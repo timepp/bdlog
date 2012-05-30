@@ -1,0 +1,36 @@
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(160C353C-ED83-4dd3-B39F-A0C73E54B8A1),
+	dual,
+	helpstring("aaa"),
+	pointer_default(unique)
+]
+interface IBdLogView : IDispatch
+{
+	[id(1), helpstring("bbb")]
+	HRESULT MsgBox();
+};
+
+
+[
+	uuid(565E617D-43FF-41cc-8EC3-D41A38A887D4),
+	version(1.0),
+	helpstring("BDLogView")
+]
+library BdLogviewLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(F5C68AE4-272E-4271-BF37-C7D122484089), 
+		helpstring("ccc")
+	]
+	coclass BdLogView
+	{
+		[default] interface IBdLogView;
+	};
+};

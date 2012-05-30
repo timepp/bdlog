@@ -1,0 +1,1404 @@
+1>------ Rebuild All started: Project: bdlog, Configuration: Release Win32 ------
+2>------ Rebuild All started: Project: testbdlog, Configuration: Release Win32 ------
+3>------ Rebuild All started: Project: bdlogview, Configuration: Release Win32 ------
+3>Deleting intermediate and output files for project 'bdlogview', configuration 'Release|Win32'
+1>Deleting intermediate and output files for project 'bdlog', configuration 'Release|Win32'
+2>Deleting intermediate and output files for project 'testbdlog', configuration 'Release|Win32'
+2>Compiling...
+1>Compiling...
+2>stdafx.cpp
+3>bdlogview : warning PRJ0009 : Build log could not be opened for writing.
+3>Make sure that the file is not open by another process and is not write-protected.
+1>stdafx.cpp
+3>Compiling...
+3>stdafx.cpp
+1>Compiling...
+1>logutil.cpp
+1>logoption.cpp
+1>logfilter.cpp
+1>logcontroller.cpp
+1>..\bdlog\logcontroller.cpp(63) : warning C4365: 'initializing' : conversion from 'size_t' to 'int', signed/unsigned mismatch
+1>bdlog.cpp
+1>dllmain.cpp
+2>Compiling...
+1>outputdevice_sharememory.cpp
+2>testbdlog.cpp
+1>outputdevice_pipe.cpp
+1>outputdevice_file.cpp
+1>outputdevice_debugoutput.cpp
+1>Compiling resources...
+1>Linking...
+1>   Creating library D:\src\app\gensoft\bull\bdlog\build\..\output\Win32\Release\bdlog.lib and object D:\src\app\gensoft\bull\bdlog\build\..\output\Win32\Release\bdlog.exp
+1>Generating code
+1>d:\src\app\gensoft\bull\bdlog\bdlog\logfilter.cpp(163) : warning C4702: unreachable code
+2>d:\src\app\gensoft\bull\bdlog\testbdlog\unittest.h(82) : warning C4100: 'tags' : unreferenced formal parameter
+2>d:\src\app\gensoft\bull\bdlog\testbdlog\unittest.h(100) : warning C4640: 'ut' : construction of local static object is not thread-safe
+2>..\testbdlog\testbdlog.cpp(318) : warning C4800: 'BOOL' : forcing value to bool 'true' or 'false' (performance warning)
+1>Finished generating code
+2>..\testbdlog\testbdlog.cpp(509) : warning C4101: 'hr' : unreferenced local variable
+2>..\testbdlog\testbdlog.cpp(562) : warning C4100: 'argv' : unreferenced formal parameter
+2>..\testbdlog\testbdlog.cpp(562) : warning C4100: 'argc' : unreferenced formal parameter
+1>Embedding manifest...
+2>perftest.cpp
+1>Build log was saved at "file://D:\src\app\gensoft\bull\bdlog\build\intermediate\bdlog\Release\BuildLog.htm"
+1>bdlog - 0 error(s), 2 warning(s)
+2>file2.cpp
+2>earlyinvoke.cpp
+2>Linking...
+2>Generating code
+2>Finished generating code
+2>Embedding manifest...
+2>Build log was saved at "file://D:\src\app\gensoft\bull\bdlog\build\intermediate\testbdlog\Release\BuildLog.htm"
+2>testbdlog - 0 error(s), 6 warning(s)
+3>Compiling...
+3>helper.cpp
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+3>advancedfiltereditdlg.cpp
+3>concretefiltereditdlg.CPP
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+3>filter.cpp
+3>filtercreator.cpp
+3>filtereditdlg.cpp
+3>filtersetdlg.cpp
+3>graphicfiltereditdlg.cpp
+3>hilightereditdlg.cpp
+3>hilightermanagedlg.cpp
+3>simplefiltereditdlg.cpp
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+3>loginfodlg.cpp
+3>C:\Program Files (x86)\Microsoft Visual Studio 8\VC\atlmfc\include\atltime.inl(670) : warning C4365: 'argument' : conversion from 'ULONGLONG' to 'LONGLONG', signed/unsigned mismatch
+3>logsourceinfodlg.cpp
+3>mainframe.cpp
+3>C:\Program Files (x86)\Microsoft Visual Studio 8\VC\atlmfc\include\atltime.inl(670) : warning C4365: 'argument' : conversion from 'ULONGLONG' to 'LONGLONG', signed/unsigned mismatch
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+3>..\bdlogview\mainframe.cpp(341) : warning C4101: 'rtpos' : unreferenced local variable
+3>..\bdlogview\mainframe.cpp(753) : warning C4244: '=' : conversion from 'UINT64' to 'size_t', possible loss of data
+3>..\bdlogview\mainframe.cpp(1353) : warning C4365: 'argument' : conversion from 'size_t' to 'int', signed/unsigned mismatch
+3>..\bdlogview\mainframe.cpp(1377) : warning C4365: 'argument' : conversion from 'size_t' to 'int', signed/unsigned mismatch
+3>quickfilterdlg.cpp
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+3>specialpathdlg.cpp
+3>tagselector.cpp
+3>vislogicdlg.cpp
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+3>..\bdlogview\vislogicdlg.cpp(11) : warning C4244: 'return' : conversion from 'INT64' to 'int', possible loss of data
+3>..\bdlogview\vislogicdlg.cpp(94) : warning C4365: '=' : conversion from 'time_t' to 'UINT64', signed/unsigned mismatch
+3>..\bdlogview\vislogicdlg.cpp(95) : warning C4365: '=' : conversion from 'int' to 'UINT32', signed/unsigned mismatch
+3>..\bdlogview\vislogicdlg.cpp(106) : warning C4244: 'initializing' : conversion from 'INT64' to 'int', possible loss of data
+3>..\bdlogview\vislogicdlg.cpp(120) : warning C4928: illegal copy-initialization; more than one user-defined conversion has been implicitly applied
+3>        while calling the constructor 'WTL::CComboBoxT<TBase>::CComboBoxT(HWND)'
+3>        with
+3>        [
+3>            TBase=ATL::CWindow
+3>        ]
+3>        D:\src\app\gensoft\bull\bdlog\thirdsrc\include\wtl/atlctrls.h(791) : see declaration of 'WTL::CComboBoxT<TBase>::CComboBoxT'
+3>        with
+3>        [
+3>            TBase=ATL::CWindow
+3>        ]
+3>..\bdlogview\vislogicdlg.cpp(126) : warning C4365: 'argument' : conversion from 'UINT32' to 'int', signed/unsigned mismatch
+3>..\bdlogview\vislogicdlg.cpp(124) : warning C4189: 'pid' : local variable is initialized but not referenced
+3>..\bdlogview\vislogicdlg.cpp(144) : warning C4640: 'p1' : construction of local static object is not thread-safe
+3>..\bdlogview\vislogicdlg.cpp(144) : warning C4640: 'p2' : construction of local static object is not thread-safe
+3>..\bdlogview\vislogicdlg.cpp(144) : warning C4640: 'p3' : construction of local static object is not thread-safe
+3>..\bdlogview\vislogicdlg.cpp(178) : warning C4640: 'ptask' : construction of local static object is not thread-safe
+3>..\bdlogview\vislogicdlg.cpp(180) : warning C4640: 'pconnect' : construction of local static object is not thread-safe
+3>..\bdlogview\vislogicdlg.cpp(202) : warning C4365: 'argument' : conversion from 'int' to 'UINT64', signed/unsigned mismatch
+3>..\bdlogview\vislogicdlg.cpp(227) : warning C4365: 'initializing' : conversion from 'unsigned long' to 'int', signed/unsigned mismatch
+3>..\bdlogview\vislogicdlg.cpp(238) : warning C4365: 'initializing' : conversion from 'unsigned long' to 'int', signed/unsigned mismatch
+3>..\bdlogview\vislogicdlg.cpp(239) : warning C4365: 'initializing' : conversion from 'unsigned long' to 'int', signed/unsigned mismatch
+3>..\bdlogview\vislogicdlg.cpp(257) : warning C4365: 'initializing' : conversion from 'unsigned long' to 'int', signed/unsigned mismatch
+3>..\bdlogview\vislogicdlg.cpp(293) : warning C4928: illegal copy-initialization; more than one user-defined conversion has been implicitly applied
+3>        while calling the constructor 'WTL::CComboBoxT<TBase>::CComboBoxT(HWND)'
+3>        with
+3>        [
+3>            TBase=ATL::CWindow
+3>        ]
+3>        D:\src\app\gensoft\bull\bdlog\thirdsrc\include\wtl/atlctrls.h(791) : see declaration of 'WTL::CComboBoxT<TBase>::CComboBoxT'
+3>        with
+3>        [
+3>            TBase=ATL::CWindow
+3>        ]
+3>config.cpp
+3>bdlogview.cpp
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+3>Processing...
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\config.cpp(276) : warning C6211: Leaking memory 'h[28]' due to an exception. Consider using a local catch block to clean up memory: Lines: 268, 273, 275, 276, 277, 278, 280, 281
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\vislogicdlg.cpp(251) : warning C6246: Local declaration of 'it' hides declaration of the same name in outer scope. For additional information, see previous declaration at line '187' of 'd:\src\app\gensoft\bull\bdlog\bdlogview\vislogicdlg.cpp': Lines: 187
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\vislogicdlg.cpp(254) : warning C6246: Local declaration of 'r' hides declaration of the same name in outer scope. For additional information, see previous declaration at line '190' of 'd:\src\app\gensoft\bull\bdlog\bdlogview\vislogicdlg.cpp': Lines: 190
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\vislogicdlg.cpp(255) : warning C6246: Local declaration of 'line_start' hides declaration of the same name in outer scope. For additional information, see previous declaration at line '225' of 'd:\src\app\gensoft\bull\bdlog\bdlogview\vislogicdlg.cpp': Lines: 225
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\vislogicdlg.cpp(256) : warning C6246: Local declaration of 'line_end' hides declaration of the same name in outer scope. For additional information, see previous declaration at line '226' of 'd:\src\app\gensoft\bull\bdlog\bdlogview\vislogicdlg.cpp': Lines: 226
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\vislogicdlg.cpp(257) : warning C6246: Local declaration of 'y' hides declaration of the same name in outer scope. For additional information, see previous declaration at line '227' of 'd:\src\app\gensoft\bull\bdlog\bdlogview\vislogicdlg.cpp': Lines: 227
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\mainframe.cpp(1280) : warning C6211: Leaking memory 'child' due to an exception. Consider using a local catch block to clean up memory: Lines: 1270, 1271, 1276, 1277, 1279, 1280, 1301
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\simplefiltereditdlg.cpp(166) : warning C6211: Leaking memory 'f' due to an exception. Consider using a local catch block to clean up memory: Lines: 161, 166, 169, 170, 171, 172, 178, 179, 180, 183, 190, 191, 192, 199, 200, 201, 208, 209, 210, 217, 218, 219, 228, 229, 230, 232, 233, 234
+3>Compiling...
+3>logcenter.cpp
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+3>..\bdlogview\logcenter.cpp(298) : warning C4365: 'argument' : conversion from 'int' to 'DWORD', signed/unsigned mismatch
+3>logicvis.cpp
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+3>..\bdlogview\logicvis.cpp(67) : warning C4365: '=' : conversion from 'int' to 'size_t', signed/unsigned mismatch
+3>..\bdlogview\logicvis.cpp(89) : warning C4365: '=' : conversion from 'int' to 'size_t', signed/unsigned mismatch
+3>..\bdlogview\logicvis.cpp(91) : warning C4365: '=' : conversion from 'int' to 'size_t', signed/unsigned mismatch
+3>..\bdlogview\logicvis.cpp(137) : warning C4365: 'argument' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+3>..\bdlogview\logicvis.cpp(137) : warning C4365: 'argument' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+3>..\bdlogview\logicvis.cpp(175) : warning C4365: 'initializing' : conversion from 'unsigned int' to 'int', signed/unsigned mismatch
+3>..\bdlogview\logicvis.cpp(178) : warning C4365: 'argument' : conversion from 'int' to 'unsigned int', signed/unsigned mismatch
+3>..\bdlogview\logicvis.cpp(215) : warning C4365: '=' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+3>..\bdlogview\logicvis.cpp(216) : warning C4365: '=' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+3>..\bdlogview\logicvis.cpp(235) : warning C4365: '=' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+3>..\bdlogview\logicvis.cpp(236) : warning C4365: '=' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+3>..\bdlogview\logicvis.cpp(249) : warning C4365: '=' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+3>..\bdlogview\logicvis.cpp(250) : warning C4365: '=' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+3>..\bdlogview\logicvis.cpp(265) : warning C4365: '=' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+3>..\bdlogview\logicvis.cpp(266) : warning C4365: '=' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+3>..\bdlogview\logicvis.cpp(283) : warning C4365: '=' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+3>..\bdlogview\logicvis.cpp(284) : warning C4365: '=' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+3>..\bdlogview\logicvis.cpp(286) : warning C4365: 'initializing' : conversion from 'LONGLONG' to 'UINT64', signed/unsigned mismatch
+3>Processing...
+3>Compiling resources...
+3>Compiling manifest to resources...
+3>Linking...
+3>LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/PROFILE' specification
+3>Generating code
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\helper.cpp(687) : warning C4701: potentially uninitialized local variable 'hRoot' used
+3>Finished generating code
+3>Embedding manifest...
+3>LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/PROFILE' specification
+3>Generating code
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\helper.cpp(687) : warning C4701: potentially uninitialized local variable 'hRoot' used
+3>Finished generating code
+3>Build log was saved at "file://D:\src\app\gensoft\bull\bdlog\build\intermediate\bdlogview\Release\BuildLog.htm"
+3>bdlogview - 0 error(s), 92 warning(s)
+========== Rebuild All: 3 succeeded, 0 failed, 0 skipped ==========
+
+1>------ Skipped Rebuild All: Project: testbdlog, Configuration: Release Win32 ------
+1>Project not selected to build for this solution configuration 
+2>------ Rebuild All started: Project: bdlog, Configuration: ReleaseStatic Win32 ------
+3>------ Rebuild All started: Project: bdlogview, Configuration: Release Win32 ------
+3>Deleting intermediate and output files for project 'bdlogview', configuration 'Release|Win32'
+2>Deleting intermediate and output files for project 'bdlog', configuration 'ReleaseStatic|Win32'
+2>Compiling...
+3>bdlogview : warning PRJ0009 : Build log could not be opened for writing.
+3>Make sure that the file is not open by another process and is not write-protected.
+3>Compiling...
+2>stdafx.cpp
+3>stdafx.cpp
+2>Compiling...
+2>logutil.cpp
+2>logoption.cpp
+2>logfilter.cpp
+2>logcontroller.cpp
+2>..\bdlog\logcontroller.cpp(63) : warning C4365: 'initializing' : conversion from 'size_t' to 'int', signed/unsigned mismatch
+2>bdlog.cpp
+2>dllmain.cpp
+2>outputdevice_sharememory.cpp
+2>outputdevice_pipe.cpp
+2>outputdevice_file.cpp
+2>outputdevice_debugoutput.cpp
+2>Compiling resources...
+2>Linking...
+2>   Creating library D:\src\app\gensoft\bull\bdlog\build\..\output\Win32\ReleaseStatic\bdlog.lib and object D:\src\app\gensoft\bull\bdlog\build\..\output\Win32\ReleaseStatic\bdlog.exp
+2>Generating code
+2>d:\src\app\gensoft\bull\bdlog\bdlog\logfilter.cpp(163) : warning C4702: unreachable code
+2>Finished generating code
+2>Embedding manifest...
+2>Build log was saved at "file://D:\src\app\gensoft\bull\bdlog\build\intermediate\bdlog\ReleaseStatic\BuildLog.htm"
+2>bdlog - 0 error(s), 2 warning(s)
+3>Compiling...
+3>helper.cpp
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+3>advancedfiltereditdlg.cpp
+3>concretefiltereditdlg.CPP
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+3>filter.cpp
+3>filtercreator.cpp
+3>filtereditdlg.cpp
+3>filtersetdlg.cpp
+3>graphicfiltereditdlg.cpp
+3>hilightereditdlg.cpp
+3>hilightermanagedlg.cpp
+3>simplefiltereditdlg.cpp
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+3>loginfodlg.cpp
+3>C:\Program Files (x86)\Microsoft Visual Studio 8\VC\atlmfc\include\atltime.inl(670) : warning C4365: 'argument' : conversion from 'ULONGLONG' to 'LONGLONG', signed/unsigned mismatch
+3>logsourceinfodlg.cpp
+3>mainframe.cpp
+3>C:\Program Files (x86)\Microsoft Visual Studio 8\VC\atlmfc\include\atltime.inl(670) : warning C4365: 'argument' : conversion from 'ULONGLONG' to 'LONGLONG', signed/unsigned mismatch
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+3>..\bdlogview\mainframe.cpp(341) : warning C4101: 'rtpos' : unreferenced local variable
+3>..\bdlogview\mainframe.cpp(753) : warning C4244: '=' : conversion from 'UINT64' to 'size_t', possible loss of data
+3>..\bdlogview\mainframe.cpp(1353) : warning C4365: 'argument' : conversion from 'size_t' to 'int', signed/unsigned mismatch
+3>..\bdlogview\mainframe.cpp(1377) : warning C4365: 'argument' : conversion from 'size_t' to 'int', signed/unsigned mismatch
+3>quickfilterdlg.cpp
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+3>specialpathdlg.cpp
+3>tagselector.cpp
+3>vislogicdlg.cpp
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+3>..\bdlogview\vislogicdlg.cpp(11) : warning C4244: 'return' : conversion from 'INT64' to 'int', possible loss of data
+3>..\bdlogview\vislogicdlg.cpp(94) : warning C4365: '=' : conversion from 'time_t' to 'UINT64', signed/unsigned mismatch
+3>..\bdlogview\vislogicdlg.cpp(95) : warning C4365: '=' : conversion from 'int' to 'UINT32', signed/unsigned mismatch
+3>..\bdlogview\vislogicdlg.cpp(106) : warning C4244: 'initializing' : conversion from 'INT64' to 'int', possible loss of data
+3>..\bdlogview\vislogicdlg.cpp(120) : warning C4928: illegal copy-initialization; more than one user-defined conversion has been implicitly applied
+3>        while calling the constructor 'WTL::CComboBoxT<TBase>::CComboBoxT(HWND)'
+3>        with
+3>        [
+3>            TBase=ATL::CWindow
+3>        ]
+3>        D:\src\app\gensoft\bull\bdlog\thirdsrc\include\wtl/atlctrls.h(791) : see declaration of 'WTL::CComboBoxT<TBase>::CComboBoxT'
+3>        with
+3>        [
+3>            TBase=ATL::CWindow
+3>        ]
+3>..\bdlogview\vislogicdlg.cpp(126) : warning C4365: 'argument' : conversion from 'UINT32' to 'int', signed/unsigned mismatch
+3>..\bdlogview\vislogicdlg.cpp(124) : warning C4189: 'pid' : local variable is initialized but not referenced
+3>..\bdlogview\vislogicdlg.cpp(144) : warning C4640: 'p1' : construction of local static object is not thread-safe
+3>..\bdlogview\vislogicdlg.cpp(144) : warning C4640: 'p2' : construction of local static object is not thread-safe
+3>..\bdlogview\vislogicdlg.cpp(144) : warning C4640: 'p3' : construction of local static object is not thread-safe
+3>..\bdlogview\vislogicdlg.cpp(178) : warning C4640: 'ptask' : construction of local static object is not thread-safe
+3>..\bdlogview\vislogicdlg.cpp(180) : warning C4640: 'pconnect' : construction of local static object is not thread-safe
+3>..\bdlogview\vislogicdlg.cpp(202) : warning C4365: 'argument' : conversion from 'int' to 'UINT64', signed/unsigned mismatch
+3>..\bdlogview\vislogicdlg.cpp(227) : warning C4365: 'initializing' : conversion from 'unsigned long' to 'int', signed/unsigned mismatch
+3>..\bdlogview\vislogicdlg.cpp(238) : warning C4365: 'initializing' : conversion from 'unsigned long' to 'int', signed/unsigned mismatch
+3>..\bdlogview\vislogicdlg.cpp(239) : warning C4365: 'initializing' : conversion from 'unsigned long' to 'int', signed/unsigned mismatch
+3>..\bdlogview\vislogicdlg.cpp(257) : warning C4365: 'initializing' : conversion from 'unsigned long' to 'int', signed/unsigned mismatch
+3>..\bdlogview\vislogicdlg.cpp(293) : warning C4928: illegal copy-initialization; more than one user-defined conversion has been implicitly applied
+3>        while calling the constructor 'WTL::CComboBoxT<TBase>::CComboBoxT(HWND)'
+3>        with
+3>        [
+3>            TBase=ATL::CWindow
+3>        ]
+3>        D:\src\app\gensoft\bull\bdlog\thirdsrc\include\wtl/atlctrls.h(791) : see declaration of 'WTL::CComboBoxT<TBase>::CComboBoxT'
+3>        with
+3>        [
+3>            TBase=ATL::CWindow
+3>        ]
+3>config.cpp
+3>bdlogview.cpp
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+3>Processing...
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\config.cpp(276) : warning C6211: Leaking memory 'h[28]' due to an exception. Consider using a local catch block to clean up memory: Lines: 268, 273, 275, 276, 277, 278, 280, 281
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\vislogicdlg.cpp(251) : warning C6246: Local declaration of 'it' hides declaration of the same name in outer scope. For additional information, see previous declaration at line '187' of 'd:\src\app\gensoft\bull\bdlog\bdlogview\vislogicdlg.cpp': Lines: 187
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\vislogicdlg.cpp(254) : warning C6246: Local declaration of 'r' hides declaration of the same name in outer scope. For additional information, see previous declaration at line '190' of 'd:\src\app\gensoft\bull\bdlog\bdlogview\vislogicdlg.cpp': Lines: 190
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\vislogicdlg.cpp(255) : warning C6246: Local declaration of 'line_start' hides declaration of the same name in outer scope. For additional information, see previous declaration at line '225' of 'd:\src\app\gensoft\bull\bdlog\bdlogview\vislogicdlg.cpp': Lines: 225
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\vislogicdlg.cpp(256) : warning C6246: Local declaration of 'line_end' hides declaration of the same name in outer scope. For additional information, see previous declaration at line '226' of 'd:\src\app\gensoft\bull\bdlog\bdlogview\vislogicdlg.cpp': Lines: 226
+3>d:\src\app\gensoft\bull\bdlog\bdlogview\vislogicdlg.cpp(257) : warning C6246: Local declaration of 'y' hides declaration of the same name in outer scope. For additional information, see previous declaration at line '227' of 'd:\src\app\gensoft\bull\bdlog\bdlogview\vislogicdlg.cpp': Lines: 227
+1>------ Rebuild All started: Project: bdlogview, Configuration: Release Win32 ------
+2>------ Rebuild All started: Project: testbdlog, Configuration: Release Win32 ------
+3>------ Rebuild All started: Project: bdlog, Configuration: Release Win32 ------
+1>Deleting intermediate and output files for project 'bdlogview', configuration 'Release|Win32'
+3>Deleting intermediate and output files for project 'bdlog', configuration 'Release|Win32'
+2>Deleting intermediate and output files for project 'testbdlog', configuration 'Release|Win32'
+2>Compiling...
+3>Compiling...
+2>stdafx.cpp
+1>bdlogview : warning PRJ0009 : Build log could not be opened for writing.
+1>Make sure that the file is not open by another process and is not write-protected.
+3>stdafx.cpp
+1>Compiling...
+1>stdafx.cpp
+3>Compiling...
+3>logutil.cpp
+3>logoption.cpp
+3>logfilter.cpp
+3>logcontroller.cpp
+3>..\bdlog\logcontroller.cpp(63) : warning C4365: 'initializing' : conversion from 'size_t' to 'int', signed/unsigned mismatch
+3>bdlog.cpp
+3>dllmain.cpp
+2>Compiling...
+3>outputdevice_sharememory.cpp
+2>testbdlog.cpp
+3>outputdevice_pipe.cpp
+3>outputdevice_file.cpp
+3>outputdevice_debugoutput.cpp
+3>Compiling resources...
+3>Linking...
+3>   Creating library D:\src\app\gensoft\bull\bdlog\build\..\output\Win32\Release\bdlog.lib and object D:\src\app\gensoft\bull\bdlog\build\..\output\Win32\Release\bdlog.exp
+3>Generating code
+3>d:\src\app\gensoft\bull\bdlog\bdlog\logfilter.cpp(163) : warning C4702: unreachable code
+2>d:\src\app\gensoft\bull\bdlog\testbdlog\unittest.h(82) : warning C4100: 'tags' : unreferenced formal parameter
+2>d:\src\app\gensoft\bull\bdlog\testbdlog\unittest.h(100) : warning C4640: 'ut' : construction of local static object is not thread-safe
+2>..\testbdlog\testbdlog.cpp(318) : warning C4800: 'BOOL' : forcing value to bool 'true' or 'false' (performance warning)
+2>..\testbdlog\testbdlog.cpp(509) : warning C4101: 'hr' : unreferenced local variable
+2>..\testbdlog\testbdlog.cpp(562) : warning C4100: 'argv' : unreferenced formal parameter
+2>..\testbdlog\testbdlog.cpp(562) : warning C4100: 'argc' : unreferenced formal parameter
+3>Finished generating code
+3>Embedding manifest...
+2>perftest.cpp
+1>Compiling...
+3>Build log was saved at "file://D:\src\app\gensoft\bull\bdlog\build\intermediate\bdlog\Release\BuildLog.htm"
+3>bdlog - 0 error(s), 2 warning(s)
+1>helper.cpp
+2>file2.cpp
+2>earlyinvoke.cpp
+1>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+1>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+1>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+1>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+1>advancedfiltereditdlg.cpp
+2>Linking...
+2>Generating code
+2>Finished generating code
+2>Embedding manifest...
+2>Build log was saved at "file://D:\src\app\gensoft\bull\bdlog\build\intermediate\testbdlog\Release\BuildLog.htm"
+2>testbdlog - 0 error(s), 6 warning(s)
+1>concretefiltereditdlg.CPP
+1>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+1>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+1>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+1>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+1>filter.cpp
+1>filtercreator.cpp
+1>filtereditdlg.cpp
+1>filtersetdlg.cpp
+1>graphicfiltereditdlg.cpp
+1>hilightereditdlg.cpp
+1>hilightermanagedlg.cpp
+1>simplefiltereditdlg.cpp
+1>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+1>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+1>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+1>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+1>loginfodlg.cpp
+1>C:\Program Files (x86)\Microsoft Visual Studio 8\VC\atlmfc\include\atltime.inl(670) : warning C4365: 'argument' : conversion from 'ULONGLONG' to 'LONGLONG', signed/unsigned mismatch
+1>logsourceinfodlg.cpp
+1>mainframe.cpp
+1>C:\Program Files (x86)\Microsoft Visual Studio 8\VC\atlmfc\include\atltime.inl(670) : warning C4365: 'argument' : conversion from 'ULONGLONG' to 'LONGLONG', signed/unsigned mismatch
+1>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+1>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+1>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+1>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+1>..\bdlogview\mainframe.cpp(341) : warning C4101: 'rtpos' : unreferenced local variable
+1>..\bdlogview\mainframe.cpp(753) : warning C4244: '=' : conversion from 'UINT64' to 'size_t', possible loss of data
+1>..\bdlogview\mainframe.cpp(1353) : warning C4365: 'argument' : conversion from 'size_t' to 'int', signed/unsigned mismatch
+1>..\bdlogview\mainframe.cpp(1377) : warning C4365: 'argument' : conversion from 'size_t' to 'int', signed/unsigned mismatch
+1>quickfilterdlg.cpp
+1>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+1>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+1>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+1>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+1>specialpathdlg.cpp
+1>tagselector.cpp
+1>vislogicdlg.cpp
+1>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+1>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+1>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+1>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+1>..\bdlogview\vislogicdlg.cpp(11) : warning C4244: 'return' : conversion from 'INT64' to 'int', possible loss of data
+1>..\bdlogview\vislogicdlg.cpp(94) : warning C4365: '=' : conversion from 'time_t' to 'UINT64', signed/unsigned mismatch
+1>..\bdlogview\vislogicdlg.cpp(95) : warning C4365: '=' : conversion from 'int' to 'UINT32', signed/unsigned mismatch
+1>..\bdlogview\vislogicdlg.cpp(106) : warning C4244: 'initializing' : conversion from 'INT64' to 'int', possible loss of data
+1>..\bdlogview\vislogicdlg.cpp(120) : warning C4928: illegal copy-initialization; more than one user-defined conversion has been implicitly applied
+1>        while calling the constructor 'WTL::CComboBoxT<TBase>::CComboBoxT(HWND)'
+1>        with
+1>        [
+1>            TBase=ATL::CWindow
+1>        ]
+1>        D:\src\app\gensoft\bull\bdlog\thirdsrc\include\wtl/atlctrls.h(791) : see declaration of 'WTL::CComboBoxT<TBase>::CComboBoxT'
+1>        with
+1>        [
+1>            TBase=ATL::CWindow
+1>        ]
+1>..\bdlogview\vislogicdlg.cpp(126) : warning C4365: 'argument' : conversion from 'UINT32' to 'int', signed/unsigned mismatch
+1>..\bdlogview\vislogicdlg.cpp(124) : warning C4189: 'pid' : local variable is initialized but not referenced
+1>..\bdlogview\vislogicdlg.cpp(144) : warning C4640: 'p1' : construction of local static object is not thread-safe
+1>..\bdlogview\vislogicdlg.cpp(144) : warning C4640: 'p2' : construction of local static object is not thread-safe
+1>..\bdlogview\vislogicdlg.cpp(144) : warning C4640: 'p3' : construction of local static object is not thread-safe
+1>..\bdlogview\vislogicdlg.cpp(178) : warning C4640: 'ptask' : construction of local static object is not thread-safe
+1>..\bdlogview\vislogicdlg.cpp(180) : warning C4640: 'pconnect' : construction of local static object is not thread-safe
+1>..\bdlogview\vislogicdlg.cpp(202) : warning C4365: 'argument' : conversion from 'int' to 'UINT64', signed/unsigned mismatch
+1>..\bdlogview\vislogicdlg.cpp(227) : warning C4365: 'initializing' : conversion from 'unsigned long' to 'int', signed/unsigned mismatch
+1>..\bdlogview\vislogicdlg.cpp(238) : warning C4365: 'initializing' : conversion from 'unsigned long' to 'int', signed/unsigned mismatch
+1>..\bdlogview\vislogicdlg.cpp(239) : warning C4365: 'initializing' : conversion from 'unsigned long' to 'int', signed/unsigned mismatch
+1>..\bdlogview\vislogicdlg.cpp(257) : warning C4365: 'initializing' : conversion from 'unsigned long' to 'int', signed/unsigned mismatch
+1>..\bdlogview\vislogicdlg.cpp(293) : warning C4928: illegal copy-initialization; more than one user-defined conversion has been implicitly applied
+1>        while calling the constructor 'WTL::CComboBoxT<TBase>::CComboBoxT(HWND)'
+1>        with
+1>        [
+1>            TBase=ATL::CWindow
+1>        ]
+1>        D:\src\app\gensoft\bull\bdlog\thirdsrc\include\wtl/atlctrls.h(791) : see declaration of 'WTL::CComboBoxT<TBase>::CComboBoxT'
+1>        with
+1>        [
+1>            TBase=ATL::CWindow
+1>        ]
+1>config.cpp
+1>bdlogview.cpp
+1>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+1>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+1>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+1>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+1>Compiling...
+1>logcenter.cpp
+1>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+1>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+1>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+1>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+1>..\bdlogview\logcenter.cpp(298) : warning C4365: 'argument' : conversion from 'int' to 'DWORD', signed/unsigned mismatch
+1>logicvis.cpp
+1>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+1>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+1>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+1>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+1>..\bdlogview\logicvis.cpp(67) : warning C4365: '=' : conversion from 'int' to 'size_t', signed/unsigned mismatch
+1>..\bdlogview\logicvis.cpp(89) : warning C4365: '=' : conversion from 'int' to 'size_t', signed/unsigned mismatch
+1>..\bdlogview\logicvis.cpp(91) : warning C4365: '=' : conversion from 'int' to 'size_t', signed/unsigned mismatch
+1>..\bdlogview\logicvis.cpp(137) : warning C4365: 'argument' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+1>..\bdlogview\logicvis.cpp(137) : warning C4365: 'argument' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+1>..\bdlogview\logicvis.cpp(175) : warning C4365: 'initializing' : conversion from 'unsigned int' to 'int', signed/unsigned mismatch
+1>..\bdlogview\logicvis.cpp(178) : warning C4365: 'argument' : conversion from 'int' to 'unsigned int', signed/unsigned mismatch
+1>..\bdlogview\logicvis.cpp(215) : warning C4365: '=' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+1>..\bdlogview\logicvis.cpp(216) : warning C4365: '=' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+1>..\bdlogview\logicvis.cpp(235) : warning C4365: '=' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+1>..\bdlogview\logicvis.cpp(236) : warning C4365: '=' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+1>..\bdlogview\logicvis.cpp(249) : warning C4365: '=' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+1>..\bdlogview\logicvis.cpp(250) : warning C4365: '=' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+1>..\bdlogview\logicvis.cpp(265) : warning C4365: '=' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+1>..\bdlogview\logicvis.cpp(266) : warning C4365: '=' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+1>..\bdlogview\logicvis.cpp(283) : warning C4365: '=' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+1>..\bdlogview\logicvis.cpp(284) : warning C4365: '=' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+1>..\bdlogview\logicvis.cpp(286) : warning C4365: 'initializing' : conversion from 'LONGLONG' to 'UINT64', signed/unsigned mismatch
+1>Compiling resources...
+1>Compiling manifest to resources...
+1>Linking...
+1>LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/PROFILE' specification
+1>Generating code
+1>d:\src\app\gensoft\bull\bdlog\bdlogview\helper.cpp(687) : warning C4701: potentially uninitialized local variable 'hRoot' used
+1>Finished generating code
+1>Embedding manifest...
+1>LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/PROFILE' specification
+1>Generating code
+1>d:\src\app\gensoft\bull\bdlog\bdlogview\helper.cpp(687) : warning C4701: potentially uninitialized local variable 'hRoot' used
+1>Finished generating code
+1>Build log was saved at "file://D:\src\app\gensoft\bull\bdlog\build\intermediate\bdlogview\Release\BuildLog.htm"
+1>bdlogview - 0 error(s), 84 warning(s)
+========== Rebuild All: 3 succeeded, 0 failed, 0 skipped ==========
+
+1>------ Skipped Rebuild All: Project: testbdlog, Configuration: Release Win32 ------
+1>Project not selected to build for this solution configuration 
+2>------ Rebuild All started: Project: bdlogview, Configuration: Release Win32 ------
+3>------ Rebuild All started: Project: bdlog, Configuration: ReleaseStatic Win32 ------
+3>Deleting intermediate and output files for project 'bdlog', configuration 'ReleaseStatic|Win32'
+2>Deleting intermediate and output files for project 'bdlogview', configuration 'Release|Win32'
+2>bdlogview : warning PRJ0009 : Build log could not be opened for writing.
+2>Make sure that the file is not open by another process and is not write-protected.
+2>Compiling...
+2>stdafx.cpp
+3>Compiling...
+3>stdafx.cpp
+3>Compiling...
+3>logutil.cpp
+3>logoption.cpp
+3>logfilter.cpp
+3>logcontroller.cpp
+3>..\bdlog\logcontroller.cpp(63) : warning C4365: 'initializing' : conversion from 'size_t' to 'int', signed/unsigned mismatch
+3>bdlog.cpp
+3>dllmain.cpp
+3>outputdevice_sharememory.cpp
+3>outputdevice_pipe.cpp
+3>outputdevice_file.cpp
+3>outputdevice_debugoutput.cpp
+3>Compiling resources...
+3>Linking...
+3>   Creating library D:\src\app\gensoft\bull\bdlog\build\..\output\Win32\ReleaseStatic\bdlog.lib and object D:\src\app\gensoft\bull\bdlog\build\..\output\Win32\ReleaseStatic\bdlog.exp
+3>Generating code
+3>d:\src\app\gensoft\bull\bdlog\bdlog\logfilter.cpp(163) : warning C4702: unreachable code
+3>Finished generating code
+3>Embedding manifest...
+2>Compiling...
+2>helper.cpp
+3>Build log was saved at "file://D:\src\app\gensoft\bull\bdlog\build\intermediate\bdlog\ReleaseStatic\BuildLog.htm"
+3>bdlog - 0 error(s), 2 warning(s)
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>advancedfiltereditdlg.cpp
+2>concretefiltereditdlg.CPP
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>filter.cpp
+2>filtercreator.cpp
+2>filtereditdlg.cpp
+2>filtersetdlg.cpp
+2>graphicfiltereditdlg.cpp
+2>hilightereditdlg.cpp
+2>hilightermanagedlg.cpp
+2>simplefiltereditdlg.cpp
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>loginfodlg.cpp
+2>C:\Program Files (x86)\Microsoft Visual Studio 8\VC\atlmfc\include\atltime.inl(670) : warning C4365: 'argument' : conversion from 'ULONGLONG' to 'LONGLONG', signed/unsigned mismatch
+2>logsourceinfodlg.cpp
+2>mainframe.cpp
+2>C:\Program Files (x86)\Microsoft Visual Studio 8\VC\atlmfc\include\atltime.inl(670) : warning C4365: 'argument' : conversion from 'ULONGLONG' to 'LONGLONG', signed/unsigned mismatch
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>..\bdlogview\mainframe.cpp(341) : warning C4101: 'rtpos' : unreferenced local variable
+2>..\bdlogview\mainframe.cpp(753) : warning C4244: '=' : conversion from 'UINT64' to 'size_t', possible loss of data
+2>..\bdlogview\mainframe.cpp(1353) : warning C4365: 'argument' : conversion from 'size_t' to 'int', signed/unsigned mismatch
+2>..\bdlogview\mainframe.cpp(1377) : warning C4365: 'argument' : conversion from 'size_t' to 'int', signed/unsigned mismatch
+2>quickfilterdlg.cpp
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>specialpathdlg.cpp
+2>tagselector.cpp
+2>vislogicdlg.cpp
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(11) : warning C4244: 'return' : conversion from 'INT64' to 'int', possible loss of data
+2>..\bdlogview\vislogicdlg.cpp(94) : warning C4365: '=' : conversion from 'time_t' to 'UINT64', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(95) : warning C4365: '=' : conversion from 'int' to 'UINT32', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(106) : warning C4244: 'initializing' : conversion from 'INT64' to 'int', possible loss of data
+2>..\bdlogview\vislogicdlg.cpp(120) : warning C4928: illegal copy-initialization; more than one user-defined conversion has been implicitly applied
+2>        while calling the constructor 'WTL::CComboBoxT<TBase>::CComboBoxT(HWND)'
+2>        with
+2>        [
+2>            TBase=ATL::CWindow
+2>        ]
+2>        D:\src\app\gensoft\bull\bdlog\thirdsrc\include\wtl/atlctrls.h(791) : see declaration of 'WTL::CComboBoxT<TBase>::CComboBoxT'
+2>        with
+2>        [
+2>            TBase=ATL::CWindow
+2>        ]
+2>..\bdlogview\vislogicdlg.cpp(126) : warning C4365: 'argument' : conversion from 'UINT32' to 'int', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(124) : warning C4189: 'pid' : local variable is initialized but not referenced
+2>..\bdlogview\vislogicdlg.cpp(144) : warning C4640: 'p1' : construction of local static object is not thread-safe
+2>..\bdlogview\vislogicdlg.cpp(144) : warning C4640: 'p2' : construction of local static object is not thread-safe
+2>..\bdlogview\vislogicdlg.cpp(144) : warning C4640: 'p3' : construction of local static object is not thread-safe
+2>..\bdlogview\vislogicdlg.cpp(178) : warning C4640: 'ptask' : construction of local static object is not thread-safe
+2>..\bdlogview\vislogicdlg.cpp(180) : warning C4640: 'pconnect' : construction of local static object is not thread-safe
+2>..\bdlogview\vislogicdlg.cpp(202) : warning C4365: 'argument' : conversion from 'int' to 'UINT64', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(227) : warning C4365: 'initializing' : conversion from 'unsigned long' to 'int', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(238) : warning C4365: 'initializing' : conversion from 'unsigned long' to 'int', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(239) : warning C4365: 'initializing' : conversion from 'unsigned long' to 'int', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(257) : warning C4365: 'initializing' : conversion from 'unsigned long' to 'int', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(293) : warning C4928: illegal copy-initialization; more than one user-defined conversion has been implicitly applied
+2>        while calling the constructor 'WTL::CComboBoxT<TBase>::CComboBoxT(HWND)'
+2>        with
+2>        [
+2>            TBase=ATL::CWindow
+2>        ]
+2>        D:\src\app\gensoft\bull\bdlog\thirdsrc\include\wtl/atlctrls.h(791) : see declaration of 'WTL::CComboBoxT<TBase>::CComboBoxT'
+2>        with
+2>        [
+2>            TBase=ATL::CWindow
+2>        ]
+2>config.cpp
+2>bdlogview.cpp
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>Compiling...
+2>logcenter.cpp
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>..\bdlogview\logcenter.cpp(298) : warning C4365: 'argument' : conversion from 'int' to 'DWORD', signed/unsigned mismatch
+2>logicvis.cpp
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(67) : warning C4365: '=' : conversion from 'int' to 'size_t', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(89) : warning C4365: '=' : conversion from 'int' to 'size_t', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(91) : warning C4365: '=' : conversion from 'int' to 'size_t', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(137) : warning C4365: 'argument' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(137) : warning C4365: 'argument' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(175) : warning C4365: 'initializing' : conversion from 'unsigned int' to 'int', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(178) : warning C4365: 'argument' : conversion from 'int' to 'unsigned int', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(215) : warning C4365: '=' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(216) : warning C4365: '=' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(235) : warning C4365: '=' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(236) : warning C4365: '=' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(249) : warning C4365: '=' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(250) : warning C4365: '=' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(265) : warning C4365: '=' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(266) : warning C4365: '=' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(283) : warning C4365: '=' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(284) : warning C4365: '=' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(286) : warning C4365: 'initializing' : conversion from 'LONGLONG' to 'UINT64', signed/unsigned mismatch
+2>Compiling resources...
+2>Compiling manifest to resources...
+2>Linking...
+2>LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/PROFILE' specification
+2>Generating code
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\helper.cpp(687) : warning C4701: potentially uninitialized local variable 'hRoot' used
+2>Finished generating code
+2>Embedding manifest...
+2>LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/PROFILE' specification
+2>Generating code
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\helper.cpp(687) : warning C4701: potentially uninitialized local variable 'hRoot' used
+2>Finished generating code
+2>Build log was saved at "file://D:\src\app\gensoft\bull\bdlog\build\intermediate\bdlogview\Release\BuildLog.htm"
+2>bdlogview - 0 error(s), 84 warning(s)
+========== Rebuild All: 2 succeeded, 0 failed, 1 skipped ==========
+
+1>------ Skipped Rebuild All: Project: testbdlog, Configuration: Release Win32 ------
+1>Project not selected to build for this solution configuration 
+2>------ Rebuild All started: Project: bdlogview, Configuration: Release Win32 ------
+2>Deleting intermediate and output files for project 'bdlogview', configuration 'Release|Win32'
+3>------ Rebuild All started: Project: bdlog, Configuration: ReleaseNoManifest Win32 ------
+3>Deleting intermediate and output files for project 'bdlog', configuration 'ReleaseNoManifest|Win32'
+3>Compiling...
+2>bdlogview : warning PRJ0009 : Build log could not be opened for writing.
+2>Make sure that the file is not open by another process and is not write-protected.
+3>stdafx.cpp
+2>Compiling...
+2>stdafx.cpp
+3>Compiling...
+3>logutil.cpp
+3>logoption.cpp
+3>logfilter.cpp
+3>logcontroller.cpp
+3>..\bdlog\logcontroller.cpp(63) : warning C4365: 'initializing' : conversion from 'size_t' to 'int', signed/unsigned mismatch
+3>bdlog.cpp
+3>dllmain.cpp
+3>outputdevice_sharememory.cpp
+3>outputdevice_pipe.cpp
+3>outputdevice_file.cpp
+3>outputdevice_debugoutput.cpp
+3>Compiling resources...
+3>Linking...
+3>   Creating library D:\src\app\gensoft\bull\bdlog\build\..\output\Win32\ReleaseNoManifest\bdlog.lib and object D:\src\app\gensoft\bull\bdlog\build\..\output\Win32\ReleaseNoManifest\bdlog.exp
+3>Generating code
+3>d:\src\app\gensoft\bull\bdlog\bdlog\logfilter.cpp(163) : warning C4702: unreachable code
+3>Finished generating code
+3>Creating manifest...
+3>Build log was saved at "file://D:\src\app\gensoft\bull\bdlog\build\intermediate\bdlog\ReleaseNoManifest\BuildLog.htm"
+3>bdlog - 0 error(s), 2 warning(s)
+2>Compiling...
+2>helper.cpp
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>advancedfiltereditdlg.cpp
+2>concretefiltereditdlg.CPP
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>filter.cpp
+2>filtercreator.cpp
+2>filtereditdlg.cpp
+2>filtersetdlg.cpp
+2>graphicfiltereditdlg.cpp
+2>hilightereditdlg.cpp
+2>hilightermanagedlg.cpp
+2>simplefiltereditdlg.cpp
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>loginfodlg.cpp
+2>C:\Program Files (x86)\Microsoft Visual Studio 8\VC\atlmfc\include\atltime.inl(670) : warning C4365: 'argument' : conversion from 'ULONGLONG' to 'LONGLONG', signed/unsigned mismatch
+2>logsourceinfodlg.cpp
+2>mainframe.cpp
+2>C:\Program Files (x86)\Microsoft Visual Studio 8\VC\atlmfc\include\atltime.inl(670) : warning C4365: 'argument' : conversion from 'ULONGLONG' to 'LONGLONG', signed/unsigned mismatch
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>..\bdlogview\mainframe.cpp(341) : warning C4101: 'rtpos' : unreferenced local variable
+2>..\bdlogview\mainframe.cpp(753) : warning C4244: '=' : conversion from 'UINT64' to 'size_t', possible loss of data
+2>..\bdlogview\mainframe.cpp(1353) : warning C4365: 'argument' : conversion from 'size_t' to 'int', signed/unsigned mismatch
+2>..\bdlogview\mainframe.cpp(1377) : warning C4365: 'argument' : conversion from 'size_t' to 'int', signed/unsigned mismatch
+2>quickfilterdlg.cpp
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>specialpathdlg.cpp
+2>tagselector.cpp
+2>vislogicdlg.cpp
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(11) : warning C4244: 'return' : conversion from 'INT64' to 'int', possible loss of data
+2>..\bdlogview\vislogicdlg.cpp(94) : warning C4365: '=' : conversion from 'time_t' to 'UINT64', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(95) : warning C4365: '=' : conversion from 'int' to 'UINT32', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(106) : warning C4244: 'initializing' : conversion from 'INT64' to 'int', possible loss of data
+2>..\bdlogview\vislogicdlg.cpp(120) : warning C4928: illegal copy-initialization; more than one user-defined conversion has been implicitly applied
+2>        while calling the constructor 'WTL::CComboBoxT<TBase>::CComboBoxT(HWND)'
+2>        with
+2>        [
+2>            TBase=ATL::CWindow
+2>        ]
+2>        D:\src\app\gensoft\bull\bdlog\thirdsrc\include\wtl/atlctrls.h(791) : see declaration of 'WTL::CComboBoxT<TBase>::CComboBoxT'
+2>        with
+2>        [
+2>            TBase=ATL::CWindow
+2>        ]
+2>..\bdlogview\vislogicdlg.cpp(126) : warning C4365: 'argument' : conversion from 'UINT32' to 'int', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(124) : warning C4189: 'pid' : local variable is initialized but not referenced
+2>..\bdlogview\vislogicdlg.cpp(144) : warning C4640: 'p1' : construction of local static object is not thread-safe
+2>..\bdlogview\vislogicdlg.cpp(144) : warning C4640: 'p2' : construction of local static object is not thread-safe
+2>..\bdlogview\vislogicdlg.cpp(144) : warning C4640: 'p3' : construction of local static object is not thread-safe
+2>..\bdlogview\vislogicdlg.cpp(178) : warning C4640: 'ptask' : construction of local static object is not thread-safe
+2>..\bdlogview\vislogicdlg.cpp(180) : warning C4640: 'pconnect' : construction of local static object is not thread-safe
+2>..\bdlogview\vislogicdlg.cpp(202) : warning C4365: 'argument' : conversion from 'int' to 'UINT64', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(227) : warning C4365: 'initializing' : conversion from 'unsigned long' to 'int', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(238) : warning C4365: 'initializing' : conversion from 'unsigned long' to 'int', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(239) : warning C4365: 'initializing' : conversion from 'unsigned long' to 'int', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(257) : warning C4365: 'initializing' : conversion from 'unsigned long' to 'int', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(293) : warning C4928: illegal copy-initialization; more than one user-defined conversion has been implicitly applied
+2>        while calling the constructor 'WTL::CComboBoxT<TBase>::CComboBoxT(HWND)'
+2>        with
+2>        [
+2>            TBase=ATL::CWindow
+2>        ]
+2>        D:\src\app\gensoft\bull\bdlog\thirdsrc\include\wtl/atlctrls.h(791) : see declaration of 'WTL::CComboBoxT<TBase>::CComboBoxT'
+2>        with
+2>        [
+2>            TBase=ATL::CWindow
+2>        ]
+2>config.cpp
+2>bdlogview.cpp
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>Compiling...
+2>logcenter.cpp
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>..\bdlogview\logcenter.cpp(298) : warning C4365: 'argument' : conversion from 'int' to 'DWORD', signed/unsigned mismatch
+2>logicvis.cpp
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(67) : warning C4365: '=' : conversion from 'int' to 'size_t', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(89) : warning C4365: '=' : conversion from 'int' to 'size_t', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(91) : warning C4365: '=' : conversion from 'int' to 'size_t', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(137) : warning C4365: 'argument' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(137) : warning C4365: 'argument' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(175) : warning C4365: 'initializing' : conversion from 'unsigned int' to 'int', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(178) : warning C4365: 'argument' : conversion from 'int' to 'unsigned int', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(215) : warning C4365: '=' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(216) : warning C4365: '=' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(235) : warning C4365: '=' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(236) : warning C4365: '=' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(249) : warning C4365: '=' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(250) : warning C4365: '=' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(265) : warning C4365: '=' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(266) : warning C4365: '=' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(283) : warning C4365: '=' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(284) : warning C4365: '=' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(286) : warning C4365: 'initializing' : conversion from 'LONGLONG' to 'UINT64', signed/unsigned mismatch
+2>Compiling resources...
+2>Compiling manifest to resources...
+2>Linking...
+2>LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/PROFILE' specification
+2>Generating code
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\helper.cpp(687) : warning C4701: potentially uninitialized local variable 'hRoot' used
+2>Finished generating code
+2>Embedding manifest...
+2>LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/PROFILE' specification
+2>Generating code
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\helper.cpp(687) : warning C4701: potentially uninitialized local variable 'hRoot' used
+2>Finished generating code
+2>Build log was saved at "file://D:\src\app\gensoft\bull\bdlog\build\intermediate\bdlogview\Release\BuildLog.htm"
+2>bdlogview - 0 error(s), 84 warning(s)
+========== Rebuild All: 2 succeeded, 0 failed, 1 skipped ==========
+
+1>------ Rebuild All started: Project: testbdlog, Configuration: Release Win32 ------
+2>------ Rebuild All started: Project: bdlogview, Configuration: Release Win32 ------
+3>------ Rebuild All started: Project: bdlog, Configuration: Release Win32 ------
+2>Deleting intermediate and output files for project 'bdlogview', configuration 'Release|Win32'
+3>Deleting intermediate and output files for project 'bdlog', configuration 'Release|Win32'
+1>Deleting intermediate and output files for project 'testbdlog', configuration 'Release|Win32'
+1>Compiling...
+3>Compiling...
+2>bdlogview : warning PRJ0009 : Build log could not be opened for writing.
+2>Make sure that the file is not open by another process and is not write-protected.
+1>stdafx.cpp
+2>Compiling...
+2>stdafx.cpp
+3>stdafx.cpp
+3>Compiling...
+3>logutil.cpp
+3>logoption.cpp
+3>logfilter.cpp
+3>logcontroller.cpp
+3>..\bdlog\logcontroller.cpp(63) : warning C4365: 'initializing' : conversion from 'size_t' to 'int', signed/unsigned mismatch
+3>bdlog.cpp
+3>dllmain.cpp
+3>outputdevice_sharememory.cpp
+1>Compiling...
+1>testbdlog.cpp
+3>outputdevice_pipe.cpp
+3>outputdevice_file.cpp
+3>outputdevice_debugoutput.cpp
+3>Compiling resources...
+3>Linking...
+3>   Creating library D:\src\app\gensoft\bull\bdlog\build\..\output\Win32\Release\bdlog.lib and object D:\src\app\gensoft\bull\bdlog\build\..\output\Win32\Release\bdlog.exp
+3>Generating code
+3>d:\src\app\gensoft\bull\bdlog\bdlog\logfilter.cpp(163) : warning C4702: unreachable code
+1>d:\src\app\gensoft\bull\bdlog\testbdlog\unittest.h(82) : warning C4100: 'tags' : unreferenced formal parameter
+1>d:\src\app\gensoft\bull\bdlog\testbdlog\unittest.h(100) : warning C4640: 'ut' : construction of local static object is not thread-safe
+1>..\testbdlog\testbdlog.cpp(318) : warning C4800: 'BOOL' : forcing value to bool 'true' or 'false' (performance warning)
+1>..\testbdlog\testbdlog.cpp(509) : warning C4101: 'hr' : unreferenced local variable
+1>..\testbdlog\testbdlog.cpp(562) : warning C4100: 'argv' : unreferenced formal parameter
+1>..\testbdlog\testbdlog.cpp(562) : warning C4100: 'argc' : unreferenced formal parameter
+3>Finished generating code
+1>perftest.cpp
+3>Embedding manifest...
+2>Compiling...
+2>helper.cpp
+3>Build log was saved at "file://D:\src\app\gensoft\bull\bdlog\build\intermediate\bdlog\Release\BuildLog.htm"
+3>bdlog - 0 error(s), 2 warning(s)
+1>file2.cpp
+1>earlyinvoke.cpp
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+1>Linking...
+2>advancedfiltereditdlg.cpp
+1>Generating code
+1>Finished generating code
+1>Embedding manifest...
+1>Build log was saved at "file://D:\src\app\gensoft\bull\bdlog\build\intermediate\testbdlog\Release\BuildLog.htm"
+1>testbdlog - 0 error(s), 6 warning(s)
+2>concretefiltereditdlg.CPP
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>filter.cpp
+2>filtercreator.cpp
+2>filtereditdlg.cpp
+2>filtersetdlg.cpp
+2>graphicfiltereditdlg.cpp
+2>hilightereditdlg.cpp
+2>hilightermanagedlg.cpp
+2>simplefiltereditdlg.cpp
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>loginfodlg.cpp
+2>C:\Program Files (x86)\Microsoft Visual Studio 8\VC\atlmfc\include\atltime.inl(670) : warning C4365: 'argument' : conversion from 'ULONGLONG' to 'LONGLONG', signed/unsigned mismatch
+2>logsourceinfodlg.cpp
+2>mainframe.cpp
+2>C:\Program Files (x86)\Microsoft Visual Studio 8\VC\atlmfc\include\atltime.inl(670) : warning C4365: 'argument' : conversion from 'ULONGLONG' to 'LONGLONG', signed/unsigned mismatch
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>..\bdlogview\mainframe.cpp(341) : warning C4101: 'rtpos' : unreferenced local variable
+2>..\bdlogview\mainframe.cpp(753) : warning C4244: '=' : conversion from 'UINT64' to 'size_t', possible loss of data
+2>..\bdlogview\mainframe.cpp(1353) : warning C4365: 'argument' : conversion from 'size_t' to 'int', signed/unsigned mismatch
+2>..\bdlogview\mainframe.cpp(1377) : warning C4365: 'argument' : conversion from 'size_t' to 'int', signed/unsigned mismatch
+2>quickfilterdlg.cpp
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>specialpathdlg.cpp
+2>tagselector.cpp
+2>vislogicdlg.cpp
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(11) : warning C4244: 'return' : conversion from 'INT64' to 'int', possible loss of data
+2>..\bdlogview\vislogicdlg.cpp(94) : warning C4365: '=' : conversion from 'time_t' to 'UINT64', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(95) : warning C4365: '=' : conversion from 'int' to 'UINT32', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(106) : warning C4244: 'initializing' : conversion from 'INT64' to 'int', possible loss of data
+2>..\bdlogview\vislogicdlg.cpp(120) : warning C4928: illegal copy-initialization; more than one user-defined conversion has been implicitly applied
+2>        while calling the constructor 'WTL::CComboBoxT<TBase>::CComboBoxT(HWND)'
+2>        with
+2>        [
+2>            TBase=ATL::CWindow
+2>        ]
+2>        D:\src\app\gensoft\bull\bdlog\thirdsrc\include\wtl/atlctrls.h(791) : see declaration of 'WTL::CComboBoxT<TBase>::CComboBoxT'
+2>        with
+2>        [
+2>            TBase=ATL::CWindow
+2>        ]
+2>..\bdlogview\vislogicdlg.cpp(126) : warning C4365: 'argument' : conversion from 'UINT32' to 'int', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(124) : warning C4189: 'pid' : local variable is initialized but not referenced
+2>..\bdlogview\vislogicdlg.cpp(144) : warning C4640: 'p1' : construction of local static object is not thread-safe
+2>..\bdlogview\vislogicdlg.cpp(144) : warning C4640: 'p2' : construction of local static object is not thread-safe
+2>..\bdlogview\vislogicdlg.cpp(144) : warning C4640: 'p3' : construction of local static object is not thread-safe
+2>..\bdlogview\vislogicdlg.cpp(178) : warning C4640: 'ptask' : construction of local static object is not thread-safe
+2>..\bdlogview\vislogicdlg.cpp(180) : warning C4640: 'pconnect' : construction of local static object is not thread-safe
+2>..\bdlogview\vislogicdlg.cpp(202) : warning C4365: 'argument' : conversion from 'int' to 'UINT64', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(227) : warning C4365: 'initializing' : conversion from 'unsigned long' to 'int', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(238) : warning C4365: 'initializing' : conversion from 'unsigned long' to 'int', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(239) : warning C4365: 'initializing' : conversion from 'unsigned long' to 'int', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(257) : warning C4365: 'initializing' : conversion from 'unsigned long' to 'int', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(293) : warning C4928: illegal copy-initialization; more than one user-defined conversion has been implicitly applied
+2>        while calling the constructor 'WTL::CComboBoxT<TBase>::CComboBoxT(HWND)'
+2>        with
+2>        [
+2>            TBase=ATL::CWindow
+2>        ]
+2>        D:\src\app\gensoft\bull\bdlog\thirdsrc\include\wtl/atlctrls.h(791) : see declaration of 'WTL::CComboBoxT<TBase>::CComboBoxT'
+2>        with
+2>        [
+2>            TBase=ATL::CWindow
+2>        ]
+2>config.cpp
+2>bdlogview.cpp
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>Compiling...
+2>logcenter.cpp
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>..\bdlogview\logcenter.cpp(298) : warning C4365: 'argument' : conversion from 'int' to 'DWORD', signed/unsigned mismatch
+2>logicvis.cpp
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(67) : warning C4365: '=' : conversion from 'int' to 'size_t', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(89) : warning C4365: '=' : conversion from 'int' to 'size_t', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(91) : warning C4365: '=' : conversion from 'int' to 'size_t', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(137) : warning C4365: 'argument' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(137) : warning C4365: 'argument' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(175) : warning C4365: 'initializing' : conversion from 'unsigned int' to 'int', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(178) : warning C4365: 'argument' : conversion from 'int' to 'unsigned int', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(215) : warning C4365: '=' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(216) : warning C4365: '=' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(235) : warning C4365: '=' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(236) : warning C4365: '=' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(249) : warning C4365: '=' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(250) : warning C4365: '=' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(265) : warning C4365: '=' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(266) : warning C4365: '=' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(283) : warning C4365: '=' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(284) : warning C4365: '=' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(286) : warning C4365: 'initializing' : conversion from 'LONGLONG' to 'UINT64', signed/unsigned mismatch
+2>Compiling resources...
+2>Compiling manifest to resources...
+2>Linking...
+2>LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/PROFILE' specification
+2>Generating code
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\helper.cpp(687) : warning C4701: potentially uninitialized local variable 'hRoot' used
+2>Finished generating code
+2>Embedding manifest...
+2>LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/PROFILE' specification
+2>Generating code
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\helper.cpp(687) : warning C4701: potentially uninitialized local variable 'hRoot' used
+2>Finished generating code
+2>Build log was saved at "file://D:\src\app\gensoft\bull\bdlog\build\intermediate\bdlogview\Release\BuildLog.htm"
+2>bdlogview - 0 error(s), 84 warning(s)
+========== Rebuild All: 3 succeeded, 0 failed, 0 skipped ==========
+
+1>------ Skipped Rebuild All: Project: testbdlog, Configuration: Release Win32 ------
+1>Project not selected to build for this solution configuration 
+2>------ Rebuild All started: Project: bdlogview, Configuration: Release Win32 ------
+3>------ Rebuild All started: Project: bdlog, Configuration: ReleaseStatic Win32 ------
+2>Deleting intermediate and output files for project 'bdlogview', configuration 'Release|Win32'
+3>Deleting intermediate and output files for project 'bdlog', configuration 'ReleaseStatic|Win32'
+2>bdlogview : warning PRJ0009 : Build log could not be opened for writing.
+2>Make sure that the file is not open by another process and is not write-protected.
+3>Compiling...
+2>Compiling...
+3>stdafx.cpp
+2>stdafx.cpp
+3>Compiling...
+3>logutil.cpp
+3>logoption.cpp
+3>logfilter.cpp
+3>logcontroller.cpp
+3>..\bdlog\logcontroller.cpp(63) : warning C4365: 'initializing' : conversion from 'size_t' to 'int', signed/unsigned mismatch
+3>bdlog.cpp
+3>dllmain.cpp
+3>outputdevice_sharememory.cpp
+3>outputdevice_pipe.cpp
+3>outputdevice_file.cpp
+3>outputdevice_debugoutput.cpp
+3>Compiling resources...
+3>Linking...
+3>   Creating library D:\src\app\gensoft\bull\bdlog\build\..\output\Win32\ReleaseStatic\bdlog.lib and object D:\src\app\gensoft\bull\bdlog\build\..\output\Win32\ReleaseStatic\bdlog.exp
+3>Generating code
+3>d:\src\app\gensoft\bull\bdlog\bdlog\logfilter.cpp(163) : warning C4702: unreachable code
+3>Finished generating code
+3>Embedding manifest...
+2>Compiling...
+2>helper.cpp
+3>Build log was saved at "file://D:\src\app\gensoft\bull\bdlog\build\intermediate\bdlog\ReleaseStatic\BuildLog.htm"
+3>bdlog - 0 error(s), 2 warning(s)
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>advancedfiltereditdlg.cpp
+2>concretefiltereditdlg.CPP
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>filter.cpp
+2>filtercreator.cpp
+2>filtereditdlg.cpp
+2>filtersetdlg.cpp
+2>graphicfiltereditdlg.cpp
+2>hilightereditdlg.cpp
+2>hilightermanagedlg.cpp
+2>simplefiltereditdlg.cpp
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>loginfodlg.cpp
+2>C:\Program Files (x86)\Microsoft Visual Studio 8\VC\atlmfc\include\atltime.inl(670) : warning C4365: 'argument' : conversion from 'ULONGLONG' to 'LONGLONG', signed/unsigned mismatch
+2>logsourceinfodlg.cpp
+2>mainframe.cpp
+2>C:\Program Files (x86)\Microsoft Visual Studio 8\VC\atlmfc\include\atltime.inl(670) : warning C4365: 'argument' : conversion from 'ULONGLONG' to 'LONGLONG', signed/unsigned mismatch
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>..\bdlogview\mainframe.cpp(341) : warning C4101: 'rtpos' : unreferenced local variable
+2>..\bdlogview\mainframe.cpp(753) : warning C4244: '=' : conversion from 'UINT64' to 'size_t', possible loss of data
+2>..\bdlogview\mainframe.cpp(1353) : warning C4365: 'argument' : conversion from 'size_t' to 'int', signed/unsigned mismatch
+2>..\bdlogview\mainframe.cpp(1377) : warning C4365: 'argument' : conversion from 'size_t' to 'int', signed/unsigned mismatch
+2>quickfilterdlg.cpp
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>specialpathdlg.cpp
+2>tagselector.cpp
+2>vislogicdlg.cpp
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(11) : warning C4244: 'return' : conversion from 'INT64' to 'int', possible loss of data
+2>..\bdlogview\vislogicdlg.cpp(94) : warning C4365: '=' : conversion from 'time_t' to 'UINT64', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(95) : warning C4365: '=' : conversion from 'int' to 'UINT32', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(106) : warning C4244: 'initializing' : conversion from 'INT64' to 'int', possible loss of data
+2>..\bdlogview\vislogicdlg.cpp(120) : warning C4928: illegal copy-initialization; more than one user-defined conversion has been implicitly applied
+2>        while calling the constructor 'WTL::CComboBoxT<TBase>::CComboBoxT(HWND)'
+2>        with
+2>        [
+2>            TBase=ATL::CWindow
+2>        ]
+2>        D:\src\app\gensoft\bull\bdlog\thirdsrc\include\wtl/atlctrls.h(791) : see declaration of 'WTL::CComboBoxT<TBase>::CComboBoxT'
+2>        with
+2>        [
+2>            TBase=ATL::CWindow
+2>        ]
+2>..\bdlogview\vislogicdlg.cpp(126) : warning C4365: 'argument' : conversion from 'UINT32' to 'int', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(124) : warning C4189: 'pid' : local variable is initialized but not referenced
+2>..\bdlogview\vislogicdlg.cpp(144) : warning C4640: 'p1' : construction of local static object is not thread-safe
+2>..\bdlogview\vislogicdlg.cpp(144) : warning C4640: 'p2' : construction of local static object is not thread-safe
+2>..\bdlogview\vislogicdlg.cpp(144) : warning C4640: 'p3' : construction of local static object is not thread-safe
+2>..\bdlogview\vislogicdlg.cpp(178) : warning C4640: 'ptask' : construction of local static object is not thread-safe
+2>..\bdlogview\vislogicdlg.cpp(180) : warning C4640: 'pconnect' : construction of local static object is not thread-safe
+2>..\bdlogview\vislogicdlg.cpp(202) : warning C4365: 'argument' : conversion from 'int' to 'UINT64', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(227) : warning C4365: 'initializing' : conversion from 'unsigned long' to 'int', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(238) : warning C4365: 'initializing' : conversion from 'unsigned long' to 'int', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(239) : warning C4365: 'initializing' : conversion from 'unsigned long' to 'int', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(257) : warning C4365: 'initializing' : conversion from 'unsigned long' to 'int', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(293) : warning C4928: illegal copy-initialization; more than one user-defined conversion has been implicitly applied
+2>        while calling the constructor 'WTL::CComboBoxT<TBase>::CComboBoxT(HWND)'
+2>        with
+2>        [
+2>            TBase=ATL::CWindow
+2>        ]
+2>        D:\src\app\gensoft\bull\bdlog\thirdsrc\include\wtl/atlctrls.h(791) : see declaration of 'WTL::CComboBoxT<TBase>::CComboBoxT'
+2>        with
+2>        [
+2>            TBase=ATL::CWindow
+2>        ]
+2>config.cpp
+2>bdlogview.cpp
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>Compiling...
+2>logcenter.cpp
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>..\bdlogview\logcenter.cpp(298) : warning C4365: 'argument' : conversion from 'int' to 'DWORD', signed/unsigned mismatch
+2>logicvis.cpp
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(67) : warning C4365: '=' : conversion from 'int' to 'size_t', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(89) : warning C4365: '=' : conversion from 'int' to 'size_t', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(91) : warning C4365: '=' : conversion from 'int' to 'size_t', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(137) : warning C4365: 'argument' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(137) : warning C4365: 'argument' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(175) : warning C4365: 'initializing' : conversion from 'unsigned int' to 'int', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(178) : warning C4365: 'argument' : conversion from 'int' to 'unsigned int', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(215) : warning C4365: '=' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(216) : warning C4365: '=' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(235) : warning C4365: '=' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(236) : warning C4365: '=' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(249) : warning C4365: '=' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(250) : warning C4365: '=' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(265) : warning C4365: '=' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(266) : warning C4365: '=' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(283) : warning C4365: '=' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(284) : warning C4365: '=' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(286) : warning C4365: 'initializing' : conversion from 'LONGLONG' to 'UINT64', signed/unsigned mismatch
+2>Compiling resources...
+2>Compiling manifest to resources...
+2>Linking...
+2>LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/PROFILE' specification
+2>Generating code
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\helper.cpp(687) : warning C4701: potentially uninitialized local variable 'hRoot' used
+2>Finished generating code
+2>Embedding manifest...
+2>LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/PROFILE' specification
+2>Generating code
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\helper.cpp(687) : warning C4701: potentially uninitialized local variable 'hRoot' used
+2>Finished generating code
+2>Build log was saved at "file://D:\src\app\gensoft\bull\bdlog\build\intermediate\bdlogview\Release\BuildLog.htm"
+2>bdlogview - 0 error(s), 84 warning(s)
+========== Rebuild All: 2 succeeded, 0 failed, 1 skipped ==========
+
+1>------ Skipped Rebuild All: Project: testbdlog, Configuration: Release Win32 ------
+1>Project not selected to build for this solution configuration 
+2>------ Rebuild All started: Project: bdlogview, Configuration: Release Win32 ------
+3>------ Rebuild All started: Project: bdlog, Configuration: ReleaseNoManifest Win32 ------
+2>Deleting intermediate and output files for project 'bdlogview', configuration 'Release|Win32'
+3>Deleting intermediate and output files for project 'bdlog', configuration 'ReleaseNoManifest|Win32'
+3>Compiling...
+2>bdlogview : warning PRJ0009 : Build log could not be opened for writing.
+2>Make sure that the file is not open by another process and is not write-protected.
+2>Compiling...
+3>stdafx.cpp
+2>stdafx.cpp
+3>Compiling...
+3>logutil.cpp
+3>logoption.cpp
+3>logfilter.cpp
+3>logcontroller.cpp
+3>..\bdlog\logcontroller.cpp(63) : warning C4365: 'initializing' : conversion from 'size_t' to 'int', signed/unsigned mismatch
+3>bdlog.cpp
+3>dllmain.cpp
+3>outputdevice_sharememory.cpp
+3>outputdevice_pipe.cpp
+3>outputdevice_file.cpp
+3>outputdevice_debugoutput.cpp
+3>Compiling resources...
+3>Linking...
+3>   Creating library D:\src\app\gensoft\bull\bdlog\build\..\output\Win32\ReleaseNoManifest\bdlog.lib and object D:\src\app\gensoft\bull\bdlog\build\..\output\Win32\ReleaseNoManifest\bdlog.exp
+3>Generating code
+3>d:\src\app\gensoft\bull\bdlog\bdlog\logfilter.cpp(163) : warning C4702: unreachable code
+3>Finished generating code
+3>Creating manifest...
+3>Build log was saved at "file://D:\src\app\gensoft\bull\bdlog\build\intermediate\bdlog\ReleaseNoManifest\BuildLog.htm"
+3>bdlog - 0 error(s), 2 warning(s)
+2>Compiling...
+2>helper.cpp
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>advancedfiltereditdlg.cpp
+2>concretefiltereditdlg.CPP
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>filter.cpp
+2>filtercreator.cpp
+2>filtereditdlg.cpp
+2>filtersetdlg.cpp
+2>graphicfiltereditdlg.cpp
+2>hilightereditdlg.cpp
+2>hilightermanagedlg.cpp
+2>simplefiltereditdlg.cpp
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>loginfodlg.cpp
+2>C:\Program Files (x86)\Microsoft Visual Studio 8\VC\atlmfc\include\atltime.inl(670) : warning C4365: 'argument' : conversion from 'ULONGLONG' to 'LONGLONG', signed/unsigned mismatch
+2>logsourceinfodlg.cpp
+2>mainframe.cpp
+2>C:\Program Files (x86)\Microsoft Visual Studio 8\VC\atlmfc\include\atltime.inl(670) : warning C4365: 'argument' : conversion from 'ULONGLONG' to 'LONGLONG', signed/unsigned mismatch
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>..\bdlogview\mainframe.cpp(341) : warning C4101: 'rtpos' : unreferenced local variable
+2>..\bdlogview\mainframe.cpp(753) : warning C4244: '=' : conversion from 'UINT64' to 'size_t', possible loss of data
+2>..\bdlogview\mainframe.cpp(1353) : warning C4365: 'argument' : conversion from 'size_t' to 'int', signed/unsigned mismatch
+2>..\bdlogview\mainframe.cpp(1377) : warning C4365: 'argument' : conversion from 'size_t' to 'int', signed/unsigned mismatch
+2>quickfilterdlg.cpp
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>specialpathdlg.cpp
+2>tagselector.cpp
+2>vislogicdlg.cpp
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(11) : warning C4244: 'return' : conversion from 'INT64' to 'int', possible loss of data
+2>..\bdlogview\vislogicdlg.cpp(94) : warning C4365: '=' : conversion from 'time_t' to 'UINT64', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(95) : warning C4365: '=' : conversion from 'int' to 'UINT32', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(106) : warning C4244: 'initializing' : conversion from 'INT64' to 'int', possible loss of data
+2>..\bdlogview\vislogicdlg.cpp(120) : warning C4928: illegal copy-initialization; more than one user-defined conversion has been implicitly applied
+2>        while calling the constructor 'WTL::CComboBoxT<TBase>::CComboBoxT(HWND)'
+2>        with
+2>        [
+2>            TBase=ATL::CWindow
+2>        ]
+2>        D:\src\app\gensoft\bull\bdlog\thirdsrc\include\wtl/atlctrls.h(791) : see declaration of 'WTL::CComboBoxT<TBase>::CComboBoxT'
+2>        with
+2>        [
+2>            TBase=ATL::CWindow
+2>        ]
+2>..\bdlogview\vislogicdlg.cpp(126) : warning C4365: 'argument' : conversion from 'UINT32' to 'int', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(124) : warning C4189: 'pid' : local variable is initialized but not referenced
+2>..\bdlogview\vislogicdlg.cpp(144) : warning C4640: 'p1' : construction of local static object is not thread-safe
+2>..\bdlogview\vislogicdlg.cpp(144) : warning C4640: 'p2' : construction of local static object is not thread-safe
+2>..\bdlogview\vislogicdlg.cpp(144) : warning C4640: 'p3' : construction of local static object is not thread-safe
+2>..\bdlogview\vislogicdlg.cpp(178) : warning C4640: 'ptask' : construction of local static object is not thread-safe
+2>..\bdlogview\vislogicdlg.cpp(180) : warning C4640: 'pconnect' : construction of local static object is not thread-safe
+2>..\bdlogview\vislogicdlg.cpp(202) : warning C4365: 'argument' : conversion from 'int' to 'UINT64', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(227) : warning C4365: 'initializing' : conversion from 'unsigned long' to 'int', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(238) : warning C4365: 'initializing' : conversion from 'unsigned long' to 'int', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(239) : warning C4365: 'initializing' : conversion from 'unsigned long' to 'int', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(257) : warning C4365: 'initializing' : conversion from 'unsigned long' to 'int', signed/unsigned mismatch
+2>..\bdlogview\vislogicdlg.cpp(293) : warning C4928: illegal copy-initialization; more than one user-defined conversion has been implicitly applied
+2>        while calling the constructor 'WTL::CComboBoxT<TBase>::CComboBoxT(HWND)'
+2>        with
+2>        [
+2>            TBase=ATL::CWindow
+2>        ]
+2>        D:\src\app\gensoft\bull\bdlog\thirdsrc\include\wtl/atlctrls.h(791) : see declaration of 'WTL::CComboBoxT<TBase>::CComboBoxT'
+2>        with
+2>        [
+2>            TBase=ATL::CWindow
+2>        ]
+2>config.cpp
+2>bdlogview.cpp
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>Compiling...
+2>logcenter.cpp
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>..\bdlogview\logcenter.cpp(298) : warning C4365: 'argument' : conversion from 'int' to 'DWORD', signed/unsigned mismatch
+2>logicvis.cpp
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(32) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(43) : warning C4244: '=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(47) : warning C4242: '-=' : conversion from 'UINT64' to 'UINT32', possible loss of data
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\logicvis.h(67) : warning C4365: 'return' : conversion from 'const UINT64' to 'INT64', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(67) : warning C4365: '=' : conversion from 'int' to 'size_t', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(89) : warning C4365: '=' : conversion from 'int' to 'size_t', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(91) : warning C4365: '=' : conversion from 'int' to 'size_t', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(137) : warning C4365: 'argument' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(137) : warning C4365: 'argument' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(175) : warning C4365: 'initializing' : conversion from 'unsigned int' to 'int', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(178) : warning C4365: 'argument' : conversion from 'int' to 'unsigned int', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(215) : warning C4365: '=' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(216) : warning C4365: '=' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(235) : warning C4365: '=' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(236) : warning C4365: '=' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(249) : warning C4365: '=' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(250) : warning C4365: '=' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(265) : warning C4365: '=' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(266) : warning C4365: '=' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(283) : warning C4365: '=' : conversion from 'bdlog::int64_t' to 'UINT64', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(284) : warning C4365: '=' : conversion from 'bdlog::int32_t' to 'UINT32', signed/unsigned mismatch
+2>..\bdlogview\logicvis.cpp(286) : warning C4365: 'initializing' : conversion from 'LONGLONG' to 'UINT64', signed/unsigned mismatch
+2>Compiling resources...
+2>Compiling manifest to resources...
+2>Linking...
+2>LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/PROFILE' specification
+2>Generating code
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\helper.cpp(687) : warning C4701: potentially uninitialized local variable 'hRoot' used
+2>Finished generating code
+2>Embedding manifest...
+2>LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/PROFILE' specification
+2>Generating code
+2>d:\src\app\gensoft\bull\bdlog\bdlogview\helper.cpp(687) : warning C4701: potentially uninitialized local variable 'hRoot' used
+2>Finished generating code
+2>Build log was saved at "file://D:\src\app\gensoft\bull\bdlog\build\intermediate\bdlogview\Release\BuildLog.htm"
+2>bdlogview - 0 error(s), 84 warning(s)
+========== Rebuild All: 2 succeeded, 0 failed, 1 skipped ==========
+
