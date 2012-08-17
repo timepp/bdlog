@@ -272,6 +272,7 @@ HRESULT CLogController::SetLogUserContext(const wchar_t* prefix)
 
 BOOL CLogController::NeedLog(LogLevel level, const wchar_t* tag)
 {
+	if (!m_constructed || m_destructed || !m_inited) return FALSE;
 	MULTI_TRHEAD_GUARD(m_csLog);
 	if (!m_constructed || m_destructed || !m_inited) return FALSE;
 
