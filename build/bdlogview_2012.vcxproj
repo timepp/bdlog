@@ -104,6 +104,7 @@
     <ClCompile Include="..\bdlogview\logicvis.cpp" />
     <ClCompile Include="..\bdlogview\scripthost.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\bdlogview\simplefiltereditdlg.cpp" />
     <ClCompile Include="..\bdlogview\loginfodlg.cpp" />
@@ -202,6 +203,7 @@
   <ItemGroup>
     <Midl Include="..\bdlogview\bdlogview.idl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </Midl>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

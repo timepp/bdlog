@@ -787,10 +787,10 @@ public:
 				LPCWSTR content_start = te + 2;
 
 				// 是标题行了
-				li->log_index = id;
+				li->log_index = ++id;
 				is_title_line = true;
 				last_prefix_len = static_cast<size_t>(content_start - szLine);
-				if (id++ > 0) // 输出上一条日志
+				if (id > 1) // 输出上一条日志
 				{
 					m_listener->on_new_log(li);
 					li = new logitem();

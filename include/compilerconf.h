@@ -12,7 +12,7 @@
 /// 无警告区，用于包容稳定的第三方库头文件，如boost/ATL/WTL/STL/CxImage，不可自用
 #define BD_NO_WARNING_AREA_BEGIN()                    \
 	__pragma(warning(push, 1))                        \
-	__pragma(warning(disable: 4505 4548 4819 4917 4555))        \
+	__pragma(warning(disable: 4505 4548 4819 4917 4555 4350))        \
 	__pragma(warning(disable: 6202 6328 6334 6385 6386 6387 6255 6031 6011 6400 6246 6401 6323 6211 6282)) \
 	__pragma(warning(disable: 6054 6001 28183))
 

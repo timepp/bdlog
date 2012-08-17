@@ -27,7 +27,7 @@ LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
 // TYPELIB
 //
 
-1                       TYPELIB                 "bdlogview.tlb"
+// 1                       TYPELIB                 "bdlogview.tlb"
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////

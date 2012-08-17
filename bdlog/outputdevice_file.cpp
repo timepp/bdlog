@@ -115,16 +115,23 @@ HRESULT CLOD_File::Write(const LogItem* item)
 
 	m_cvtbuf[len++] = L' ';
 	m_cvtbuf[len++] = L'[';
+	m_cvtbuf[len++] = L'X';
+	m_cvtbuf[len++] = L':';
 	_itow_s(static_cast<int>(item->pid), m_cvtbuf + len, _countof(m_cvtbuf) - len, 16);
 	len += wcslen(m_cvtbuf + len);
 	m_cvtbuf[len++] = L':';
 	_itow_s(static_cast<int>(item->tid), m_cvtbuf + len, _countof(m_cvtbuf) - len, 16);
 	len += wcslen(m_cvtbuf + len);
+	m_cvtbuf[len++] = L':';
+	_itow_s(static_cast<int>(item->depth), m_cvtbuf + len, _countof(m_cvtbuf) - len, 10);
+	len += wcslen(m_cvtbuf + len);
 	m_cvtbuf[len++] = L']';
 
 	m_cvtbuf[len++] = L' ';
 	m_cvtbuf[len++] = L'{';
-	wcsncpy_s(m_cvtbuf + len, _countof(m_cvtbuf) - len - 2, item->tag, _TRUNCATE);
+	const wchar_t* tag = item->tag;
+	if (!tag || !*tag) tag = L" ";
+	wcsncpy_s(m_cvtbuf + len, _countof(m_cvtbuf) - len - 2, tag, _TRUNCATE);
 	wcsncat_s(m_cvtbuf + len, _countof(m_cvtbuf) - len, L"} ", _TRUNCATE);
 	len += wcslen(m_cvtbuf + len);
 
