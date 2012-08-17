@@ -32,6 +32,7 @@
 #		pragma comment(lib, "bdlog.lib")
 #	elif defined(BDLOG_USE_AS_STATIC_LIB)
 #		define BDLOGAPI extern "C"
+#       pragma comment(lib, "bdlog.lib")
 #	elif defined(BDLOG_USE_AS_DLL_DYNAMIC_LOAD)
 #		define BDLOGAPI extern "C"
 #	endif
