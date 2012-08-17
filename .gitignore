@@ -1,0 +1,4 @@
+﻿intermediate/
+ipch/
+*.suo
+output/Win32/
