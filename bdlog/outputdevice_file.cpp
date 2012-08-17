@@ -55,6 +55,7 @@ HRESULT CLOD_File::Open(ILogOption* opt)
 	helper::ExpandVariable(m_path, path, _countof(path));
 	::ExpandEnvironmentStringsW(path, m_path, _countof(m_path));
 
+	helper::MakeRequiredDirectory(m_path);
 	m_file = ::CreateFileW(m_path, GENERIC_WRITE, shareMode, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 	if (m_file == INVALID_HANDLE_VALUE)
 	{

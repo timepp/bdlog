@@ -53,6 +53,8 @@ struct helper
 	static void UnixTimeToString(__int64 t, const wchar_t* fmt, wchar_t* buf, size_t buflen);
 
 	static wchar_t* IntToStr_Padding0(wchar_t* str, size_t strlen, size_t len, int val);
+
+	static BOOL MakeRequiredDirectory(const wchar_t* path);
 };
 
 class binarystream

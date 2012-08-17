@@ -161,3 +161,22 @@ void helper::UnixTimeToString(__int64 t, const wchar_t* fmt, wchar_t* buf, size_
 
 	*buf = L'\0';
 }
+
+BOOL helper::MakeRequiredDirectory(const wchar_t* p)
+{
+	wchar_t path[MAX_PATH];
+	SafeCopyString(p, wcslen(p), path, _countof(path) - 1);
+	path[_countof(path)-1] = L'\0';
+
+	wchar_t* q = path;
+	for (;;)
+	{
+		q = wcschr(q, L'\\');
+		if (!q) break;
+		*q = L'\0';
+		::CreateDirectoryW(path, NULL);
+		*q++ = L'\\';
+	}
+
+	return TRUE;
+}
