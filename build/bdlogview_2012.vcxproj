@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCTargetsPath Condition="'$(VCTargetsPath11)' != '' and '$(VSVersion)' == '' and '$(VisualStudioVersion)' == ''">$(VCTargetsPath11)</VCTargetsPath>
+  </PropertyGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>bdlogview</ProjectName>
+    <ProjectGuid>{BD966C3A-5865-4EAC-A013-C59FAAB2D23D}</ProjectGuid>
+    <RootNamespace>bdlogview</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v110</PlatformToolset>
+    <UseOfAtl>Static</UseOfAtl>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v110</PlatformToolset>
+    <UseOfAtl>Static</UseOfAtl>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="release.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="debug.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>11.0.50214.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>version.lib;psapi.lib;rpcns4.lib;rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <Manifest>
+      <AdditionalManifestFiles>$(bdlogroot)\thirdsrc\xpstyle.manifest;%(AdditionalManifestFiles)</AdditionalManifestFiles>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <EnablePREfast>true</EnablePREfast>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>version.lib;psapi.lib;rpcns4.lib;rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <Profile>true</Profile>
+    </Link>
+    <Manifest>
+      <AdditionalManifestFiles>$(bdlogroot)\thirdsrc\xpstyle.manifest;%(AdditionalManifestFiles)</AdditionalManifestFiles>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\bdlogview\helper.cpp" />
+    <ClCompile Include="..\bdlogview\advancedfiltereditdlg.cpp" />
+    <ClCompile Include="..\bdlogview\concretefiltereditdlg.CPP" />
+    <ClCompile Include="..\bdlogview\filter.cpp" />
+    <ClCompile Include="..\bdlogview\filtercreator.cpp" />
+    <ClCompile Include="..\bdlogview\filtereditdlg.cpp" />
+    <ClCompile Include="..\bdlogview\filtersetdlg.cpp" />
+    <ClCompile Include="..\bdlogview\graphicfiltereditdlg.cpp" />
+    <ClCompile Include="..\bdlogview\hilightereditdlg.cpp" />
+    <ClCompile Include="..\bdlogview\hilightermanagedlg.cpp" />
+    <ClCompile Include="..\bdlogview\logcenter.cpp" />
+    <ClCompile Include="..\bdlogview\logicvis.cpp" />
+    <ClCompile Include="..\bdlogview\scripthost.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\bdlogview\simplefiltereditdlg.cpp" />
+    <ClCompile Include="..\bdlogview\loginfodlg.cpp" />
+    <ClCompile Include="..\bdlogview\logsourceinfodlg.cpp" />
+    <ClCompile Include="..\bdlogview\mainframe.cpp" />
+    <ClCompile Include="..\bdlogview\quickfilterdlg.cpp" />
+    <ClCompile Include="..\bdlogview\specialpathdlg.cpp" />
+    <ClCompile Include="..\bdlogview\tagselector.cpp" />
+    <ClCompile Include="..\bdlogview\config.cpp" />
+    <ClCompile Include="..\bdlogview\bdlogview.cpp" />
+    <ClCompile Include="..\bdlogview\stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\bdlogview\vislogicdlg.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\bdlogview\helper.h" />
+    <ClInclude Include="..\bdlogview\logcenter.h" />
+    <ClInclude Include="..\bdlogview\service.h" />
+    <ClInclude Include="..\bdlogview\servicehelper.h" />
+    <ClInclude Include="..\bdlogview\serviceid.h" />
+    <ClInclude Include="..\bdlogview\taglist.h" />
+    <ClInclude Include="..\bdlogview\concretefilter.h" />
+    <ClInclude Include="..\bdlogview\concretefiltereditdlg.h" />
+    <ClInclude Include="..\bdlogview\filter.h" />
+    <ClInclude Include="..\bdlogview\filtercreator.h" />
+    <ClInclude Include="..\bdlogview\filtereditdlg.h" />
+    <ClInclude Include="..\bdlogview\filtersetdlg.h" />
+    <ClInclude Include="..\bdlogview\hilightereditdlg.h" />
+    <ClInclude Include="..\bdlogview\hilightermanagedlg.h" />
+    <ClInclude Include="..\bdlogview\serializer.h" />
+    <ClInclude Include="..\bdlogview\aboutdlg.h" />
+    <ClInclude Include="..\bdlogview\colorselector.h" />
+    <ClInclude Include="..\bdlogview\droptarget.h" />
+    <ClInclude Include="..\bdlogview\firsttimedlg.h" />
+    <ClInclude Include="..\bdlogview\historycombo.h" />
+    <ClInclude Include="..\bdlogview\loginfodlg.h" />
+    <ClInclude Include="..\bdlogview\logsourceinfodlg.h" />
+    <ClInclude Include="..\bdlogview\mainframe.h" />
+    <ClInclude Include="..\bdlogview\modelesskeyprocessor.h" />
+    <ClInclude Include="..\bdlogview\quickfilterdlg.h" />
+    <ClInclude Include="..\bdlogview\searchdlg.h" />
+    <ClInclude Include="..\bdlogview\specialpathdlg.h" />
+    <ClInclude Include="..\bdlogview\tagselector.h" />
+    <ClInclude Include="..\bdlogview\vislogicdlg.h" />
+    <ClInclude Include="..\bdlogview\whitebkdlg.h" />
+    <ClInclude Include="..\bdlogview\config.h" />
+    <ClInclude Include="..\bdlogview\common.h" />
+    <ClInclude Include="..\bdlogview\logpropdb.h" />
+    <ClInclude Include="..\bdlogview\msgfilter.h" />
+    <ClInclude Include="..\bdlogview\Resource.h" />
+    <ClInclude Include="..\bdlogview\stdafx.h" />
+    <ClInclude Include="..\bdlogview\targetver.h" />
+    <ClInclude Include="..\bdlogview\uipublic.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\bdlogview\res\advanced.ico" />
+    <Image Include="..\bdlogview\res\application.ico" />
+    <Image Include="..\bdlogview\res\bitmap1.bmp" />
+    <Image Include="..\bdlogview\res\clear.ico" />
+    <Image Include="..\bdlogview\res\content.ico" />
+    <Image Include="..\bdlogview\res\Down.ico" />
+    <Image Include="..\bdlogview\res\Edit.ico" />
+    <Image Include="..\bdlogview\res\icon3.ico" />
+    <Image Include="..\bdlogview\res\level.ico" />
+    <Image Include="..\bdlogview\res\logical_and.ico" />
+    <Image Include="..\bdlogview\res\logical_not.ico" />
+    <Image Include="..\bdlogview\res\logical_or.ico" />
+    <Image Include="..\bdlogview\res\open.ico" />
+    <Image Include="..\bdlogview\res\pid.ico" />
+    <Image Include="..\bdlogview\res\save.ico" />
+    <Image Include="..\bdlogview\res\simple.ico" />
+    <Image Include="..\bdlogview\res\simplify.ico" />
+    <Image Include="..\bdlogview\res\star.ico" />
+    <Image Include="..\bdlogview\res\star_next.ico" />
+    <Image Include="..\bdlogview\res\star_prev.ico" />
+    <Image Include="..\bdlogview\res\start.ico" />
+    <Image Include="..\bdlogview\res\stop.ico" />
+    <Image Include="..\bdlogview\res\tag.ico" />
+    <Image Include="..\bdlogview\res\tid.ico" />
+    <Image Include="..\bdlogview\res\toolbar1.bmp" />
+    <Image Include="..\bdlogview\res\tree.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\bdlogview\bdlogview.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\bdlogview\res\bdxlog.ini" />
+    <None Include="..\bdlogview\res\debugset.ini" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\bdlogview\res\help.txt" />
+    <Text Include="..\bdlogview\ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="..\bdlogview\bdlogview.idl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Midl>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="bdlogview.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

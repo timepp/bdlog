@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="-- inerface --">
+      <UniqueIdentifier>{693ecb6f-5a16-47d8-8161-b04cd9293213}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party">
+      <UniqueIdentifier>{be90ebbc-b431-4741-881e-4d77aff2903c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="outputdevice">
+      <UniqueIdentifier>{80e79140-85e3-40b7-9f7c-c37bf98386f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="proj">
+      <UniqueIdentifier>{df1a9bed-517d-4f16-9c0e-70df98447deb}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\bdlog.h">
+      <Filter>-- inerface --</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\bdlog_util.h">
+      <Filter>-- inerface --</Filter>
+    </ClInclude>
+    <ClInclude Include="..\bdlog\outputdevice_common.h">
+      <Filter>outputdevice</Filter>
+    </ClInclude>
+    <ClInclude Include="..\bdlog\outputdevice_debugoutput.h">
+      <Filter>outputdevice</Filter>
+    </ClInclude>
+    <ClInclude Include="..\bdlog\outputdevice_file.h">
+      <Filter>outputdevice</Filter>
+    </ClInclude>
+    <ClInclude Include="..\bdlog\outputdevice_pipe.h">
+      <Filter>outputdevice</Filter>
+    </ClInclude>
+    <ClInclude Include="..\bdlog\outputdevice_sharememory.h">
+      <Filter>outputdevice</Filter>
+    </ClInclude>
+    <ClInclude Include="..\bdlog\compilerconf.h">
+      <Filter>proj</Filter>
+    </ClInclude>
+    <ClInclude Include="..\bdlog\resource.h">
+      <Filter>proj</Filter>
+    </ClInclude>
+    <ClInclude Include="..\bdlog\stdafx.h">
+      <Filter>proj</Filter>
+    </ClInclude>
+    <ClInclude Include="..\bdlog\targetver.h">
+      <Filter>proj</Filter>
+    </ClInclude>
+    <ClInclude Include="..\bdlog\logcontroller.h" />
+    <ClInclude Include="..\bdlog\logfilter.h" />
+    <ClInclude Include="..\bdlog\logoption.h" />
+    <ClInclude Include="..\bdlog\logutil.h" />
+    <ClInclude Include="..\include\bdlogprovider.h">
+      <Filter>-- inerface --</Filter>
+    </ClInclude>
+    <ClInclude Include="..\thirdsrc\include\accutime.h">
+      <Filter>third_party</Filter>
+    </ClInclude>
+    <ClInclude Include="..\thirdsrc\include\bdsecurity.h">
+      <Filter>third_party</Filter>
+    </ClInclude>
+    <ClInclude Include="..\thirdsrc\include\bdsharemem.h">
+      <Filter>third_party</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\bdlog\outputdevice_debugoutput.cpp">
+      <Filter>outputdevice</Filter>
+    </ClCompile>
+    <ClCompile Include="..\bdlog\outputdevice_file.cpp">
+      <Filter>outputdevice</Filter>
+    </ClCompile>
+    <ClCompile Include="..\bdlog\outputdevice_pipe.cpp">
+      <Filter>outputdevice</Filter>
+    </ClCompile>
+    <ClCompile Include="..\bdlog\outputdevice_sharememory.cpp">
+      <Filter>outputdevice</Filter>
+    </ClCompile>
+    <ClCompile Include="..\bdlog\dllmain.cpp">
+      <Filter>proj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\bdlog\stdafx.cpp">
+      <Filter>proj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\bdlog\bdlog.cpp" />
+    <ClCompile Include="..\bdlog\logcontroller.cpp" />
+    <ClCompile Include="..\bdlog\logfilter.cpp" />
+    <ClCompile Include="..\bdlog\logoption.cpp" />
+    <ClCompile Include="..\bdlog\logutil.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\bdlog\bdlog.rc">
+      <Filter>proj</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

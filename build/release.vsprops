@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="gb2312"?>
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="releasecommon"
+	InheritedPropertySheets=".\common.vsprops"
+	>
+	<Tool
+		Name="VCCLCompilerTool"
+		Optimization="2"
+		PreprocessorDefinitions="NDEBUG"
+		DebugInformationFormat="3"
+	/>
+</VisualStudioPropertySheet>

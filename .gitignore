@@ -2,3 +2,5 @@
 ipch/
 *.suo
 output/Win32/
+*.sdf
+*.opensdf
