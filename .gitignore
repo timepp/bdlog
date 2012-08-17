@@ -1,6 +1,6 @@
-﻿intermediate/
-ipch/
 *.suo
-output/Win32/
 *.sdf
 *.opensdf
+intermediate/
+ipch/
+output/Win32/

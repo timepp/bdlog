@@ -18,7 +18,7 @@
 #include <stdio.h>
 
 #ifdef BDLOG_SELF_BUILD
-#	ifdef BDLOG_STATIC_LIB
+#	ifdef BDLOG_USE_AS_STATIC_LIB
 #		define BDLOGAPI extern "C"
 #	else
 #		define BDLOGAPI extern "C" __declspec(dllexport)
