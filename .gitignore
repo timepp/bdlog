@@ -5,3 +5,4 @@ intermediate/
 ipch/
 output/Win32/
 output
+/bdlog/*.aps
