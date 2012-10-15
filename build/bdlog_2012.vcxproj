@@ -1,16 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="DebugLib|Win32">
-      <Configuration>DebugLib</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="ReleaseLib|Win32">
-      <Configuration>ReleaseLib</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
@@ -28,19 +20,6 @@
     <Keyword>Win32Proj</Keyword>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugLib|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
-    <PlatformToolset>v110</PlatformToolset>
-    <UseOfAtl>Static</UseOfAtl>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseLib|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
-    <PlatformToolset>v110</PlatformToolset>
-    <UseOfAtl>Static</UseOfAtl>
-    <CharacterSet>Unicode</CharacterSet>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <PlatformToolset>v110</PlatformToolset>
@@ -56,16 +35,6 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DebugLib|Win32'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="debug.props" />
-    <Import Project="bdlog_self.props" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseLib|Win32'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="release.props" />
-    <Import Project="bdlog_self.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -122,62 +91,33 @@
       <EntryPointSymbol>DllMain</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseLib|Win32'">
-    <ClCompile>
-      <AdditionalOptions>/Oy- %(AdditionalOptions)</AdditionalOptions>
-      <PreprocessorDefinitions>BDLOG_USE_AS_STATIC_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <BufferSecurityCheck>false</BufferSecurityCheck>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <AssemblerOutput>All</AssemblerOutput>
-      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
-      <RuntimeTypeInfo>false</RuntimeTypeInfo>
-      <ExceptionHandling>false</ExceptionHandling>
-    </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugLib|Win32'">
-    <ClCompile>
-      <PreprocessorDefinitions>BDLOG_BUILD_STATIC_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <MinimalRebuild>true</MinimalRebuild>
-      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <RuntimeTypeInfo>false</RuntimeTypeInfo>
-      <StringPooling>true</StringPooling>
-      <ExceptionHandling>false</ExceptionHandling>
-    </ClCompile>
-  </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\bdlog\lock.h" />
     <ClInclude Include="..\bdlog\minicrt.h" />
-    <ClInclude Include="..\bdlog\stream.h" />
+    <ClInclude Include="..\include\accutime.h" />
     <ClInclude Include="..\include\bdlog.h" />
     <ClInclude Include="..\include\bdlogprovider.h" />
     <ClInclude Include="..\include\bdlog_util.h" />
-    <ClInclude Include="..\bdlog\outputdevice_common.h" />
-    <ClInclude Include="..\bdlog\outputdevice_debugoutput.h" />
-    <ClInclude Include="..\bdlog\outputdevice_file.h" />
-    <ClInclude Include="..\bdlog\outputdevice_pipe.h" />
-    <ClInclude Include="..\bdlog\outputdevice_sharememory.h" />
     <ClInclude Include="..\bdlog\resource.h" />
     <ClInclude Include="..\bdlog\stdafx.h" />
     <ClInclude Include="..\bdlog\targetver.h" />
-    <ClInclude Include="..\bdlog\logcontroller.h" />
-    <ClInclude Include="..\bdlog\logfilter.h" />
-    <ClInclude Include="..\bdlog\logoption.h" />
-    <ClInclude Include="..\bdlog\logutil.h" />
-    <ClInclude Include="..\thirdsrc\include\accutime.h" />
-    <ClInclude Include="..\thirdsrc\include\bdsecurity.h" />
-    <ClInclude Include="..\thirdsrc\include\bdsharemem.h" />
+    <ClInclude Include="..\include\bdsharemem.h" />
+    <ClInclude Include="..\include\compilerconf.h" />
+    <ClInclude Include="..\include\getlogcontroller_impl.h" />
+    <ClInclude Include="..\include\lock.h" />
+    <ClInclude Include="..\include\logcontroller.h" />
+    <ClInclude Include="..\include\logfilter.h" />
+    <ClInclude Include="..\include\logoption.h" />
+    <ClInclude Include="..\include\logutil.h" />
+    <ClInclude Include="..\include\outputdevice_common.h" />
+    <ClInclude Include="..\include\outputdevice_debugoutput.h" />
+    <ClInclude Include="..\include\outputdevice_file.h" />
+    <ClInclude Include="..\include\outputdevice_pipe.h" />
+    <ClInclude Include="..\include\outputdevice_sharememory.h" />
+    <ClInclude Include="..\include\stream.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\bdlog\minicrt.cpp">
-    </ClCompile>
     <ClCompile Include="..\bdlog\stdafx.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DebugLib|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='ReleaseLib|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\bdlog\bdlog.cpp" />

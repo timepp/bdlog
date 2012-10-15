@@ -77,8 +77,8 @@ public:
 		textstream s(m_cvtbuf, _countof(m_cvtbuf));
 
 		// 如果两次日志秒数相同，后一次日志就可以直接使用前一次格式化过的时间串，没必要再格式化一遍
-		if (m_lastTime.dwHighDateTime == item->time.dwHighDateTime && 
-			m_lastTime.dwLowDateTime / E7 == item->time.dwLowDateTime / E7)
+		if (m_lastTime.dwLowDateTime / E7 != item->time.dwLowDateTime / E7 ||
+			m_lastTime.dwHighDateTime != item->time.dwHighDateTime)
 		{
 			m_lastTime = item->time;
 			helper::FileTimeToString(item->time, L"Y-m-d H:M:S", m_cvtbuf, _countof(m_cvtbuf));
@@ -86,9 +86,10 @@ public:
 
 		s.advance(19);
 
-		DWORD us = item->time.dwLowDateTime % E7 / E6;
-		wsprintfW(s, L".%06u %02d [X:%X:%X:%d] {", us, item->level, item->pid, item->tid, item->depth);
-		s.advance(wcslen(s));
+		DWORD us = item->time.dwLowDateTime % E7 / 10;
+		wchar_t tmp[128];
+		wsprintfW(tmp, L".%06u %02d [X:%X:%X:%d] {", us, item->level, item->pid, item->tid, item->depth);
+		s << tmp;
 
 		const wchar_t* tag = item->tag;
 		if (!tag || !*tag) tag = L" ";

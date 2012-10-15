@@ -3,27 +3,15 @@
 #include <bdlog.h>
 #include "logcontroller.h"
 
-#ifdef BDLOG_BUILD_STATIC_LIB
-
-// 在static lib的情况下，因为全局变量的初始化顺序无法保证，所以也就无法保证LogController在足够早的时间初始化。
-// 于是在static lib的情况下，LogController被实现为：在第一次获取的时候初始化
-// 但这不是线程安全的，所以请确保在新线程启动之前初始化LogController
-
-BDLOGAPI ILogController* GetLogController()
-{
-#pragma warning(push)
-#pragma warning(disable: 4640)
-	static CLogController s_controller;  // 请确保在所有新线程启动之前调用GetLogController
-#pragma warning(pop)
-
-	return &s_controller;
+void * operator new (unsigned int /*size*/, void * p)
+{ 
+	return p ; 
 }
-
-#else // no BDLOG_BUILD_STATIC_LIB
 
 static char Room_For_LogControler[sizeof(CLogController)];
 
-BDLOGAPI ILogController* GetLogController()
+extern "C" __declspec(dllexport)
+ILogController* GetLogController()
 {
 	return (CLogController*)Room_For_LogControler;
 }
@@ -34,8 +22,79 @@ BOOL APIENTRY DllMain( HMODULE /*hModule*/, DWORD ul_reason_for_call, LPVOID /*l
 	{
 		new(Room_For_LogControler) CLogController;
 	}
+	if (ul_reason_for_call == DLL_PROCESS_DETACH)
+	{
+		GetLogController()->UnInit();
+	}
 
 	return TRUE;
+}
+
+#define WIDE_STR_(x) L##x
+#define WIDE_STR(x) WIDE_STR_(x)
+
+// 使用symview检查产出是否有“不该被链接”字样的符号出现，若有，说明不小心链接了相应的函数，应该检查并消灭掉
+#define SHOULD_NOT_LINK(reason)  LOG(L"不该被链接(" reason L"): " WIDE_STR(__FUNCTION__))
+
+/// 缺省实现的new/delete比较复杂，
+/// bdlog中没有几处new/delete，用不到这么复杂的功能，直接使用HeapAlloc/HeapFree代替
+void * operator new(unsigned int size)
+{
+	return ::HeapAlloc(::GetProcessHeap(), 0, size);
+}
+void operator delete(void* p)
+{
+	::HeapFree(::GetProcessHeap(), 0, p);
+}
+
+int _purecall()
+{
+	return 0;
+}
+
+/// 缺省的wcschr比较复杂(占用170多个字节，见wcschr.c)
+/// bdlog中的场景都是在一个比较短的字符串中进行查找，自己写一个wcschr就够了
+const wchar_t* wcschr(const wchar_t* src, wchar_t ch)
+{
+	while (*src)
+	{
+		if (*src == ch) return src;
+		src++;
+	}
+	return NULL;
+}
+
+/// 以下是不应该被链接进来的函数
+#ifndef _DEBUG
+int _itow_s(int /*val*/, wchar_t* /*buf*/, size_t /*buflen*/, int /*redix*/)
+{
+	SHOULD_NOT_LINK(L"缺省实现太大");
+	return 0;
+}
+
+int wcsncpy_s(wchar_t* /*dest*/, size_t /*destlen*/, const wchar_t* /*src*/, size_t /*copylen*/)
+{
+	SHOULD_NOT_LINK(L"缺省实现太大");
+	return 0;
+}
+
+// error LNK2005: __wtoi already defined in LIBCMT.lib(wtox.obj)
+int wcsncat_s(wchar_t* /*dest*/, size_t /*destlen*/, const wchar_t* /*src*/, size_t /*copylen*/)
+{
+	SHOULD_NOT_LINK(L"缺省实现太大");
+	return 0;
+}
+
+int _wtoi(const wchar_t* /*str*/)
+{
+	SHOULD_NOT_LINK(L"缺省实现太大");
+	return 0;
+}
+
+int atexit ( void ( * /*func*/ ) (void) )
+{
+	SHOULD_NOT_LINK(L"没有运行库的初始化，不支持atexit");
+	return 0;
 }
 
 #endif

@@ -10,6 +10,7 @@
 #include "unittest.h"
 #include <map>
 #include <string>
+#include "getlogcontroller_impl.h"
 
 #define TPUT_MODNAME Main
 
@@ -576,6 +577,19 @@ TPUT_DEFINE_BLOCK(L"LOD.Pipe", L"")
 	ctrl->AddOutputDevice(L"pipe", LODT_PIPE, L"enable:true");
 
 	Log(LL_EVENT, TAG_DEFAULT, L"%s", L"Hello, Pipe.");
+}
+
+TPUT_DEFINE_BLOCK(L"LOD.File", L"")
+{
+	ILogController* ctrl = GetLogController();
+	ctrl->UnInit();
+	ctrl->Init(L"logtest");
+	ctrl->AddOutputDevice(L"file", LODT_FILE, L"enable:true path:'d:\\${T}.log'");
+
+	for (size_t i = 0; i < 10; i++)
+	{
+		Log(LL_EVENT, TAG_DEFAULT, L"%s", L"Hello, File.");
+	}
 }
 
 
