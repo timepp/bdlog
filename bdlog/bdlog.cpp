@@ -1,7 +1,6 @@
 #include "stdafx.h"
 
-#include <bdlog.h>
-#include "logcontroller.h"
+#include <logcontroller.h>
 
 void * operator new (unsigned int /*size*/, void * p)
 { 

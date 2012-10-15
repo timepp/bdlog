@@ -3,7 +3,7 @@
 #include <windows.h>
 #include <psapi.h>
 #include <TlHelp32.h>
-#include <bdsecurity.h>                // for "lowest rights security attribute"
+#include "bdsecurity.h"                // for "lowest rights security attribute"
 
 namespace bdlog
 {

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "outputdevice_common.h"
+#include "logutil.h"
 
 class CLOD_File : public CLogOutputDeviceBase
 {
@@ -72,7 +73,6 @@ public:
 	virtual HRESULT Write(const LogItem* item)
 	{
 		const DWORD E7 = 10000000U;
-		const DWORD E6 = 1000000U;
 
 		textstream s(m_cvtbuf, _countof(m_cvtbuf));
 

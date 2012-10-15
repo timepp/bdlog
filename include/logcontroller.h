@@ -1,7 +1,7 @@
 #pragma once
 
-#include <bdlog.h>
-#include <accutime.h>
+#include "bdlog.h"
+#include "accutime.h"
 #include "logutil.h"
 #include "logfilter.h"
 #include "logoption.h"
@@ -9,7 +9,6 @@
 #include "outputdevice_pipe.h"
 #include "outputdevice_sharememory.h"
 #include "outputdevice_file.h"
-#include <process.h>
 
 #define BDLOG_CONTROLLER_CHECK_STATE \
 	if (!m_constructed) return BDLOG_E_BEFORE_CONSTRUCT; \

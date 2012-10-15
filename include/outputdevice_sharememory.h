@@ -1,7 +1,8 @@
 #pragma once
 
 #include "outputdevice_common.h"
-#include <bdsharemem.h>
+#include "bdsharemem.h"
+#include "logutil.h"
 
 #pragma pack(push, 1)
 struct MemLogQuene
