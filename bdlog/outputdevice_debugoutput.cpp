@@ -13,15 +13,14 @@ HRESULT CLOD_DebugOutput::Close()
 
 HRESULT CLOD_DebugOutput::Write(const LogItem* item)
 {
-	wchar_t timestr[64];
-	helper::UnixTimeToString(item->unixTime, L"Y-m-d H:M:S ", timestr, _countof(timestr));
+	wchar_t timestr[32];
+	helper::FileTimeToString(item->time, L"Y-m-d H:M:S ", timestr, _countof(timestr));
 	
-	m_stream.clear();
-	m_stream.store_str(timestr);
-	m_stream.store_str(item->content);
-	m_stream.store_buffer(L"\n", 4);
+	wchar_t buffer[1024];
+	textstream s(buffer, _countof(buffer));
+	s << timestr << item->content << L"\n";
 	
-	::OutputDebugStringW((LPCWSTR)(LPCVOID)m_stream);
+	::OutputDebugStringW(buffer);
 	return S_OK;
 }
 

@@ -5,6 +5,7 @@
 #include "outputdevice_sharememory.h"
 #include "outputdevice_file.h"
 #include <process.h>
+#include <strsafe.h>
 
 #define LOG_CONFIG_SECTION_NAME L"LOG_CONFIG"
 
@@ -13,6 +14,7 @@
 	if (m_destructed) return BDLOG_E_DESTRUCTED; \
 	if (!m_inited) return BDLOG_E_NOT_INITED;
 
+#define ENSURE_STATE_RETVAL(v) if (!m_constructed || m_destructed || !m_inited) return v
 
 CLogController::CLogController()
 : m_inited(false)
@@ -26,7 +28,6 @@ CLogController::CLogController()
 , m_hConfigKey(NULL)
 {
 	LOGFUNC;
-	::InitializeCriticalSection(&m_csLog);
 
 	m_configpath[0] = 0;
 	m_constructed = true;
@@ -37,8 +38,6 @@ CLogController::~CLogController()
 	LOGFUNC;
 	UnInit();
 	m_destructed = true;
-
-	::DeleteCriticalSection(&m_csLog);
 }
 
 HRESULT CLogController::Init(const wchar_t* configname)
@@ -56,12 +55,8 @@ HRESULT CLogController::Init(const wchar_t* configname)
 
 	if (configname && configname[0])
 	{
-		int bufsize = _countof(m_configpath);
-		lstrcpynW(m_configpath, L"Software\\Baidu\\BDLOG\\", bufsize);
-		m_configpath[bufsize-1] = L'\0';
-
-		int len = static_cast<int>(wcslen(m_configpath));
-		lstrcpynW(m_configpath + len, configname, bufsize - len - 1);
+		textstream s(m_configpath, _countof(m_configpath));
+		s << LSTR(L"Software\\Baidu\\BDLOG\\") << configname;
 
 		::RegCreateKeyExW(HKEY_CURRENT_USER, m_configpath, 0, NULL, 0, KEY_QUERY_VALUE|KEY_NOTIFY, NULL, &m_hConfigKey, NULL);
 		if (!m_hConfigKey)
@@ -127,24 +122,14 @@ HRESULT CLogController::UnInit()
 HRESULT CLogController::MonitorConfigChange()
 {
 	LOGFUNC;
-	MULTI_TRHEAD_GUARD(m_csLog);
-	CHECK_STATE;
 
-	if (!m_configpath[0] || !m_hConfigKey)
+	if (!CanMonitorConfig())
 	{
 		return BDLOG_E_FUNCTION_UNAVAILBLE;
 	}
-
-	// "是否监视配置文件" 以配置文件中的设置为主
-	DWORD mcc;
-	DWORD mcc_len = 4;
-	if (::RegQueryValueExW(m_hConfigKey, L"monitor_config_change", NULL, NULL, (LPBYTE)&mcc, &mcc_len) == ERROR_SUCCESS)
-	{
-		if (mcc == 0) return S_FALSE;
-	}
-
+	
 	m_monitorThreadQuitEvent = ::CreateEvent(NULL, FALSE, FALSE, NULL);
-	m_monitorThread = (HANDLE)_beginthreadex(NULL, 0, MonitorThread, this, 0, NULL);
+	m_monitorThread = ::CreateThread(NULL, 0, MonitorThread, this, 0, NULL);
 	if (!m_monitorThread)
 	{
 		LOGWINERR(L"创建监视线程失败");
@@ -160,18 +145,17 @@ HRESULT CLogController::AddOutputDevice(const wchar_t* name, LogOutputDeviceType
 
 	ILogOutputDevice* device = NULL;
 
-#define DEV_ENTRY(type, className) case type: device = new className; break;
 	switch (type)
 	{
-		DEV_ENTRY(LODT_NULL,             CLOD_Null);
-		DEV_ENTRY(LODT_CONSOLE,          CLOD_Null);
-		DEV_ENTRY(LODT_DEBUGOUTPUT,      CLOD_DebugOutput);
-		DEV_ENTRY(LODT_PIPE,             CLOD_Pipe);
-		DEV_ENTRY(LODT_SHARED_MEMORY,    CLOD_ShareMemory);
-		DEV_ENTRY(LODT_FILE,             CLOD_File);
-	default:break;
+	case LODT_NULL:           device = new CLOD_Null;            break;
+	case LODT_DEBUGOUTPUT:    device = new CLOD_DebugOutput;     break;
+	case LODT_SHARED_MEMORY:  device = new CLOD_ShareMemory;     break;
+	case LODT_FILE:           device = new CLOD_File;            break;
+	case LODT_PIPE:           device = new CLOD_Pipe;            break;
+	case LODT_CONSOLE:        return E_NOTIMPL;
+
+	default:                  return E_INVALIDARG;
 	}
-#undef DEV_ENTRY
 
 	return AddCustomOutputDevice(name, device, config);
 }
@@ -195,7 +179,7 @@ HRESULT CLogController::AddCustomOutputDevice(const wchar_t* name, ILogOutputDev
 	}
 
 	OutputDevice* od = new OutputDevice;
-	wcsncpy_s(od->name, name, _TRUNCATE);
+	textstream(od->name, _countof(od->name)) << name;
 	od->pDevice = device;
 	od->defaultOption.SetOptionString(config);
 	od->enabled = false;	
@@ -260,21 +244,11 @@ HRESULT CLogController::DecreaseCallDepth()
 	return S_OK;
 }
 
-HRESULT CLogController::SetLogUserContext(const wchar_t* prefix)
-{
-	MULTI_TRHEAD_GUARD(m_csLog);
-	CHECK_STATE;
-
-	wcsncpy_s(m_userContext, prefix, _TRUNCATE);
-	
-	return S_OK;
-}
-
 BOOL CLogController::NeedLog(LogLevel level, const wchar_t* tag)
 {
-	if (!m_constructed || m_destructed || !m_inited) return FALSE;
+	ENSURE_STATE_RETVAL(FALSE);
 	MULTI_TRHEAD_GUARD(m_csLog);
-	if (!m_constructed || m_destructed || !m_inited) return FALSE;
+	ENSURE_STATE_RETVAL(FALSE);
 
 	LogItem item = {};
 	item.level = level;
@@ -297,17 +271,15 @@ HRESULT CLogController::Log(LogLevel level, const wchar_t* tag, const wchar_t* c
 	CHECK_STATE;
 
 	LogItem item;
-	AccurateTime t = m_accurateTime.GetTime();
-	item.id = m_logID;
-	item.unixTime = t.unix_time;
-	item.microSecond = t.micro_second;
+	FILETIME t = m_accurateTime.GetTime();
+	item.id = m_logID++;
+	item.time = t;
 	item.level = level;
 	item.tag = tag;
 	item.content = content;
 	item.tid = ::GetCurrentThreadId();
 	item.pid = m_pid;
-	item.depth = reinterpret_cast<INT_PTR>(TlsGetValue(m_calldepthTlsIndex));
-	item.userContext = m_userContext;
+	item.depth = (DWORD)TlsGetValue(m_calldepthTlsIndex);
 
 	for (size_t i = 0; i < m_odsLen; i++)
 	{
@@ -320,8 +292,6 @@ HRESULT CLogController::Log(LogLevel level, const wchar_t* tag, const wchar_t* c
 
 		m_ods[i]->pDevice->Write(&item);
 	}
-
-	m_logID++;
 
 	return S_OK;
 }
@@ -348,8 +318,8 @@ HRESULT CLogController::GetLogOutputDeviceOverlayConfig(const wchar_t* name, wch
 
 	if (m_hConfigKey)
 	{
-		WCHAR key[256] = L"ld_";
-		wcsncat_s(key, name, _TRUNCATE);
+		WCHAR key[256];// = L"ld_";
+		textstream(key, _countof(key)) << L"ld_" << name;
 		DWORD readlen = len;
 		::RegQueryValueExW(m_hConfigKey, key, NULL, NULL, (LPBYTE)buffer, &readlen);
 	}
@@ -357,7 +327,7 @@ HRESULT CLogController::GetLogOutputDeviceOverlayConfig(const wchar_t* name, wch
 	return S_OK;
 }
 
-unsigned int CLogController::MonitorThread(void* pParam)
+DWORD WINAPI CLogController::MonitorThread(void* pParam)
 {
 	// 监视目录的辅助类
 	class CEventDirMonitor
@@ -385,7 +355,7 @@ unsigned int CLogController::MonitorThread(void* pParam)
 		HKEY m_hKey;
 	};
 
-	LOG(L"监视线程已启动");
+	LOG(L"监视线程启动");
 	CLogController* pController = static_cast<CLogController*>(pParam);
 	if (!pController)
 	{
@@ -395,7 +365,7 @@ unsigned int CLogController::MonitorThread(void* pParam)
 
 	HANDLE quitEvt = pController->m_monitorThreadQuitEvent;
 	CEventDirMonitor m(pController->m_hConfigKey);
-	HANDLE evts[] = {m, quitEvt};
+	HANDLE evts[2] = {m, quitEvt};
 
 	for (;;)
 	{
@@ -445,7 +415,7 @@ HRESULT CLogController::OnConfigFileChange()
 HRESULT CLogController::ChangeOutputDeviceOverlayConfig(OutputDevice* device, const wchar_t* config)
 {
 	CLogOption overlayOption;
-	wcsncpy_s(device->overlayConfig, config, _TRUNCATE);
+	TRUNCATED_COPY(device->overlayConfig, config);
 	overlayOption.SetOptionString(config);
 	overlayOption.Append(device->defaultOption);
 
@@ -478,4 +448,26 @@ HRESULT CLogController::ChangeOutputDeviceOverlayConfig(OutputDevice* device, co
 	}
 
 	return S_OK;
+}
+
+BOOL CLogController::CanMonitorConfig()
+{
+	LOGFUNC;
+	MULTI_TRHEAD_GUARD(m_csLog);
+	ENSURE_STATE_RETVAL(FALSE);
+
+	if (!m_hConfigKey)
+	{
+		return FALSE;
+	}
+
+	DWORD mcc;
+	DWORD mcc_len = 4;
+	if (::RegQueryValueExW(m_hConfigKey, L"monitor_config_change", NULL, NULL, (LPBYTE)&mcc, &mcc_len) == ERROR_SUCCESS)
+	{
+		// If there exists a value named "monitor_config_change", and it's value is 0, we disable the monitor.
+		if (mcc == 0) return FALSE;
+	}
+
+	return TRUE;
 }

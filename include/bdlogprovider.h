@@ -343,23 +343,12 @@ private:
 
 	static logitem* read_log_item(logsrc* ls, size_t* bytes_required)
 	{
-		switch (ls->version)
-		{
-		case 1: return read_log_item_v1(ls, bytes_required);
-		case 2: return read_log_item_v2(ls, bytes_required);
-		default: ls->thisptr->m_listener->on_notify(Error_HighClientVersion, E_FAIL);
-		}
-		return NULL;
-	}
-
-	static logitem* read_log_item_v2(logsrc* ls, size_t* bytes_required)
-	{
 #define CHECK_SIZE(x) if (ls->content_len < x) { *bytes_required = x - ls->content_len; return NULL; }
 		if (ls->pid == 0)
 		{
 			CHECK_SIZE(4);
 			size_t ver = *(uint32_t*)ls->buffer;
-			if (ver != 2) 
+			if (ver != 3) 
 			{
 				ls->thisptr->m_listener->on_notify(Error_HighClientVersion, E_FAIL);
 				*bytes_required = 0;
@@ -384,97 +373,29 @@ private:
 			byte* buf = ls->buffer + 4;
 
 			logitem* li = new logitem;
+			FILETIME ft;
 			li->log_pid = ls->pid;
 			li->log_process_name = ls->pname;
 			li->log_index = *(uint64_t*)(buf);
-			li->log_time_sec = *(INT64*)(buf + 8);
-			li->log_time_msec = *(INT32*)(buf + 16);
-			li->log_tid = *(uint32_t*)(buf + 20);
-			li->log_class = *(uint32_t*)(buf + 24);
-			li->log_depth = *(uint32_t*)(buf + 28);
-			size_t taglen = *(uint32_t*)(buf + 32);
-			li->log_tags.assign((LPCWSTR)(buf + 36), taglen / 2);
-			size_t contentLen = *(uint32_t*)(buf + 36 + taglen);
-			li->log_content.assign((LPCWSTR)(buf + 40 + taglen), contentLen / 2);
+			ft.dwHighDateTime = *(UINT32*)(buf + 8);
+			ft.dwLowDateTime = *(UINT32*)(buf + 12);
+			li->log_tid = *(uint32_t*)(buf + 16);
+			li->log_class = *(uint32_t*)(buf + 20);
+			li->log_depth = *(uint32_t*)(buf + 24);
+			size_t taglen = *(uint32_t*)(buf + 28);
+			li->log_tags.assign((LPCWSTR)(buf + 32), taglen / 2);
+			size_t contentLen = *(uint32_t*)(buf + 32 + taglen);
+			li->log_content.assign((LPCWSTR)(buf + 36 + taglen), contentLen / 2);
+
+			DWORD ns = ft.dwLowDateTime % 10000000;
+			li->log_time_msec = static_cast<int>(ns / 10);
+			INT64 t = ((INT64)ft.dwHighDateTime << 32) | (ft.dwLowDateTime - ns);
+			t = (t - 116444736000000000LL) / 10000000;
+			li->log_time_sec = t;
 
 			ls->content_len = 0;
 			*bytes_required = 4;
 
-			return li;
-		}
-	}
-
-	static logitem* read_log_item_v1(logsrc* ls, size_t* bytes_required)
-	{
-		// 先有四个字节的PID，然后是每一条条日志
-		if (ls->pid == 0)
-		{
-			if (ls->content_len == 4)
-			{
-				ls->pid = *(uint32_t*)ls->buffer;
-				log_source_info lsi = get_source_info(ls->pid);
-				ls->thisptr->update_source_info(ls->pipe, lsi);
-				ls->pname = lsi.process_name;
-				ls->content_len = 0;
-				*bytes_required = 32;
-			}
-			else
-			{
-				*bytes_required = 4 - ls->content_len;
-			}
-
-			return NULL;
-		}
-		else
-		{
-			size_t& len = ls->content_len;
-			byte* buf = ls->buffer;
-
-			size_t expect_len = 32;
-			if (len < expect_len)
-			{
-				*bytes_required = expect_len - len;
-				return NULL;
-			}
-
-			uint32_t taglen = *(uint32_t*)(buf + expect_len - 4);
-			expect_len += taglen + 4;
-			if (len < expect_len)
-			{
-				*bytes_required = expect_len - len;
-				return NULL;
-			}
-
-			uint32_t contentLen = *(uint32_t*)(buf + expect_len - 4);
-			expect_len += contentLen;
-			if (len < expect_len)
-			{
-				*bytes_required = expect_len - len;
-				return NULL;
-			}
-			
-			logitem* li = new logitem;
-			li->log_pid = ls->pid;
-			li->log_process_name = ls->pname;
-			li->log_index = *(uint64_t*)(buf);
-			li->log_time_sec = *(INT64*)(buf + 8);
-			li->log_time_msec = *(INT32*)(buf + 16);
-			li->log_tid = *(uint32_t*)(buf + 20);
-			li->log_class = *(uint32_t*)(buf + 24);
-			li->log_tags.assign((LPCWSTR)(buf + 32), taglen / 2);
-			li->log_depth = 0;
-			li->log_content.assign((LPCWSTR)(buf + 32 + taglen + 4), contentLen / 2);
-
-			if (li->log_index == 0 && li->log_time_sec == 0)
-			{
-				// 忽略收到新的日志设备给旧的日志查看器发送的提示数据
-				delete li;
-				li = NULL;
-			}
-
-			len = 0;
-			*bytes_required = 32;
-			
 			return li;
 		}
 	}
@@ -496,15 +417,12 @@ private:
 
 	void work_thread_internal()
 	{
-		pipe_connection conn1(L"\\\\.\\pipe\\bd_log_receiver");
-		conn1.start_new_connection();
-
-		pipe_connection conn2(L"\\\\.\\pipe\\bdlog_receiver");
-		conn2.start_new_connection();
+		pipe_connection conn(L"\\\\.\\pipe\\bdlog_data_channel");
+		conn.start_new_connection();
 
 		for (;;)
 		{
-			HANDLE evts[] = {m_exit_evt, conn1.get_event(), conn2.get_event()};
+			HANDLE evts[] = {m_exit_evt, conn.get_event()};
 			DWORD dwWait = ::WaitForMultipleObjectsEx(_countof(evts), evts, FALSE, INFINITE, TRUE);
 			if (dwWait == WAIT_IO_COMPLETION)
 			{
@@ -515,31 +433,17 @@ private:
 			}
 			else if (dwWait == WAIT_OBJECT_0 + 1) // pipe connect
 			{
-				conn1.on_connected();
+				conn.on_connected();
 
 				logsrc* ls = new logsrc;
-				ls->pipe = conn1.get_pipe();
-				ls->thisptr = this;
-				ls->version = 1;
-				add_source(ls);
-
-				complete_read_routine(0, 0, (LPOVERLAPPED)ls);
-
-				conn1.start_new_connection();
-			}
-			else if (dwWait == WAIT_OBJECT_0 + 2) // pipe connect v2
-			{
-				conn2.on_connected();
-
-				logsrc* ls = new logsrc;
-				ls->pipe = conn2.get_pipe();
+				ls->pipe = conn.get_pipe();
 				ls->thisptr = this;
 				ls->version = 2;
 				add_source(ls);
 
 				complete_read_routine(0, 0, (LPOVERLAPPED)ls);
 
-				conn2.start_new_connection();
+				conn.start_new_connection();
 			}
 			else
 			{

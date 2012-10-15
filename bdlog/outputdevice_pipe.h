@@ -17,16 +17,11 @@ public:
 
 private:
 	HANDLE m_pipe;
-	time_t m_lastTryConnectTime;
-	CSimpleStr m_pipeName;
-	bool m_notifyOld;
-	bool m_notified;
+	DWORD m_lastTryConnectTime;
+	wchar_t m_pipeName[256];
 
 	binarystream m_stream;
 
 	static HANDLE OpenPipe(const wchar_t* name);
-	void WriteLogToPipe(const LogItem& item);
-
-	void WriteData_NotifyOld(bool newpipe, const LogItem& item);
-	void WriteData(bool newpipe, const LogItem& item);
+	HRESULT WriteLogToPipe(const LogItem& item);
 };

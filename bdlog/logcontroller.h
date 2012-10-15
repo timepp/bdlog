@@ -24,7 +24,6 @@ public:
 	virtual HRESULT ChangeOutputDeviceConfig(const wchar_t* name, const wchar_t* config);
 	virtual HRESULT IncreaseCallDepth();
 	virtual HRESULT DecreaseCallDepth();
-	virtual HRESULT SetLogUserContext(const wchar_t* prefix);
 
 	/** logcontroller的状态
 	 *  因为logcontroller是全局对象，所以在对象未构造时这些变量的值都是false，恰好能够表达对应的意思
@@ -47,7 +46,7 @@ private: // types
 	
 private:
 
-	CRITICAL_SECTION m_csLog;
+	cslock m_csLog;
 	HANDLE m_monitorThreadQuitEvent;
 	HANDLE m_monitorThread;
 
@@ -61,14 +60,13 @@ private:
 	unsigned int m_pid;
 	CLogAccurateTime m_accurateTime;
 	DWORD m_calldepthTlsIndex;
-	wchar_t m_userContext[32];
 
 private:
 	HRESULT GetLogOutputDeviceOverlayConfig(const wchar_t* name, wchar_t* buffer, size_t len);
 	HRESULT ChangeOutputDeviceOverlayConfig(OutputDevice* device, const wchar_t* config);
 	HRESULT OnConfigFileChange();
+	BOOL CanMonitorConfig();
 
 	// 监视线程
-	static unsigned int __stdcall MonitorThread(void* pParam);
-
+	static DWORD WINAPI MonitorThread(void* pParam);
 };

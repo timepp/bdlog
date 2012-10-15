@@ -9,8 +9,7 @@ CLOD_ShareMemory::CLOD_ShareMemory()
 void CLOD_ShareMemory::GetShareMemoryName(ILogOption* opt, wchar_t* name, size_t len)
 {
 	const wchar_t* namePrefix = opt->GetOption(L"nameprefix", L"BDXLOG_SHAREMEMORY_V1.0_");
-	wcsncpy_s(name, len, namePrefix, _TRUNCATE);
-	wcsncat_s(name, len, tostr(GetCurrentProcessId()), _TRUNCATE);
+	textstream(name, len) << namePrefix << ToStr(GetCurrentProcessId(), L"%u");
 }
 
 HRESULT CLOD_ShareMemory::Open(ILogOption* opt)
@@ -56,10 +55,10 @@ HRESULT CLOD_ShareMemory::Write(const LogItem* item)
 	{
 		q.head = (q.head + 1) % _countof(q.record);
 	}
-	record.unixTime = item->unixTime;
-	record.milliSecond = item->microSecond / 1000;
+	record.unixTime = 0;
+	record.milliSecond = 0;
 	record.tid = item->tid;
-	wcsncpy_s(record.content, item->content, _TRUNCATE);
+	TRUNCATED_COPY(record.content, item->content);
 
 	return S_OK;
 }
@@ -70,7 +69,7 @@ HRESULT CLOD_ShareMemory::OnConfigChange(ILogOption* opt)
 	GetShareMemoryName(opt, newname, _countof(newname));
 	if (wcscmp(m_smName, newname) != 0)
 	{
-		wcsncpy_s(m_smName, newname, _TRUNCATE);
+		TRUNCATED_COPY(m_smName, newname);
 		m_shareMemory.Close();
 		m_shareMemory.Open(m_smName, sizeof(MemLogQuene), FALSE);
 	}

@@ -124,6 +124,8 @@ void TEST_OutputDevice_File()
 	Log(LL_EVENT, NOTAG, L"日志来了");
 
 	ctrl->RemoveOutputDevice(NULL);
+
+	// TODO 测试日志路径不存在的时候，文件日志设备是否会自动创建
 }
 
 HRESULT TEST_BD_CHECK()
@@ -233,7 +235,6 @@ TPUT_DEFINE_BLOCK(L"Init", L"")
 			ret[i++] = ctrl->IncreaseCallDepth();
 			ret[i++] = ctrl->DecreaseCallDepth();
 			ret[i++] = ctrl->RemoveOutputDevice(L"aaa");
-			ret[i++] = ctrl->SetLogUserContext(L"");
 			for (size_t j = 0; j < i; j++)
 			{
 				if (ret[j] != BDLOG_E_NOT_INITED) return false;
@@ -509,7 +510,6 @@ TPUT_DEFINE_BLOCK(L"#a3", L"")
 	HRESULT hr;
 	ctrl->Init(L".");
 	TPUT_EXPECT(ctrl->RemoveOutputDevice(L"aaa") == BDLOG_E_NOT_INITED);
-	TPUT_EXPECT(ctrl->SetLogUserContext(L"") == BDLOG_E_NOT_INITED);
 }
 
 TPUT_DEFINE_BLOCK(L"#初始化日志系统", L"")
@@ -546,7 +546,7 @@ TPUT_DEFINE_BLOCK(L"#Pipe.Interact", L"")
 	}
 }
 
-TPUT_DEFINE_BLOCK(L"Performance", L"")
+TPUT_DEFINE_BLOCK(L"#Performance", L"")
 {
 	ILogController* ctrl = GetLogController();
 	ctrl->Init(L"logtest");
@@ -558,12 +558,32 @@ TPUT_DEFINE_BLOCK(L"Performance", L"")
 	}
 }
 
+TPUT_DEFINE_BLOCK(L"LOD.DebugOutput", L"")
+{
+	ILogController* ctrl = GetLogController();
+	ctrl->UnInit();
+	ctrl->Init(L"logtest");
+	ctrl->AddOutputDevice(L"dbgout", LODT_DEBUGOUTPUT, L"enable:true");
+
+	Log(LL_EVENT, TAG_DEFAULT, L"%s", L"Hello, Debug Output.");
+}
+
+TPUT_DEFINE_BLOCK(L"LOD.Pipe", L"")
+{
+	ILogController* ctrl = GetLogController();
+	ctrl->UnInit();
+	ctrl->Init(L"logtest");
+	ctrl->AddOutputDevice(L"pipe", LODT_PIPE, L"enable:true");
+
+	Log(LL_EVENT, TAG_DEFAULT, L"%s", L"Hello, Pipe.");
+}
+
 
 int wmain(int argc, wchar_t* argv[])
 {
 	setlocale(LC_ALL, "chs");
 
-	tp::unittest::instance().run_test(L"Performance");
+	tp::unittest::instance().run_test();
 
 	return 0;
 }

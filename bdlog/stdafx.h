@@ -9,6 +9,7 @@
 BD_NO_WARNING_AREA_BEGIN()
 
 #include <windows.h>
+#include <stdlib.h>
 
 BD_NO_WARNING_AREA_END()
 BD_CLEAR_WARNING_STACK()
@@ -17,5 +18,5 @@ BD_CLEAR_WARNING_STACK()
 #pragma warning(disable: 4710) // warning C4710: 'void BDLog::Log(const wchar_t *,...)' : function not inlined
 #pragma warning(disable: 4711) // warning C4711: function 'xxx' selected for automatic inline expansion
 #pragma warning(disable: 4820) // warning C4820: 'LogItem' : '4' bytes padding added after data member 'LogItem::depth'
-
+#include "minicrt.h"
 #include "logutil.h"

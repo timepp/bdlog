@@ -1,15 +1,16 @@
 #include "stdafx.h"
 #include "logutil.h"
-#include <stdlib.h>
-#include <time.h>
 
 static int g_enableLog = -1;
 
 static int GetSelfLogSetting()
 {
 	wchar_t buf[32];
-	::GetEnvironmentVariableW(L"BDLOGENV", buf, _countof(buf));
-	return _wtoi(buf) & 1;
+	if (!::GetEnvironmentVariableW(L"BDLOGENV", buf, _countof(buf)))
+	{
+		return 0;
+	}
+	return helper::StrToInt(buf);
 }
 
 void InternalLogClass::InternalLog(const wchar_t* buffer1, const wchar_t* buffer2)
@@ -18,14 +19,13 @@ void InternalLogClass::InternalLog(const wchar_t* buffer1, const wchar_t* buffer
 
 	if (g_enableLog == -1)
 	{
-		g_enableLog = GetSelfLogSetting();
+		g_enableLog = GetSelfLogSetting() & 1;
 		if (g_enableLog == 0) return;
 	}
-
-	wchar_t buffer[1024] = L"BDLOG:";
-	wcsncat_s(buffer, buffer1, _TRUNCATE);
-	wcsncat_s(buffer, buffer2, _TRUNCATE);
-	wcsncat_s(buffer, L"\n", _TRUNCATE);
+	
+	wchar_t buffer[1024];
+	textstream s(buffer, _countof(buffer));
+	s << L"BDLOG:" << buffer1 << buffer2 << L"\n";
 
 	OutputDebugStringW(buffer);
 }
@@ -34,7 +34,7 @@ void InternalLogClass::InternalLogWinError(const wchar_t* buffer)
 {
 	if (g_enableLog == 0) return;
 	DWORD dwError = ::GetLastError();
-	InternalLog(buffer, tostr(dwError));
+	InternalLog(buffer, ToStr(dwError, L"%u"));
 }
 
 static bool StringEqual(const wchar_t* ss, const wchar_t* se, const wchar_t* dest)
@@ -55,25 +55,28 @@ static const size_t ResolveVariable(const wchar_t* vs, const wchar_t* ve, wchar_
 {
 	if (StringEqual(vs, ve, L"PID"))
 	{
-		_itow_s(static_cast<int>(::GetCurrentProcessId()), buf, 10);
+		helper::IntToStr(static_cast<int>(::GetCurrentProcessId()), buf);
 		return wcslen(buf);
 	}
 	else if (StringEqual(vs, ve, L"T"))
 	{
-		time_t t = time(NULL);
-		helper::UnixTimeToString(t, L"YmdHMS", buf, _countof(buf));
+		FILETIME t;
+		::GetSystemTimeAsFileTime(&t);
+		helper::FileTimeToString(t, L"YmdHMS", buf, _countof(buf));
 		return wcslen(buf);
 	}
 	else if (StringEqual(vs, ve, L"DATE"))
 	{
-		time_t t = time(NULL);
-		helper::UnixTimeToString(t, L"Ymd", buf, _countof(buf));
+		FILETIME t;
+		::GetSystemTimeAsFileTime(&t);
+		helper::FileTimeToString(t, L"Ymd", buf, _countof(buf));
 		return wcslen(buf);
 	}
 	else if (StringEqual(vs, ve, L"TIME"))
 	{
-		time_t t = time(NULL);
-		helper::UnixTimeToString(t, L"HMS", buf, _countof(buf));
+		FILETIME t;
+		::GetSystemTimeAsFileTime(&t);
+		helper::FileTimeToString(t, L"HMS", buf, _countof(buf));
 		return wcslen(buf);
 	}
 
@@ -128,14 +131,18 @@ wchar_t* helper::IntToStr_Padding0(wchar_t* str, size_t strlen, size_t len, int 
 	return e;
 }
 
-void helper::UnixTimeToString(__int64 t, const wchar_t* fmt, wchar_t* buf, size_t buflen)
+FILETIME helper::UnixTimeToFileTime(__int64 t)
 {
 	FILETIME ft;
 	t += 3600 * 8;
 	t = t * 10000000 + 116444736000000000;
 	ft.dwLowDateTime = static_cast<DWORD>(t);
 	ft.dwHighDateTime = static_cast<DWORD>(t >> 32);
+	return ft;
+}
 
+void helper::FileTimeToString(FILETIME ft, const wchar_t* fmt, wchar_t* buf, size_t buflen)
+{
 	SYSTEMTIME st;
 	if (!::FileTimeToSystemTime(&ft, &st))
 	{
@@ -179,4 +186,32 @@ BOOL helper::MakeRequiredDirectory(const wchar_t* p)
 	}
 
 	return TRUE;
+}
+
+HRESULT helper::GetLastErrorAsHRESULT()
+{
+	DWORD dwErr = ::GetLastError();
+	return HRESULT_FROM_WIN32(dwErr);
+}
+
+wchar_t* helper::IntToStr(int val, wchar_t* str)
+{
+	wsprintfW(str, L"%d", val);
+	return str;
+}
+
+wchar_t* helper::IntToHexStr(int val, wchar_t* str)
+{
+	wsprintfW(str, L"%x", val);
+	return str;
+}
+
+int helper::StrToInt(const wchar_t* str)
+{
+	int r = 0;
+	while (*str)
+	{
+		r = r * 10 + (*str - L'0');
+	}
+	return r;
 }

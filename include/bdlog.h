@@ -18,7 +18,7 @@
 #include <stdio.h>
 
 #ifdef BDLOG_SELF_BUILD
-#	ifdef BDLOG_USE_AS_STATIC_LIB
+#	ifdef BDLOG_BUILD_STATIC_LIB
 #		define BDLOGAPI extern "C"
 #	else
 #		define BDLOGAPI extern "C" __declspec(dllexport)
@@ -62,18 +62,15 @@ enum LogLevel
 
 struct LogItem
 {
-	unsigned __int64 id;          // 每条日志产生时分配，进程内唯一
+	UINT64 id;                    /// Unique ID (per process)
+	FILETIME time;                /// Time when the log is generated, (not the log is wrote to output device)
+	LogLevel level;               /// 
+	const wchar_t* tag;           /// Tags are seperated with simicolon(;), e.g. "perf;check;xmpp"
+	const wchar_t* content;       /// 
 
-	__int64 unixTime;             // 日志产生时的时间（秒），含义同time()函数的返回值
-	int microSecond;              // 日志产生时的时间：微秒
-	LogLevel level;               // 日志级别
-	const wchar_t* tag;           // 日志标签，一个日志可以关联多个标签，分号分隔。
-	const wchar_t* content;       // 日志正文
-
-	unsigned int tid;             // 日志产生时的线程ID
-	unsigned int pid;             // 日志产生时的进程ID
-	int depth;                    // 日志深度，每个线程的日志深度是独立的。
-	const wchar_t* userContext;   // 用户指定的上下文，每条日志都相同
+	DWORD pid;                    /// Process ID
+	DWORD tid;                    /// Thread ID
+	DWORD depth;                  /// Call depth 
 };
 
 struct ILogOption
@@ -81,6 +78,8 @@ struct ILogOption
 	virtual const wchar_t* GetOption(const wchar_t* key, const wchar_t* defaultValue) = 0;
 	virtual int GetOptionAsInt(const wchar_t* key, int defaultValue) = 0;
 	virtual bool GetOptionAsBool(const wchar_t* key, bool defaultValue) = 0;
+
+	virtual ~ILogOption() {}
 };
 
 struct ILogOutputDevice
@@ -156,7 +155,6 @@ struct ILogController
 	/// 改变日志深度 
 	virtual HRESULT IncreaseCallDepth() = 0;
 	virtual HRESULT DecreaseCallDepth() = 0;
-	virtual HRESULT SetLogUserContext(const wchar_t* prefix) = 0;
 
 	/** 监视日志配置 
 	 *

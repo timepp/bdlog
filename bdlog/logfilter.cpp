@@ -105,7 +105,7 @@ CLogFilter* CLogFilterCreator::CreateFilter(const wchar_t* filterstr, size_t len
 	if (wcsncmp(filterstr, L"tag", 3) == 0)
 	{
 		CTagFilter* filter = new CTagFilter;
-		wcsncpy_s(filter->m_tag, filterstr + vp, min(_countof(filter->m_tag)-1, len - vp));
+		TRUNCATED_COPY(filter->m_tag, lstr(filterstr + vp, len - vp));
 		return filter;
 	}
 

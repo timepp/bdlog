@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "logoption.h"
-#include <stdlib.h>
 
 CLogOption::CLogOption() : m_fieldLen(0)
 {
@@ -27,7 +26,7 @@ int CLogOption::GetOptionAsInt(const wchar_t* key, int defaultValue)
 		return defaultValue;
 	}
 
-	return _wtoi(val);
+	return helper::StrToInt(val);
 }
 
 bool CLogOption::GetOptionAsBool(const wchar_t* key, bool defaultValue)
@@ -67,7 +66,7 @@ void CLogOption::Append(const CLogOption& opt)
 void CLogOption::SetOptionString(const wchar_t* optstr)
 {
 	m_fieldLen = 0;
-	wcsncpy_s(m_optstr, optstr, _TRUNCATE);
+	TRUNCATED_COPY(m_optstr, optstr);
 
 	enum {sBlank, sKey, sVal} state = sKey;
 

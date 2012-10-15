@@ -46,7 +46,7 @@
 #define BD_TUNE_WARNINGS \
 __pragma(warning(default: 4061 4062 4191 4242 4254 4263 4264 4265 4266 4287 4296)) \
 __pragma(warning(default: 4302 4365 4514 4545 4546 4547 4548 4549 4555 4571)) \
-__pragma(warning(default: 4623 4625 4626 4640 4668 4682 4710 4711 4820 4826 4836)) \
+__pragma(warning(default: 4623 4625 4626 4640 4668 4682 4710 4711 4820 4826)) \
 __pragma(warning(default: 4905 4906 4917 4928 4946)) \
 \
 __pragma(warning(disable: 4061 4127 4503 4514 4571 4623 4625 4626 4710 4820)) \

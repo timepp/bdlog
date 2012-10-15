@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "outputdevice_file.h"
 #include "logutil.h"
-#include <time.h>
+//#include <time.h>
 
 static BOOL SyncWriteFile(HANDLE file, const void* buffer, size_t len)
 {
@@ -21,7 +21,7 @@ VOID CALLBACK FileIOCompletionRoutine(
 									  __inout  LPOVERLAPPED /*lpOverlapped*/
 									  )
 {
-	LOG(tostr(dwErrorCode));
+	LOG(ToStr(dwErrorCode, L"%u"));
 }
 
 
@@ -35,8 +35,9 @@ static BOOL AsyncWriteFile(HANDLE file, const void* buffer, size_t len)
 }
 
 CLOD_File::CLOD_File() 
-	: m_file(NULL), m_buffer(NULL), m_bufferLen(0), m_pos(0), m_syncMode(true), m_lastTime(-1)
+	: m_file(NULL), m_buffer(NULL), m_bufferLen(0), m_pos(0), m_syncMode(true)
 {
+	m_lastTime.dwHighDateTime = m_lastTime.dwLowDateTime = 0;
 	m_path[0] = L'\0';
 }
 
@@ -47,7 +48,7 @@ CLOD_File::~CLOD_File()
 
 HRESULT CLOD_File::Open(ILogOption* opt)
 {
-	wcsncpy_s(m_path, opt->GetOption(L"path", L""), _TRUNCATE);
+	TRUNCATED_COPY(m_path, opt->GetOption(L"path", L""));
 	DWORD shareMode = opt->GetOptionAsBool(L"share_read", true) ? FILE_SHARE_READ : 0U;
 
 	// 自定义变量和环境变量扩展
@@ -59,7 +60,7 @@ HRESULT CLOD_File::Open(ILogOption* opt)
 	m_file = ::CreateFileW(m_path, GENERIC_WRITE, shareMode, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 	if (m_file == INVALID_HANDLE_VALUE)
 	{
-		return LastError_HRESULT();
+		return helper::GetLastErrorAsHRESULT();
 	}
 
 	m_bufferLen = static_cast<size_t>(opt->GetOptionAsInt(L"buffer_size", 1000000));
@@ -95,58 +96,38 @@ HRESULT CLOD_File::Close()
 
 HRESULT CLOD_File::Write(const LogItem* item)
 {
-	size_t len = 0;
+	const DWORD E7 = 10000000U;
+	const DWORD E6 = 1000000U;
 
-	// 如果两次日志时间相同，后一次日志就可以直接使用前一次格式化过的时间串，没必要再格式化一遍
-	if (m_lastTime != item->unixTime)
+	textstream s(m_cvtbuf, _countof(m_cvtbuf));
+
+	// 如果两次日志秒数相同，后一次日志就可以直接使用前一次格式化过的时间串，没必要再格式化一遍
+	if (m_lastTime.dwHighDateTime == item->time.dwHighDateTime && 
+		m_lastTime.dwLowDateTime / E7 == item->time.dwLowDateTime / E7)
 	{
-		m_lastTime = item->unixTime;
-		helper::UnixTimeToString(item->unixTime, L"Y-m-d H:M:S", m_cvtbuf, _countof(m_cvtbuf));
+		m_lastTime = item->time;
+		helper::FileTimeToString(item->time, L"Y-m-d H:M:S", m_cvtbuf, _countof(m_cvtbuf));
 	}
 	
-	len += 19;
-	m_cvtbuf[len++] = L'.';
-	helper::IntToStr_Padding0(m_cvtbuf + len, _countof(m_cvtbuf) - len, 6, item->microSecond);
-	len += 6;
+	s.advance(19);
 
-	m_cvtbuf[len++] = L' ';
-	helper::IntToStr_Padding0(m_cvtbuf + len, _countof(m_cvtbuf) - len, 2, item->level);
-	len += 2;
-
-	m_cvtbuf[len++] = L' ';
-	m_cvtbuf[len++] = L'[';
-	m_cvtbuf[len++] = L'X';
-	m_cvtbuf[len++] = L':';
-	_itow_s(static_cast<int>(item->pid), m_cvtbuf + len, _countof(m_cvtbuf) - len, 16);
-	len += wcslen(m_cvtbuf + len);
-	m_cvtbuf[len++] = L':';
-	_itow_s(static_cast<int>(item->tid), m_cvtbuf + len, _countof(m_cvtbuf) - len, 16);
-	len += wcslen(m_cvtbuf + len);
-	m_cvtbuf[len++] = L':';
-	_itow_s(static_cast<int>(item->depth), m_cvtbuf + len, _countof(m_cvtbuf) - len, 10);
-	len += wcslen(m_cvtbuf + len);
-	m_cvtbuf[len++] = L']';
-
-	m_cvtbuf[len++] = L' ';
-	m_cvtbuf[len++] = L'{';
+	DWORD us = item->time.dwLowDateTime % E7 / E6;
+	wsprintfW(s, L".%06u %02d [X:%X:%X:%d] {", us, item->level, item->pid, item->tid, item->depth);
+	s.advance(wcslen(s));
+	
 	const wchar_t* tag = item->tag;
 	if (!tag || !*tag) tag = L" ";
-	wcsncpy_s(m_cvtbuf + len, _countof(m_cvtbuf) - len - 2, tag, _TRUNCATE);
-	wcsncat_s(m_cvtbuf + len, _countof(m_cvtbuf) - len, L"} ", _TRUNCATE);
-	len += wcslen(m_cvtbuf + len);
+	s << tag << L"} ";
 
 	size_t contentLen = wcslen(item->content);
-	size_t copyLen = min(contentLen, _countof(m_cvtbuf) - len - 2);
+	s << lstr(item->content, contentLen);
 
-	wcsncpy_s(m_cvtbuf + len, _countof(m_cvtbuf) - len, item->content, copyLen);
-	len += copyLen;
-
-	if (m_cvtbuf[len-1] != L'\n')
+	if (contentLen > 0 && item->content[contentLen-1] != L'\n')
 	{
-		m_cvtbuf[len++] = L'\n';
+		s << L'\n';
 	}
 
-	Write(m_cvtbuf, len * 2);
+	Write(m_cvtbuf, s.len() * 2);
 
 	return S_OK;
 }

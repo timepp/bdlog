@@ -140,7 +140,7 @@ void CLogCenter::on_new_log(bdlog::logitem* li)
 
 void CLogCenter::on_notify(int notifyid, HRESULT hr)
 {
-
+	m_notifyTimerID = ::SetTimer(NULL, 0, 100, &CLogCenter::NotifyProc);
 }
 
 void CLogCenter::MergeBuffer()
@@ -180,6 +180,10 @@ void CLogCenter::MergeBuffer()
 VOID CLogCenter::TimerProc( __in HWND hwnd, __in UINT uMsg, __in UINT_PTR idEvent, __in DWORD dwTime )
 {
 	ServiceHelper::GetLogCenter()->MergeBuffer();
+}
+VOID CLogCenter::NotifyProc( __in HWND hwnd, __in UINT uMsg, __in UINT_PTR idEvent, __in DWORD dwTime )
+{
+	ServiceHelper::GetLogCenter()->ShowNotifyMsg();
 }
 
 LogRange CLogCenter::GetLogRange()
@@ -350,4 +354,11 @@ void CLogCenter::ClearOldLog(UINT64 logid)
 		delete *it;
 	}
 	m_logDB.erase(m_logDB.begin(), it);
+}
+
+void CLogCenter::ShowNotifyMsg()
+{
+	::KillTimer(NULL, m_notifyTimerID);
+	
+	::MessageBoxW(NULL, L"a", L"b", MB_OK);
 }

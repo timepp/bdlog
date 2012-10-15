@@ -64,6 +64,7 @@
     <ClInclude Include="..\thirdsrc\include\bdsharemem.h">
       <Filter>third_party</Filter>
     </ClInclude>
+    <ClInclude Include="..\bdlog\minicrt.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\bdlog\outputdevice_debugoutput.cpp">
@@ -89,6 +90,7 @@
     <ClCompile Include="..\bdlog\logfilter.cpp" />
     <ClCompile Include="..\bdlog\logoption.cpp" />
     <ClCompile Include="..\bdlog\logutil.cpp" />
+    <ClCompile Include="..\bdlog\minicrt.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\bdlog\bdlog.rc">

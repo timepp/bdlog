@@ -96,9 +96,9 @@ void CVisLogicDlg::Refresh()
 
 	if (use_current_time_as_end_time)
 	{
-		AccurateTime t = m_lat.GetTime();
-		range.t2.sec = t.unix_time;
-		range.t2.usec = t.micro_second;
+//		AccurateTime t = m_lat.GetTime();
+//		range.t2.sec = t.unix_time;
+//		range.t2.usec = t.micro_second;
 	}
 	else
 	{

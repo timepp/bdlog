@@ -27,6 +27,7 @@ BD_NO_WARNING_AREA_BEGIN()
 #include <iostream>
 #include <vector>
 #include <list>
+#include <map>
 
 BD_NO_WARNING_AREA_END()
 BD_TUNE_WARNINGS

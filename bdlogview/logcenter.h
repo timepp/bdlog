@@ -62,10 +62,18 @@ private:
 		__in  UINT_PTR idEvent,
 		__in  DWORD dwTime
 		);
+	static VOID CALLBACK NotifyProc(
+		__in  HWND hwnd,
+		__in  UINT uMsg,
+		__in  UINT_PTR idEvent,
+		__in  DWORD dwTime
+		);
 
 	void MergeBuffer();
 	bool EnablePipeDeviceFile(bool bEnable);
 	bool EnablePipeDeviceReg(bool bEnable);
+
+	void ShowNotifyMsg();
 
 private:
 	// listener
@@ -90,6 +98,10 @@ private:
 	UINT64 m_logID;
 
 	UINT m_timerID;
+
+	// 收到log provider的notify后，在TIMER中显示
+	UINT m_notifyTimerID;
+	int m_notifyID;
 
 	bool m_autoEnablePipeDeviceFile;
 	bool m_autoEnablePipeDeviceReg;

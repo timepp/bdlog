@@ -7,7 +7,7 @@
 //
 // Generated from the TEXTINCLUDE 2 resource.
 //
-#include "afxres.h"
+#include "winres.h"
 #include "..\build\versionnum.h"
 
 /////////////////////////////////////////////////////////////////////////////
@@ -631,7 +631,7 @@ BEGIN
         MENUITEM "编辑日志输出配置文件(&X)...",           ID_EDIT_XLOG_INI
         MENUITEM SEPARATOR
         MENUITEM "改变配色(&C)...",                 ID_CHANGE_THEME_COLOR
-        MENUITEM "帮助(&H)...\tF1",               ID_HELP
+//        MENUITEM "帮助(&H)...\tF1",               ID_HELP
         MENUITEM "关于(&A)...",                   ID_ABOUT
     END
     POPUP "main"
@@ -690,14 +690,14 @@ BEGIN
         MENUITEM SEPARATOR
         MENUITEM "清除所有日志(&D)\tCtrl+X",          ID_CLEARALL
         MENUITEM SEPARATOR
-        MENUITEM "退出(&X)",                      ID_FILE_CLOSE
+//        MENUITEM "退出(&X)",                      ID_FILE_CLOSE
     END
     POPUP "查看(&V)"
     BEGIN
         MENUITEM "菜单栏(&1)\tF9",                 ID_VIEW_MENUBAR
-        MENUITEM "工具栏(&2)",                     ID_VIEW_TOOLBAR
+//        MENUITEM "工具栏(&2)",                     ID_VIEW_TOOLBAR
         MENUITEM "快速过滤(&3)",                    ID_VIEW_SEARCHBAR
-        MENUITEM "状态栏(&4)",                     ID_VIEW_STATUS_BAR
+//        MENUITEM "状态栏(&4)",                     ID_VIEW_STATUS_BAR
         MENUITEM SEPARATOR
         MENUITEM "显示网格线(&G)",                   ID_SHOW_GRIDLINE
         MENUITEM "十六进制(&H)",                    ID_HEX
@@ -725,7 +725,7 @@ BEGIN
     END
     POPUP "帮助(&H)"
     BEGIN
-        MENUITEM "使用帮助...(&H)\tF1",             ID_HELP
+//        MENUITEM "使用帮助...(&H)\tF1",             ID_HELP
         MENUITEM "关于日志查看器(&A)",                 ID_ABOUT
     END
 END
@@ -742,7 +742,7 @@ BEGIN
     "F",            ID_EDIT_FILTER,         VIRTKEY, SHIFT, CONTROL, NOINVERT
     "H",            ID_EDIT_HLIGHT,         VIRTKEY, SHIFT, CONTROL, NOINVERT
     "S",            ID_EXPORT_ALL,          VIRTKEY, CONTROL, NOINVERT
-    VK_F1,          ID_HELP,                VIRTKEY, NOINVERT
+//    VK_F1,          ID_HELP,                VIRTKEY, NOINVERT
     VK_F2,          ID_NEXT_BOOKMARK,       VIRTKEY, NOINVERT
     "O",            ID_OPEN_XLOG,           VIRTKEY, CONTROL, NOINVERT
     VK_F2,          ID_PREV_BOOKMARK,       VIRTKEY, SHIFT, NOINVERT

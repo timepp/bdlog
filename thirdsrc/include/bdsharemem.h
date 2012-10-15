@@ -27,19 +27,12 @@ public:
 		return HRESULT_FROM_WIN32(dwError);
 	}
 
-	HRESULT Open(LPCWSTR name, size_t len, BOOL bLowestRights)
+	HRESULT Open(LPCWSTR name, size_t len, LPSECURITY_ATTRIBUTES sa)
 	{
 		HRESULT ret = S_OK;
 		Close();
 
-		if (bLowestRights)
-		{
-			m_hFileMapping = CreateFileMapping(INVALID_HANDLE_VALUE, CLowestRightsSecurityAttribute(), PAGE_READWRITE, 0, len, name);
-		}
-		else
-		{
-			m_hFileMapping = CreateFileMapping(INVALID_HANDLE_VALUE, NULL, PAGE_READWRITE, 0, len, name);
-		}
+		m_hFileMapping = CreateFileMapping(INVALID_HANDLE_VALUE, sa, PAGE_READWRITE, 0, len, name);
 		if(!m_hFileMapping)
 		{
 			return GetLastErrorAsHRESULT();
@@ -59,7 +52,9 @@ public:
 		}
 
 		WCHAR mutexName[1024] = L"locker_";
-		wcsncat_s(mutexName, name, _TRUNCATE);
+		WCHAR* p = mutexName + 7;
+		while (*name && p <= mutexName + 256) *p++ = *name++;
+		*p = L'\0';
 		m_hMutex = CreateMutexW(NULL, FALSE, mutexName);
 
 		m_bOpen = TRUE;
