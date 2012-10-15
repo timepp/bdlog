@@ -15,7 +15,6 @@
     <ClInclude Include="..\include\bdlogprovider.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="..\bdlog\minicrt.h" />
     <ClInclude Include="..\bdlog\resource.h" />
     <ClInclude Include="..\bdlog\stdafx.h" />
     <ClInclude Include="..\bdlog\targetver.h" />

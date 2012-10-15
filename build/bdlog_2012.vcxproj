@@ -92,7 +92,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\bdlog\minicrt.h" />
     <ClInclude Include="..\include\accutime.h" />
     <ClInclude Include="..\include\bdlog.h" />
     <ClInclude Include="..\include\bdlogprovider.h" />
