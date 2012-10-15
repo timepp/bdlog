@@ -18,22 +18,12 @@
 #include <stdio.h>
 
 #ifdef BDLOG_SELF_BUILD
-#	ifdef BDLOG_BUILD_STATIC_LIB
-#		define BDLOGAPI extern "C"
-#	else
-#		define BDLOGAPI extern "C" __declspec(dllexport)
-#	endif
+#	define BDLOGAPI extern "C" __declspec(dllexport)
 #else
-#	if !defined(BDLOG_USE_AS_STATIC_LIB) && !defined(BDLOG_USE_AS_DLL_DYNAMIC_LOAD)
-#		define BDLOG_USE_AS_DLL
-#	endif
 #	if defined(BDLOG_USE_AS_DLL)
 #		define BDLOGAPI extern "C" __declspec(dllimport)
 #		pragma comment(lib, "bdlog.lib")
-#	elif defined(BDLOG_USE_AS_STATIC_LIB)
-#		define BDLOGAPI extern "C"
-#       pragma comment(lib, "bdlog.lib")
-#	elif defined(BDLOG_USE_AS_DLL_DYNAMIC_LOAD)
+#	else
 #		define BDLOGAPI extern "C"
 #	endif
 #endif

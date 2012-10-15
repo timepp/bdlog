@@ -149,7 +149,9 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\bdlog\lock.h" />
     <ClInclude Include="..\bdlog\minicrt.h" />
+    <ClInclude Include="..\bdlog\stream.h" />
     <ClInclude Include="..\include\bdlog.h" />
     <ClInclude Include="..\include\bdlogprovider.h" />
     <ClInclude Include="..\include\bdlog_util.h" />
@@ -158,7 +160,6 @@
     <ClInclude Include="..\bdlog\outputdevice_file.h" />
     <ClInclude Include="..\bdlog\outputdevice_pipe.h" />
     <ClInclude Include="..\bdlog\outputdevice_sharememory.h" />
-    <ClInclude Include="..\bdlog\compilerconf.h" />
     <ClInclude Include="..\bdlog\resource.h" />
     <ClInclude Include="..\bdlog\stdafx.h" />
     <ClInclude Include="..\bdlog\targetver.h" />
@@ -173,11 +174,6 @@
   <ItemGroup>
     <ClCompile Include="..\bdlog\minicrt.cpp">
     </ClCompile>
-    <ClCompile Include="..\bdlog\outputdevice_debugoutput.cpp" />
-    <ClCompile Include="..\bdlog\outputdevice_file.cpp" />
-    <ClCompile Include="..\bdlog\outputdevice_pipe.cpp" />
-    <ClCompile Include="..\bdlog\outputdevice_sharememory.cpp" />
-    <ClCompile Include="..\bdlog\dllmain.cpp" />
     <ClCompile Include="..\bdlog\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DebugLib|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -185,11 +181,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\bdlog\bdlog.cpp" />
-    <ClCompile Include="..\bdlog\logcontroller.cpp">
-    </ClCompile>
-    <ClCompile Include="..\bdlog\logfilter.cpp" />
-    <ClCompile Include="..\bdlog\logoption.cpp" />
-    <ClCompile Include="..\bdlog\logutil.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\bdlog\bdlog.rc" />

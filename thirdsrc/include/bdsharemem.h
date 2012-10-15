@@ -1,6 +1,5 @@
 #pragma once
 
-#include "bdsecurity.h"
 #include <stdio.h>
 
 class CSharingMemory
