@@ -25,7 +25,7 @@ public:
 
 	void Init()
 	{
-		HRESULT hr = m_sm.Open(L"bdlog_timing_info_V2", sizeof(TimingInfo), NULL);
+		HRESULT hr = m_sm.Open(L"bdlog_timing_info_V3", sizeof(TimingInfo), NULL);
 		if (FAILED(hr))
 		{
 			m_timingInfo = CreateTimingInfo();

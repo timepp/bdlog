@@ -387,7 +387,7 @@ inline HRESULT CLogController::GetLogOutputDeviceOverlayConfig(const wchar_t* na
 
 	if (m_hConfigKey)
 	{
-		WCHAR key[256];// = L"ld_";
+		WCHAR key[256];
 		textstream(key, _countof(key)) << L"ld_" << name;
 		DWORD readlen = len;
 		::RegQueryValueExW(m_hConfigKey, key, NULL, NULL, (LPBYTE)buffer, &readlen);
