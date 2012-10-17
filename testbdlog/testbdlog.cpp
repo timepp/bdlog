@@ -10,7 +10,7 @@
 #include "unittest.h"
 #include <map>
 #include <string>
-#include "getlogcontroller_impl.h"
+#include <bdlog_impl.h>
 
 #define TPUT_MODNAME Main
 

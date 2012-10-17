@@ -4,6 +4,9 @@
     <Filter Include="include">
       <UniqueIdentifier>{693ecb6f-5a16-47d8-8161-b04cd9293213}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\detail">
+      <UniqueIdentifier>{cf0165b5-4850-4e95-a48a-6b3beca45436}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\bdlog.h">
@@ -17,50 +20,49 @@
     </ClInclude>
     <ClInclude Include="..\bdlog\resource.h" />
     <ClInclude Include="..\bdlog\stdafx.h" />
-    <ClInclude Include="..\bdlog\targetver.h" />
     <ClInclude Include="..\include\accutime.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\bdsharemem.h">
-      <Filter>include</Filter>
+    <ClInclude Include="..\include\detail\bdsecurity.h">
+      <Filter>include\detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\compilerconf.h">
-      <Filter>include</Filter>
+    <ClInclude Include="..\include\detail\bdsharemem.h">
+      <Filter>include\detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\lock.h">
-      <Filter>include</Filter>
+    <ClInclude Include="..\include\detail\lock.h">
+      <Filter>include\detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\logcontroller.h">
-      <Filter>include</Filter>
+    <ClInclude Include="..\include\detail\logcontroller.h">
+      <Filter>include\detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\logfilter.h">
-      <Filter>include</Filter>
+    <ClInclude Include="..\include\detail\logfilter.h">
+      <Filter>include\detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\logoption.h">
-      <Filter>include</Filter>
+    <ClInclude Include="..\include\detail\logoption.h">
+      <Filter>include\detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\logutil.h">
-      <Filter>include</Filter>
+    <ClInclude Include="..\include\detail\logutil.h">
+      <Filter>include\detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\outputdevice_common.h">
-      <Filter>include</Filter>
+    <ClInclude Include="..\include\detail\outputdevice_common.h">
+      <Filter>include\detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\outputdevice_debugoutput.h">
-      <Filter>include</Filter>
+    <ClInclude Include="..\include\detail\outputdevice_debugoutput.h">
+      <Filter>include\detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\outputdevice_file.h">
-      <Filter>include</Filter>
+    <ClInclude Include="..\include\detail\outputdevice_file.h">
+      <Filter>include\detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\outputdevice_pipe.h">
-      <Filter>include</Filter>
+    <ClInclude Include="..\include\detail\outputdevice_pipe.h">
+      <Filter>include\detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\outputdevice_sharememory.h">
-      <Filter>include</Filter>
+    <ClInclude Include="..\include\detail\outputdevice_sharememory.h">
+      <Filter>include\detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\stream.h">
-      <Filter>include</Filter>
+    <ClInclude Include="..\include\detail\stream.h">
+      <Filter>include\detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\getlogcontroller_impl.h">
+    <ClInclude Include="..\include\bdlog_impl.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

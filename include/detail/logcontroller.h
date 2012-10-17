@@ -1,10 +1,12 @@
 #pragma once
 
-#include "bdlog.h"
-#include "accutime.h"
+#include "../bdlog.h"
+#include "../accutime.h"
+
 #include "logutil.h"
 #include "logfilter.h"
 #include "logoption.h"
+
 #include "outputdevice_debugoutput.h"
 #include "outputdevice_pipe.h"
 #include "outputdevice_sharememory.h"

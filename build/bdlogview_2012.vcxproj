@@ -75,7 +75,6 @@
       <MinimalRebuild>true</MinimalRebuild>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <EnablePREfast>true</EnablePREfast>
       <WarningLevel>EnableAllWarnings</WarningLevel>
     </ClCompile>
     <Link>

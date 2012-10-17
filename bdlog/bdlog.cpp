@@ -1,6 +1,6 @@
 #include "stdafx.h"
 
-#include <logcontroller.h>
+#include <detail/logcontroller.h>
 
 void * operator new (unsigned int /*size*/, void * p)
 { 
