@@ -3,6 +3,11 @@
 #include "stream.h"
 #include "lock.h"
 
+#ifndef BDLOG_STR_W
+#define BDLOG_STR_W_2(str) L##str
+#define BDLOG_STR_W(str) BDLOG_STR_W_2(str)
+#endif
+
 struct ToStr
 {
 	template <typename T>
@@ -70,7 +75,7 @@ private:
 
 #define LOG(...) helper::InternalLog(__VA_ARGS__)
 #define LOGWINERR(str) helper::InternalLogWinError(str)
-#define LOGFUNC LOG(WIDESTRING(__FUNCTION__))
+#define LOGFUNC LOG(BDLOG_STR_W(__FUNCTION__))
 #define CHECK_HR(s)	if (FAILED(s)) {ATLASSERT(FALSE);}
 #define ENSURE_SUCCEED(s) {HRESULT hr_ = s; if (FAILED(hr_)) { return hr_; } }
 
