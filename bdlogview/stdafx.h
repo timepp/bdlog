@@ -59,8 +59,8 @@ BD_TUNE_WARNINGS
 
 #pragma warning(disable: 4100)
 
-#include <tplib/auto_release.h>
-#include <tplib/format_shim.h>
-#include <tplib/service.h>
+#include <tplib/include/auto_release.h>
+#include <tplib/include/format_shim.h>
+#include <tplib/include/service.h>
 
 #define SERVICE(x) tp::servicemgr::get<x>()

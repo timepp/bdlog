@@ -4,7 +4,7 @@
 #include "servicehelper.h"
 #include "logpropdb.h"
 #include "config.h"
-#include <tplib/msg_crack.h>
+#include <tplib/include/msg_crack.h>
 
 CQuickFilterDlg* g_dlg = NULL;
 

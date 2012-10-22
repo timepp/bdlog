@@ -1,7 +1,7 @@
 #pragma once
 
 #include "resource.h"
-#include <tplib/compositetreectrl.h>
+#include <tplib/include/compositetreectrl.h>
 #include "concretefilter.h"
 #include "whitebkdlg.h"
 

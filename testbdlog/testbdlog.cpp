@@ -6,7 +6,7 @@
 #include <atlstr.h>
 #include <vector>
 #include <iostream>
-#include <tplib/auto_release.h>
+#include <tplib/include/auto_release.h>
 #include "unittest.h"
 #include <map>
 #include <string>

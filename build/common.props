@@ -15,7 +15,7 @@
   <ItemDefinitionGroup>
     <ClCompile>
       <AdditionalOptions>/Wall %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>$(bdlogroot)\include;$(bdlogroot)\thirdsrc\include;$(bdlogroot)\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(bdlogroot)\include;$(bdlogroot)\thirdsrc\include;$(bdlogroot)\thirdsrc;$(bdlogroot)\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>

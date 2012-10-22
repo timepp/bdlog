@@ -1,7 +1,7 @@
 #pragma once
 
 #include "resource.h"
-#include <tplib/compositetreectrl.h>
+#include <tplib/include/compositetreectrl.h>
 #include "filter.h"
 #include <wtl/atlctrlx.h>
 
