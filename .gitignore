@@ -6,3 +6,8 @@ ipch/
 output/Win32/
 output
 /bdlog/*.aps
+/bdlogview/bdlogview.aps
+/bdlogview/bdlogview.tlb
+/bdlogview/bdlogview_i.c
+/bdlogview/bdlogview_p.c
+/build/dlldata.c
