@@ -1,28 +1,88 @@
 #include "stdafx.h"
-#include <activscp.h>
+#include "scripthost.h"
+#include "logcenter.h"
+
 #include "bdlogview_h.h"
 
 const GUID CLSID_VBScript = {0xb54f3741, 0x5b07, 0x11cf, {0xa4, 0xb0, 0x00, 0xaa, 0x00, 0x4a, 0x55, 0xe8}};
 const GUID CLSID_JScript  = {0xf414c260, 0x6ac0, 0x11cf, {0xb6, 0xd1, 0x00, 0xaa, 0x00, 0xbb, 0xbb, 0x58}};
 
-class ATL_NO_VTABLE CActiveScriptSite
+DECLARE_LIBID(LIBID_BdLogviewLib);
+
+class ATL_NO_VTABLE CCoLogCenter
 	: public CComObjectRootEx<CComSingleThreadModel>
-	, public CComCoClass<CActiveScriptSite, &CLSID_BdLogView>
-	, public IDispatchImpl<IBdLogView, &IID_IBdLogView, &LIBID_BdLogviewLib, -1 ,-1>
-	, public IActiveScriptSite
+	, public CComCoClass<CCoLogCenter, &CLSID_LogCenter>
+	, public IDispatchImpl<ILogCenter, &IID_ILogCenter, &LIBID_BdLogviewLib, -1 ,-1>
 {
 public:
-	virtual ~CActiveScriptSite()
-	{
+	virtual ~CCoLogCenter() {}
 
+	BEGIN_COM_MAP(CCoLogCenter)
+		COM_INTERFACE_ENTRY(IDispatch)
+		COM_INTERFACE_ENTRY(ILogCenter)
+	END_COM_MAP()
+
+	STDMETHOD(get_LogCount)(long* pCount)
+	{
+		LogRange r = SERVICE(CLogCenter)->GetLogRange();
+		*pCount = r.idmax - r.idmin + 1;
+		return S_OK;
+	}
+};
+
+
+class ATL_NO_VTABLE CCoBDLogView
+	: public CComObjectRootEx<CComSingleThreadModel>
+	, public CComCoClass<CCoBDLogView, &CLSID_BdLogView>
+	, public IDispatchImpl<IBdLogView, &IID_IBdLogView, &LIBID_BdLogviewLib, -1 ,-1>
+{
+private:
+	CComPtr<ILogCenter> m_logCenter;
+public:
+	CCoBDLogView()
+	{
+		CComObject<CCoLogCenter>* obj = NULL;
+		CComObject<CCoLogCenter>::CreateInstance(&obj);
+		m_logCenter = obj;
 	}
 
-	DECLARE_LIBID(LIBID_BdLogviewLib)
+	virtual ~CCoBDLogView() {}
+
+	BEGIN_COM_MAP(CCoBDLogView)
+		COM_INTERFACE_ENTRY(IDispatch)
+		COM_INTERFACE_ENTRY(IBdLogView)
+	END_COM_MAP()
+
+	STDMETHOD(MsgBox)(BSTR title, BSTR text)
+	{
+		::MessageBoxW(NULL, text, title, MB_OK);
+		return S_OK;
+	}
+
+	STDMETHOD(GetLogCenter)(IDispatch** ppObj)
+	{
+		return m_logCenter->QueryInterface(&ppObj);
+	}
+};
+
+class ATL_NO_VTABLE CActiveScriptSite
+	: public CComObjectRootEx<CComSingleThreadModel>
+	, public IActiveScriptSite
+{
+	CComPtr<IBdLogView> m_app;
+public:
+	CActiveScriptSite()
+	{
+		CComObject<CCoBDLogView>* obj = NULL;
+		CComObject<CCoBDLogView>::CreateInstance(&obj);
+		m_app = obj;
+	}
+	virtual ~CActiveScriptSite()
+	{
+	}
 
 	BEGIN_COM_MAP(CActiveScriptSite)
-		COM_INTERFACE_ENTRY(IDispatch)
 		COM_INTERFACE_ENTRY(IActiveScriptSite)
-		COM_INTERFACE_ENTRY(IBdLogView)
 	END_COM_MAP()
 
 	STDMETHOD(GetLCID)(LCID *plcid)
@@ -52,14 +112,13 @@ public:
 		{
 			if (dwReturnMask & SCRIPTINFO_ITYPEINFO)
 			{
-				GetTypeInfo(0, NULL, ppti);
+				m_app->GetTypeInfo(0, NULL, ppti);
 				(*ppti)->AddRef();
 			}
 
 			if (dwReturnMask & SCRIPTINFO_IUNKNOWN)
 			{
-				*ppiunkItem = static_cast<IBdLogView*>(this);
-				(*ppiunkItem)->AddRef();
+				m_app->QueryInterface(ppiunkItem);
 			}
 			return S_OK;
 		}
@@ -67,27 +126,22 @@ public:
 		return E_INVALIDARG;
 	}
 
-	virtual HRESULT STDMETHODCALLTYPE GetDocVersionString( 
-		/* [out] */ BSTR * /*pbstrVersion*/)
+	STDMETHOD(GetDocVersionString)(BSTR * /*pbstrVersion*/)
 	{
 		return E_NOTIMPL;
 	}
 
-	virtual HRESULT STDMETHODCALLTYPE OnScriptTerminate( 
-		/* [in] */ const VARIANT * /*pvarResult*/,
-		/* [in] */ const EXCEPINFO * /*pexcepinfo*/)
+	STDMETHOD(OnScriptTerminate)( const VARIANT * /*pvarResult*/, const EXCEPINFO * /*pexcepinfo*/)
 	{
 		return S_OK;
 	}
 
-	virtual HRESULT STDMETHODCALLTYPE OnStateChange( 
-		/* [in] */ SCRIPTSTATE /*ssScriptState*/)
+	STDMETHOD(OnStateChange)(SCRIPTSTATE /*ssScriptState*/)
 	{
 		return S_OK;
 	}
 
-	virtual HRESULT STDMETHODCALLTYPE OnScriptError( 
-		/* [in] */ IActiveScriptError *pscripterror)
+	STDMETHOD(OnScriptError)(IActiveScriptError *pscripterror)
 	{
 		EXCEPINFO ei;
 		DWORD     dwSrcContext;
@@ -111,65 +165,41 @@ public:
 		return S_OK;
 	}
 
-	virtual HRESULT STDMETHODCALLTYPE OnEnterScript( void)
+	STDMETHOD(OnEnterScript)()
 	{
 		return S_OK;
 	}
 
-	virtual HRESULT STDMETHODCALLTYPE OnLeaveScript( void)
+	STDMETHOD(OnLeaveScript)()
 	{
-		return S_OK;
-	}
-
-	STDMETHOD(MsgBox)()
-	{
-		::MessageBoxW(NULL,L"aaa", L"bbb", MB_OK);
 		return S_OK;
 	}
 };
 
-void RunScript()
+
+CScriptHost::CScriptHost()
 {
-	HRESULT hr = S_OK;
-	HRESULT hrInit;
-	//IClassFactory * pfactory = NULL;
-	IActiveScript * pscript = NULL;
-	IActiveScriptParse * pparse = NULL;
-	IActiveScriptSite * psite = NULL;
+	InitLibId();
 
-	hr = hrInit = OleInitialize(NULL);
-	if (FAILED(hr))
-		goto LError;
+	CoCreateInstance(CLSID_JScript, NULL, CLSCTX_SERVER, IID_IActiveScript, (void**)&m_scriptEngine);
 
-	CoCreateInstance(CLSID_JScript, NULL, CLSCTX_SERVER, IID_IActiveScript, (void**)&pscript);
+	CComObject<CActiveScriptSite>* as;
+	CComObject<CActiveScriptSite>::CreateInstance(&as);
+	m_scriptSite = as;
+	
+	m_scriptEngine->SetScriptSite(m_scriptSite);
+	m_scriptEngine->AddNamedItem(L"application", SCRIPTITEM_ISVISIBLE|SCRIPTITEM_NOCODE);
 
-	psite = new CComObject<CActiveScriptSite>;
+	m_scriptEngine->QueryInterface(IID_IActiveScriptParse, (void**)&m_scriptParser);
+	m_scriptParser->InitNew();
+}
 
-	CActiveScriptSite::InitLibId();
+CScriptHost::~CScriptHost()
+{
+}
 
-	hr = pscript->SetScriptSite(psite);
-	if (FAILED(hr))
-		goto LError;
-
-	hr = pscript->AddNamedItem(L"application", SCRIPTITEM_ISVISIBLE|SCRIPTITEM_NOCODE);
-
-	hr = pscript->QueryInterface(IID_IActiveScriptParse, (void**)&pparse);
-	if (FAILED(hr))
-		goto LError;
-
-	hr = pparse->InitNew();
-
-	hr = pparse->ParseScriptText(L"application.MsgBox(); \n",
-		NULL, NULL, NULL, 0, 1, 0, NULL, NULL);
-
-	if (FAILED(hr))
-		goto LError;
-
-	hr = pscript->SetScriptState(SCRIPTSTATE_CONNECTED);
-
-	if (FAILED(hr))
-		goto LError;
-
-LError:
-	return;
+void CScriptHost::RunScript(const wchar_t* jscode)
+{
+	m_scriptParser->ParseScriptText(jscode,	NULL, NULL, NULL, 0, 1, 0, NULL, NULL);
+	m_scriptEngine->SetScriptState(SCRIPTSTATE_CONNECTED);
 }

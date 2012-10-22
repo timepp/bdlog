@@ -14,20 +14,18 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// Chinese (P.R.C.) resources
+// Chinese (Simplified, PRC) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
-#ifdef _WIN32
 LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
 #pragma code_page(936)
-#endif //_WIN32
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // TYPELIB
 //
 
-// 1                       TYPELIB                 "bdlogview.tlb"
+1                       TYPELIB                 "bdlogview.tlb"
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -42,7 +40,7 @@ END
 
 2 TEXTINCLUDE 
 BEGIN
-    "#include ""afxres.h""\r\n"
+    "#include ""winres.h""\r\n"
     "#include ""..\\build\\versionnum.h""\r\n"
     "\0"
 END
@@ -390,6 +388,16 @@ BEGIN
     SCROLLBAR       IDC_SCROLLBAR,7,140,417,12
 END
 
+IDD_RUNSCRIPT DIALOGEX 0, 0, 309, 176
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "运行JSCRIPT脚本"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "运行",IDOK,198,155,50,14
+    PUSHBUTTON      "取消",IDCANCEL,252,155,50,14
+    EDITTEXT        IDC_EDIT_SCRIPT,7,7,295,142,ES_MULTILINE | ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -397,7 +405,7 @@ END
 //
 
 #ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO 
+GUIDELINES DESIGNINFO
 BEGIN
     IDD_MAINDLG, DIALOG
     BEGIN
@@ -568,6 +576,14 @@ BEGIN
         TOPMARGIN, 7
         BOTTOMMARGIN, 152
     END
+
+    IDD_RUNSCRIPT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 302
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 169
+    END
 END
 #endif    // APSTUDIO_INVOKED
 
@@ -578,8 +594,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION VERSION_INT
- PRODUCTVERSION VERSION_INT
+ FILEVERSION 9,0,0,1
+ PRODUCTVERSION 9,0,0,1
  FILEFLAGSMASK 0x17L
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -596,12 +612,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "Baidu"
             VALUE "FileDescription", "百度客户端日志查看器"
-            VALUE "FileVersion", VERSION_STR
+            VALUE "FileVersion", "9.0.0.1"
             VALUE "InternalName", "bdlogview"
             VALUE "LegalCopyright", "Baidu.  All rights reserved."
             VALUE "OriginalFilename", "bdlogview.exe"
             VALUE "ProductName", "百度客户端日志查看器"
-            VALUE "ProductVersion", VERSION_STR
+            VALUE "ProductVersion", "9.0.0.1"
         END
     END
     BLOCK "VarFileInfo"
@@ -616,7 +632,7 @@ END
 // Menu
 //
 
-IDR_MENU1 MENU 
+IDR_MENU1 MENU
 BEGIN
     POPUP "主菜单"
     BEGIN
@@ -631,7 +647,6 @@ BEGIN
         MENUITEM "编辑日志输出配置文件(&X)...",           ID_EDIT_XLOG_INI
         MENUITEM SEPARATOR
         MENUITEM "改变配色(&C)...",                 ID_CHANGE_THEME_COLOR
-//        MENUITEM "帮助(&H)...\tF1",               ID_HELP
         MENUITEM "关于(&A)...",                   ID_ABOUT
     END
     POPUP "main"
@@ -669,7 +684,7 @@ BEGIN
     END
 END
 
-IDR_CONTEXTMENU MENU 
+IDR_CONTEXTMENU MENU
 BEGIN
     POPUP "fda"
     BEGIN
@@ -677,7 +692,7 @@ BEGIN
     END
 END
 
-IDR_MAINFRAME MENU 
+IDR_MAINFRAME MENU
 BEGIN
     POPUP "文件(&F)"
     BEGIN
@@ -690,14 +705,11 @@ BEGIN
         MENUITEM SEPARATOR
         MENUITEM "清除所有日志(&D)\tCtrl+X",          ID_CLEARALL
         MENUITEM SEPARATOR
-//        MENUITEM "退出(&X)",                      ID_FILE_CLOSE
     END
     POPUP "查看(&V)"
     BEGIN
         MENUITEM "菜单栏(&1)\tF9",                 ID_VIEW_MENUBAR
-//        MENUITEM "工具栏(&2)",                     ID_VIEW_TOOLBAR
         MENUITEM "快速过滤(&3)",                    ID_VIEW_SEARCHBAR
-//        MENUITEM "状态栏(&4)",                     ID_VIEW_STATUS_BAR
         MENUITEM SEPARATOR
         MENUITEM "显示网格线(&G)",                   ID_SHOW_GRIDLINE
         MENUITEM "十六进制(&H)",                    ID_HEX
@@ -722,10 +734,10 @@ BEGIN
         MENUITEM "常用位置...(&P)\tCtrl+D",         ID_VIEW_SPECIAL_PATH
         MENUITEM "日志源信息(&S)...",                ID_LOG_SOURCE_INFO
         MENUITEM "逻辑可视化(&L)",                   ID_SHOW_VISUAL_LOGIC
+        MENUITEM "执行脚本(E)...",                  ID_RUN_SCRIPT
     END
     POPUP "帮助(&H)"
     BEGIN
-//        MENUITEM "使用帮助...(&H)\tF1",             ID_HELP
         MENUITEM "关于日志查看器(&A)",                 ID_ABOUT
     END
 END
@@ -736,13 +748,12 @@ END
 // Accelerator
 //
 
-IDR_MAINFRAME ACCELERATORS 
+IDR_MAINFRAME ACCELERATORS
 BEGIN
     "X",            ID_CLEARALL,            VIRTKEY, CONTROL, NOINVERT
     "F",            ID_EDIT_FILTER,         VIRTKEY, SHIFT, CONTROL, NOINVERT
     "H",            ID_EDIT_HLIGHT,         VIRTKEY, SHIFT, CONTROL, NOINVERT
     "S",            ID_EXPORT_ALL,          VIRTKEY, CONTROL, NOINVERT
-//    VK_F1,          ID_HELP,                VIRTKEY, NOINVERT
     VK_F2,          ID_NEXT_BOOKMARK,       VIRTKEY, NOINVERT
     "O",            ID_OPEN_XLOG,           VIRTKEY, CONTROL, NOINVERT
     VK_F2,          ID_PREV_BOOKMARK,       VIRTKEY, SHIFT, NOINVERT
@@ -801,7 +812,7 @@ IDI_FILTER              ICON                    "res\\filter.ico"
 // Toolbar
 //
 
-IDR_MAINFRAME TOOLBAR  16, 15
+IDR_MAINFRAME TOOLBAR 16, 15
 BEGIN
     BUTTON      ID_START_MONITOR
     BUTTON      ID_STOP_MONITOR
@@ -821,43 +832,43 @@ IDB_BITMAP1             BITMAP                  "res\\bitmap1.bmp"
 // String Table
 //
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_CLEAR_FILTER         "CTRL+R"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDR_MAINFRAME           "百度客户端日志查看器"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_PANE_LOGCOUNT        "总数：10000000"
     ID_PANE_FILTERED_LOGCOUNT "过滤：10000000"
     ID_PANE_WORKTHREAD_COUNT "日志源：100"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_START_MONITOR        "开始监控\n开始监视"
     ID_STOP_MONITOR         "停止监控\n停止监视"
     ID_CLEARALL             "a\n清空日志"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_TOGGLE_BOOKMARK      "A\n设置/取消书签"
     ID_NEXT_BOOKMARK        "a\n跳到下一个书签"
     ID_PREV_BOOKMARK        "a\n跳到上一个书签"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_FORCEAUTOSCROLL      "a\n自动滚动"
 END
 
-#endif    // Chinese (P.R.C.) resources
+#endif    // Chinese (Simplified, PRC) resources
 /////////////////////////////////////////////////////////////////////////////
 
 

@@ -3,11 +3,10 @@
 #include <string>
 #include <set>
 
-#include "service.h"
 #include "serviceid.h"
 #include "logcenter.h"
 
-class CLogPropertyDB : public Service<SID_LogPropertyDB>, public CLogCenterListener
+class CLogPropertyDB : public tp::service_impl<SID_LogPropertyDB>, public CLogCenterListener
 {
 public:
 	typedef std::set<std::wstring> TagSet;
@@ -16,7 +15,7 @@ public:
 public:
 	void Init()
 	{
-		m_logCenter->AddListener(this);
+		SERVICE(CLogCenter)->AddListener(this);
 	}
 
 	void AddLevel(UINT32 lvl)
@@ -96,24 +95,24 @@ public:
 		m_defaultlvlset.insert(0x30);
 		m_defaultlvlset.insert(0x40);
 
-		m_logCenter = ServiceMgr::Instance().GetService<CLogCenter>();
+		tp::servicemgr::instance().add_destroy_dependency(service_id, SID_LogCenter);
 	}
 
 	~CLogPropertyDB()
 	{
-		m_logCenter->RemoveListener(this);
+		SERVICE(CLogCenter)->RemoveListener(this);
 	}
 
 	static CLogPropertyDB& Instance()
 	{
-		return *ServiceMgr::GetService<CLogPropertyDB>().operator->();
+		return *SERVICE(CLogPropertyDB);
 	}
 
 	virtual void OnNewLog(const LogRange& range)
 	{
 		for (UINT64 i = range.idmin; i < range.idmax; i++)
 		{
-			const LogInfo* li = m_logCenter->GetLog(i);
+			const LogInfo* li = SERVICE(CLogCenter)->GetLog(i);
 			AddTag(li->item->log_tags);
 			AddLevel(li->item->log_class);
 		}
@@ -135,8 +134,6 @@ private:
 	LevelSet m_defaultlvlset;
 	LevelSet m_runtimelvlset;
 	int m_lvlVersion;
-
-	CServicePtr<CLogCenter> m_logCenter;
 };
 
 DEFINE_SERVICE(CLogPropertyDB, L"日志属性管理器");

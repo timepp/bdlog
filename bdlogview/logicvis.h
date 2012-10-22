@@ -2,7 +2,6 @@
 
 #include "filter.h"
 #include "logcenter.h"
-#include "service.h"
 #include "serviceid.h"
 
 #define M 1000000
@@ -128,7 +127,7 @@ struct process_info
 typedef std::vector<process_info> process_infos_t;
 typedef std::map<UINT32, process_info*> process_map_t;
 
-class CVisualLogic : public Service<SID_VisualLogic>, public CLogCenterListener
+class CVisualLogic : public tp::service_impl<SID_VisualLogic>, public CLogCenterListener
 {
 public:
 	CVisualLogic();

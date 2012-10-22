@@ -72,6 +72,8 @@
 #define IDI_ICON5                       167
 #define IDI_FILTER                      167
 #define IDD_VISLOGIC                    168
+#define IDD_DIALOG2                     169
+#define IDD_RUNSCRIPT                   169
 #define IDC_LIST                        1001
 #define IDC_APPLY                       1002
 #define IDC_CB_SHOW_CLASS               1003
@@ -181,6 +183,7 @@
 #define IDC_SCROLLBAR1                  1076
 #define IDC_SCROLLBAR                   1076
 #define IDC_STATIC_CANVAS               1077
+#define IDC_EDIT_SCRIPT                 1078
 #define ID_MAIN_ID                      40001
 #define ID_VIEW_DETAIL                  40002
 #define ID_MAIN_ABOUT                   40003
@@ -318,14 +321,16 @@
 #define ID_FUNCTION_JUMP                40158
 #define ID_40159                        40159
 #define ID_SHOW_VISUAL_LOGIC            40160
+#define ID_40161                        40161
+#define ID_RUN_SCRIPT                   40162
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        169
-#define _APS_NEXT_COMMAND_VALUE         40161
-#define _APS_NEXT_CONTROL_VALUE         1078
+#define _APS_NEXT_RESOURCE_VALUE        170
+#define _APS_NEXT_COMMAND_VALUE         40163
+#define _APS_NEXT_CONTROL_VALUE         1079
 #define _APS_NEXT_SYMED_VALUE           107
 #endif
 #endif

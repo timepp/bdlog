@@ -5,7 +5,6 @@
 #include <deque>
 #include <atlsync.h>
 #include "common.h"
-#include "service.h"
 #include "serviceid.h"
 
 struct LogRange
@@ -23,7 +22,7 @@ public:
 	virtual ~CLogCenterListener(){}
 };
 
-class CLogCenter : public Service<SID_LogCenter>, public bdlog::log_listener, public bdlog::log_source_support
+class CLogCenter : public tp::service_impl<SID_LogCenter>, public bdlog::log_listener, public bdlog::log_source_support
 {
 public:
 	CLogCenter();

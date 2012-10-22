@@ -67,6 +67,10 @@
     <Manifest>
       <AdditionalManifestFiles>$(bdlogroot)\thirdsrc\xpstyle.manifest;%(AdditionalManifestFiles)</AdditionalManifestFiles>
     </Manifest>
+    <Midl>
+      <OutputDirectory>$(bdlogroot)\bdlogview</OutputDirectory>
+      <TypeLibraryName>$(bdlogroot)\bdlogview\bdlogview.tlb</TypeLibraryName>
+    </Midl>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -89,6 +93,17 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\bdlogview\bdlogview_i.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\bdlogview\bdlogview_p.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\bdlogview\dlldata.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="..\bdlogview\helper.cpp" />
     <ClCompile Include="..\bdlogview\advancedfiltereditdlg.cpp" />
     <ClCompile Include="..\bdlogview\concretefiltereditdlg.CPP" />
@@ -103,7 +118,6 @@
     <ClCompile Include="..\bdlogview\logicvis.cpp" />
     <ClCompile Include="..\bdlogview\scripthost.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\bdlogview\simplefiltereditdlg.cpp" />
     <ClCompile Include="..\bdlogview\loginfodlg.cpp" />
@@ -121,10 +135,11 @@
     <ClCompile Include="..\bdlogview\vislogicdlg.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\bdlogview\bdlogview_h.h" />
     <ClInclude Include="..\bdlogview\helper.h" />
     <ClInclude Include="..\bdlogview\logcenter.h" />
-    <ClInclude Include="..\bdlogview\service.h" />
-    <ClInclude Include="..\bdlogview\servicehelper.h" />
+    <ClInclude Include="..\bdlogview\runscriptdlg.h" />
+    <ClInclude Include="..\bdlogview\scripthost.h" />
     <ClInclude Include="..\bdlogview\serviceid.h" />
     <ClInclude Include="..\bdlogview\taglist.h" />
     <ClInclude Include="..\bdlogview\concretefilter.h" />
@@ -168,6 +183,7 @@
     <Image Include="..\bdlogview\res\content.ico" />
     <Image Include="..\bdlogview\res\Down.ico" />
     <Image Include="..\bdlogview\res\Edit.ico" />
+    <Image Include="..\bdlogview\res\filter.ico" />
     <Image Include="..\bdlogview\res\icon3.ico" />
     <Image Include="..\bdlogview\res\level.ico" />
     <Image Include="..\bdlogview\res\logical_and.ico" />
@@ -192,6 +208,7 @@
     <ResourceCompile Include="..\bdlogview\bdlogview.rc" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\bdlogview\bdlogview.tlb" />
     <None Include="..\bdlogview\res\bdxlog.ini" />
     <None Include="..\bdlogview\res\debugset.ini" />
   </ItemGroup>
@@ -202,7 +219,6 @@
   <ItemGroup>
     <Midl Include="..\bdlogview\bdlogview.idl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </Midl>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

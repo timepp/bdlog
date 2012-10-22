@@ -1,7 +1,7 @@
 #pragma once
 
 #include <windows.h>
-#include "bdsharemem.h"
+#include "detail/bdsharemem.h"
 
 // TODO 休眠后，用基准时间+计数器算出来的时间落后于当前时间
 

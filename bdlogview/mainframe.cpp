@@ -18,6 +18,7 @@
 #include <Strsafe.h>
 #include "vislogicdlg.h"
 #include "servicehelper.h"
+#include "runscriptdlg.h"
 
 extern CAppModule _Module;
 extern HANDLE g_pipe;
@@ -1495,5 +1496,12 @@ void CMainFrame::UpdateFunctionPos(int index, int lookuplimit)
 LRESULT CMainFrame::OnShowVisualLogic(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 {
 	CVisLogicDlg::Show();
+	return 0;
+}
+
+LRESULT CMainFrame::OnRunScript(WORD, WORD, HWND, BOOL&)
+{
+	CRunScriptDlg dlg;
+	dlg.DoModal();
 	return 0;
 }

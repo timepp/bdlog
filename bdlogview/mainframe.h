@@ -111,6 +111,7 @@ public:
 		COMMAND_ID_HANDLER(ID_SEARCH_NEXT, OnSearchNext)
 		COMMAND_ID_HANDLER(ID_SEARCH_PREV, OnSearchPrev)
 		COMMAND_ID_HANDLER(ID_SEARCH, OnSearch)
+		COMMAND_ID_HANDLER(ID_RUN_SCRIPT, OnRunScript)
 
 		COMMAND_ID_HANDLER(ID_VIEW_TOOLBAR, OnViewToolbar)
 		COMMAND_ID_HANDLER(ID_VIEW_STATUS_BAR, OnViewStatusbar)
@@ -194,6 +195,7 @@ private:
 	LRESULT OnSearchNext(WORD, WORD, HWND, BOOL&);
 	LRESULT OnSearchPrev(WORD, WORD, HWND, BOOL&);
 	LRESULT OnSearch(WORD, WORD, HWND, BOOL&);
+	LRESULT OnRunScript(WORD, WORD, HWND, BOOL&);
 	LRESULT OnClearBeforeThisLog(WORD, WORD, HWND, BOOL&);
 	LRESULT OnViewDetail(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
 	LRESULT OnViewToolbar(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);

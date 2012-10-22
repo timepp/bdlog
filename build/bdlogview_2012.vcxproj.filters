@@ -91,6 +91,15 @@
     <ClCompile Include="..\bdlogview\scripthost.cpp">
       <Filter>Scripting</Filter>
     </ClCompile>
+    <ClCompile Include="..\bdlogview\dlldata.c">
+      <Filter>Scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="..\bdlogview\bdlogview_i.c">
+      <Filter>Scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="..\bdlogview\bdlogview_p.c">
+      <Filter>Scripting</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\bdlogview\helper.h">
@@ -182,9 +191,16 @@
     <ClInclude Include="..\bdlogview\vislogicdlg.h">
       <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="..\bdlogview\service.h" />
     <ClInclude Include="..\bdlogview\serviceid.h" />
-    <ClInclude Include="..\bdlogview\servicehelper.h" />
+    <ClInclude Include="..\bdlogview\bdlogview_h.h">
+      <Filter>Scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="..\bdlogview\scripthost.h">
+      <Filter>Scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="..\bdlogview\runscriptdlg.h">
+      <Filter>UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\bdlogview\res\advanced.ico">
@@ -265,11 +281,9 @@
     <Image Include="..\bdlogview\res\tree.ico">
       <Filter>#Resource</Filter>
     </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="..\bdlogview\bdlogview.rc">
+    <Image Include="..\bdlogview\res\filter.ico">
       <Filter>#Resource</Filter>
-    </ResourceCompile>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\bdlogview\res\bdxlog.ini">
@@ -277,6 +291,9 @@
     </None>
     <None Include="..\bdlogview\res\debugset.ini">
       <Filter>#Resource</Filter>
+    </None>
+    <None Include="..\bdlogview\bdlogview.tlb">
+      <Filter>Scripting</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -289,5 +306,8 @@
     <Midl Include="..\bdlogview\bdlogview.idl">
       <Filter>Scripting</Filter>
     </Midl>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\bdlogview\bdlogview.rc" />
   </ItemGroup>
 </Project>

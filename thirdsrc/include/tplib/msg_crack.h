@@ -5,34 +5,16 @@
 #include <string>
 #include <map>
 
-template <typename T>
-class singleton
-{
-public:
-	static T& instance()
-	{
-		return inst;
-	}
-private:
-	static T inst;
-};
-
-#define IMPLEMENT_SINGLETON_GLOBAL_OBJ(T) T singleton<T>::inst;
-
-class S1 : public singleton<S1>
-{
-public:
-	void print()
-	{
-
-	}
-};
-
 namespace tp
 {
-	class msg_crack: public singleton<msg_crack>
+	class msg_crack
 	{
 	public:
+		static msg_crack * instance()
+		{
+			static msg_crack mc;
+			return &mc;
+		}
 		std::wstring crack(const MSG& msg)
 		{
 			return crack(msg.message);

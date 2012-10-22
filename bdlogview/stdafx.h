@@ -61,3 +61,6 @@ BD_TUNE_WARNINGS
 
 #include <tplib/auto_release.h>
 #include <tplib/format_shim.h>
+#include <tplib/service.h>
+
+#define SERVICE(x) tp::servicemgr::get<x>()

@@ -7,8 +7,8 @@
 #include <time.h>
 #include "firsttimedlg.h"
 #include "logicvis.h"
-#include "service.h"
 #include "servicehelper.h"
+#include "scripthost.h"
 
 CAppModule _Module;
 HWND g_activeModlessDlg = NULL;
@@ -86,9 +86,9 @@ int Run(LPTSTR /*lpstrCmdLine*/ = NULL, int nCmdShow = SW_SHOWDEFAULT)
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPWSTR lpstrCmdLine, int nCmdShow)
 {
 	::OleInitialize(NULL);
-	::LoadLibrary(L"Riched20.dll");
+	ON_LEAVE(::OleUninitialize());
 
-//	RunScript();
+	::LoadLibrary(L"Riched20.dll");
 
 	CConfig::Instance()->Load(L"");
 
@@ -116,9 +116,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPWSTR lps
 	_Module.Term();
 
 	CConfig::Instance()->Save();
-	::OleUninitialize();
 
-	ServiceMgr::Instance().DestroyAllServices();
+	tp::servicemgr::instance().destroy_all_services();
 
 	return nRet;
 }

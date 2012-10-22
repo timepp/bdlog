@@ -1,7 +1,6 @@
 #pragma once
 
 #include "serviceid.h"
-#include "service.h"
 
 #include "logpropdb.h"
 #include "logcenter.h"
@@ -9,16 +8,16 @@
 
 struct ServiceHelper
 {
-	static CServicePtr<CLogPropertyDB> GetLogPropertyDB()
+	static CLogPropertyDB* GetLogPropertyDB()
 	{
-		return ServiceMgr::GetService<CLogPropertyDB>();
+		return tp::servicemgr::get<CLogPropertyDB>();
 	}
 	static CLogCenter* GetLogCenter()
 	{
-		return ServiceMgr::GetService<CLogCenter>().operator->();
+		return SERVICE(CLogCenter);
 	}
-	static CServicePtr<CVisualLogic> GetVisualLogic()
+	static CVisualLogic* GetVisualLogic()
 	{
-		return ServiceMgr::GetService<CVisualLogic>();
+		return SERVICE(CVisualLogic);
 	}
 };
