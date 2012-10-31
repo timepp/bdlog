@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job id="run"><script type="text/javascript">
+
+var usage = 
+    "Replace string in file and convert encoding.\n" + 
+    "Usage: cscript.exe|wscript.exe replace.wsf <src_path> <src_encoding> <src_string> <dst_string> [<dst_path>] [<dst_encoding>]\n" +
+    "By default, <dst_path> and <dst_encoding> is the same as <src_path> and <src_encoding>\n" +
+    "\nWARNING: if src_string or dst_string contains double quotes(\"), use two single quotes('') instead";
+
+function ReadTextFileContent(path, encoding) {
+    var stream = new ActiveXObject('ADODB.Stream');
+    stream.Type = 2;
+    stream.Mode = 3;
+    if (encoding) stream.Charset = encoding;
+    stream.Open();
+    stream.Position = 0;
+
+    stream.LoadFromFile(path);
+    var size = stream.Size;
+    var text = stream.ReadText();
+
+    stream.Close();
+
+    return text;
+}
+
+function WriteTextToFile(text, path, encoding) {
+    var stream = new ActiveXObject('ADODB.Stream');
+    stream.Type = 2;
+    stream.Mode = 3;
+    if (encoding) stream.Charset = encoding;
+    stream.Open();
+    stream.Position = 0;
+
+    stream.WriteText(text);
+    stream.SaveToFile(path, 2);
+
+    stream.Close();
+}
+
+src_path = "";
+src_encoding = "";
+src_string = "";
+dst_string = "";
+dst_path = "";
+dst_encoding = "";
+
+try {
+    src_path = WScript.Arguments(0);
+    src_encoding = WScript.Arguments(1);
+    src_string = WScript.Arguments(2);
+    dst_string = WScript.Arguments(3);
+    dst_path = WScript.Arguments(4);
+    dst_encoding = WScript.Arguments(5);
+} catch(e) {}
+
+if (!src_path || !src_encoding || !src_string) {
+    WScript.Echo(usage);
+    WScript.Quit();
+}
+
+if (!dst_path) dst_path = src_path;
+if (!dst_encoding) dst_encoding = src_encoding;
+
+src_string = src_string.replace(/''/g, "\"");
+dst_string = dst_string.replace(/''/g, "\"");
+
+WScript.Echo(
+    "\nsrc path: " + src_path +
+    "\ndst path: " + dst_path +
+    "\nsrc encoding: " + src_encoding + 
+    "\ndst encoding: " + dst_encoding +
+    "\nsrc string: " + src_string +
+    "\ndst string: " + dst_string);
+
+var text = ReadTextFileContent(src_path, src_encoding);
+text = text.replace(new RegExp(src_string, "gm"), dst_string);
+WriteTextToFile(text, dst_path, dst_encoding);
+
+</script></job>

@@ -103,6 +103,7 @@
     </ClCompile>
     <ClCompile Include="..\bdlogview\dlldata.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\bdlogview\helper.cpp" />
     <ClCompile Include="..\bdlogview\advancedfiltereditdlg.cpp" />
@@ -116,9 +117,7 @@
     <ClCompile Include="..\bdlogview\hilightermanagedlg.cpp" />
     <ClCompile Include="..\bdlogview\logcenter.cpp" />
     <ClCompile Include="..\bdlogview\logicvis.cpp" />
-    <ClCompile Include="..\bdlogview\scripthost.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
+    <ClCompile Include="..\bdlogview\scripthost.cpp" />
     <ClCompile Include="..\bdlogview\simplefiltereditdlg.cpp" />
     <ClCompile Include="..\bdlogview\loginfodlg.cpp" />
     <ClCompile Include="..\bdlogview\logsourceinfodlg.cpp" />
@@ -217,9 +216,7 @@
     <Text Include="..\bdlogview\ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Midl Include="..\bdlogview\bdlogview.idl">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </Midl>
+    <Midl Include="..\bdlogview\bdlogview.idl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

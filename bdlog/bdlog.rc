@@ -8,7 +8,6 @@
 // Generated from the TEXTINCLUDE 2 resource.
 //
 #include "winres.h"
-#include "..\build\versionnum.h"
 
 /////////////////////////////////////////////////////////////////////////////
 #undef APSTUDIO_READONLY_SYMBOLS
@@ -36,7 +35,6 @@ END
 2 TEXTINCLUDE 
 BEGIN
     "#include ""afxres.h""\r\n"
-	"#include ""..\build\versionnum.h""\r\n"
     "\0"
 END
 
@@ -55,8 +53,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION VERSION_INT
- PRODUCTVERSION VERSION_INT
+ FILEVERSION 9,0,0,1
+ PRODUCTVERSION 9,0,0,1
  FILEFLAGSMASK 0x17L
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -72,12 +70,12 @@ BEGIN
         BLOCK "080404b0"
         BEGIN
             VALUE "FileDescription", "bdlog Dynamic Link Library"
-            VALUE "FileVersion", VERSION_STR
+            VALUE "FileVersion", "9.0.0.1"
             VALUE "InternalName", "bdlog"
             VALUE "LegalCopyright", "Copyright (C) 2011"
             VALUE "OriginalFilename", "bdlog.dll"
             VALUE "ProductName", "bdlog Dynamic Link Library"
-            VALUE "ProductVersion", VERSION_STR
+            VALUE "ProductVersion", "9.0.0.1"
         END
     END
     BLOCK "VarFileInfo"
