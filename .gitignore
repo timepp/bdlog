@@ -11,3 +11,6 @@ output
 /bdlogview/bdlogview_i.c
 /bdlogview/bdlogview_p.c
 /build/dlldata.c
+/build/bdlogview_h.h
+/build/bdlogview_i.c
+/build/bdlogview_p.c
