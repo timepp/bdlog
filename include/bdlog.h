@@ -1,17 +1,14 @@
-#ifndef BDCLIENT_LOG_H
-#define BDCLIENT_LOG_H
+#pragma once
 
 /** @file
  *  日志接口
  *  - printf风格语法
  *  - 日志级别和日志标签(每条日志可关联多个标签，方便后期查看和分析)
  *  - 可随意配置的日志输出设备(控制台、文件、管道、共享内存等)，第三方日志输出设备支持
- *  - 运行时通过INI文件调整日志设置和日志过滤器
+ *  - 运行时动态改变日志输出设备的配置
  *
  *  控制bdlog使用方式的宏（在使用bdlog的工程里定义）
- *  - BDLOG_USE_AS_STATIC_LIB         作为静态库使用
- *  - BDLOG_USE_AS_DLL_DYNAMIC_LOAD   作为DLL使用，动态加载
- *  - BDLOG_USE_AS_DLL                作为DLL使用，静态加载。如果未定义上述两开关之一，将缺省定义此开关
+ *  - BDLOG_USE_AS_DLL  作为DLL使用，需要在使用bdlog.dll的工程中定义
  */
 
 #include <windows.h>
@@ -284,6 +281,3 @@ inline void Log(LogLevel level, LogTag tag, __in_z const wchar_t* fmt, ...)
 #endif // STATIC_CODE_ANALYSIS
 #endif // _MSC_VER
 
-
-
-#endif // BDCLIENT_LOG_H

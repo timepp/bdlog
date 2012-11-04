@@ -1,7 +1,6 @@
 #pragma once
 
 #include "outputdevice_common.h"
-#include "logutil.h"
 
 class CLOD_DebugOutput : public CLogOutputDeviceBase
 {

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../bdlog.h"
+#include "logutil.h"
 
 class CLogOutputDeviceBase : public ILogOutputDevice
 {

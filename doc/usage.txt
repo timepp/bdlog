@@ -1,0 +1,4 @@
+bdlog can be used in two ways.
+1. use bdlog.dll.
+2. include bdlog sources directly.
+
