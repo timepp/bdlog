@@ -132,7 +132,7 @@ void TEST_OutputDevice_File()
 HRESULT TEST_BD_CHECK()
 {
 	BD_CHECK(GetCurrentThreadId() == 0, IGNORE_FAIL);
-	BD_CHECK(GetCurrentThreadId() == 10, RETURN_LASTERROR_ON_FAIL);
+	BD_CHECK(GetCurrentThreadId() == 10, RETURN_HR_ON_FAIL);
 	BD_CHECK_HR(GetCurrentThreadId() == 10, RETURN_HR_ON_FAIL);
 
 //	BD_VERIFY(6 - 6 == 1);

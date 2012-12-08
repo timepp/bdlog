@@ -196,12 +196,41 @@ namespace bdlog
 		wchar_t m_buffer[2048];
 		size_t m_buffer_len;
 	};
+
+	struct helper
+	{
+		static HRESULT RecordError(const wchar_t* funcname, int line, HRESULT hr, const wchar_t* msg = NULL)
+		{
+			DWORD lasterror = ::GetLastError();
+			if (!msg)
+			{
+				Log(LL_ERROR, TAG(L"assert"), L"error @ %s:%d (lasterror=%u, hr=0x%X)", funcname, line, lasterror, hr);
+			}
+			else
+			{
+				Log(LL_ERROR, TAG(L"assert"), L"error @ %s:%d (lasterror=%u, hr=0x%X): %s", funcname, line, lasterror, hr, msg);
+			}
+			//_ASSERT_EXPR(false, funcname);
+			if (hr == S_OK)
+			{
+				hr = HRESULT_FROM_WIN32(lasterror);
+			}
+			::SetLastError(lasterror);
+			return hr;
+		}
+	};
 }
 
-#if defined(BDLOG_DISABLE_ALL) || defined(BDLOG_DISABLE_FUNCTION)
-#define LOG_FUNCTION
+#if defined(BDLOG_DISABLE_ALL)
+#define BDLOG_DISABLE_FUNCTION
+#endif
+
+#if defined(BDLOG_DISABLE_FUNCTION)
+#define LOG_FUNCTION(...)
 #else
-#define LOG_FUNCTION(...) bdlog::FunctionLogger BDLOG_NAME(fl_)(BDLOG_STR_W(__FUNCTION__), TAG(L"function"), bdlog::fmter(1, __VA_ARGS__))
+#define LOG_FUNCTION(...) \
+	bdlog::fmter bda_f_(1, __VA_ARGS__); \
+	bdlog::FunctionLogger BDLOG_NAME(fl_)(BDLOG_STR_W(__FUNCTION__), TAG(L"function"), bda_f_)
 #endif
 
 #define BDLOG_SAFESTR(str) (str?str:L"<NULL>")
@@ -210,21 +239,30 @@ namespace bdlog
 /*                                                                      */
 /************************************************************************/
 
-#define BDLOG_ASSERT_COMMON_DECLARE(expr) const wchar_t* bda_msg_ = BDLOG_STR_W(#expr)
-#define BDLOG_LOGERROR(fmt, ...) Log(LL_ERROR, TAG(L"assert"), L"ASSERT FAILED @ %s(%d): " fmt, BDLOG_STR_W(__FUNCTION__), __LINE__, __VA_ARGS__)
-#define BDLOG_ASSERT_REPORTERROR(fmt, ...) BDLOG_LOGERROR(fmt, __VA_ARGS__);_ASSERT_EXPR(false, bda_msg_)
+#define BDLOG_RECORD_ERROR(hr)                bdlog::helper::RecordError(BDLOG_STR_W(__FUNCTION__), __LINE__, hr)
+#define BDLOG_RECORD_ERROR_WITH_MSG(hr, msg)  bdlog::helper::RecordError(BDLOG_STR_W(__FUNCTION__), __LINE__, hr, msg)
 
 /** 
  *   BD_CHECK(ret == 0, IGNORE_FAIL)
  *   BD_CHECK(!m_inited, RETURN_ON_FAIL)
  *   BD_CHECK(hFile != INVALID_HANDLE_VALUE, RETURN_LASTERROR_ON_FAIL)
  */
-#define BD_CHECK(expr, operation) \
-	do { \
-		BDLOG_ASSERT_COMMON_DECLARE(expr); \
-		if (!!(expr) == false) { \
-			operation; \
-		} \
+#define BD_CHECK(expr, operation)                                             \
+	do {                                                                      \
+		if (!!(expr) == false) {                                              \
+			HRESULT bda_hr_ = BDLOG_RECORD_ERROR(S_OK);                       \
+			(bda_hr_);                                                        \
+			operation;                                                        \
+		}                                                                     \
+	} while (0)
+
+#define BD_CHECK_WITH_MSG(expr, operation, msg)                               \
+	do {                                                                      \
+		if (!!(expr) == false) {                                              \
+			HRESULT bda_hr_ = BDLOG_RECORD_ERROR_WITH_MSG(S_OK, msg);         \
+			(bda_hr_);                                                        \
+			operation;                                                        \
+		}                                                                     \
 	} while (0)
 
 /** 
@@ -232,39 +270,42 @@ namespace bdlog
  *   BD_CHECK_HR(hr, IGNORE_FAIL)
  *   BD_CHECK_HR(hr, RETURN_ON_FAIL)
  */
-#define BD_CHECK_HR(expr, operation) \
-	do { \
-		BDLOG_ASSERT_COMMON_DECLARE(expr); \
-		HRESULT bda_hr_ = (expr); \
-		if (!SUCCEEDED(bda_hr_)) { \
-			operation; \
-		} \
+#define BD_CHECK_HR(expr, operation)                                          \
+	do {                                                                      \
+		HRESULT bda_hr_ = (expr);                                             \
+		if (FAILED(bda_hr_)) {                                                \
+			BDLOG_RECORD_ERROR(bda_hr_);                                      \
+			operation;                                                        \
+		}                                                                     \
+	} while (0)
+
+#define BD_CHECK_HR_WITH_MSG(expr, operation, msg)                            \
+	do {                                                                      \
+		HRESULT bda_hr_ = (expr);                                             \
+		if (FAILED(bda_hr_)) {                                                \
+			BDLOG_RECORD_ERROR_WITH_MSG(bda_hr_, msg);                        \
+			operation;                                                        \
+		}                                                                     \
 	} while (0)
 
 /// 失败时打印日志（DEBUG下弹ASSERT窗口），程序流程继续执行
-#define IGNORE_FAIL \
-	BDLOG_ASSERT_REPORTERROR(L"%s", bda_msg_)
+#define IGNORE_FAIL 
 
 /// 失败时打印日志（DEBUG下弹ASSERT窗口），函数返回
-#define RETURN_ON_FAIL \
-	BDLOG_ASSERT_REPORTERROR(L"%s", bda_msg_); \
-	return;
+#define RETURN_ON_FAIL return
 
 /// 失败时打印日志（DEBUG下弹ASSERT窗口），函数返回
-#define RETURN_VAL_ON_FAIL(val) \
-	BDLOG_ASSERT_REPORTERROR(L"%s", bda_msg_); \
-	return val;
+#define RETURN_VAL_ON_FAIL(val) return val;
 
 /// 失败时打印日志（DEBUG下弹ASSERT窗口），函数返回，把出错的HRESULT值传递给上层调用
-#define RETURN_HR_ON_FAIL \
-	BDLOG_ASSERT_REPORTERROR(L"%s  -- HRESULT=0x%X", bda_msg_, bda_hr_); \
-	return bda_hr_;
+#define RETURN_HR_ON_FAIL return bda_hr_;
 
-/// 失败时打印日志（DEBUG下弹ASSERT窗口），函数返回，把lasterror封装为HRESULT返回给上层调用
-#define RETURN_LASTERROR_ON_FAIL \
-	DWORD bda_lasterror_ = ::GetLastError(); \
-	BDLOG_ASSERT_REPORTERROR(L"%s  -- lasterror=%u", bda_msg_, bda_lasterror_); \
-	return HRESULT_FROM_WIN32(bda_lasterror_)
 
+#define BD_ASSERT(expr) BD_CHECK(expr, IGNORE_FAIL)
+#define BD_CHECK_RETURN_HR_ON_FAIL(expr) BD_CHECK(expr, RETURN_HR_ON_FAIL)
+#define BD_CHECK_HR_PASS_HR_ON_FAIL(expr) BD_CHECK_HR(expr, RETURN_HR_ON_FAIL)
+#define BD_CHECK_RETURN_VAL_ON_FAIL(expr, val) BD_CHECK(expr, RETURN_VAL_ON_FAIL(val))
+#define BD_CHECK_HR_RETURN_VAL_ON_FAIL(expr, val) BD_CHECK_HR(expr, RETURN_VAL_ON_FAIL(val))
+#define BD_CHECK_PARAM(expr) BD_CHECK(expr, RETURN_VAL_ON_FAIL(E_INVALIDARG))
 
 #endif
