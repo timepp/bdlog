@@ -1,6 +1,8 @@
 #pragma  once
 #include "resource.h"
 #include "whitebkdlg.h"
+#include "config.h"
+#include "helper.h"
 
 #define DLL_DOWNLOAD_URL L"ftp://tmp:tmp@win.baidu.com/incoming/timepp/bdlogview.exe"
 
@@ -25,6 +27,7 @@ public:
 		COMMAND_ID_HANDLER(IDCANCEL, OnCancel)
 		COMMAND_ID_HANDLER(IDC_BTN_DOWNLOAD, OnDownload)
 
+		COMMAND_HANDLER(IDC_BUTTON_SHOW_VERSIONINFO, BN_CLICKED, OnBnClickedButtonShowVersioninfo)
 		CHAIN_MSG_MAP(CColoredDlgImpl)
 	END_MSG_MAP()
 
@@ -65,30 +68,8 @@ private:
 	}
 	LRESULT OnDownload(WORD , WORD , HWND , BOOL& )
 	{
-		CStringW strVersion = helper::GetLatestVersion();
-		CStringW strInfo;
-		if (!strVersion.IsEmpty() && strVersion != helper::GetVersion())
-		{
-			CStringW strDllPath = helper::GetModuleFilePath();
-
-			CStringW strErr = helper::UpdateSelf();
-			if (strErr.IsEmpty())
-			{
-				strInfo.Format(L"已升级到新版本: %s, \n重启后才能生效。", (LPCWSTR)strVersion);
-				MessageBox(strInfo, L"信息", MB_ICONINFORMATION|MB_OK);
-			}
-			else
-			{
-				strInfo.Format(L"升级失败: %s", (LPCWSTR)strErr);
-				MessageBox(strInfo, L"信息", MB_ICONWARNING|MB_OK);
-			}
-		}
-		else
-		{
-			strInfo.Format(L"最新版本为: %s, 您已是最新版本.", (LPCWSTR)strVersion);
-			MessageBox(strInfo, L"信息", MB_ICONINFORMATION|MB_OK);
-		}
-
 		return 0;
 	}
+public:
+	LRESULT OnBnClickedButtonShowVersioninfo(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
 };

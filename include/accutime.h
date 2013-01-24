@@ -47,17 +47,17 @@ public:
 
 	FILETIME GetTime() const
 	{
-		FILETIME t;
+		FILETIME t; // FILETIME的单位为 100纳秒， 即 1/E7 秒， 所以下面计算时， 要乘以E7
 		if (m_timingInfo.performanceFrequency > 0)
 		{
 			LARGE_INTEGER li;
 			::QueryPerformanceCounter(&li);
 			const int E7 = 10000000;
 			INT64 counterDelta = li.QuadPart - m_timingInfo.basePerformanceCounter;
-			INT64 counterUnit = counterDelta * E7 / m_timingInfo.performanceFrequency;
+			INT64 counterUnit = counterDelta * E7 / m_timingInfo.performanceFrequency; 
 			counterUnit += m_timingInfo.baseTime.dwLowDateTime;
 			t.dwHighDateTime = m_timingInfo.baseTime.dwHighDateTime + static_cast<DWORD>(counterUnit >> 32);
-			t.dwLowDateTime = static_cast<DWORD>(counterUnit & 0xFFFFFFFF);
+			t.dwLowDateTime = static_cast<DWORD>(counterUnit & UINT_MAX);
 		}
 		else
 		{

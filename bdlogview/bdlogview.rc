@@ -117,19 +117,22 @@ BEGIN
     CONTROL         "高亮所有匹配项",IDC_CHECK_HILIGHT_ALL,"Button",BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_TABSTOP,3,26,78,10
 END
 
-IDD_ABOUT DIALOGEX 0, 0, 312, 103
+IDD_ABOUT DIALOGEX 0, 0, 312, 124
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "关于"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
+    DEFPUSHBUTTON   "关闭",IDOK,255,103,50,14
+    PUSHBUTTON      "查看版本历史(&H)",IDC_BUTTON_SHOW_VERSIONINFO,7,103,83,14
     LTEXT           "版本：",IDC_STATIC,53,49,56,12,SS_CENTERIMAGE
     LTEXT           "产品名称：",IDC_STATIC,53,64,56,12,SS_CENTERIMAGE
     LTEXT           "配置文件路径：",IDC_STATIC,53,79,56,12,SS_CENTERIMAGE
-    LTEXT           "日志查看器是配合BDLOG使用的工具。可以实时查看应用程序的管道日志(LODT_PIPE)的输出；也可以以离线模式打开计算机中的BDLOG日志文件。",IDC_STATIC,53,7,244,35
+    LTEXT           "日志查看器是配合BDLOG使用的工具。可以实时查看应用程序的管道日志(LODT_PIPE)的输出；可以查看应用应用程序的共享内存日志(LODT_SHAREMEMORY)的内容；也可以以离线模式打开计算机中的BDLOG日志文件。",IDC_STATIC,53,7,244,35
     ICON            IDR_MAINFRAME,IDC_STATIC,7,9,20,20,SS_REALSIZEIMAGE
-    LTEXT           "Static",IDC_STATIC_VERSION,111,49,194,12,SS_CENTERIMAGE
+    LTEXT           "Static",IDC_STATIC_VERSION,111,49,60,12,SS_CENTERIMAGE
     LTEXT           "Static",IDC_STATIC_PRODUCT_NAME,111,64,194,12,SS_CENTERIMAGE
     LTEXT           "Static",IDC_STATIC_CONF_PATH,111,80,194,10
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,7,97,298,1
 END
 
 IDD_EXPORT DIALOGEX 0, 0, 279, 130
@@ -145,15 +148,17 @@ BEGIN
     CONTROL         "选择ID的范围",IDC_RADIO3,"Button",BS_AUTORADIOBUTTON,18,53,234,10
 END
 
-IDD_OPTION DIALOGEX 0, 0, 316, 178
+IDD_OPTION DIALOGEX 0, 0, 420, 240
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "选项"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    DEFPUSHBUTTON   "确定",IDOK,205,157,50,14
-    PUSHBUTTON      "取消",IDCANCEL,259,157,50,14
-    CONTROL         "启动日志查看器时自动开始监控",IDC_CHECK_AUTO_MONITOR,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,7,302,10
-    CONTROL         "关联xlog文件类型",IDC_CHECK2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,21,302,10
+    DEFPUSHBUTTON   "确定",IDOK,255,219,50,14
+    PUSHBUTTON      "取消",IDCANCEL,309,219,50,14
+    PUSHBUTTON      "应用(&A)",IDC_BUTTON_APPLY,363,219,50,14
+    CONTROL         "",IDC_TREE,"SysTreeView32",TVS_SHOWSELALWAYS | TVS_FULLROWSELECT | WS_BORDER | WS_TABSTOP,7,7,76,198
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,7,211,406,2
+    CONTROL         "",IDC_STATIC_OPTION_CLIENT,"Static",SS_BLACKFRAME,89,7,324,198
 END
 
 IDD_FILTER_EDIT DIALOGEX 0, 0, 191, 72
@@ -232,7 +237,7 @@ BEGIN
     LTEXT           "日志内容包含(&C)：",IDC_STATIC,7,7,278,12
     EDITTEXT        IDC_EDIT_LOGCONTENT,7,19,278,40,ES_MULTILINE | ES_AUTOVSCROLL | WS_VSCROLL
     CONTROL         "忽略大小写(&I)",IDC_CHECK_IGNORECASE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,69,71,14
-    CONTROL         "正则表达式(&R)",IDC_CHECK_REGEX,"Button",BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_TABSTOP,101,69,62,14
+    CONTROL         "正则表达式(&R)",IDC_CHECK_REGEX,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,75,69,62,14
     DEFPUSHBUTTON   "确定",IDOK,181,69,50,14
     PUSHBUTTON      "取消",IDCANCEL,235,69,50,14
 END
@@ -369,9 +374,9 @@ CAPTION "初次运行设置"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     DEFPUSHBUTTON   "确定",IDOK,259,116,50,14
-    COMBOBOX        IDC_COMBO_PRODUCT,129,58,109,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
-    LTEXT           "请选择使用日志查看器的产品：",IDC_STATIC,7,58,116,12,SS_CENTERIMAGE
-    LTEXT           "您是第一次使用日志查看器，请选择您所在的产品线名字。这个名字将会影响日志查看器中一些和具体产品线相关的策略，比如日志配置文件bdlog.ini的存储位置等。",IDC_STATIC,7,18,302,33
+    COMBOBOX        IDC_COMBO_PRODUCT,129,76,109,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "请选择使用日志查看器的产品：",IDC_STATIC,7,76,116,12,SS_CENTERIMAGE
+    LTEXT           "日志查看器在监视管道时，会自动把管道日志设备设为启用。这是通过修改注册表项来实现的。对不同的产品线，有不同的注册表项，注册表路径是用产品名字拼成的。\r\n\r\n产品名字是在具体产品的日志系统初始化时指定的，比如浏览器的产品名字是""BaiduBrowser""。其它产品名字请咨询对应的开发者。",IDC_STATIC,7,18,305,52
 END
 
 IDD_VISLOGIC DIALOGEX 0, 0, 431, 159
@@ -394,6 +399,39 @@ BEGIN
     DEFPUSHBUTTON   "运行",IDOK,198,155,50,14
     PUSHBUTTON      "取消",IDCANCEL,252,155,50,14
     EDITTEXT        IDC_EDIT_SCRIPT,7,7,295,142,ES_MULTILINE | ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL
+END
+
+IDD_SIMPLE_INPUT DIALOGEX 0, 0, 292, 90
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "输入PID：",IDC_TIP,7,19,278,11,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT,7,35,278,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "确定",IDOK,181,69,50,14
+    PUSHBUTTON      "取消",IDCANCEL,235,69,50,14
+END
+
+IDD_OPT_PERFMARK DIALOGEX 0, 0, 319, 196
+STYLE DS_SETFONT | DS_FIXEDSYS | DS_CONTROL | WS_CHILD | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "性能标记指的是“间隔”列的特殊背景颜色。开启性能标记显示时，这一列的背景颜色深浅会随着每条日志的间隔大小而变化。通过性能标记能更快的发现性能瓶颈。",IDC_STATIC,7,7,305,33
+    LTEXT           "最深标记颜色：",IDC_STATIC,7,63,61,14,SS_CENTERIMAGE
+    LTEXT           "",IDC_STATIC_COLOR,75,63,68,14,SS_NOTIFY | SS_CENTERIMAGE
+    LTEXT           "最深标记颜色对应的间隔时间：",IDC_STATIC,7,83,115,14,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_MAX_OCCUPYTIME,134,83,63,14,ES_AUTOHSCROLL
+    LTEXT           "毫秒",IDC_STATIC,203,83,24,14,SS_CENTERIMAGE
+    CONTROL         "开启性能标记",IDC_CHECK_ENABLE_PERFMARK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,44,305,10
+END
+
+IDD_OPT_SYSTEM DIALOGEX 0, 0, 319, 196
+STYLE DS_SETFONT | DS_FIXEDSYS | DS_CONTROL | WS_CHILD | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "日志查看器在监视管道时，会自动把管道日志设备设为启用。这是通过修改注册表项来实现的。对不同的产品线，有不同的注册表项，注册表路径是用产品名字拼成的。\r\n\r\n产品名字是在具体产品的日志系统初始化时指定的，比如浏览器的产品名字是""BaiduBrowser""。其它产品名字请咨询对应的开发者。",-1,7,7,305,52
+    LTEXT           "日志配置名（产品名）：",-1,7,83,92,14,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT,7,99,185,14,ES_AUTOHSCROLL
 END
 
 
@@ -434,7 +472,7 @@ BEGIN
         RIGHTMARGIN, 305
         VERTGUIDE, 73
         TOPMARGIN, 7
-        BOTTOMMARGIN, 96
+        BOTTOMMARGIN, 117
         HORZGUIDE, 42
     END
 
@@ -450,9 +488,10 @@ BEGIN
     IDD_OPTION, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 309
+        RIGHTMARGIN, 413
         TOPMARGIN, 7
-        BOTTOMMARGIN, 171
+        BOTTOMMARGIN, 233
+        HORZGUIDE, 205
     END
 
     IDD_FILTER_EDIT_LOGCLASS, DIALOG
@@ -582,6 +621,29 @@ BEGIN
         TOPMARGIN, 7
         BOTTOMMARGIN, 169
     END
+    IDD_SIMPLE_INPUT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 285
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 83
+    END
+
+    IDD_OPT_PERFMARK, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 312
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 189
+    END
+
+    IDD_OPT_SYSTEM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 312
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 189
+    END
 END
 #endif    // APSTUDIO_INVOKED
 
@@ -679,6 +741,7 @@ BEGIN
         END
         MENUITEM SEPARATOR
         MENUITEM "跳到函数头/尾",                     ID_FUNCTION_JUMP
+        MENUITEM "设置为时间原点",                     ID_SET_TIME_BASE
     END
 END
 
@@ -694,23 +757,32 @@ IDR_MAINFRAME MENU
 BEGIN
     POPUP "文件(&F)"
     BEGIN
-        MENUITEM "开始监视(&M)",                    ID_START_MONITOR
+        MENUITEM "开始监视管道日志(&M)",                ID_START_MONITOR
         MENUITEM "停止监视(&P)",                    ID_STOP_MONITOR
         MENUITEM SEPARATOR
-        MENUITEM "打开日志文件(&O)...\tCtrl+O",       ID_OPEN_XLOG
-        MENUITEM "导出所有日志(&S)...\tCtrl+S",       ID_EXPORT_ALL
-        MENUITEM "导出当前过滤结果(&F)...",             ID_EXPORT_FILTERED
+        MENUITEM "打开文件(&O)...\tCtrl+O",         ID_OPEN_XLOG
+        POPUP "打开最近的文件(&L)"
+        BEGIN
+            MENUITEM "aaa",                         ID_40171
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "打开共享内存日志(&A)...",             ID_OPEN_SM_LOG
+        MENUITEM SEPARATOR
+        MENUITEM "保存所有日志(&S)...\tCtrl+S",       ID_EXPORT_ALL
+        MENUITEM "保存当前过滤结果(&F)...",             ID_EXPORT_FILTERED
         MENUITEM SEPARATOR
         MENUITEM "清除所有日志(&D)\tCtrl+X",          ID_CLEARALL
-        MENUITEM SEPARATOR
     END
     POPUP "查看(&V)"
     BEGIN
         MENUITEM "菜单栏(&1)\tF9",                 ID_VIEW_MENUBAR
+        MENUITEM "工具栏(&2)",                     ID_TOGGLE_TOOLBAR
         MENUITEM "快速过滤(&3)",                    ID_VIEW_SEARCHBAR
+        MENUITEM "状态栏(&4)",                     ID_TOGGLE_STATUSBAR
         MENUITEM SEPARATOR
         MENUITEM "显示网格线(&G)",                   ID_SHOW_GRIDLINE
-        MENUITEM "十六进制(&H)",                    ID_HEX
+        MENUITEM "以十六进制显示进程和线程ID(&H)",          ID_HEX
+        MENUITEM "显示绝对时间(&T)",                  ID_SHOW_ABS_TIME
         MENUITEM SEPARATOR
         MENUITEM "设置/取消书签(&M)\tCtrl+F2",        ID_TOGGLE_BOOKMARK
         MENUITEM "跳到下一个书签(&N)\tF2",             ID_NEXT_BOOKMARK
@@ -737,6 +809,7 @@ BEGIN
     POPUP "帮助(&H)"
     BEGIN
         MENUITEM "关于日志查看器(&A)",                 ID_ABOUT
+        MENUITEM "检查更新(&U)",                    ID_CHECK_UPDATE
     END
 END
 

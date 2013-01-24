@@ -54,7 +54,7 @@ private:
 	LRESULT OnLButtonUp(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/)
 	{
 		CColorDialog dlg(m_color);
-		if (dlg.DoModal(GetParent()) == IDOK)
+		if (dlg.DoModal(m_hWnd) == IDOK)
 		{
 			SetColor(dlg.GetColor());
 		}

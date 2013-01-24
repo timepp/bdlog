@@ -61,8 +61,9 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>version.lib;psapi.lib;rpcns4.lib;rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>version.lib;psapi.lib;rpcns4.lib;rpcrt4.lib;wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
+      <Profile>true</Profile>
     </Link>
     <Manifest>
       <AdditionalManifestFiles>$(bdlogroot)\thirdsrc\xpstyle.manifest;%(AdditionalManifestFiles)</AdditionalManifestFiles>
@@ -82,7 +83,7 @@
       <WarningLevel>EnableAllWarnings</WarningLevel>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>version.lib;psapi.lib;rpcns4.lib;rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>version.lib;psapi.lib;rpcns4.lib;rpcrt4.lib;wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -93,6 +94,7 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\bdlogview\aboutdlg.CPP" />
     <ClCompile Include="..\bdlogview\bdlogview_i.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
@@ -117,6 +119,8 @@
     <ClCompile Include="..\bdlogview\hilightermanagedlg.cpp" />
     <ClCompile Include="..\bdlogview\logcenter.cpp" />
     <ClCompile Include="..\bdlogview\logicvis.cpp" />
+    <ClCompile Include="..\bdlogview\optiondlg.cpp" />
+    <ClCompile Include="..\bdlogview\optpage.cpp" />
     <ClCompile Include="..\bdlogview\scripthost.cpp" />
     <ClCompile Include="..\bdlogview\simplefiltereditdlg.cpp" />
     <ClCompile Include="..\bdlogview\loginfodlg.cpp" />
@@ -131,6 +135,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\bdlogview\updater.cpp" />
     <ClCompile Include="..\bdlogview\vislogicdlg.cpp" />
   </ItemGroup>
   <ItemGroup>

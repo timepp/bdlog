@@ -74,6 +74,11 @@
 #define IDD_VISLOGIC                    168
 #define IDD_DIALOG2                     169
 #define IDD_RUNSCRIPT                   169
+#define IDD_SIMPLE_INPUT                170
+#define IDD_OPT_PERFMARK                171
+#define IDD_OPT_PERFMARK1               172
+#define IDD_OPT_SYSTEM                  172
+
 #define IDC_LIST                        1001
 #define IDC_APPLY                       1002
 #define IDC_CB_SHOW_CLASS               1003
@@ -87,6 +92,7 @@
 #define IDC_CHECK_REGEX                 1011
 #define IDC_CHECK_AUTO_MONITOR          1011
 #define IDC_CHECK_HILIGHT_ALL           1011
+#define IDC_CHECK_ENABLE_PERFMARK       1011
 #define IDC_EDIT_CLASS                  1012
 #define IDC_CHECK2                      1012
 #define IDC_CHECK_IGNORECASE            1012
@@ -147,6 +153,8 @@
 #define IDC_BUTTON_ADD_HL               1051
 #define IDC_BUTTON_BG                   1051
 #define IDC_QF_RESETFILTER              1051
+#define IDC_BUTTON_SHOW_VERSIONINFO     1051
+#define IDC_BUTTON_APPLY                1051
 #define IDC_COMBO_HILIGHTER             1052
 #define IDC_BUTTON_REF2                 1052
 #define IDC_BUTTON2                     1052
@@ -184,6 +192,11 @@
 #define IDC_SCROLLBAR                   1076
 #define IDC_STATIC_CANVAS               1077
 #define IDC_EDIT_SCRIPT                 1078
+#define IDC_TIP                         1079
+#define IDC_STATIC_OPTION_CLIENT        1081
+#define IDC_EDIT_MAX_OCCUPYTIME         1082
+#define IDC_STATIC_COLOR                1083
+#define IDC_EDIT                        1084
 #define ID_MAIN_ID                      40001
 #define ID_VIEW_DETAIL                  40002
 #define ID_MAIN_ABOUT                   40003
@@ -323,14 +336,33 @@
 #define ID_SHOW_VISUAL_LOGIC            40160
 #define ID_40161                        40161
 #define ID_RUN_SCRIPT                   40162
+#define ID_40163                        40163
+#define ID_40164                        40164
+#define ID_SHOW_RELATIME                40165
+#define ID_SHOW_ABS_TIME                40166
+#define ID_LIST40167                    40167
+#define ID_SET_TIME_BASE                40168
+#define ID_40169                        40169
+#define ID_40170                        40170
+#define ID_40171                        40171
+#define ID_40172                        40172
+#define ID_40173                        40173
+#define ID_TOGGLE_TOOLBAR               40174
+#define ID_TOGGLE_STATUSBAR             40175
+#define ID_40176                        40176
+#define ID_CHECK_UPDATE                 40177
+#define ID_40178                        40178
+#define ID_OPEN_SM_LOG                  40179
+#define ID_ACCELERATOR40180             40180
+#define ID_EXITAPP                      40181
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        170
-#define _APS_NEXT_COMMAND_VALUE         40163
-#define _APS_NEXT_CONTROL_VALUE         1079
+#define _APS_NEXT_RESOURCE_VALUE        173
+#define _APS_NEXT_COMMAND_VALUE         40182
+#define _APS_NEXT_CONTROL_VALUE         1085
 #define _APS_NEXT_SYMED_VALUE           107
 #endif
 #endif

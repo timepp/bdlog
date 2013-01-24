@@ -9,49 +9,24 @@
 #include "logicvis.h"
 #include "servicehelper.h"
 #include "scripthost.h"
+#include "updater.h"
 
 CAppModule _Module;
 HWND g_activeModlessDlg = NULL;
-
-static void UpdateThread(void*)
-{
-	CStringW strVersion = helper::GetLatestVersion();
-	CStringW strInfo;
-	if (!strVersion.IsEmpty() && strVersion != helper::GetVersion())
-	{
-		CStringW strDllPath = helper::GetModuleFilePath();
-
-		CStringW strErr = helper::UpdateSelf();
-		if (strErr.IsEmpty())
-		{
-			strInfo.Format(L"已升级到新版本: %s, \n重启后才能生效。", (LPCWSTR)strVersion);
-			MessageBox(NULL, strInfo, L"信息", MB_ICONINFORMATION|MB_OK);
-		}
-		else
-		{
-			strInfo.Format(L"升级失败: %s", (LPCWSTR)strErr);
-			MessageBox(NULL, strInfo, L"信息", MB_ICONWARNING|MB_OK);
-		}
-	}
-	else
-	{
-		strInfo.Format(L"最新版本为: %s, 您已是最新版本.", (LPCWSTR)strVersion);
-		//		MessageBox(NULL, strInfo, L"信息", MB_ICONINFORMATION|MB_OK);
-	}
-}
-
 
 int Run(LPTSTR /*lpstrCmdLine*/ = NULL, int nCmdShow = SW_SHOWDEFAULT)
 {
 	CMessageLoop theLoop;
 	CModlessDlgKeyProcessor mdkp;
 
+	Updater::NotifyNewVersion();
+
 	if (CConfig::Instance()->GetConfig().product_name.empty())
 	{
 		CFirsttimeDlg dlg;
 		dlg.DoModal();
 	}
-							
+
 	_Module.AddMessageLoop(&theLoop);
 	theLoop.AddMessageFilter(&mdkp);
 
@@ -68,10 +43,10 @@ int Run(LPTSTR /*lpstrCmdLine*/ = NULL, int nCmdShow = SW_SHOWDEFAULT)
 	g_mainframe.ShowWindow(nCmdShow);
 
 	// update thread
-	if (_time64(NULL) - CConfig::Instance()->GetConfig().syscfg.last_check_update_time > 86400 * 3)
+	if (_time64(NULL) - CConfig::Instance()->GetConfig().syscfg.last_check_update_time > 86400)
 	{
 		CConfig::Instance()->GetConfig().syscfg.last_check_update_time = _time64(NULL);
-	//	_beginthread(UpdateThread, 0, NULL);
+		Updater::CheckAndUpdate(TRUE);
 	}
 
 	int nRet = theLoop.Run();

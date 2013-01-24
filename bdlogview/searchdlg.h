@@ -45,6 +45,13 @@ public:
 		return text;
 	}
 
+	void WaitUserInput()
+	{
+		ShowWindow(SW_SHOW);
+		SetActiveWindow();
+		GetDlgItem(IDC_COMBO_TEXT).SetFocus();
+	}
+
 private:
 
 	CHistoryComboBox m_combo;
@@ -55,8 +62,7 @@ private:
 		m_combo.SubclassWindow(GetDlgItem(IDC_COMBO_TEXT));
 		m_combo.LoadHistory();
 
-		GetDlgItem(IDC_COMBO_TEXT).SetFocus();
-		return FALSE;
+		return TRUE;
 	}
 
 	void NotifySearch(BOOL searchNext)

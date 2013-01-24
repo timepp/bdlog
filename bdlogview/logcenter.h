@@ -33,6 +33,7 @@ public:
 
 	void ConnectPipe();
 	void ConnectFile(LPCWSTR pszPath);
+	void ConnectShareMemory(LPCWSTR name);
 	void Disconnect();
 	bool MonitoringPipe() const;
 
@@ -93,6 +94,10 @@ private:
 	// provider
 	bdlog::pipe_reader m_logPipeReader;
 	bdlog::file_reader m_logFileReader;
+	bdlog::sharememory_reader m_logShareMemoryReader;
+
+	// occupytime
+	std::map<bdlog::uint32_t, UINT64> m_lastLogInSameThread;
 
 	UINT64 m_logID;
 
@@ -103,7 +108,9 @@ private:
 	int m_notifyID;
 
 	bool m_autoEnablePipeDeviceFile;
+	CStringW m_cfgPathFile;
 	bool m_autoEnablePipeDeviceReg;
+	CStringW m_cfgPathReg;
 };
 
 DEFINE_SERVICE(CLogCenter, L"日志内容管理中心");

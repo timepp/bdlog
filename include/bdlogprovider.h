@@ -788,5 +788,135 @@ public:
 };
 
 
+class sharememory_reader : public log_reader, public log_source_support
+{
+private:
+	HANDLE m_worker_thread;
+	bool m_stop_flag;
+	std::wstring m_smname;
+	bdlog::log_listener* m_listener;
+
+public:
+	sharememory_reader() : m_stop_flag(true), m_worker_thread(NULL)
+	{
+
+	}
+
+	~sharememory_reader()
+	{
+		stop();
+	}
+
+	void setsmname(const wchar_t* name)
+	{
+		m_smname = name;
+	}
+
+	virtual void set_listener(log_listener* listener)
+	{
+		m_listener = listener;
+	}
+
+	virtual HRESULT start()
+	{
+		if (!m_stop_flag)
+		{
+			return S_FALSE;
+		}
+
+		m_stop_flag = false;
+		m_worker_thread = (HANDLE)_beginthreadex(NULL, 0, work_thread, this, 0, NULL);
+		return S_OK;
+	}
+
+	virtual HRESULT stop()
+	{
+		m_stop_flag = true;
+		if (m_worker_thread)
+		{
+			::WaitForSingleObject(m_worker_thread, INFINITE);
+			::CloseHandle(m_worker_thread);
+			m_worker_thread = NULL;
+		}
+		return S_OK;
+	}
+
+	virtual bool working() const
+	{
+		return !m_stop_flag;
+	}
+
+	virtual size_t source_count() const
+	{
+		if (!m_stop_flag) return 0;
+		return 1;
+	}
+
+	virtual lsi_vec_t get_sources() const
+	{
+		lsi_vec_t ret;
+		return ret;
+	}
+
+	static unsigned int __stdcall work_thread(void* param)
+	{
+		sharememory_reader* thisptr = reinterpret_cast<sharememory_reader*>(param);
+		thisptr->work_thread_internal();
+		thisptr->m_stop_flag = true;
+		return 0;
+	}
+
+	void work_thread_internal()
+	{
+		HANDLE hMapping = NULL;
+		LPVOID pData = NULL;
+
+		hMapping = ::OpenFileMappingW(FILE_MAP_READ, FALSE, m_smname.c_str());
+		if (!hMapping) goto thread_exit;
+
+		pData = ::MapViewOfFile(hMapping, FILE_MAP_READ, 0, 0, 0);
+		if (!pData) goto thread_exit;
+
+		LPBYTE pBuffer = (LPBYTE)pData;
+		UINT memSize = *(UINT*)pBuffer;
+		UINT elemCount = *(UINT*)(pBuffer + 4);
+		UINT elemSize = *(UINT*)(pBuffer + 8);
+		UINT head = *(UINT*)(pBuffer + 12);
+		UINT tail = *(UINT*)(pBuffer + 16);
+		pBuffer += 20;
+		if (elemSize == 0 || elemCount == 0 || head >= elemCount || tail >= elemCount || elemSize * elemCount >= memSize )
+		{
+			goto thread_exit;
+		}
+
+		for (UINT i = head; i != tail; i = (i+1) % elemCount)
+		{
+			if (m_stop_flag) break;
+
+			LPBYTE pRecord = pBuffer + i * elemSize;
+			INT64 tm_sec = *(INT64*)pRecord;
+			int tm_msec = *(int*)(pRecord + 8);
+			UINT threadID = *(UINT*)(pRecord + 12);
+			LPCWSTR content = (LPCWSTR)(pRecord + 16);
+
+			logitem* li = new logitem;
+			li->log_class = 0x25;
+			li->log_depth = 0;
+			li->log_index = 0;
+			li->log_content = content;
+			li->log_pid = 0;
+			li->log_tid = threadID;
+			li->log_time_sec = tm_sec;
+			li->log_time_msec = tm_msec;
+			
+			m_listener->on_new_log(li);
+		}
+
+thread_exit:
+		if (pData) ::UnmapViewOfFile(pData);
+		if (hMapping) ::CloseHandle(hMapping);
+	}
+};
+
 
 } // namespace bdlog

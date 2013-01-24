@@ -16,6 +16,10 @@ struct formatstr
 	{
 		return m_buffer;
 	}
+	operator std::wstring()
+	{
+		return std::wstring(m_buffer);
+	}
 private:
 	WCHAR m_buffer[1024];
 };
@@ -41,11 +45,13 @@ struct helper
 	static COLORREF XML_GetAttributeAsColor(IXMLDOMNode* pNode, LPCWSTR pszAttr, COLORREF crDefault);
 	static UINT XML_GetAttributeAsUint(IXMLDOMNode* pNode, LPCWSTR pszAttr, UINT uDefault);
 	static int XML_GetAttributeAsInt(IXMLDOMNode* pNode, LPCWSTR pszAttr, int uDefault);
+	static bool XML_GetAttributeAsBool(IXMLDOMNode* pNode, LPCWSTR pszAttr, bool bDefault);
 	static CComPtr<IXMLDOMNode> XML_CreateNode(IXMLDOMDocument* pDoc, int type, LPCWSTR pszName);
 
 	static bool XML_AddAttribute(IXMLDOMDocument* pDoc, IXMLDOMNode* pNode, LPCWSTR pszAttrName, LPCWSTR pszValue);
 	static bool XML_AddAttributeUint(IXMLDOMDocument* pDoc, IXMLDOMNode* pNode, LPCWSTR pszAttrName, UINT nVal);
 	static bool XML_AddAttributeInt(IXMLDOMDocument* pDoc, IXMLDOMNode* pNode, LPCWSTR pszAttrName, int nVal);
+	static bool XML_AddAttributeBool(IXMLDOMDocument* pDoc, IXMLDOMNode* pNode, LPCWSTR pszAttrName, bool bVal);
 	static bool XML_AddAttributeColor(IXMLDOMDocument* pDoc, IXMLDOMNode* pNode, LPCWSTR pszAttrName, COLORREF cr);
 
 
@@ -64,11 +70,16 @@ struct helper
 
 	static void RunOffline(LPCWSTR pszFilePath = NULL);
 
+	static CStringW IntVersionToString(UINT64 ver);
+	static UINT64 StringVersionToInt(CStringW ver);
+	static UINT64 GetFileVersion(LPCWSTR path);
+
 	static CStringW GetVersion();
 	static CStringW GetLatestVersion();
 	static CStringW UpdateSelf();
 
 	static bool FtpDownloadFile(LPCSTR pszHost, LPCSTR user, LPCSTR pass, LPCSTR remote_path, LPCSTR remote_file, LPCSTR local_file);
+	static bool DownloadUrlToFile(LPCWSTR url, LPCWSTR path);
 
 	static int parse_num(const wchar_t * start, int count, int radix);
 
@@ -88,6 +99,31 @@ struct helper
 	static void SplitTag(const wchar_t* tags, str_segment (&segs)[256]);
 
 	static bool MakeRequiredPath(LPCWSTR pcszPath);
+	static bool FileExists(LPCWSTR path);
+	static CString GetConfigDir();
+
+	static INT64 GetElapsedTime(const LogInfo& li1, const LogInfo& li2);
+
+	static COLORREF GetGradientColor(COLORREF c1, COLORREF c2, double ratio);
+
+	struct UI
+	{
+		static bool DlgItem_GetCheck(HWND hWnd, int ctrlid);
+		static void DlgItem_SetCheck(HWND hWnd, int ctrlid, bool val);
+		static CStringW DlgItem_GetText(HWND hWnd, int ctrlid);
+		static void DlgItem_SetText(HWND hWnd, int ctrlid, LPCWSTR text);
+	};
+};
+
+class CDlgItem : public CWindow
+{
+public:
+	CDlgItem(HWND hDlg, int ctrlid);
+
+	bool GetCheck();
+	void SetCheck(bool val);
+	CStringW GetText();
+	void SetText(LPCWSTR text);
 };
 
 struct GlobalData

@@ -61,7 +61,7 @@ public:
 
 	STDMETHOD(GetLogCenter)(IDispatch** ppObj)
 	{
-		return m_logCenter->QueryInterface(&ppObj);
+		return m_logCenter->QueryInterface(ppObj);
 	}
 };
 

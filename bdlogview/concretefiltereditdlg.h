@@ -8,7 +8,7 @@
 class CComponentConfigCommand
 {
 public:
-	virtual void Do(component* c) = 0;
+	virtual bool Do(component* c) = 0;
 	virtual ~CComponentConfigCommand(){}
 };
 
@@ -20,7 +20,7 @@ class CLogClassFilterEditDlg
 public:
 	enum {IDD = IDD_FILTER_EDIT_LOGCLASS};
 
-	virtual void Do(component* c);
+	virtual bool Do(component* c);
 
 	BEGIN_MSG_MAP(CLogClassFilterEditDlg)
 		MSG_WM_INITDIALOG(OnInitDialog)
@@ -46,7 +46,7 @@ class CLogContentFilterEditDlg
 public:
 	enum {IDD = IDD_FILTER_EDIT_LOGCONTENT};
 
-	virtual void Do(component* c);
+	virtual bool Do(component* c);
 
 	BEGIN_MSG_MAP(CLogContentFilterEditDlg)
 		MSG_WM_INITDIALOG(OnInitDialog)
@@ -70,7 +70,7 @@ class CLogTagFilterEditDlg
 public:
 	enum {IDD = IDD_FILTER_EDIT_LOGTAG};
 
-	virtual void Do(component* c);
+	virtual bool Do(component* c);
 
 	BEGIN_MSG_MAP(CLogTagFilterEditDlg)
 		MSG_WM_INITDIALOG(OnInitDialog)
@@ -96,7 +96,7 @@ class CLogProcessNameFilterEditDlg
 public:
 	enum {IDD = IDD_FILTER_EDIT_PROCESSNAME};
 
-	virtual void Do(component* c);
+	virtual bool Do(component* c);
 
 	BEGIN_MSG_MAP(CLogProcessNameFilterEditDlg)
 		MSG_WM_INITDIALOG(OnInitDialog)
@@ -121,7 +121,7 @@ class CLogPIDFilterEditDlg
 public:
 	enum {IDD = IDD_FILTER_EDIT_PID};
 
-	virtual void Do(component* c);
+	virtual bool Do(component* c);
 
 	BEGIN_MSG_MAP(CLogPIDFilterEditDlg)
 		MSG_WM_INITDIALOG(OnInitDialog)
@@ -149,7 +149,7 @@ class CLogTIDFilterEditDlg
 public:
 	enum {IDD = IDD_FILTER_EDIT_TID};
 
-	virtual void Do(component* c);
+	virtual bool Do(component* c);
 
 	BEGIN_MSG_MAP(CLogTIDFilterEditDlg)
 		MSG_WM_INITDIALOG(OnInitDialog)

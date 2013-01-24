@@ -50,6 +50,7 @@ BD_NO_WARNING_AREA_BEGIN()
 
 #include <string>
 #include <vector>
+#include <list>
 #include <map>
 #include <set>
 #include <deque>
@@ -62,5 +63,7 @@ BD_TUNE_WARNINGS
 #include <tplib/include/auto_release.h>
 #include <tplib/include/format_shim.h>
 #include <tplib/include/service.h>
+
+#include "common.h"
 
 #define SERVICE(x) tp::servicemgr::get<x>()

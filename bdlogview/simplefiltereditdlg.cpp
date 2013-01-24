@@ -191,7 +191,7 @@ filter* CSimpleFilterEditDlg::GetFilter() const
 		GetDlgItem(IDC_EDIT_LOGCONTENT).GetWindowTextW(strText);
 		if (strText.GetLength() > 0)
 		{
-			f->add_child(new logcontent_filter((LPCWSTR)strText, true));
+			f->add_child(new logcontent_filter((LPCWSTR)strText, true, false));
 		}
 	}
 

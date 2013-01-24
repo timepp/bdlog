@@ -5,6 +5,7 @@
 #include <atlsync.h>
 #include "config.h"
 #include "servicehelper.h"
+#include <wininet.h>
 
 GlobalData GD;
 
@@ -123,6 +124,12 @@ int helper::XML_GetAttributeAsInt(IXMLDOMNode* pNode, LPCWSTR pszAttr, int nDefa
 	}
 }
 
+bool helper::XML_GetAttributeAsBool(IXMLDOMNode* pNode, LPCWSTR pszAttr, bool bDefault)
+{
+	int v = XML_GetAttributeAsInt(pNode, pszAttr, bDefault?1:0);
+	return v == 1? true : false;
+}
+
 COLORREF helper::XML_GetAttributeAsColor(IXMLDOMNode* pNode, LPCWSTR pszAttr, COLORREF crDefault)
 {
 	CStringW strVal = XML_GetAttributeAsString(pNode, pszAttr, L"");
@@ -171,6 +178,10 @@ bool helper::XML_AddAttributeInt(IXMLDOMDocument* pDoc, IXMLDOMNode* pNode, LPCW
 	CStringW strVal;
 	strVal.Format(L"%d", nVal);
 	return XML_AddAttribute(pDoc, pNode, pszAttrName, strVal);
+}
+bool helper::XML_AddAttributeBool(IXMLDOMDocument* pDoc, IXMLDOMNode* pNode, LPCWSTR pszAttrName, bool bVal)
+{
+	return XML_AddAttributeInt(pDoc, pNode, pszAttrName, bVal?1:0);
 }
 bool helper::XML_AddAttributeColor(IXMLDOMDocument* pDoc, IXMLDOMNode* pNode, LPCWSTR pszAttrName, COLORREF cr)
 {
@@ -439,29 +450,29 @@ void helper::RunOffline(LPCWSTR pszFilePath)
 	ShellExecute(NULL, L"open", GetModuleFilePath(), strPath, GetModuleDir(), SW_SHOW);
 }
 
-CStringW helper::GetVersion()
+UINT64 helper::GetFileVersion(LPCWSTR path)
 {
-	CStringW strDllPath = GetModuleFilePath();
-	DWORD dwSize = GetFileVersionInfoSizeW(strDllPath, NULL);
+	DWORD dwSize = GetFileVersionInfoSizeW(path, NULL);
 	CAutoVectorPtr<char> buf;
 	buf.Allocate(dwSize);
-	if (!GetFileVersionInfoW(strDllPath, 0, dwSize, buf))
+	if (!GetFileVersionInfoW(path, 0, dwSize, buf))
 	{
-		return L"";
+		return 0;
 	}
 
 	VS_FIXEDFILEINFO* pInfo = NULL;
 	unsigned int nInfoLen;
 	if (!VerQueryValue(buf, _T( "\\" ), (LPVOID*)&pInfo, &nInfoLen) || !pInfo)
 	{
-		return L"";
+		return 0;
 	}
-	
-	CStringW strVersion;
-	strVersion.Format(L"%d.%d.%d.%d", 
-		pInfo->dwFileVersionMS >> 16, pInfo->dwFileVersionMS & 0xFFFF,
-		pInfo->dwFileVersionLS >> 16, pInfo->dwFileVersionLS & 0xFFFF);
-	return strVersion;
+
+	return (UINT64(pInfo->dwFileVersionMS) << 32) + pInfo->dwFileVersionLS;
+}
+
+CStringW helper::GetVersion()
+{
+	return IntVersionToString(GetFileVersion(GetModuleFilePath()));
 }
 
 bool helper::FtpDownloadFile(LPCSTR pszHost, LPCSTR user, LPCSTR pass, LPCSTR remote_path, LPCSTR remote_file, LPCSTR local_file)
@@ -492,56 +503,6 @@ bool helper::FtpDownloadFile(LPCSTR pszHost, LPCSTR user, LPCSTR pass, LPCSTR re
 	WaitForSingleObject(ei.hProcess, 5000);
 
 	return true;
-}
-
-CStringW helper::GetLatestVersion()
-{
-	CStringW strDir = GetModuleDir();
-	::DeleteFileW(strDir + L"\\log_fgui.ver");
-
-	FtpDownloadFile("win.baidu.com", "tmp", "tmp", "/incoming/timepp", "log_fgui.ver", "log_fgui.ver");
-
-	CStringW strVersion;
-	HANDLE hFile = CreateFile(strDir + L"\\log_fgui.ver", GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
-	if (hFile != INVALID_HANDLE_VALUE)
-	{
-		char buf[1024];
-		DWORD dwBytesRead = 0;
-		memset(buf, 0, sizeof(buf));
-		BOOL ret = ReadFile(hFile, buf, 100, &dwBytesRead, NULL);
-		if (!ret)
-		{
-			strVersion = L"0";
-		}
-		CloseHandle(hFile);
-		strVersion = buf;
-	}
-	strVersion.TrimRight(L" \r\n\t");
-
-	//return strVersion;
-	return GetVersion();
-}
-
-CStringW helper::UpdateSelf()
-{
-	CStringW strDir = GetModuleDir();
-	CStringW strDll = GetModuleFilePath();
-	if (!FtpDownloadFile("win.baidu.com", "tmp", "tmp", "/incoming/timepp", "log_fgui.dll", "log_fgui.dll.new"))
-	{
-		return L"下载文件失败";
-	}
-
-	if (!MoveFileEx(strDll, strDll + L".old", MOVEFILE_COPY_ALLOWED|MOVEFILE_REPLACE_EXISTING))
-	{
-		return L"dll文件备份失败";
-	}
-	if (!MoveFileEx(strDll + L".new", strDll, MOVEFILE_COPY_ALLOWED|MOVEFILE_REPLACE_EXISTING))
-	{
-		MoveFileEx(strDll + L".old", strDll, MOVEFILE_COPY_ALLOWED|MOVEFILE_REPLACE_EXISTING);
-		return L"dll文件改名失败";
-	}
-
-	return L"";
 }
 
 int helper::parse_num(const wchar_t * start, int count, int radix)
@@ -799,4 +760,117 @@ bool helper::MakeRequiredPath(LPCWSTR pcszPath)
 	}
 
 	return bRet? true: false;
+}
+
+bool helper::FileExists(LPCWSTR path)
+{
+	return _waccess_s(path, 0) == 0;
+}
+
+CStringW helper::GetConfigDir()
+{
+	CStringW strPath;
+
+	WCHAR szPath[MAX_PATH];
+	SHGetFolderPathW(NULL, CSIDL_APPDATA, NULL, SHGFP_TYPE_CURRENT, szPath);
+	strPath = szPath;
+
+	strPath += L"\\Baidu";
+	::CreateDirectoryW(strPath, NULL);
+	return strPath;
+}
+
+bool helper::DownloadUrlToFile(LPCWSTR url, LPCWSTR path)
+{
+	HINTERNET hnet = ::InternetOpen(NULL, INTERNET_OPEN_TYPE_PRECONFIG, NULL, NULL, 0);
+	if (!hnet) return false;
+	ON_LEAVE_1(::InternetCloseHandle(hnet), HINTERNET, hnet);
+
+	HINTERNET hurl = ::InternetOpenUrlW(hnet, url, NULL, 0, INTERNET_FLAG_RELOAD, 0);
+	if (!hurl) return false;
+	ON_LEAVE_1(::InternetCloseHandle(hurl), HINTERNET, hurl);
+
+	HANDLE hFile = ::CreateFileW(path, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+	if (hFile == INVALID_HANDLE_VALUE) return false;
+	ON_LEAVE_1(::CloseHandle(hFile), HANDLE, hFile);
+
+	CHAR buffer[4096];
+	DWORD bytesRead;
+	do {
+		bytesRead = 0;
+		DWORD bytesWrite = 0;
+		BOOL bRet = ::InternetReadFile(hurl, (LPVOID)buffer, _countof(buffer), &bytesRead);
+		if (!bRet) break;
+		::WriteFile(hFile, buffer, bytesRead, &bytesWrite, NULL);
+	} while (bytesRead > 0);
+
+	return true;
+}
+
+UINT64 helper::StringVersionToInt(CStringW ver)
+{
+	UINT a,b,c,d;
+	swscanf_s(ver, L"%u.%u.%u.%u", &a, &b, &c, &d);
+	UINT32 h = (a << 16) + b;
+	UINT32 l = (c << 16) + d;
+	return ((UINT64)h << 32) + l;
+}
+
+CStringW helper::IntVersionToString(UINT64 ver)
+{
+	UINT32 h = static_cast<UINT32>(ver >> 32);
+	UINT32 l = static_cast<UINT32>(ver & 0xFFFFFFFF);
+	CStringW ret;
+	ret.Format(L"%u.%u.%u.%u", HIWORD(h), LOWORD(h), HIWORD(l), LOWORD(l));
+	return ret;
+}
+
+INT64 helper::GetElapsedTime(const LogInfo& li1, const LogInfo& li2)
+{
+	return accutime(li2.item->log_time_sec, li2.item->log_time_msec) - accutime(li1.item->log_time_sec, li1.item->log_time_msec);
+}
+
+COLORREF helper::GetGradientColor(COLORREF c1, COLORREF c2, double ratio)
+{
+	int r1 = GetRValue(c1);
+	int b1 = GetBValue(c1);
+	int g1 = GetGValue(c1);
+	int r2 = GetRValue(c2);
+	int b2 = GetBValue(c2);
+	int g2 = GetGValue(c2);
+	
+	if (ratio > 1) ratio = 1;
+
+	int r = r1 + static_cast<int>((r2 - r1) * ratio);
+	int g = g1 + static_cast<int>((g2 - g1) * ratio);
+	int b = b1 + static_cast<int>((b2 - b1) * ratio);
+
+	return RGB(r, g, b);
+}
+
+CDlgItem::CDlgItem(HWND hDlg, int ctrlid)
+{
+	m_hWnd = ::GetDlgItem(hDlg, ctrlid);
+}
+
+bool CDlgItem::GetCheck()
+{
+	return SendMessage(BM_GETCHECK, 0, 0L) == BST_CHECKED;
+}
+
+void CDlgItem::SetCheck(bool val)
+{
+	SendMessage(BM_SETCHECK, WPARAM(val? BST_CHECKED : BST_UNCHECKED), 0L);
+}
+
+CStringW CDlgItem::GetText()
+{
+	CStringW text;
+	GetWindowText(text);
+	return text;
+}
+
+void CDlgItem::SetText(LPCWSTR text)
+{
+	SetWindowText(text);
 }

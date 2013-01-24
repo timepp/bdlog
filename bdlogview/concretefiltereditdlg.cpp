@@ -3,10 +3,10 @@
 #include "helper.h"
 #include "servicehelper.h"
 
-void CLogClassFilterEditDlg::Do(component* c)
+bool CLogClassFilterEditDlg::Do(component* c)
 {
 	m_filter = dynamic_cast<logclass_filter*>(c);
-	DoModal();
+	return DoModal() == IDOK;
 }
 
 LRESULT CLogClassFilterEditDlg::OnInitDialog(HWND /*hwndFocus*/, LPARAM /*lp*/)
@@ -75,10 +75,10 @@ void CLogClassFilterEditDlg::SetLogClass(int comboID, UINT c)
 	}
 }
 
-void CLogContentFilterEditDlg::Do(component* c)
+bool CLogContentFilterEditDlg::Do(component* c)
 {
 	m_filter = dynamic_cast<logcontent_filter*>(c);
-	DoModal();
+	return DoModal() == IDOK;
 }
 
 LRESULT CLogContentFilterEditDlg::OnOK(WORD , WORD , HWND , BOOL& )
@@ -87,7 +87,15 @@ LRESULT CLogContentFilterEditDlg::OnOK(WORD , WORD , HWND , BOOL& )
 	GetDlgItemText(IDC_EDIT_LOGCONTENT, text);
 	CButton btn((HWND)GetDlgItem(IDC_CHECK_IGNORECASE));
 	bool ics = (btn.GetCheck() == 1);
-	m_filter->setfilter((LPCWSTR)text, ics);
+	CButton btn2((HWND)GetDlgItem(IDC_CHECK_REGEX));
+	bool use_regex = (btn2.GetCheck() == 1);
+	
+	if (!m_filter->setfilter((LPCWSTR)text, ics, use_regex))
+	{
+		::MessageBoxW(m_hWnd, L"正则表达式解析错误，请检查。", L"错误", MB_ICONWARNING|MB_OK);
+		return 0;
+	}
+
 	EndDialog(IDOK);
 	return 0;
 }
@@ -105,6 +113,10 @@ LRESULT CLogContentFilterEditDlg::OnInitDialog(HWND /*hwndFocus*/, LPARAM /*lp*/
 	{
 		GetDlgItem(IDC_CHECK_IGNORECASE).SendMessageW(BM_SETCHECK, 1);
 	}
+	if (m_filter->m_use_regex)
+	{
+		GetDlgItem(IDC_CHECK_REGEX).SendMessageW(BM_SETCHECK, 1);
+	}
 	CenterWindow();
 	
 	return 0;
@@ -112,10 +124,10 @@ LRESULT CLogContentFilterEditDlg::OnInitDialog(HWND /*hwndFocus*/, LPARAM /*lp*/
 
 
 
-void CLogTagFilterEditDlg::Do(component* c)
+bool CLogTagFilterEditDlg::Do(component* c)
 {
 	m_filter = dynamic_cast<logtag_filter*>(c);
-	DoModal();
+	return DoModal() == IDOK;
 }
 
 LRESULT CLogTagFilterEditDlg::OnOK(WORD , WORD , HWND , BOOL& )
@@ -143,10 +155,10 @@ LRESULT CLogTagFilterEditDlg::OnInitDialog(HWND /*hwndFocus*/, LPARAM /*lp*/)
 	return 0;
 }
 
-void CLogProcessNameFilterEditDlg::Do(component* c)
+bool CLogProcessNameFilterEditDlg::Do(component* c)
 {
 	m_filter = dynamic_cast<logprocessname_filter*>(c);
-	DoModal();
+	return DoModal() == IDOK;
 }
 
 LRESULT CLogProcessNameFilterEditDlg::OnOK(WORD , WORD , HWND , BOOL& )
@@ -172,10 +184,10 @@ LRESULT CLogProcessNameFilterEditDlg::OnInitDialog(HWND /*hwndFocus*/, LPARAM /*
 }
 
 
-void CLogPIDFilterEditDlg::Do(component* c)
+bool CLogPIDFilterEditDlg::Do(component* c)
 {
 	m_filter = dynamic_cast<logpid_filter*>(c);
-	DoModal();
+	return DoModal() == IDOK;
 }
 
 LRESULT CLogPIDFilterEditDlg::OnOK(WORD , WORD , HWND , BOOL& )
@@ -203,10 +215,10 @@ LRESULT CLogPIDFilterEditDlg::OnInitDialog(HWND /*hwndFocus*/, LPARAM /*lp*/)
 }
 
 
-void CLogTIDFilterEditDlg::Do(component* c)
+bool CLogTIDFilterEditDlg::Do(component* c)
 {
 	m_filter = dynamic_cast<logtid_filter*>(c);
-	DoModal();
+	return DoModal() == IDOK;
 }
 
 LRESULT CLogTIDFilterEditDlg::OnOK(WORD , WORD , HWND , BOOL& )

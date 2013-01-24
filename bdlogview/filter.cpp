@@ -4,6 +4,7 @@
 #include "concretefilter.h"
 #include "logpropdb.h"
 
+
 #define SAVE_UNSTABLE_FILTER
 
 namespace 
@@ -126,16 +127,30 @@ std::wstring logcontent_filter::name() const
 }	
 std::wstring logcontent_filter::desc() const
 {
-	std::wstring str = L"日志内容包含" + quote(m_matcher);
-	if (m_ignore_case) str += L"(忽略大小写)";
+	std::wstring str;
+	if (m_use_regex)
+	{
+		str = L"日志内容匹配正则表达式" + quote(m_matcher);
+	}
+	else
+	{
+		str = L"日志内容包含" + quote(m_matcher);
+	}
+
+	if (m_ignore_case) str += L"  (忽略大小写)";
 	return str;
 }
 component* logcontent_filter::clone(bool) const
 {
-	return new logcontent_filter(m_matcher, m_ignore_case);
+	return new logcontent_filter(m_matcher, m_ignore_case, m_use_regex);
 }
 bool logcontent_filter::meet(const LogInfo& log) const
 {
+	if (m_use_regex)
+	{
+		CAtlREMatchContext<CAtlRECharTraits> context;
+		return m_regexp.Match(log.item->log_content.c_str(), &context)? true:false;
+	}
 	if (m_ignore_case)
 	{
 		return helper::wcsistr(log.item->log_content.c_str(), m_matcher.c_str()) != NULL;
@@ -148,23 +163,28 @@ bool logcontent_filter::meet(const LogInfo& log) const
 
 bool logcontent_filter::load(component_creator* /*cc*/, serializer* s)
 {
-	int cs = 0;
 	m_matcher = s->get_property(L"matcher");
-	swscanf_s(s->get_property(L"ignorecase").c_str(), L"%d", &cs);
-	m_ignore_case = (cs == 1);
+	int tmp = 0;
+	swscanf_s(s->get_property(L"ignorecase").c_str(), L"%d", &tmp);
+	m_ignore_case = (tmp == 1);
+	tmp = 0;
+	swscanf_s(s->get_property(L"useregex").c_str(), L"%d", &tmp);
+	m_use_regex = (tmp == 1);
 
-	m_matcher_lowercase = lowercase(m_matcher);
+	if (m_use_regex)
+	{
+		m_regexp.Parse(m_matcher.c_str(), m_ignore_case);
+	}
+
 	return true;
 }
 bool logcontent_filter::save(component_creator* /*cc*/, serializer* s) const
 {
-	wchar_t buf[32];
 	serializer* mys = s->add_child(classname());
 
 	mys->set_property(L"matcher", m_matcher.c_str());
-
-	swprintf_s(buf, L"%d", m_ignore_case? 1: 0);
-	mys->set_property(L"ignorecase", buf);
+	mys->set_property(L"ignorecase", formatstr(L"%d", m_ignore_case? 1: 0));
+	mys->set_property(L"useregex", formatstr(L"%d", m_use_regex? 1: 0));
 
 	return true;
 }
@@ -178,31 +198,32 @@ int logcontent_filter::compare(const leaf* f) const
 {
 	const logcontent_filter* rhs = dynamic_cast<const logcontent_filter*>(f);
 
-	return value_compare(m_ignore_case, rhs->m_ignore_case, m_matcher, rhs->m_matcher);
+	return value_compare(m_ignore_case, rhs->m_ignore_case, m_matcher, rhs->m_matcher, m_use_regex, rhs->m_use_regex);
 }
 
-void logcontent_filter::setfilter(const std::wstring& matcher, bool cs)
+bool logcontent_filter::setfilter(const std::wstring& matcher, bool ignore_case, bool use_regex)
 {
 	m_matcher = matcher;
-	m_ignore_case = cs;
-	m_matcher_lowercase = lowercase(matcher);
-}
-
-logcontent_filter::logcontent_filter(const std::wstring& matcher, bool cs) : m_matcher(matcher), m_ignore_case(cs)
-{
-	m_matcher_lowercase = lowercase(matcher);
-}
-
-
-std::wstring logcontent_filter::lowercase(const std::wstring str)
-{
-	std::wstring ret = str;
-	for (size_t i = 0; i < ret.length(); i++)
+	m_ignore_case = ignore_case;
+	m_use_regex = use_regex;
+	if (m_use_regex)
 	{
-		ret[i] = static_cast<wchar_t>(tolower(ret[i]));
+		ATL::REParseError ret = m_regexp.Parse(matcher.c_str(), m_ignore_case);
+		return (ret == REPARSE_ERROR_OK);
 	}
-	return ret;
+
+	return true;
 }
+
+logcontent_filter::logcontent_filter(const std::wstring& matcher, bool ignore_case, bool use_regex) 
+: m_matcher(matcher), m_ignore_case(ignore_case), m_use_regex(use_regex)
+{
+	if (m_use_regex)
+	{
+		m_regexp.Parse(matcher.c_str(), m_ignore_case);
+	}
+}
+
 
 logtag_filter::logtag_filter(const std::wstring& tag)
 {

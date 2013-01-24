@@ -100,6 +100,18 @@
     <ClCompile Include="..\bdlogview\bdlogview_p.c">
       <Filter>Scripting</Filter>
     </ClCompile>
+    <ClCompile Include="..\bdlogview\aboutdlg.CPP">
+      <Filter>Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\bdlogview\optiondlg.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\bdlogview\optpage.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\bdlogview\updater.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\bdlogview\helper.h">

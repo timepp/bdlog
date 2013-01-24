@@ -44,6 +44,13 @@ struct config
 			std::wstring logfile;
 			std::wstring filter;
 		} savedpath;
+		strlist_t recent_files;
+		struct
+		{
+			bool enable;
+			COLORREF mark_color;
+			int maxinterval;
+		} perfmark;
 	} ui;
 
 	struct sys_cfg

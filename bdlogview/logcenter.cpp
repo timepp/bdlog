@@ -43,8 +43,11 @@ void CLogCenter::ConnectPipe()
 {
 	Disconnect();
 
+	m_cfgPathFile = helper::ExpandPath(BSP_BDXLOG_INI);
+	m_cfgPathReg = CStringW(L"Software\\Baidu\\BDLOG\\") + helper::GetProductName();
 	m_autoEnablePipeDeviceFile = EnablePipeDeviceFile(true);
 	m_autoEnablePipeDeviceReg = EnablePipeDeviceReg(true);
+
 	m_logPipeReader.set_listener(this);
 	m_logPipeReader.start();
 
@@ -78,12 +81,33 @@ void CLogCenter::ConnectFile(LPCWSTR pszPath)
 	m_timerID = ::SetTimer(NULL, 0, 500, &CLogCenter::TimerProc);
 }
 
+void CLogCenter::ConnectShareMemory(LPCWSTR name)
+{
+	Disconnect();
+
+	m_logShareMemoryReader.set_listener(this);
+	m_logShareMemoryReader.setsmname(name);
+	m_logShareMemoryReader.start();
+
+	{
+		CAutoCriticalSection cs(m_csListener);
+		for (ListenerList::iterator it = m_listeners.begin(); it != m_listeners.end(); ++it)
+		{
+			(*it)->OnConnect();
+		}
+	}
+
+	m_timerID = ::SetTimer(NULL, 0, 500, &CLogCenter::TimerProc);
+}
+
 void CLogCenter::Disconnect()
 {
 	m_logFileReader.stop();
 	m_logFileReader.set_listener(NULL);
 	m_logPipeReader.stop();
 	m_logPipeReader.set_listener(NULL);
+	m_logShareMemoryReader.stop();
+	m_logShareMemoryReader.set_listener(NULL);
 
 	{
 			CAutoCriticalSection cs(m_csListener);
@@ -159,12 +183,30 @@ void CLogCenter::MergeBuffer()
 				LogInfo* li = new LogInfo;
 				li->logid = m_logID++;
 				li->item = *it;
+				li->occupytime = 0;
 				m_logDB.push_back(li);
 			}
 			m_buffer.clear();
 		}
 
 		newrange.idmax = m_logID;
+
+		// 更新occupytime
+		for (UINT64 i = newrange.idmin; i < newrange.idmax; i++)
+		{
+			LogInfo* li = GetLog(i);
+			std::map<bdlog::uint32_t, UINT64>::iterator it = m_lastLogInSameThread.find(li->item->log_tid);
+			if (it == m_lastLogInSameThread.end())
+			{
+				m_lastLogInSameThread[li->item->log_tid] = i;
+			}
+			else
+			{
+				LogInfo* lastli = GetLog(it->second);
+				lastli->occupytime = helper::GetElapsedTime(*lastli, *li);
+				it->second = i;
+			}
+		}
 		
 		if (newrange.idmin < newrange.idmax)
 		{
@@ -235,12 +277,11 @@ void CLogCenter::UnlockLog()
 
 bool CLogCenter::EnablePipeDeviceFile(bool bEnable)
 {
-	CStringW strXlogPath = helper::ExpandPath(BSP_BDXLOG_INI);
-	helper::WriteFileIfNotExist(strXlogPath, MAKEINTRESOURCEW(IDR_BDXLOG_INI), L"PDATA");
+	helper::WriteFileIfNotExist(m_cfgPathFile, MAKEINTRESOURCEW(IDR_BDXLOG_INI), L"PDATA");
 
 	CStringW desiredEnableString = bEnable? L"enable:true" : L"enable:false";
 	WCHAR buffer[4096];
-	::GetPrivateProfileStringW(L"LOG_CONFIG", L"ld_pipe", L"", buffer, _countof(buffer), strXlogPath);
+	::GetPrivateProfileStringW(L"LOG_CONFIG", L"ld_pipe", L"", buffer, _countof(buffer), m_cfgPathFile);
 	CStringW bufR = buffer;
 	CStringW bufW = buffer;
 	bufR.MakeLower();
@@ -258,7 +299,7 @@ bool CLogCenter::EnablePipeDeviceFile(bool bEnable)
 
 	if (bufW.Compare(buffer) != 0)
 	{
-		::WritePrivateProfileStringW(L"LOG_CONFIG", L"ld_pipe", bufW, strXlogPath);
+		::WritePrivateProfileStringW(L"LOG_CONFIG", L"ld_pipe", bufW, m_cfgPathFile);
 		return true;
 	}
 
@@ -270,8 +311,7 @@ bool CLogCenter::EnablePipeDeviceReg(bool bEnable)
 	CStringW desiredEnableString = bEnable? L"enable:true" : L"enable:false";
 
 	HKEY hKey = NULL;
-	CStringW path = CStringW(L"Software\\Baidu\\BDLOG\\") + helper::GetProductName();
-	::RegCreateKeyExW(HKEY_CURRENT_USER, path, 0, NULL, 0, KEY_QUERY_VALUE|KEY_SET_VALUE, NULL, &hKey, NULL);
+	::RegCreateKeyExW(HKEY_CURRENT_USER, m_cfgPathReg, 0, NULL, 0, KEY_QUERY_VALUE|KEY_SET_VALUE, NULL, &hKey, NULL);
 	if (!hKey)
 	{
 		helper::GUIReportError(L"从注册表修改pipe设备的配置失败");
@@ -340,7 +380,11 @@ bdlog::lsi_vec_t CLogCenter::get_sources() const
 
 void CLogCenter::ClearAllLog()
 {
+	CAutoCriticalSection cs(m_csLogDB);
+
+	m_lastLogInSameThread.clear();
 	ClearOldLog((UINT64)-1);
+	m_logID = 1;
 }
 
 void CLogCenter::ClearOldLog(UINT64 logid)

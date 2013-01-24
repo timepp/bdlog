@@ -18,6 +18,10 @@
 #include <Strsafe.h>
 #include "vislogicdlg.h"
 #include "servicehelper.h"
+#include "filtercreator.h"
+#include "updater.h"
+#include "optiondlg.h"
+#include "simpleinputdlg.h"
 #include "runscriptdlg.h"
 
 extern CAppModule _Module;
@@ -36,14 +40,17 @@ extern HANDLE g_pipe;
 	cs.Enter(); \
 	ON_LEAVE_1(cs.Leave(), CCriticalSection&, cs)
 
+#define KEY_IS_DOWN(vk) ((GetKeyState(vk) & 0x8000) != 0)
+
 CMainFrame::CMainFrame()
 : m_bShowToolbar(true)
 , m_bShowStatusbar(true)
 , m_cfg(CConfig::Instance()->GetConfig())
 , m_functionBegin(-1)
 , m_functionEnd(-1)
+, m_isHex(false)
+, m_showAbsTime(true)
 {
-	m_isHex = false;
 }
 
 void CMainFrame::CreateReBar()
@@ -104,7 +111,7 @@ void CMainFrame::CreateReBar()
 	m_rebar = m_hWndToolBar;
 
 	UIAddToolBar(m_toolbar);
-	UISetCheck(ID_VIEW_TOOLBAR, true);
+	UISetCheck(ID_TOGGLE_TOOLBAR, true);
 }
 
 void CMainFrame::CreateStatusBar()
@@ -116,9 +123,11 @@ void CMainFrame::CreateStatusBar()
 	m_wndStatusbar.SetPaneText(ID_PANE_FILTERED_LOGCOUNT, L"显示:0");
 	m_wndStatusbar.SetPaneText(ID_PANE_WORKTHREAD_COUNT, L"日志源:0");
 
+	m_filterIcon = AtlLoadIconImage(IDI_FILTER, LR_DEFAULTCOLOR, 16, 16);
+
 	m_hWndStatusBar = m_wndStatusbar;
 	UIAddStatusBar(m_hWndStatusBar);
-	UISetCheck(ID_VIEW_STATUS_BAR, true);
+	UISetCheck(ID_TOGGLE_STATUSBAR, true);
 }
 
 void CMainFrame::CreateList()
@@ -144,9 +153,10 @@ void CMainFrame::CreateList()
 	{
 		L"", 20,
 		L"序号", 60, 
-		L"时间", 90,
+		L"时间", 110,
+		L"间隔(us)", 60,
 		L"级别", 40,
-		L"进程", 130,
+		L"进程", 150,
 		L"线程", 50,
 		L"内容", 600,
 	};
@@ -178,9 +188,22 @@ LRESULT CMainFrame::OnCreate( LPCREATESTRUCTW /*cs*/ )
 	m_filterDlg.Create(m_hWnd);
 	UpdateUI();
 
-	CMenu mu = GetSystemMenu(FALSE);
+	CMenuHandle mu = GetSystemMenu(FALSE);
 	mu.InsertMenu(0, MF_BYPOSITION|MF_SEPARATOR, 0U, L"");
 	mu.InsertMenu(0, MF_BYPOSITION|MF_STRING, ID_VIEW_MENUBAR, L"显示/隐藏菜单\tF9");
+
+	CMenuHandle mainMenu = m_cmdbar.GetMenu();
+	CMenuHandle fileMenu = mainMenu.GetSubMenu(0);
+	for (int i = 0; i < 100; i++)
+	{
+		if (fileMenu.GetMenuItemID(i) == ID_OPEN_XLOG)
+		{
+			m_mru = fileMenu.GetSubMenu(i+1);
+			break;
+		}
+	}
+
+	UpdateMRU();
 
 	CMessageLoop* pLoop = _Module.GetMessageLoop();
 	pLoop->AddMessageFilter(this);
@@ -192,6 +215,7 @@ LRESULT CMainFrame::OnCreate( LPCREATESTRUCTW /*cs*/ )
 
 	ServiceHelper::GetLogCenter()->AddListener(this);
 
+	m_filterIndicator = AtlLoadIconImage(IDI_FILTER, LR_DEFAULTCOLOR, 16, 16);
 	if (CConfig::Instance()->GetConfig().first_time_run)
 	{
 		PostMessage(WM_USER_FIRST_TIME_RUN);
@@ -250,7 +274,7 @@ void CMainFrame::UpdateUI()
 	UISetCheck(ID_VIEW_MENUBAR, ui.placement.show_menubar);
 
 	rebar.ShowBand(rebar.IdToIndex(ATL_IDW_BAND_FIRST + 1), ui.placement.show_toolbar);
-	UISetCheck(ID_VIEW_TOOLBAR, ui.placement.show_toolbar);
+	UISetCheck(ID_TOGGLE_TOOLBAR, ui.placement.show_toolbar);
 
 	rebar.ShowBand(rebar.IdToIndex(ATL_IDW_BAND_FIRST + 2), ui.placement.show_filterbar);
 	UISetCheck(ID_VIEW_SEARCHBAR, ui.placement.show_filterbar);
@@ -373,9 +397,15 @@ LRESULT CMainFrame::OnUserFirstTimeRun(UINT /*uMsg*/, WPARAM /*wp*/, LPARAM /*lp
 
 LRESULT CMainFrame::OnEditXlogIni(WORD, WORD, HWND, BOOL&)
 {
-	CStringW strXlogPath = helper::ExpandPath(BSP_BDXLOG_INI);
-	helper::WriteFileIfNotExist(strXlogPath, MAKEINTRESOURCEW(IDR_BDXLOG_INI), L"PDATA");
-	::ShellExecuteW(m_hWnd, L"open", strXlogPath, NULL, NULL, SW_SHOW);
+	CStringW strMessage;
+	strMessage.Format(
+		L"日志配置已经从文件移至注册表，请编辑注册表的如下位置:\n"
+		L"HKCU\\Software\\Baidu\\BDLOG\\%s", 
+		m_cfg.product_name.c_str());
+	MessageBox(strMessage, L"提示", MB_OK|MB_ICONINFORMATION);
+//	CStringW strXlogPath = helper::ExpandPath(BSP_BDXLOG_INI);
+//	helper::WriteFileIfNotExist(strXlogPath, MAKEINTRESOURCEW(IDR_BDXLOG_INI), L"PDATA");
+//	::ShellExecuteW(m_hWnd, L"open", strXlogPath, NULL, NULL, SW_SHOW);
 	return 0;
 }
 
@@ -417,7 +447,7 @@ void CMainFrame::OnUserCommand(UINT /*uCode*/, int nID, HWND /*hWnd*/)
 	}
 }
 
-void CMainFrame::UpdateWindowTitle()
+void CMainFrame::UpdateWindowTitle(LPCWSTR pszFileName)
 {
 	CStringW strTitle = L"日志查看器";
 
@@ -425,10 +455,10 @@ void CMainFrame::UpdateWindowTitle()
 	{
 		strTitle += L" - 正在监控";
 	}
-	else if (!GD.strXLogFile.IsEmpty())
+	else if (pszFileName)
 	{
 		strTitle += L" - ";
-		strTitle += GD.strXLogFile;
+		strTitle += pszFileName;
 	}
 
 	SetWindowTextW(strTitle);
@@ -497,7 +527,22 @@ void CMainFrame::OpenXLog(LPCWSTR pszFileName)
 {
 	SendMessage(m_hWnd, WM_COMMAND, ID_STOP_MONITOR, 0);
 	ClearAllLog();
-	UpdateWindowTitle();
+	UpdateWindowTitle(pszFileName);
+
+	// 加入MRU
+	strlist_t& files = CConfig::Instance()->GetConfig().ui.recent_files;
+	strlist_t::iterator it = std::find(files.begin(), files.end(), pszFileName);
+	if (it != files.end())
+	{
+		files.erase(it);
+	}
+	if (files.size() >= 16)
+	{
+		files.pop_back();
+	}
+	files.push_front(pszFileName);
+
+	UpdateMRU();
 
 	// TODO decrypt遇到大文件会崩溃，目前没有decrypt的需求 所以先屏蔽
 	// strFileName = helper::DecryptXLogFile(strFileName);
@@ -549,6 +594,8 @@ void CMainFrame::ApplyFilter()
 	}
 	m_list.SetItemCount(static_cast<int>(m_lvs.size()));
 	m_list.SelectItem(index);
+
+	lc.UnlockLog();
 }
 
 LRESULT CMainFrame::OnNMDblclkList(int /*idCtrl*/, LPNMHDR pNMHDR, BOOL& /*bHandled*/)
@@ -598,19 +645,34 @@ LRESULT CMainFrame::OnNMCustomdrawList(int /*idCtrl*/, LPNMHDR pNMHDR, BOOL& /*b
 			{
 				pNMCD->clrTextBk = RGB(255, 224, 224);
 			}
-			if (m_searchText.GetLength() > 0)
-			{
-				if (helper::wcsistr(pInfo->item->log_content.c_str(), m_searchText))
-				{
-					//pNMCD->clrTextBk = RGB(255, 255, 0);
-					return CDRF_NOTIFYSUBITEMDRAW;
-				}
-			}
+
+			return CDRF_NOTIFYSUBITEMDRAW;
 		}
 	}
 	if (pNMCD->nmcd.dwDrawStage == (CDDS_ITEMPREPAINT|CDDS_ITEM|CDDS_SUBITEM))
 	{
-		if (pNMCD->iSubItem == 6 && m_searchText.GetLength() > 0)
+		// 因为第四列需要使用特殊的背景色，所以先把第一列的背景色记录下来，在画第五列的时候再恢复
+		static COLORREF rowcolor = 0;
+		if (pNMCD->iSubItem == 0)
+		{
+			rowcolor = pNMCD->clrTextBk;
+		}
+		if (pNMCD->iSubItem == 4)
+		{
+			pNMCD->clrTextBk = rowcolor;
+		}
+
+		if (pNMCD->iSubItem == 3 && CFG.ui.perfmark.enable)
+		{
+			int index = static_cast<int>(pNMCD->nmcd.dwItemSpec);
+			if (index < m_list.GetItemCount())
+			{
+				const LogInfo* pInfo = GetLogInfo(index);
+				pNMCD->clrTextBk = helper::GetGradientColor(RGB(255, 255, 255), CFG.ui.perfmark.mark_color, pInfo->occupytime * 1.0 / CFG.ui.perfmark.maxinterval / 1000);
+			}
+		}
+
+		if (pNMCD->iSubItem == 7 && m_searchText.GetLength() > 0)
 		{
 			int index = static_cast<int>(pNMCD->nmcd.dwItemSpec);
 			if (index < m_list.GetItemCount())
@@ -728,6 +790,29 @@ BOOL CMainFrame::PreTranslateMessage( MSG* pMsg )
 		return TRUE;
 	}
 
+	// list中的快捷键
+	if (pMsg->message == WM_CHAR)
+	{
+		if (GetFocus() == m_list.m_hWnd)
+		{
+			{
+				if (pMsg->wParam == L'%')
+				{
+					PostMessage(WM_COMMAND, ID_FUNCTION_JUMP);
+					return TRUE;
+				}
+				if (pMsg->wParam == L'G')
+				{
+					PostMessage(WM_COMMAND, ID_FORCEAUTOSCROLL);
+					return TRUE;
+				}
+
+				// TODO: f 下一屏 b 上一屏 
+
+			}
+		}
+	}
+
 	return FALSE;
 }
 
@@ -738,8 +823,8 @@ BOOL CMainFrame::OnIdle()
 	bool bMonitoring = ServiceHelper::GetLogCenter()->MonitoringPipe();
 	UIEnable(ID_START_MONITOR, !bMonitoring);
 	UIEnable(ID_STOP_MONITOR, bMonitoring);
-	UISetCheck(ID_VIEW_TOOLBAR, m_toolbar.IsWindowVisible());
-	UISetCheck(ID_VIEW_STATUS_BAR, m_wndStatusbar.IsWindowVisible());
+	UISetCheck(ID_TOGGLE_TOOLBAR, m_toolbar.IsWindowVisible());
+	UISetCheck(ID_TOGGLE_STATUSBAR, m_wndStatusbar.IsWindowVisible());
 	UISetCheck(ID_SHOW_GRIDLINE, CConfig::Instance()->GetConfig().ui.list.show_gridline);
 
 	return TRUE;
@@ -767,7 +852,7 @@ void CMainFrame::UpdateStatusInfo()
 		m_wndStatusbar.SetPaneText(ID_PANE_LOGCOUNT, tp::cz(L"总数:%u", info.log_count));
 		m_wndStatusbar.SetPaneText(ID_PANE_FILTERED_LOGCOUNT, tp::cz(L"显示:%u", info.filtered_log_count));
 		m_wndStatusbar.SetPaneText(ID_PANE_WORKTHREAD_COUNT, tp::cz(L"日志源:%u", info.thread_count));
-		HICON icon = info.has_filter? AtlLoadIconImage(IDI_FILTER, LR_DEFAULTCOLOR, 16, 16) : NULL;
+		HICON icon = info.has_filter? (HICON)m_filterIndicator : NULL;
 		m_wndStatusbar.SetPaneIcon(ID_PANE_FILTERED_LOGCOUNT, icon);
 	}
 }
@@ -789,6 +874,7 @@ void CMainFrame::ClearAllLog()
 {
 	m_list.SetItemCount(0);
 	m_lvs.clear();
+	m_bookmarks.clear();
 	ServiceHelper::GetLogCenter()->ClearAllLog();
 }
 
@@ -922,12 +1008,30 @@ LRESULT CMainFrame::OnListGetDispInfo(int /**/, LPNMHDR pNMHDR, BOOL& /**/)
 			swprintf_s(pItem->pszText, textlen, L"%I64u", li->logid);
 			break;
 		case 2:
-			struct tm tt;
-			localtime_s(&tt, &li->item->log_time_sec);
-			wcsftime(cvtbuf, _countof(cvtbuf), L"%H:%M:%S", &tt);
-			swprintf_s(pItem->pszText, textlen, L"%s.%06d", cvtbuf, li->item->log_time_msec);
+			{
+				if (!m_showAbsTime)
+				{
+					accutime currentTime(li->item->log_time_sec, li->item->log_time_msec);
+					INT64 us = currentTime - m_relativeTimeBase;
+					const wchar_t* sign = us > 0? L"+" : (us == 0? L"" : L"-");
+					if (us < 0) us = -us;
+					swprintf_s(pItem->pszText, textlen, L"%s%I64d.%06I64d", sign, us / M, us % M);
+				}
+				else
+				{
+					struct tm tt;
+					localtime_s(&tt, &li->item->log_time_sec);
+					wcsftime(cvtbuf, _countof(cvtbuf), L"%H:%M:%S", &tt);
+					swprintf_s(pItem->pszText, textlen, L"%s.%06d", cvtbuf, li->item->log_time_msec);
+				}
+			}
 			break;
 		case 3:
+			{
+				swprintf_s(pItem->pszText, textlen, L"%I64d", li->occupytime);
+			}
+			break;
+		case 4:
 			{
 				const wchar_t* desc = ServiceHelper::GetLogPropertyDB()->GetLevelDesc(li->item->log_class);
 				if (!desc)
@@ -937,7 +1041,7 @@ LRESULT CMainFrame::OnListGetDispInfo(int /**/, LPNMHDR pNMHDR, BOOL& /**/)
 				wcscpy_s(pItem->pszText, textlen, desc?desc:cvtbuf);
 				break;
 			}
-		case 4:
+		case 5:
 			{
 				if (!m_isHex)
 				{
@@ -950,7 +1054,7 @@ LRESULT CMainFrame::OnListGetDispInfo(int /**/, LPNMHDR pNMHDR, BOOL& /**/)
 			}
 			
 			break;
-		case 5:
+		case 6:
 			{
 				if (!m_isHex)
 				{
@@ -962,7 +1066,7 @@ LRESULT CMainFrame::OnListGetDispInfo(int /**/, LPNMHDR pNMHDR, BOOL& /**/)
 				}
 			}			
 			break;
-		case 6:
+		case 7:
 			{
 				size_t pos = 0;
 				const std::wstring& sign = m_cfg.ui.list.calldepth_sign;
@@ -978,9 +1082,9 @@ LRESULT CMainFrame::OnListGetDispInfo(int /**/, LPNMHDR pNMHDR, BOOL& /**/)
 	}
 	if (pItem->mask & LVIF_IMAGE)
 	{
-//		if (li->marked)
+		if (m_bookmarks.find(li->logid) != m_bookmarks.end())
 		{
-//			pItem->iImage = 0;
+			pItem->iImage = 0;
 		}
 	}
 
@@ -996,13 +1100,25 @@ void CMainFrame::OnDestroy()
 
 LRESULT CMainFrame::OnToggleBookmark(WORD, WORD, HWND, BOOL&)
 {
-// 	int index = m_list.GetSelectedIndex();
-// 	LogInfo* li = GetSelectedLog();
-// 	if (li)
-// 	{
-// 		li->marked = !li->marked;
-// 		m_list.RedrawItems(index, index);
-// 	}
+	int index = m_list.GetSelectedIndex();
+	if (index < 0) return 0;
+
+	LogInfo* li = GetLogInfo(index);
+	
+	if (li)
+	{
+		if (m_bookmarks.find(li->logid) == m_bookmarks.end())
+		{
+			m_bookmarks.insert(li->logid);
+		}
+		else
+		{
+			m_bookmarks.erase(li->logid);
+		}
+
+		m_list.RedrawItems(index, index);
+	}
+
 	return 0;
 }
 
@@ -1035,31 +1151,89 @@ LRESULT CMainFrame::OnFunctionJump(WORD, WORD, HWND, BOOL&)
 
 LRESULT CMainFrame::OnNextBookmark(WORD, WORD, HWND, BOOL&)
 {
-// 	size_t index = static_cast<size_t>(m_list.GetSelectedIndex());
-// 	for (size_t i = 1; i < m_lvs.size(); i++)
-// 	{
-// 		size_t pos = (index + i) % m_lvs.size();
-// 		if (m_lvs[pos]->marked)
-// 		{
-// 			m_list.SelectItem(static_cast<int>(pos));
-// 			break;
-// 		}
-// 	}
+	LogInfo* li = GetSelectedLog();
+	if (!li) return 0;
+
+	std::set<UINT64>::const_iterator it1, it2;
+	it1 = it2 = m_bookmarks.upper_bound(li->logid);
+
+	// 用it1保存当前书签点, 处理回绕
+
+	while (it2 != m_bookmarks.end())
+	{
+		if (it2 != m_bookmarks.end())
+		{
+			int index = GetLogIndex(*it2);
+			if (index >= 0)
+			{
+				m_list.SelectItem(index);
+				return 0;
+			}
+		}
+		++it2;
+	}
+
+	it2 = m_bookmarks.begin();
+	while (it2 != it1)
+	{
+		if (it2 != m_bookmarks.end())
+		{
+			int index = GetLogIndex(*it2);
+			if (index >= 0)
+			{
+				m_list.SelectItem(index);
+				return 0;
+			}
+		}
+		++it2;
+	}
+
 	return 0;
 }
 
 LRESULT CMainFrame::OnPrevBookmark(WORD, WORD, HWND, BOOL&)
 {
-// 	size_t index = static_cast<size_t>(m_list.GetSelectedIndex());
-// 	for (size_t i = 1; i < m_lvs.size(); i++)
-// 	{
-// 		size_t pos = (index + m_lvs.size() - i) % m_lvs.size();
-// 		if (m_lvs[pos]->marked)
-// 		{
-// 			m_list.SelectItem(static_cast<int>(pos));
-// 			break;
-// 		}
-// 	}
+	LogInfo* li = GetSelectedLog();
+	if (!li) return 0;
+
+	std::set<UINT64>::const_iterator it1, it2;
+	it1 = it2 = --m_bookmarks.lower_bound(li->logid);
+
+	// 用it1保存当前书签点, 处理回绕
+
+	for (;;)
+	{
+		if (it2 != m_bookmarks.end())
+		{
+			int index = GetLogIndex(*it2);
+			if (index >= 0)
+			{
+				m_list.SelectItem(index);
+				return 0;
+			}
+		}
+		if (it2 == m_bookmarks.begin())
+		{
+			break;
+		}
+		--it2;
+	}
+
+	it2 = m_bookmarks.end();
+	while (it2 != it1)
+	{
+		if (it2 != m_bookmarks.end())
+		{
+			int index = GetLogIndex(*it2);
+			if (index >= 0)
+			{
+				m_list.SelectItem(index);
+				return 0;
+			}
+		}
+		--it2;
+	}
+
 	return 0;
 }
 
@@ -1191,6 +1365,7 @@ void CMainFrame::OnContextMenu(HWND hWnd, CPoint pt)
 
 			menu.AppendMenu(MF_STRING, ID_TOGGLE_BOOKMARK, L"设置/取消书签(&M)\tCtrl+F2");
 			menu.AppendMenu(MF_STRING, ID_FUNCTION_JUMP, L"跳到函数头/尾(&F)");
+			menu.AppendMenu(MF_STRING, ID_SET_TIME_BASE, L"显示相对时间(&T)(以此条日志为时间原点)");
 			menu.AppendMenu(MF_SEPARATOR, 0U, L"");
 			menu.AppendMenu(MF_POPUP, (UINT_PTR)m1.m_hMenu, L"上下文过滤：包含(&I)");
 			// TODO: menu.AppendMenu(MF_POPUP, (UINT_PTR)m1.m_hMenu, L"上下文过滤：解除包含(&U)");
@@ -1232,10 +1407,19 @@ LRESULT CMainFrame::OnQuickFilterInclude(WORD , WORD nID, HWND , BOOL&)
 		child = new logtag_filter(li->item->log_tags.c_str());
 		break;
 	case 5: // content
-		child = new logcontent_filter(li->item->log_content.c_str(), false);
+		child = new logcontent_filter(li->item->log_content.c_str(), false, false);
 		break;
 	default:
 		return 0;
+	}
+
+	if (::GetKeyState(VK_SHIFT) & 0x8000)
+	{
+		if (!filter_creator::instance()->configure(child))
+		{
+			delete child;
+			return 0;
+		}
 	}
 
 	filter*& f = CConfig::Instance()->GetConfig().log_filter;
@@ -1291,10 +1475,19 @@ LRESULT CMainFrame::OnQuickFilterExclude(WORD , WORD nID, HWND , BOOL&)
 		child = new logtag_filter(li->item->log_tags.c_str());
 		break;
 	case 5: // content
-		child = new logcontent_filter(li->item->log_content.c_str(), false);
+		child = new logcontent_filter(li->item->log_content.c_str(), false, false);
 		break;
 	default:
 		return 0;
+	}
+
+	if (::GetKeyState(VK_SHIFT) & 0x8000)
+	{
+		if (!filter_creator::instance()->configure(child))
+		{
+			delete child;
+			return 0;
+		}
 	}
 
 	logical_not_filter* notfilter = new logical_not_filter;
@@ -1324,6 +1517,18 @@ LRESULT CMainFrame::OnQuickFilterExclude(WORD , WORD nID, HWND , BOOL&)
 	}
 
 	ApplyFilter();
+	return 0;
+}
+
+LRESULT CMainFrame::OnOpenMRU(WORD , WORD nID, HWND , BOOL&)
+{
+	const strlist_t& files = m_cfg.ui.recent_files;
+	strlist_t::const_iterator it = files.begin();
+	std::advance(it, nID - ID_MRU_BEGIN);
+
+	std::wstring path = *it;
+	OpenXLog(path.c_str());
+
 	return 0;
 }
 
@@ -1402,6 +1607,30 @@ LRESULT CMainFrame::OnHex(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, 
 	return 0;
 }
 
+LRESULT CMainFrame::OnShowAbsTime(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
+{	
+	m_showAbsTime = true;
+	m_list.InvalidateRect(NULL, TRUE);
+	return 0;
+}
+
+LRESULT CMainFrame::OnSetTimeBase(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
+{
+	LogInfo* l = GetSelectedLog();
+	if (!l)
+	{
+		return 0;
+	}
+
+	m_showAbsTime = false;
+	m_relativeTimeBase.sec = l->item->log_time_sec;
+	m_relativeTimeBase.usec = l->item->log_time_msec;
+	m_list.InvalidateRect(NULL, TRUE);
+
+	return 0;
+}
+
+
 LRESULT CMainFrame::OnSearch(WORD, WORD, HWND, BOOL&)
 {
 	if (!m_searchDlg.IsWindow())
@@ -1410,8 +1639,7 @@ LRESULT CMainFrame::OnSearch(WORD, WORD, HWND, BOOL&)
 		m_searchDlg.CenterWindow(m_hWnd);
 	}
 
-	m_searchDlg.ShowWindow(SW_SHOW);
-	m_searchDlg.SetActiveWindow();
+	m_searchDlg.WaitUserInput();
 
 	return 0;
 }
@@ -1423,74 +1651,51 @@ bool CMainFrame::IsFunctionLog(const bdlog::logitem& item)
 
 void CMainFrame::UpdateFunctionPos(int index, int lookuplimit)
 {
-// 	m_functionBegin = m_functionEnd = -1;
-// 
-// 	if (index < 0)
-// 	{
-// 		return;
-// 	}
-// 
-// 	const bdlog::logitem* item = GetLogInfo(index)->item;
-// 	if (!IsFunctionLog(*item))
-// 	{
-// 		m_functionBegin = m_functionEnd = -1;
-// 		return;
-// 	}
-// 
-// 	size_t len = m_lis.size();
-// 	if (len == 0 || m_lis[0]->logid + len <= GetLogInfo(index)->logid)
-// 	{
-// 		return;
-// 	}
-// 
-// 	int lis_index = static_cast<int>(GetLogInfo(index)->logid - m_lis[0]->logid);
-// 
-// 	if (item->log_content.length() > 0 && item->log_content[0] == L'}')
-// 	{
-// 		for (int i = lis_index - 1; i >= 0 && lookuplimit != 0; i--, lookuplimit--)
-// 		{
-// 			const bdlog::logitem* item2 = m_lis[i]->item;
-// 			if (item2->log_pid == item->log_pid &&
-// 				item2->log_tid == item->log_tid &&
-// 				item2->log_depth == item->log_depth &&
-// 				item2->log_content[0] != L'}' &&
-// 				IsFunctionLog(*item2))
-// 			{
-// 				for (int j = index; j >= 0 && m_lvs[j]->logid >= m_lis[i]->logid; j--)
-// 				{
-// 					if (m_lvs[j]->logid == m_lis[i]->logid)
-// 					{
-// 						m_functionBegin = j;
-// 						m_functionEnd = index;
-// 						return;
-// 					}
-// 				}
-// 			}
-// 		}
-// 	}
-// 	else
-// 	{
-// 		for (int i = lis_index + 1; i < m_lis.size() && lookuplimit != 0; i++, lookuplimit--)
-// 		{
-// 			const bdlog::logitem* item2 = m_lis[i]->item;
-// 			if (item2->log_pid == item->log_pid &&
-// 				item2->log_tid == item->log_tid &&
-// 				item2->log_depth == item->log_depth &&
-// 				item2->log_content[0] == L'}' &&
-// 				IsFunctionLog(*item2))
-// 			{
-// 				for (int j = index; j < m_lvs.size() && m_lvs[j]->logid <= m_lis[i]->logid; j++)
-// 				{
-// 					if (m_lvs[j]->logid == m_lis[i]->logid)
-// 					{
-// 						m_functionBegin = index;
-// 						m_functionEnd = j;
-// 						return;
-// 					}
-// 				}
-// 			}
-// 		}
-// 	}
+ 	if (index < 0) return;
+
+	m_functionBegin = m_functionEnd = -1;
+
+	const bdlog::logitem* item = GetLogInfo(index)->item;
+ 	if (!IsFunctionLog(*item))
+ 	{
+ 		m_functionBegin = m_functionEnd = -1;
+ 		return;
+ 	}
+
+ 	if (item->log_content.length() > 0 && item->log_content[0] == L'}')
+ 	{
+ 		for (int i = index - 1; i >= 0 && lookuplimit > 0; i--, lookuplimit--)
+ 		{
+ 			const bdlog::logitem* item2 = GetLogInfo(i)->item;
+ 			if (item2->log_pid == item->log_pid &&
+ 				item2->log_tid == item->log_tid &&
+ 				item2->log_depth == item->log_depth &&
+ 				item2->log_content[0] != L'}' &&
+ 				IsFunctionLog(*item2))
+ 			{
+				m_functionBegin = i;
+				m_functionEnd = index;
+ 				return;
+ 			}
+		}
+ 	}
+ 	else
+ 	{
+ 		for (int i = index + 1; i < static_cast<int>(m_lvs.size()) && lookuplimit > 0; i++, lookuplimit--)
+ 		{
+ 			const bdlog::logitem* item2 = GetLogInfo(i)->item;
+ 			if (item2->log_pid == item->log_pid &&
+ 				item2->log_tid == item->log_tid &&
+ 				item2->log_depth == item->log_depth &&
+ 				item2->log_content[0] == L'}' &&
+ 				IsFunctionLog(*item2))
+ 			{
+				m_functionBegin = index;
+				m_functionEnd = i;
+				return;
+ 			}
+ 		}
+ 	}
 }
 
 LRESULT CMainFrame::OnShowVisualLogic(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
@@ -1499,9 +1704,65 @@ LRESULT CMainFrame::OnShowVisualLogic(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /
 	return 0;
 }
 
-LRESULT CMainFrame::OnRunScript(WORD, WORD, HWND, BOOL&)
+
+int CMainFrame::GetLogIndex(UINT64 logid)
 {
-	CRunScriptDlg dlg;
+	FilterMap::const_iterator it = std::lower_bound(m_lvs.begin(), m_lvs.end(), logid);
+	if (it == m_lvs.end())
+	{
+		return -1;
+	}
+
+	return static_cast<int>(it - m_lvs.begin());
+}
+
+
+void CMainFrame::UpdateMRU()
+{
+	if (!m_mru)
+	{
+		return;
+	}
+
+	for (;;)
+	{
+		if (!m_mru.DeleteMenu(0, MF_BYPOSITION)) break;
+	}
+
+	const strlist_t& files = m_cfg.ui.recent_files;
+	UINT_PTR menuid = ID_MRU_BEGIN;
+	for (strlist_t::const_iterator it = files.begin(); it != files.end(); ++it)
+	{
+		m_mru.AppendMenuW(MF_STRING, menuid++, (*it).c_str());
+	}
+}
+
+LRESULT CMainFrame::OnCheckUpdate(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
+{
+	Updater::CheckAndUpdate(FALSE);
+	return 0;
+}
+
+LRESULT CMainFrame::OnOpenShareMemoryLog(WORD, WORD, HWND, BOOL&)
+{
+	CSimpleInputDlg dlg(L"输入", L"请输入共享内存名字：");
+	if (dlg.DoModal() == IDOK)
+	{
+		SendMessage(m_hWnd, WM_COMMAND, ID_STOP_MONITOR, 0);
+		ClearAllLog();
+		UpdateWindowTitle();
+
+		ServiceHelper::GetLogCenter()->ConnectShareMemory(dlg.GetInput());
+	}
+
+	return 0;
+}
+
+LRESULT CMainFrame::OnOption(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
+{
+	COptionDlg dlg;
 	dlg.DoModal();
+	m_list.RedrawWindow();
+
 	return 0;
 }
