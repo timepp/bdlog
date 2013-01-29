@@ -7,4 +7,5 @@ enum ServiceID
 	SID_LogCenter,
 	SID_VisualLogic,
 	SID_ScriptHost,
+	SID_ScriptDlg,
 };

@@ -842,8 +842,8 @@ void CMainFrame::UpdateStatusInfo()
 	const filter* f = CConfig::Instance()->GetConfig().log_filter;
 	const quickfilter& qf = CConfig::Instance()->GetConfig().log_quickfilter;
 	info.has_filter = f ||
-		              qf.level > 0 ||
-		              qf.tags.length() > 0 ||
+					  qf.level > 0 ||
+					  qf.tags.length() > 0 ||
 					  qf.text.length() > 0;
 
 	if (info != m_status)
@@ -1651,51 +1651,51 @@ bool CMainFrame::IsFunctionLog(const bdlog::logitem& item)
 
 void CMainFrame::UpdateFunctionPos(int index, int lookuplimit)
 {
- 	if (index < 0) return;
+	if (index < 0) return;
 
 	m_functionBegin = m_functionEnd = -1;
 
 	const bdlog::logitem* item = GetLogInfo(index)->item;
- 	if (!IsFunctionLog(*item))
- 	{
- 		m_functionBegin = m_functionEnd = -1;
- 		return;
- 	}
+	if (!IsFunctionLog(*item))
+	{
+		m_functionBegin = m_functionEnd = -1;
+		return;
+	}
 
- 	if (item->log_content.length() > 0 && item->log_content[0] == L'}')
- 	{
- 		for (int i = index - 1; i >= 0 && lookuplimit > 0; i--, lookuplimit--)
- 		{
- 			const bdlog::logitem* item2 = GetLogInfo(i)->item;
- 			if (item2->log_pid == item->log_pid &&
- 				item2->log_tid == item->log_tid &&
- 				item2->log_depth == item->log_depth &&
- 				item2->log_content[0] != L'}' &&
- 				IsFunctionLog(*item2))
- 			{
+	if (item->log_content.length() > 0 && item->log_content[0] == L'}')
+	{
+		for (int i = index - 1; i >= 0 && lookuplimit > 0; i--, lookuplimit--)
+		{
+			const bdlog::logitem* item2 = GetLogInfo(i)->item;
+			if (item2->log_pid == item->log_pid &&
+				item2->log_tid == item->log_tid &&
+				item2->log_depth == item->log_depth &&
+				item2->log_content[0] != L'}' &&
+				IsFunctionLog(*item2))
+			{
 				m_functionBegin = i;
 				m_functionEnd = index;
- 				return;
- 			}
+				return;
+			}
 		}
- 	}
- 	else
- 	{
- 		for (int i = index + 1; i < static_cast<int>(m_lvs.size()) && lookuplimit > 0; i++, lookuplimit--)
- 		{
- 			const bdlog::logitem* item2 = GetLogInfo(i)->item;
- 			if (item2->log_pid == item->log_pid &&
- 				item2->log_tid == item->log_tid &&
- 				item2->log_depth == item->log_depth &&
- 				item2->log_content[0] == L'}' &&
- 				IsFunctionLog(*item2))
- 			{
+	}
+	else
+	{
+		for (int i = index + 1; i < static_cast<int>(m_lvs.size()) && lookuplimit > 0; i++, lookuplimit--)
+		{
+			const bdlog::logitem* item2 = GetLogInfo(i)->item;
+			if (item2->log_pid == item->log_pid &&
+				item2->log_tid == item->log_tid &&
+				item2->log_depth == item->log_depth &&
+				item2->log_content[0] == L'}' &&
+				IsFunctionLog(*item2))
+			{
 				m_functionBegin = index;
 				m_functionEnd = i;
 				return;
- 			}
- 		}
- 	}
+			}
+		}
+	}
 }
 
 LRESULT CMainFrame::OnShowVisualLogic(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
@@ -1763,6 +1763,13 @@ LRESULT CMainFrame::OnOption(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*
 	COptionDlg dlg;
 	dlg.DoModal();
 	m_list.RedrawWindow();
+
+	return 0;
+}
+
+LRESULT CMainFrame::OnRunScript(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
+{
+	SERVICE(CRunScriptDlg)->Show();
 
 	return 0;
 }

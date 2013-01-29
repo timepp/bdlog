@@ -60,8 +60,11 @@ struct helper
 	static __time64_t GetExpireTime();
 	static CStringW GetHelpText();
 	static bool NeedNotifyExpire();
+
 	static HRESULT WriteFileFromResource(LPCWSTR filename, LPCWSTR name, LPCWSTR type);
 	static HRESULT WriteFileIfNotExist(LPCWSTR path, LPCWSTR rcname, LPCWSTR rctype);
+	static CStringW GetTextFileContent(LPCWSTR path);
+	static HRESULT SaveTextContentToFile(LPCWSTR path, LPCWSTR content); // utf-8 bom
 
 	static CStringW DecryptXLogFile(LPCWSTR pszFileName);
 
@@ -94,6 +97,7 @@ struct helper
 	static CStringW GetLogLevelDescription(UINT level);
 
 	static void bool_reverse(bool& val);
+	static HRESULT GetLastErrorAsHRESULT();
 
 	static bool TagMatch(const wchar_t* tags, const wchar_t* matcher);
 	static void SplitTag(const wchar_t* tags, str_segment (&segs)[256]);

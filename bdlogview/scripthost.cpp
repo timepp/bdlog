@@ -9,6 +9,81 @@ const GUID CLSID_JScript  = {0xf414c260, 0x6ac0, 0x11cf, {0xb6, 0xd1, 0x00, 0xaa
 
 DECLARE_LIBID(LIBID_BdLogviewLib);
 
+class ATL_NO_VTABLE CCoLogItem
+	: public CComObjectRootEx<CComSingleThreadModel>
+	, public CComCoClass<CCoLogItem, &CLSID_LogItem>
+	, public IDispatchImpl<ILogItem, &IID_ILogItem, &LIBID_BdLogviewLib, -1, -1>
+{
+	friend class CCoLogCenter;
+public:
+	CCoLogItem() : m_info(0) 
+	{
+	}
+	virtual ~CCoLogItem() 
+	{
+		delete m_info->item;
+		delete m_info;
+		m_info = 0;
+	}
+
+	BEGIN_COM_MAP(CCoLogItem)
+		COM_INTERFACE_ENTRY(IDispatch)
+		COM_INTERFACE_ENTRY(ILogItem)
+	END_COM_MAP()
+
+	STDMETHOD(get_time)(double* pTime)
+	{
+		*pTime = m_info->item->log_time_sec + m_info->item->log_time_msec / 1000000.0;
+		return S_OK;
+	}
+
+	STDMETHOD(get_content)(BSTR* pContent)
+	{
+		*pContent = ::SysAllocString(m_info->item->log_content.c_str());
+		return S_OK;
+	}
+	STDMETHOD(get_tag)(BSTR* pTag)
+	{
+		*pTag = ::SysAllocString(m_info->item->log_tags.c_str());
+		return S_OK;
+	}
+	STDMETHOD(get_pid)(UINT* pPID)
+	{
+		*pPID = m_info->item->log_pid;
+		return S_OK;
+	}	
+	STDMETHOD(get_tid)(UINT* pTID)
+	{
+		*pTID = m_info->item->log_tid;
+		return S_OK;
+	}
+	STDMETHOD(get_depth)(UINT* pDepth)
+	{
+		*pDepth = m_info->item->log_depth;
+		return S_OK;
+	}
+	STDMETHOD(get_level)(UINT* pClass)
+	{
+		*pClass = m_info->item->log_class;
+		return S_OK;
+	}
+
+
+
+private:
+	void SetLogItem(const LogInfo* info)
+	{
+		if (info)
+		{
+			m_info = new LogInfo();
+			*m_info = *info;
+			m_info->item = new bdlog::logitem;
+			*m_info->item = *info->item;
+		}
+	}
+	LogInfo* m_info;
+};
+
 class ATL_NO_VTABLE CCoLogCenter
 	: public CComObjectRootEx<CComSingleThreadModel>
 	, public CComCoClass<CCoLogCenter, &CLSID_LogCenter>
@@ -22,11 +97,23 @@ public:
 		COM_INTERFACE_ENTRY(ILogCenter)
 	END_COM_MAP()
 
-	STDMETHOD(get_LogCount)(long* pCount)
+	STDMETHOD(GetLogCount)(long* pCount)
 	{
 		LogRange r = SERVICE(CLogCenter)->GetLogRange();
-		*pCount = r.idmax - r.idmin + 1;
+		*pCount = r.idmax - r.idmin;
 		return S_OK;
+	}
+
+	STDMETHOD(GetLogItem)(long index, IDispatch** ppItem)
+	{
+		LogRange r = SERVICE(CLogCenter)->GetLogRange();
+		LogInfo* info = SERVICE(CLogCenter)->GetLog(index + r.idmin);
+		if (!info) return E_INVALIDARG;
+
+		CComObject<CCoLogItem>* obj = NULL;
+		CComObject<CCoLogItem>::CreateInstance(&obj);
+		obj->SetLogItem(info);
+		return obj->QueryInterface(ppItem);
 	}
 };
 
@@ -53,9 +140,10 @@ public:
 		COM_INTERFACE_ENTRY(IBdLogView)
 	END_COM_MAP()
 
-	STDMETHOD(MsgBox)(BSTR title, BSTR text)
+	STDMETHOD(MessageBox)(BSTR text, VARIANT title)
 	{
-		::MessageBoxW(NULL, text, title, MB_OK);
+		if (title.vt != VT_BSTR) title.bstrVal = L"bdlogview½Å±¾";
+		::MessageBoxW(NULL, text, title.bstrVal, MB_OK);
 		return S_OK;
 	}
 

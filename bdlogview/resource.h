@@ -2,6 +2,8 @@
 // Microsoft Visual C++ generated include file.
 // Used by bdlogview.rc
 //
+#define IDC_BTN_SAVESCRIPT              3
+#define IDC_BTN_LOADSCRIPT              4
 #define IDD_MAINDLG                     101
 #define ID_PANE_LOGCOUNT                101
 #define IDD_TIP                         102
@@ -78,7 +80,6 @@
 #define IDD_OPT_PERFMARK                171
 #define IDD_OPT_PERFMARK1               172
 #define IDD_OPT_SYSTEM                  172
-
 #define IDC_LIST                        1001
 #define IDC_APPLY                       1002
 #define IDC_CB_SHOW_CLASS               1003
@@ -197,6 +198,7 @@
 #define IDC_EDIT_MAX_OCCUPYTIME         1082
 #define IDC_STATIC_COLOR                1083
 #define IDC_EDIT                        1084
+#define IDC_SPLIT1                      1087
 #define ID_MAIN_ID                      40001
 #define ID_VIEW_DETAIL                  40002
 #define ID_MAIN_ABOUT                   40003
@@ -361,8 +363,8 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        173
-#define _APS_NEXT_COMMAND_VALUE         40182
-#define _APS_NEXT_CONTROL_VALUE         1085
+#define _APS_NEXT_COMMAND_VALUE         40184
+#define _APS_NEXT_CONTROL_VALUE         1088
 #define _APS_NEXT_SYMED_VALUE           107
 #endif
 #endif

@@ -11,10 +11,41 @@ import "ocidl.idl";
 interface IBdLogView : IDispatch
 {
 	[id(1), helpstring("bbb")]
-	HRESULT MsgBox(BSTR title, BSTR text);
+	HRESULT MessageBox([in] BSTR text, [in,optional] VARIANT title);
 
 	[id(2), helpstring("logcenter")]
 	HRESULT GetLogCenter([out,retval] IDispatch** ppObj);
+};
+
+[
+	object,
+	uuid(E6A15F6D-DE26-4D4D-984A-7B983D8FBA5E),
+	dual,
+	helpstring("Get Log Item"),
+	pointer_default(unique)
+]
+interface ILogItem : IDispatch
+{
+	[propget]
+	HRESULT time([out,retval] double* pTime);
+
+	[propget]
+	HRESULT level([out,retval] UINT* pClass);
+
+	[propget]
+	HRESULT tag([out,retval] BSTR* pTag);
+
+	[propget]
+	HRESULT pid([out,retval] UINT* pPID);
+
+	[propget]
+	HRESULT tid([out,retval] UINT* pTID);
+
+	[propget]
+	HRESULT depth([out,retval] UINT* pDepth);
+	
+	[propget]
+	HRESULT content([out,retval] BSTR* pContent);
 };
 
 [
@@ -26,8 +57,11 @@ interface IBdLogView : IDispatch
 ]
 interface ILogCenter : IDispatch
 {
-	[id(1), propget, helpstring("Get Log Count")]
-	HRESULT LogCount([out, retval] long* pCount);
+	[id(1), helpstring("Get Log Count")]
+	HRESULT GetLogCount([out, retval] long* pCount);
+
+	[id(2), helpstring("logitem")]
+	HRESULT GetLogItem([in] long index, [out,retval] IDispatch** ppObj);
 };
 
 
@@ -50,14 +84,14 @@ library BdLogviewLib
 		[default] interface IBdLogView;
 	};
 
-	//[ 
-	//	uuid(6350AE64-BFE8-4640-8D23-4310EB21A63C),
-	//	helpstring("LogItem")
-	//]
-	//coclass LogItem
-	//{
-	//	[default] interface ILogItem;
-	//};
+	[ 
+		uuid(6350AE64-BFE8-4640-8D23-4310EB21A63C),
+		helpstring("LogItem")
+	]
+	coclass LogItem
+	{
+		[default] interface ILogItem;
+	};
 
 	[
 		uuid(85A42930-3187-48C9-A152-16C3515104BD),

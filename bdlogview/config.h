@@ -43,6 +43,7 @@ struct config
 		{
 			std::wstring logfile;
 			std::wstring filter;
+			std::wstring script;
 		} savedpath;
 		strlist_t recent_files;
 		struct
@@ -85,12 +86,16 @@ public:
 	bool Save();
 
 	CStringW GetConfigFilePath() const;
+	static CStringW GetDefaultConfigFilePath();
 
 private:
 	CConfig();
 	~CConfig();
 
-	void SetDefaultHilighter();
+	// 为没有设置的值赋缺省值
+	// 这个动作需要在load完后做，而不是在构造函数中做
+	// 因为旧版本已经把一些变量存成了空值
+	void SetEmptyValueDefaults();
 
 	config m_cfg;
 	CStringW m_strConfigFilePath;

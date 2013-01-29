@@ -98,14 +98,26 @@
     <ClCompile Include="..\bdlogview\bdlogview_i.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4820;4255;4668</DisableSpecificWarnings>
+      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4820;4255;4668</DisableSpecificWarnings>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">TurnOffAllWarnings</WarningLevel>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">TurnOffAllWarnings</WarningLevel>
     </ClCompile>
     <ClCompile Include="..\bdlogview\bdlogview_p.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">TurnOffAllWarnings</WarningLevel>
+      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4820;4255;4668</DisableSpecificWarnings>
+      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4820;4255;4668</DisableSpecificWarnings>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">TurnOffAllWarnings</WarningLevel>
     </ClCompile>
     <ClCompile Include="..\bdlogview\dlldata.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">TurnOffAllWarnings</WarningLevel>
+      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4820;4255;4668</DisableSpecificWarnings>
+      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4820;4255;4668</DisableSpecificWarnings>
+      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">TurnOffAllWarnings</WarningLevel>
     </ClCompile>
     <ClCompile Include="..\bdlogview\helper.cpp" />
     <ClCompile Include="..\bdlogview\advancedfiltereditdlg.cpp" />
@@ -121,6 +133,7 @@
     <ClCompile Include="..\bdlogview\logicvis.cpp" />
     <ClCompile Include="..\bdlogview\optiondlg.cpp" />
     <ClCompile Include="..\bdlogview\optpage.cpp" />
+    <ClCompile Include="..\bdlogview\runscriptdlg.cpp" />
     <ClCompile Include="..\bdlogview\scripthost.cpp" />
     <ClCompile Include="..\bdlogview\simplefiltereditdlg.cpp" />
     <ClCompile Include="..\bdlogview\loginfodlg.cpp" />
@@ -141,6 +154,7 @@
   <ItemGroup>
     <ClInclude Include="..\bdlogview\bdlogview_h.h" />
     <ClInclude Include="..\bdlogview\helper.h" />
+    <ClInclude Include="..\bdlogview\jsparser.h" />
     <ClInclude Include="..\bdlogview\logcenter.h" />
     <ClInclude Include="..\bdlogview\runscriptdlg.h" />
     <ClInclude Include="..\bdlogview\scripthost.h" />
@@ -228,7 +242,7 @@
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties RESOURCE_FILE="bdlogview.rc" />
+      <UserProperties RESOURCE_FILE="" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

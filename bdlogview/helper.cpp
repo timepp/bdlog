@@ -775,8 +775,9 @@ CStringW helper::GetConfigDir()
 	SHGetFolderPathW(NULL, CSIDL_APPDATA, NULL, SHGFP_TYPE_CURRENT, szPath);
 	strPath = szPath;
 
-	strPath += L"\\Baidu";
-	::CreateDirectoryW(strPath, NULL);
+	strPath += L"\\Baidu\\bdlogview";
+	::SHCreateDirectory(NULL, strPath);
+
 	return strPath;
 }
 
@@ -873,4 +874,41 @@ CStringW CDlgItem::GetText()
 void CDlgItem::SetText(LPCWSTR text)
 {
 	SetWindowText(text);
+}
+
+CStringW helper::GetTextFileContent(LPCWSTR path)
+{
+	CStringW content;
+	FILE* fp = NULL;
+	_wfopen_s(&fp, path, L"rt,ccs=UNICODE");
+	if (fp)
+	{
+		wchar_t line[4096];
+		while (fgetws(line, _countof(line), fp) != NULL)
+		{
+			content += line;
+		}
+		fclose(fp);
+	}
+	return content;
+}
+
+HRESULT helper::SaveTextContentToFile(LPCWSTR path, LPCWSTR content)
+{
+	FILE* fp = NULL;
+	_wfopen_s(&fp, path, L"wt,ccs=UTF-8");
+	if (fp)
+	{
+		fwprintf_s(fp, L"%s", content);
+		fclose(fp);
+		return S_OK;
+	}
+
+	return helper::GetLastErrorAsHRESULT();
+}
+
+HRESULT helper::GetLastErrorAsHRESULT()
+{
+	DWORD err = ::GetLastError();
+	return HRESULT_FROM_WIN32(err);
 }

@@ -100,17 +100,20 @@
     <ClCompile Include="..\bdlogview\bdlogview_p.c">
       <Filter>Scripting</Filter>
     </ClCompile>
-    <ClCompile Include="..\bdlogview\aboutdlg.CPP">
-      <Filter>Helper</Filter>
-    </ClCompile>
-    <ClCompile Include="..\bdlogview\optiondlg.cpp">
-      <Filter>Helper</Filter>
-    </ClCompile>
-    <ClCompile Include="..\bdlogview\optpage.cpp">
-      <Filter>Helper</Filter>
-    </ClCompile>
     <ClCompile Include="..\bdlogview\updater.cpp">
       <Filter>Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\bdlogview\aboutdlg.CPP">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\bdlogview\optiondlg.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\bdlogview\optpage.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\bdlogview\runscriptdlg.cpp">
+      <Filter>Scripting</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -211,8 +214,9 @@
       <Filter>Scripting</Filter>
     </ClInclude>
     <ClInclude Include="..\bdlogview\runscriptdlg.h">
-      <Filter>UI</Filter>
+      <Filter>Scripting</Filter>
     </ClInclude>
+    <ClInclude Include="..\bdlogview\jsparser.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\bdlogview\res\advanced.ico">

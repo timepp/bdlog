@@ -65,7 +65,16 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPWSTR lps
 
 	::LoadLibrary(L"Riched20.dll");
 
-	CConfig::Instance()->Load(L"");
+	// 兼容旧版本的配置文件
+	CConfig* cfg = CConfig::Instance();
+	if (helper::FileExists(CConfig::GetDefaultConfigFilePath()))
+	{
+		cfg->Load(L"");
+	}
+	else
+	{
+		cfg->Load(helper::GetConfigDir() + L"\\..\\bdlogview.xml");
+	}
 
 	INITCOMMONCONTROLSEX iccx;
 	iccx.dwSize = sizeof(iccx);

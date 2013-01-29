@@ -51,12 +51,17 @@ config& CConfig::GetConfig()
 	return m_cfg;
 }
 
+CStringW CConfig::GetDefaultConfigFilePath()
+{
+	return helper::GetConfigDir() + L"\\bdlogview.xml";
+}
+
 bool CConfig::Load(LPCWSTR pszFileName)
 {
 	CStringW strPath = pszFileName;
 	if (strPath.IsEmpty())
 	{
-		strPath = helper::GetConfigDir() + L"\\bdlogview.xml";
+		strPath = GetDefaultConfigFilePath();
 	}
 
 	if (m_strConfigFilePath != strPath && !m_strConfigFilePath.IsEmpty())
@@ -77,7 +82,7 @@ bool CConfig::Load(LPCWSTR pszFileName)
 	if (_waccess_s(m_strConfigFilePath, 0) != 0)
 	{
 		// 配置文件不存在，赋缺省值
-		SetDefaultHilighter();
+		SetEmptyValueDefaults();
 		Save();
 		m_cfg.first_time_run = true;
 		return true;
@@ -175,6 +180,7 @@ bool CConfig::Load(LPCWSTR pszFileName)
 	{
 		m_cfg.ui.savedpath.logfile = helper::XML_GetAttributeAsString(pNode, L"logfile", L"");
 		m_cfg.ui.savedpath.filter= helper::XML_GetAttributeAsString(pNode, L"filter", L"");
+		m_cfg.ui.savedpath.script = helper::XML_GetAttributeAsString(pNode, L"script", L"");
 	}
 
 	pList = NULL;
@@ -220,7 +226,7 @@ bool CConfig::Load(LPCWSTR pszFileName)
 		m_cfg.product_name = helper::XML_GetAttributeAsString(pNode, L"product_name", L"");
 	}
 
-	SetDefaultHilighter();
+	SetEmptyValueDefaults();
 	return true;
 }
 
@@ -281,6 +287,7 @@ bool CConfig::Save()
 	pUINode->appendChild(helper::XML_CreateNode(pDoc, NODE_ELEMENT, L"savedpath"), &pSavedPathNode);
 	helper::XML_AddAttribute(pDoc, pSavedPathNode, L"logfile", m_cfg.ui.savedpath.logfile.c_str());
 	helper::XML_AddAttribute(pDoc, pSavedPathNode, L"filter", m_cfg.ui.savedpath.filter.c_str());
+	helper::XML_AddAttribute(pDoc, pSavedPathNode, L"script", m_cfg.ui.savedpath.script.c_str());
 
 	CComPtr<IXMLDOMNode> pRencentRoot;
 	pRootNode->appendChild(helper::XML_CreateNode(pDoc, NODE_ELEMENT, L"recentfiles"), &pRencentRoot);
@@ -307,27 +314,41 @@ bool CConfig::Save()
 	return true;
 }
 
-void CConfig::SetDefaultHilighter()
+void CConfig::SetEmptyValueDefaults()
 {
-	if (m_cfg.hls.size() > 0)
+	// 高亮
+	if (m_cfg.hls.size() == 0)
 	{
-		return;
+		hilighter h;
+
+		h.name = L"调试级别";
+		h.f = new logclass_filter(16, 16);
+		h.d.color = RGB(192, 192, 192);
+		m_cfg.hls.push_back(h);
+
+		h.name = L"警告级别";
+		h.f = new logclass_filter(48, 48);
+		h.d.color = RGB(0, 64, 255);
+		m_cfg.hls.push_back(h);
+
+		h.name = L"错误级别";
+		h.f = new logclass_filter(64, 0);
+		h.d.color = RGB(255, 0, 0);
+		m_cfg.hls.push_back(h);
 	}
 
-	hilighter h;
-
-	h.name = L"调试级别";
-	h.f = new logclass_filter(16, 16);
-	h.d.color = RGB(192, 192, 192);
-	m_cfg.hls.push_back(h);
-
-	h.name = L"警告级别";
-	h.f = new logclass_filter(48, 48);
-	h.d.color = RGB(0, 64, 255);
-	m_cfg.hls.push_back(h);
-
-	h.name = L"错误级别";
-	h.f = new logclass_filter(64, 0);
-	h.d.color = RGB(255, 0, 0);
-	m_cfg.hls.push_back(h);
+	struct inner
+	{
+		static void AssignDefaultDir(std::wstring& path, LPCWSTR subdir)
+		{
+			if (path.empty())
+			{
+				path = helper::GetConfigDir() + L"\\" + subdir;
+				::SHCreateDirectory(NULL, path.c_str());
+			}
+		}
+	};
+	inner::AssignDefaultDir(m_cfg.ui.savedpath.filter, L"filters");
+	inner::AssignDefaultDir(m_cfg.ui.savedpath.logfile, L"logs");
+	inner::AssignDefaultDir(m_cfg.ui.savedpath.script, L"scripts");
 }
