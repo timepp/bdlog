@@ -30,7 +30,7 @@ CRunScriptDlg::CRunScriptDlg()
 	m_colormap[jsparser::ctStringLiteral] = RGB(0, 128, 0);
 	m_colormap[jsparser::ctNumberLiteral] = RGB(224, 0, 0);
 
-	m_colormap[ctApp] = RGB(0, 64, 255);
+	m_colormap[ctApp] = RGB(0, 128, 255);
 }
 
 CRunScriptDlg::~CRunScriptDlg()
@@ -125,31 +125,32 @@ void CRunScriptDlg::ReColorize()
 		// 文本没有变化
 		return;
 	}
+	else
+	{
+		// 根据文本变化调整m_segments
+		CHARRANGE cr;
+		m_edit.GetSel(cr);
+		int delta = m_code.GetLength() - strCode.GetLength();
+		for (jsparser::segments_t::iterator it = m_segments.begin(); it != m_segments.end();)
+		{
+			if (it->range.begin >= cr.cpMin)
+			{
+				it->range.begin -= delta;
+				it->range.end -= delta;
+				// 如果偏移后， 落到插入点左边， 则删除区段
+				if (it->range.begin < cr.cpMin)
+				{
+					it = m_segments.erase(it);
+					continue;
+				}
+			}
+			++it;
+		}
+	}
 
 	jsparser::segments_t segs;
 	jsparser::segments_t diff;
 	m_parser.parse(strCode, segs);
-
-	// 根据文本变化调整m_segments
-	CHARRANGE cr;
-	m_edit.GetSel(cr);
-	int delta = m_code.GetLength() - strCode.GetLength();
-	for (jsparser::segments_t::iterator it = m_segments.begin(); it != m_segments.end();)
-	{
-		if (it->range.begin >= cr.cpMin)
-		{
-			it->range.begin -= delta;
-			it->range.end -= delta;
-			// 如果偏移后， 落到插入点左边， 则删除区段
-			if (it->range.begin < cr.cpMin)
-			{
-				it = m_segments.erase(it);
-				continue;
-			}
-		}
-		++it;
-	}
-
 	std::set_difference(segs.begin(), segs.end(), m_segments.begin(), m_segments.end(), std::back_inserter(diff));
 	AssignCodeColor(diff);
 	m_segments = segs;

@@ -96,6 +96,22 @@ private:
 		return is_num(ch) || (ch >= L'A' && ch <= L'F') || (ch >= L'a' && ch <= L'f');
 	}
 
+	static const wchar_t* lookup_string(const wchar_t* p)
+	{
+		wchar_t ch = *p++;
+		for (; *p; p++)
+		{
+			if (*p == L'\\')
+			{
+				p++;
+				if (!*p) break;
+			}
+			else if (*p == ch) return p + 1;
+		}
+
+		return p;
+	}
+
 	static const wchar_t* lookup_number(const wchar_t* p)
 	{
 		// 1. 0X/0x
@@ -242,13 +258,7 @@ inline bool jsparser::parse(const wchar_t* code, segments_t& segs)
 		else if (ch == L'\"' || ch == L'\'')
 		{
 			// TODO 解析字符串中的转义符
-			const wchar_t* q = p+1;
-			for (; *q; q++)
-			{
-				if (q[0] == L'\\' && q[1]) q++;
-				if (q[0] == ch) {q++; break;}
-			}
-			p = q;
+			p = lookup_string(p);
 			add_segment(segs, code, start, p, ctStringLiteral);
 			start = p;
 		}
