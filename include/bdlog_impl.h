@@ -6,14 +6,11 @@
 
 #include "detail/logcontroller.h"
 
-#if !defined(BDLOG_SELF_BUILD) && !defined(BDLOG_USE_AS_DLL_DYNAMIC_LOAD) && !defined(BDLOG_USE_AS_DLL)
 
-namespace bdlog
+namespace
 {
-	struct helper
-	{
 		__declspec(noinline)
-		static ILogController* GetLogController()
+	static ILogController* RealGetLogController()
 		{
 #pragma warning(push)
 #pragma warning(disable: 4640)
@@ -22,12 +19,11 @@ namespace bdlog
 
 			return &s_controller;
 		}
-	};
 }
 
 BDLOGAPI inline ILogController* GetLogController()
 {
-	return bdlog::helper::GetLogController();
+	return ::RealGetLogController();
 }
-#endif
+
 
