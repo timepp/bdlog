@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bdlog", "bdlog_2012.vcxproj", "{6235A976-3901-4B3B-AACF-5F3E9BFA11CC}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bdlog", "bdlog.vcxproj", "{6235A976-3901-4B3B-AACF-5F3E9BFA11CC}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "testbdlog", "testbdlog_2012.vcxproj", "{8A5ABA52-4791-4F9E-BE94-78213C3A2181}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "testlog", "testlog.vcxproj", "{8A5ABA52-4791-4F9E-BE94-78213C3A2181}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bdlogview", "bdlogview_2012.vcxproj", "{BD966C3A-5865-4EAC-A013-C59FAAB2D23D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bdlogview", "bdlogview.vcxproj", "{BD966C3A-5865-4EAC-A013-C59FAAB2D23D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1361528F-F0E4-4CA9-B947-F5C5F6BAEDBA}"
 EndProject

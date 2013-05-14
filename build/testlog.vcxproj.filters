@@ -15,36 +15,36 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\testbdlog\earlyinvoke.cpp">
+    <ClCompile Include="..\testlog\earlyinvoke.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\testbdlog\file2.cpp">
+    <ClCompile Include="..\testlog\file2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\testbdlog\perftest.cpp">
+    <ClCompile Include="..\testlog\perftest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\testbdlog\stdafx.cpp">
+    <ClCompile Include="..\testlog\stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\testbdlog\testbdlog.cpp">
+    <ClCompile Include="..\testlog\testlog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\testbdlog\profiler.h">
+    <ClInclude Include="..\testlog\profiler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\testbdlog\stdafx.h">
+    <ClInclude Include="..\testlog\stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\testbdlog\targetver.h">
+    <ClInclude Include="..\testlog\targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\testbdlog\testbdlog.h">
+    <ClInclude Include="..\testlog\unittest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\testbdlog\unittest.h">
+    <ClInclude Include="..\testlog\testlog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -2,7 +2,7 @@
 //
 
 #include "stdafx.h"
-#include "testbdlog.h"
+#include "testlog.h"
 #include <atlstr.h>
 #include <vector>
 #include <iostream>
