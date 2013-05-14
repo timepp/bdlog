@@ -11,11 +11,13 @@ class CLogPropertyDB : public tp::service_impl<SID_LogPropertyDB>, public CLogCe
 public:
 	typedef std::set<std::wstring> TagSet;
 	typedef std::set<UINT> LevelSet;
+	TP_SET_DEPENDENCIES(create, );
+	TP_SET_DEPENDENCIES(destroy, SID_LogCenter);
 
 public:
 	void Init()
 	{
-		SERVICE(CLogCenter)->AddListener(this);
+		tp::global_service<CLogCenter>()->AddListener(this);
 	}
 
 	void AddLevel(UINT32 lvl)
@@ -94,13 +96,11 @@ public:
 		m_defaultlvlset.insert(0x25);
 		m_defaultlvlset.insert(0x30);
 		m_defaultlvlset.insert(0x40);
-
-		tp::servicemgr::instance().add_destroy_dependency(service_id, SID_LogCenter);
 	}
 
 	~CLogPropertyDB()
 	{
-		SERVICE(CLogCenter)->RemoveListener(this);
+		tp::global_service<CLogCenter>()->RemoveListener(this);
 	}
 
 	static CLogPropertyDB& Instance()
@@ -136,4 +136,4 @@ private:
 	int m_lvlVersion;
 };
 
-DEFINE_SERVICE(CLogPropertyDB, L"日志属性管理器");
+TP_DEFINE_GLOBAL_SERVICE(CLogPropertyDB, L"日志属性管理器");

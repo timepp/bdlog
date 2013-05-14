@@ -5,6 +5,9 @@
 
 class CScriptHost : public tp::service_impl<SID_ScriptHost>
 {
+	TP_SET_DEPENDENCIES(create, );
+	TP_SET_DEPENDENCIES(destroy, );
+
 public:
 	CScriptHost();
 	~CScriptHost();
@@ -16,4 +19,4 @@ private:
 	CComPtr<IActiveScriptSite> m_scriptSite;
 };
 
-DEFINE_SERVICE(CScriptHost, L"脚本运行支持");
+TP_DEFINE_GLOBAL_SERVICE(CScriptHost, L"脚本运行支持");

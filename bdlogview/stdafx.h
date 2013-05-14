@@ -66,4 +66,4 @@ BD_TUNE_WARNINGS
 
 #include "common.h"
 
-#define SERVICE(x) tp::servicemgr::get<x>()
+#define SERVICE(x) tp::global_service<x>()

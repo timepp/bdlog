@@ -411,9 +411,10 @@ LRESULT CMainFrame::OnEditXlogIni(WORD, WORD, HWND, BOOL&)
 
 LRESULT CMainFrame::OnEditDebugset(WORD, WORD, HWND, BOOL&)
 {
-	CStringW strPath = helper::ExpandPath(BSP_DEBUGSET_INI);
-	helper::WriteFileIfNotExist(strPath, MAKEINTRESOURCEW(IDR_DEBUGSET_INI), L"PDATA");
-	::ShellExecuteW(m_hWnd, L"open", strPath, NULL, NULL, SW_SHOW);
+	// TODO delete function
+//	CStringW strPath = helper::ExpandPath(BSP_DEBUGSET_INI);
+//	helper::WriteFileIfNotExist(strPath, MAKEINTRESOURCEW(IDR_DEBUGSET_INI), L"PDATA");
+//	::ShellExecuteW(m_hWnd, L"open", strPath, NULL, NULL, SW_SHOW);
 	return 0;
 }
 

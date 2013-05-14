@@ -10,7 +10,7 @@ struct ServiceHelper
 {
 	static CLogPropertyDB* GetLogPropertyDB()
 	{
-		return tp::servicemgr::get<CLogPropertyDB>();
+		return tp::global_service<CLogPropertyDB>();
 	}
 	static CLogCenter* GetLogCenter()
 	{

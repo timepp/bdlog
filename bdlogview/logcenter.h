@@ -24,6 +24,9 @@ public:
 
 class CLogCenter : public tp::service_impl<SID_LogCenter>, public bdlog::log_listener, public bdlog::log_source_support
 {
+	TP_SET_DEPENDENCIES(create, );
+	TP_SET_DEPENDENCIES(destroy, );
+
 public:
 	CLogCenter();
 	~CLogCenter();
@@ -113,4 +116,4 @@ private:
 	CStringW m_cfgPathReg;
 };
 
-DEFINE_SERVICE(CLogCenter, L"日志内容管理中心");
+TP_DEFINE_GLOBAL_SERVICE(CLogCenter, L"日志内容管理中心");

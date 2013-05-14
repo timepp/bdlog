@@ -399,7 +399,7 @@ BEGIN
     DEFPUSHBUTTON   "运行",IDOK,398,155,50,14
     PUSHBUTTON      "保存脚本...(&S)",IDC_BTN_SAVESCRIPT,78,155,66,14
     PUSHBUTTON      "加载脚本...(&L)",IDC_BTN_LOADSCRIPT,7,155,66,14
-    CONTROL         "",IDC_EDIT_SCRIPT,"RichEdit20W",ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_NOHIDESEL | ES_WANTRETURN | WS_BORDER | WS_VSCROLL | WS_HSCROLL | WS_TABSTOP,7,7,441,142
+    CONTROL         "",IDC_EDIT_SCRIPT,"RichEdit20W",WS_BORDER | WS_VSCROLL | WS_HSCROLL | WS_TABSTOP | 0x11c4,7,7,441,142
 END
 
 IDD_SIMPLE_INPUT DIALOGEX 0, 0, 292, 90
@@ -842,15 +842,6 @@ END
 
 /////////////////////////////////////////////////////////////////////////////
 //
-// PDATA
-//
-
-3                       PDATA                   "res\\help.txt"
-IDR_BDXLOG_INI          PDATA                   "res\\bdxlog.ini"
-IDR_DEBUGSET_INI        PDATA                   "res\\debugset.ini"
-
-/////////////////////////////////////////////////////////////////////////////
-//
 // Icon
 //
 
@@ -880,26 +871,6 @@ IDI_TID                 ICON                    "res\\tid.ico"
 IDI_PROCESS             ICON                    "res\\application.ico"
 IDI_LEVEL               ICON                    "res\\level.ico"
 IDI_FILTER              ICON                    "res\\filter.ico"
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// Toolbar
-//
-
-IDR_MAINFRAME TOOLBAR 16, 15
-BEGIN
-    BUTTON      ID_START_MONITOR
-    BUTTON      ID_STOP_MONITOR
-END
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// Bitmap
-//
-
-IDR_MAINFRAME           BITMAP                  "res\\toolbar1.bmp"
-IDB_BITMAP1             BITMAP                  "res\\bitmap1.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //

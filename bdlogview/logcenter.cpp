@@ -277,7 +277,7 @@ void CLogCenter::UnlockLog()
 
 bool CLogCenter::EnablePipeDeviceFile(bool bEnable)
 {
-	helper::WriteFileIfNotExist(m_cfgPathFile, MAKEINTRESOURCEW(IDR_BDXLOG_INI), L"PDATA");
+//	helper::WriteFileIfNotExist(m_cfgPathFile, MAKEINTRESOURCEW(IDR_BDXLOG_INI), L"PDATA");
 
 	CStringW desiredEnableString = bEnable? L"enable:true" : L"enable:false";
 	WCHAR buffer[4096];

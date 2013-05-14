@@ -101,7 +101,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPWSTR lps
 
 	CConfig::Instance()->Save();
 
-	tp::servicemgr::instance().destroy_all_services();
+	tp::global_servicemgr().destroy_all_services();
 
 	return nRet;
 }

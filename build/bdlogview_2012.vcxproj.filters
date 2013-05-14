@@ -91,15 +91,6 @@
     <ClCompile Include="..\bdlogview\scripthost.cpp">
       <Filter>Scripting</Filter>
     </ClCompile>
-    <ClCompile Include="..\bdlogview\dlldata.c">
-      <Filter>Scripting</Filter>
-    </ClCompile>
-    <ClCompile Include="..\bdlogview\bdlogview_i.c">
-      <Filter>Scripting</Filter>
-    </ClCompile>
-    <ClCompile Include="..\bdlogview\bdlogview_p.c">
-      <Filter>Scripting</Filter>
-    </ClCompile>
     <ClCompile Include="..\bdlogview\updater.cpp">
       <Filter>Helper</Filter>
     </ClCompile>
@@ -113,6 +104,15 @@
       <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="..\bdlogview\runscriptdlg.cpp">
+      <Filter>Scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="..\bdlogview\bdlogview_i.c">
+      <Filter>Scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="..\bdlogview\bdlogview_p.c">
+      <Filter>Scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="..\bdlogview\dlldata.c">
       <Filter>Scripting</Filter>
     </ClCompile>
   </ItemGroup>
@@ -207,9 +207,6 @@
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="..\bdlogview\serviceid.h" />
-    <ClInclude Include="..\bdlogview\bdlogview_h.h">
-      <Filter>Scripting</Filter>
-    </ClInclude>
     <ClInclude Include="..\bdlogview\scripthost.h">
       <Filter>Scripting</Filter>
     </ClInclude>
@@ -217,15 +214,15 @@
       <Filter>Scripting</Filter>
     </ClInclude>
     <ClInclude Include="..\bdlogview\jsparser.h" />
+    <ClInclude Include="..\bdlogview\bdlogview_h.h">
+      <Filter>Scripting</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\bdlogview\res\advanced.ico">
       <Filter>#Resource</Filter>
     </Image>
     <Image Include="..\bdlogview\res\application.ico">
-      <Filter>#Resource</Filter>
-    </Image>
-    <Image Include="..\bdlogview\res\bitmap1.bmp">
       <Filter>#Resource</Filter>
     </Image>
     <Image Include="..\bdlogview\res\clear.ico">
@@ -291,9 +288,6 @@
     <Image Include="..\bdlogview\res\tid.ico">
       <Filter>#Resource</Filter>
     </Image>
-    <Image Include="..\bdlogview\res\toolbar1.bmp">
-      <Filter>#Resource</Filter>
-    </Image>
     <Image Include="..\bdlogview\res\tree.ico">
       <Filter>#Resource</Filter>
     </Image>
@@ -308,9 +302,7 @@
     <None Include="..\bdlogview\res\debugset.ini">
       <Filter>#Resource</Filter>
     </None>
-    <None Include="..\bdlogview\bdlogview.tlb">
-      <Filter>Scripting</Filter>
-    </None>
+    <None Include="..\bdlogview\bdlogview.tlb" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\bdlogview\res\help.txt">

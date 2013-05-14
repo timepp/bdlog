@@ -11,7 +11,6 @@
 #define IDD_LOGINFO                     103
 #define ID_PANE_WORKTHREAD_COUNT        103
 #define IDR_MENU1                       104
-#define IDR_DEBUGSET_INI                104
 #define IDD_SEARCH_DLG                  105
 #define IDC_TOOLBAR                     105
 #define IDC_SEARCH_EDIT                 106
@@ -24,7 +23,6 @@
 #define IDI_MAIN                        116
 #define IDR_MAINFRAME                   116
 #define IDR_FSAFDSA1                    117
-#define IDR_BDXLOG_INI                  119
 #define IDR_CONTEXTMENU                 122
 #define IDD_OPTION                      124
 #define IDD_FILTER_EDIT                 125
@@ -32,7 +30,6 @@
 #define IDD_FILTER_TREE                 127
 #define IDD_FILTER_EDIT_LOGCLASS        128
 #define IDD_FILTER_ADVANCED             129
-#define IDB_BITMAP1                     129
 #define IDD_FILTER_SET                  130
 #define IDI_OPEN                        130
 #define IDI_SAVE                        131

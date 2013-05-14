@@ -116,7 +116,7 @@ CVisualLogic::CVisualLogic()
 
 CVisualLogic::~CVisualLogic()
 {
-	
+	Uninit();
 }
 
 void CVisualLogic::Init()

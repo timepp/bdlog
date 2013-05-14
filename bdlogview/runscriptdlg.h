@@ -11,6 +11,9 @@ class CRunScriptDlg
 	, public CDialogResize<CRunScriptDlg>
 	, public CModlessDlgKeyProcessor
 {
+	TP_SET_DEPENDENCIES(create, );
+	TP_SET_DEPENDENCIES(destroy, );
+
 public:
 	enum {IDD = IDD_RUNSCRIPT};
 
@@ -61,4 +64,4 @@ public:
 	LRESULT OnEnUpdateEditScript(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
 };
 
-DEFINE_SERVICE(CRunScriptDlg, L"运行Script");
+TP_DEFINE_GLOBAL_SERVICE(CRunScriptDlg, L"运行Script");

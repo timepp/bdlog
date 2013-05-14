@@ -196,7 +196,6 @@
   <ItemGroup>
     <Image Include="..\bdlogview\res\advanced.ico" />
     <Image Include="..\bdlogview\res\application.ico" />
-    <Image Include="..\bdlogview\res\bitmap1.bmp" />
     <Image Include="..\bdlogview\res\clear.ico" />
     <Image Include="..\bdlogview\res\content.ico" />
     <Image Include="..\bdlogview\res\Down.ico" />
@@ -219,7 +218,6 @@
     <Image Include="..\bdlogview\res\stop.ico" />
     <Image Include="..\bdlogview\res\tag.ico" />
     <Image Include="..\bdlogview\res\tid.ico" />
-    <Image Include="..\bdlogview\res\toolbar1.bmp" />
     <Image Include="..\bdlogview\res\tree.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -235,7 +233,10 @@
     <Text Include="..\bdlogview\ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Midl Include="..\bdlogview\bdlogview.idl" />
+    <Midl Include="..\bdlogview\bdlogview.idl">
+      <OutputDirectory Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(bdlogroot)\bdlogview</OutputDirectory>
+      <TypeLibraryName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(bdlogroot)\bdlogview\bdlogview.tlb</TypeLibraryName>
+    </Midl>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

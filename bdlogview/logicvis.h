@@ -42,6 +42,9 @@ typedef std::map<UINT32, process_info*> process_map_t;
 
 class CVisualLogic : public tp::service_impl<SID_VisualLogic>, public CLogCenterListener
 {
+	TP_SET_DEPENDENCIES(create, );
+	TP_SET_DEPENDENCIES(destroy, SID_LogCenter);
+
 public:
 	CVisualLogic();
 	~CVisualLogic();
@@ -69,4 +72,4 @@ private:
 	LONGLONG m_pf;
 };
 
-DEFINE_SERVICE(CVisualLogic, L"逻辑可视化信息中心");
+TP_DEFINE_GLOBAL_SERVICE(CVisualLogic, L"逻辑可视化信息中心");
