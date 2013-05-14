@@ -65,13 +65,14 @@
       <SubSystem>Windows</SubSystem>
       <Profile>true</Profile>
     </Link>
-    <Manifest>
-      <AdditionalManifestFiles>$(bdlogroot)\thirdsrc\xpstyle.manifest;%(AdditionalManifestFiles)</AdditionalManifestFiles>
-    </Manifest>
+    <Manifest />
     <Midl>
       <OutputDirectory>$(bdlogroot)\bdlogview</OutputDirectory>
       <TypeLibraryName>$(bdlogroot)\bdlogview\bdlogview.tlb</TypeLibraryName>
     </Midl>
+    <Manifest>
+      <AdditionalManifestFiles>$(bdlogroot)\thirdparty\xpstyle.manifest</AdditionalManifestFiles>
+    </Manifest>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -90,7 +91,7 @@
       <Profile>true</Profile>
     </Link>
     <Manifest>
-      <AdditionalManifestFiles>$(bdlogroot)\thirdsrc\xpstyle.manifest;%(AdditionalManifestFiles)</AdditionalManifestFiles>
+      <AdditionalManifestFiles>$(bdlogroot)\thirdparty\xpstyle.manifest</AdditionalManifestFiles>
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>

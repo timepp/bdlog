@@ -3,7 +3,7 @@
 #include "filter.h"
 
 #pragma warning(push, 1)
-#include "thirdparty/atlserver/atlrx.h"
+#include <atlserver/atlrx.h>
 #pragma warning(pop)
 
 class logclass_filter: public filter, public leaf
