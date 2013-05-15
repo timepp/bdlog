@@ -2,17 +2,17 @@
 #include "scripthost.h"
 #include "logcenter.h"
 
-#include "bdlogview_h.h"
+#include "tplogview_h.h"
 
 const GUID CLSID_VBScript = {0xb54f3741, 0x5b07, 0x11cf, {0xa4, 0xb0, 0x00, 0xaa, 0x00, 0x4a, 0x55, 0xe8}};
 const GUID CLSID_JScript  = {0xf414c260, 0x6ac0, 0x11cf, {0xb6, 0xd1, 0x00, 0xaa, 0x00, 0xbb, 0xbb, 0x58}};
 
-DECLARE_LIBID(LIBID_BdLogviewLib);
+DECLARE_LIBID(LIBID_TpLogviewLib);
 
 class ATL_NO_VTABLE CCoLogItem
 	: public CComObjectRootEx<CComSingleThreadModel>
 	, public CComCoClass<CCoLogItem, &CLSID_LogItem>
-	, public IDispatchImpl<ILogItem, &IID_ILogItem, &LIBID_BdLogviewLib, -1, -1>
+	, public IDispatchImpl<ILogItem, &IID_ILogItem, &LIBID_TpLogviewLib, -1, -1>
 {
 	friend class CCoLogCenter;
 public:
@@ -77,7 +77,7 @@ private:
 		{
 			m_info = new LogInfo();
 			*m_info = *info;
-			m_info->item = new bdlog::logitem;
+			m_info->item = new tplog::logitem;
 			*m_info->item = *info->item;
 		}
 	}
@@ -87,7 +87,7 @@ private:
 class ATL_NO_VTABLE CCoLogCenter
 	: public CComObjectRootEx<CComSingleThreadModel>
 	, public CComCoClass<CCoLogCenter, &CLSID_LogCenter>
-	, public IDispatchImpl<ILogCenter, &IID_ILogCenter, &LIBID_BdLogviewLib, -1 ,-1>
+	, public IDispatchImpl<ILogCenter, &IID_ILogCenter, &LIBID_TpLogviewLib, -1 ,-1>
 {
 public:
 	virtual ~CCoLogCenter() {}
@@ -118,31 +118,31 @@ public:
 };
 
 
-class ATL_NO_VTABLE CCoBDLogView
+class ATL_NO_VTABLE CCoTPLogView
 	: public CComObjectRootEx<CComSingleThreadModel>
-	, public CComCoClass<CCoBDLogView, &CLSID_BdLogView>
-	, public IDispatchImpl<IBdLogView, &IID_IBdLogView, &LIBID_BdLogviewLib, -1 ,-1>
+	, public CComCoClass<CCoTPLogView, &CLSID_TpLogView>
+	, public IDispatchImpl<ITpLogView, &IID_ITpLogView, &LIBID_TpLogviewLib, -1 ,-1>
 {
 private:
 	CComPtr<ILogCenter> m_logCenter;
 public:
-	CCoBDLogView()
+	CCoTPLogView()
 	{
 		CComObject<CCoLogCenter>* obj = NULL;
 		CComObject<CCoLogCenter>::CreateInstance(&obj);
 		m_logCenter = obj;
 	}
 
-	virtual ~CCoBDLogView() {}
+	virtual ~CCoTPLogView() {}
 
-	BEGIN_COM_MAP(CCoBDLogView)
+	BEGIN_COM_MAP(CCoTPLogView)
 		COM_INTERFACE_ENTRY(IDispatch)
-		COM_INTERFACE_ENTRY(IBdLogView)
+		COM_INTERFACE_ENTRY(ITpLogView)
 	END_COM_MAP()
 
 	STDMETHOD(MessageBox)(BSTR text, VARIANT title)
 	{
-		if (title.vt != VT_BSTR) title.bstrVal = L"bdlogview重云";
+		if (title.vt != VT_BSTR) title.bstrVal = L"tplogview重云";
 		::MessageBoxW(NULL, text, title.bstrVal, MB_OK);
 		return S_OK;
 	}
@@ -157,12 +157,12 @@ class ATL_NO_VTABLE CActiveScriptSite
 	: public CComObjectRootEx<CComSingleThreadModel>
 	, public IActiveScriptSite
 {
-	CComPtr<IBdLogView> m_app;
+	CComPtr<ITpLogView> m_app;
 public:
 	CActiveScriptSite()
 	{
-		CComObject<CCoBDLogView>* obj = NULL;
-		CComObject<CCoBDLogView>::CreateInstance(&obj);
+		CComObject<CCoTPLogView>* obj = NULL;
+		CComObject<CCoTPLogView>::CreateInstance(&obj);
 		m_app = obj;
 	}
 	virtual ~CActiveScriptSite()

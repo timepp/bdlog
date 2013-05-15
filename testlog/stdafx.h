@@ -32,7 +32,7 @@ BD_NO_WARNING_AREA_BEGIN()
 BD_NO_WARNING_AREA_END()
 BD_TUNE_WARNINGS
 
-#include <bdlog.h>
-#include <bdlog_util.h>
+#include <tplog.h>
+#include <tplog_util.h>
 
 #include "profiler.h"

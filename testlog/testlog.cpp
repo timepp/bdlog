@@ -1,6 +1,3 @@
-// testbdlog.cpp : Defines the entry point for the application.
-//
-
 #include "stdafx.h"
 #include "testlog.h"
 #include <atlstr.h>
@@ -10,7 +7,7 @@
 #include "unittest.h"
 #include <map>
 #include <string>
-#include <bdlog_impl.h>
+#include <tplog_impl.h>
 
 #define TPUT_MODNAME Main
 
@@ -121,7 +118,7 @@ void TEST_OutputDevice_File()
 	ILogController* ctrl = GetLogController();
 	ctrl->RemoveOutputDevice(NULL);
 
-	ctrl->AddOutputDevice(L"file", LODT_FILE, L"enable:1 path:'%appdata%\\${PID}${}${$}_${T}_a${DATE}_b${TIME}_u${no}${u${.bdlog'");
+	ctrl->AddOutputDevice(L"file", LODT_FILE, L"enable:1 path:'%appdata%\\${PID}${}${$}_${T}_a${DATE}_b${TIME}_u${no}${u${.tplog'");
 	Log(LL_EVENT, NOTAG, L"日志来了");
 
 	ctrl->RemoveOutputDevice(NULL);
@@ -129,20 +126,20 @@ void TEST_OutputDevice_File()
 	// TODO 测试日志路径不存在的时候，文件日志设备是否会自动创建
 }
 
-HRESULT TEST_BD_CHECK()
+HRESULT TEST_TP_CHECK()
 {
-	BD_CHECK(GetCurrentThreadId() == 0, IGNORE_FAIL);
-	BD_CHECK(GetCurrentThreadId() == 10, RETURN_HR_ON_FAIL);
-	BD_CHECK_HR(GetCurrentThreadId() == 10, RETURN_HR_ON_FAIL);
+	TP_CHECK(GetCurrentThreadId() == 0, IGNORE_FAIL);
+	TP_CHECK(GetCurrentThreadId() == 10, RETURN_HR_ON_FAIL);
+	TP_CHECK_HR(GetCurrentThreadId() == 10, RETURN_HR_ON_FAIL);
 
-//	BD_VERIFY(6 - 6 == 1);
-//	BD_ENSURE_RETURN(3-3!=0, );
+//	TP_VERIFY(6 - 6 == 1);
+//	TP_ENSURE_RETURN(3-3!=0, );
 
 //	BOOL ret = ::WriteFile(NULL, NULL, 0, 0, NULL);
-//	BD_ENSURE_WINAPI_RETURN_HR(ret);
+//	TP_ENSURE_WINAPI_RETURN_HR(ret);
 
 //	HRESULT hr = E_FAIL;
-//	BD_ENSURE_SUCCEEDED_RETURN_HR(hr);
+//	TP_ENSURE_SUCCEEDED_RETURN_HR(hr);
 
 	return S_OK;
 }
@@ -166,7 +163,6 @@ void TEST_ManyManyLog()
 void TEST_DeadLoop()
 {
 	ILogController* ctrl = GetLogController();
-	ctrl->AddOutputDevice(L"pipe", LODT_PIPE, L"enable:true notify_old:true name:bd_log_receiver");
 	ctrl->AddOutputDevice(L"pipe2", LODT_PIPE, L"enable:true");
 
 	const wchar_t * longstr = L"aaaaassssssssssssssssssssssssssaaaaaaaaaaassssssssssssssssssssssssssaaaaaaaaaaassssssssssssssssssssssssssaaaaaaaaaaassssssssssssssssssssssssssaaaaaaaaaaassssssssssssssssssssssssssaaaaaaaaaaassssssssssssssssssssssssssaaaaaaaaaaassssssssssssssssssssssssssaaaaaaaaaaassssssssssssssssssssssssssaaaaaaaaaaassssssssssssssssssssssssssaaaaaaaaaaassssssssssssssssssssssssssaaaaaaaaaaassssssssssssssssssssssssssaaaaaaaaaaassssssssssssssssssssssssssaaaaaaaaaaassssssssssssssssssssssssssaaaaaaaaaaassssssssssssssssssssssssssaaaaaaaaaaassssssssssssssssssssssssssaaaaaaaaaaassssssssssssssssssssssssssaaaaaaaaaaassssssssssssssssssssssssssaaaaaaaaaaassssssssssssssssssssssssssaaaaaaaaaaassssssssssssssssssssssssssaaaaaaaaaaassssssssssssssssssssssssssaaaaaaaaaaassssssssssssssssssssssssssaaaaaaaaaaassssssssssssssssssssssssssaaaaaaaaaaassssssssssssssssssssssssssaaaaaaaaaaassssssssssssssssssssssssssaaaaaaaaaaassssssssssssssssssssssssssaaaaaaaaaaassssssssssssssssssssssssssaaaaaaaaaaasssssssssssssssssssssssssaaaaassssssssssssssssssssssssssaaaaaaaaaaasssssssssssssssssssssssssaaaaassssssssssssssssssssssssssaaaaaaaaaaasssssssssssssssssssssssssaaaaassssssssssssssssssssssssssaaaaaaaaaaasssssssssssssssssssssssssaaaaassssssssssssssssssssssssssaaaaaaaaaaasssssssssssssssssssssssssaaaaassssssssssssssssssssssssssaaaaaaaaaaasssssssssssssssssssssssssaaaaassssssssssssssssssssssssssaaaaaaaaaaasssssssssssssssssssssssssaaaaassssssssssssssssssssssssssaaaaaaaaaaasssssssssssssssssssssssssaaaaassssssssssssssssssssssssssaaaaaaaaaaasssssssssssssssssssssssssaaaaassssssssssssssssssssssssssaaaaaaaaaaasssssssssssssssssssssssssaaaaassssssssssssssssssssssssssaaaaaaaaaaasssssssssssssssssssssssssaaaaassssssssssssssssssssssssssaaaaaaaaaaasssssssssssssssssssssssssaaaaassssssssssssssssssssssssssaaaaaaaaaaasssssssssssssssssssssssssaaaaassssssssssssssssssssssssssaaaaaaaaaaasssssssssssssssssssssssssaaaaassssssssssssssssssssssssssaaaaaaaaaaasssssssssssssssssssssssssaaaaassssssssssssssssssssssssssaaaaaaaaaaasssssssssssssssssssssssssaaaaassssssssssssssssssssssssssaaaaaaaaaaasssssssssssssssssssssssssaaaaassssssssssssssssssssssssssaaaaaaaaaaasssssssssssssssssssssssssaaaaassssssssssssssssssssssssssaaaaaaaaaaasssssssssssssssssssssssssaaaaassssssssssssssssssssssssssaaaaaaaaaaasssssssssssssssssssssssssaaaaassssssssssssssssssssssssssaaaaaaaaaaasssssssssssssssssssssssssaaaaassssssssssssssssssssssssssaaaaaaaaaaasssssssssssssssssssssssssaaaaassssssssssssssssssssssssssaaaaaaaaaaasssssssssssssssssssssssss";
@@ -198,7 +194,7 @@ void TEST_Basic()
 	ctrl->RemoveOutputDevice(L"pipe");
 }
 
-bdlog::fmter& operator<<(bdlog::fmter& fmt, const RECT& /*rc*/)
+tplog::fmter& operator<<(tplog::fmter& fmt, const RECT& /*rc*/)
 {
 	return fmt;
 }
@@ -238,7 +234,7 @@ TPUT_DEFINE_BLOCK(L"Init", L"")
 			ret[i++] = ctrl->RemoveOutputDevice(L"aaa");
 			for (size_t j = 0; j < i; j++)
 			{
-				if (ret[j] != BDLOG_E_NOT_INITED) return false;
+				if (ret[j] != TPLOG_E_NOT_INITED) return false;
 			}
 			return true;
 		}
@@ -255,7 +251,7 @@ TPUT_DEFINE_BLOCK(L"Init", L"")
 	TPUT_EXPECT(SUCCEEDED(ctrl->Init(NULL)));
 
 	ctrl->Init(L".");
-	TPUT_EXPECT_WITH_MSG(ctrl->Init(L".") == BDLOG_E_ALREADY_INITED, L"重复初始化时返回对应的错误码");
+	TPUT_EXPECT_WITH_MSG(ctrl->Init(L".") == TPLOG_E_ALREADY_INITED, L"重复初始化时返回对应的错误码");
 
 	HRESULT hr = S_OK;
 	for (size_t i = 0; i < 100; i++)
@@ -510,7 +506,7 @@ TPUT_DEFINE_BLOCK(L"#a3", L"")
 	ILogController* ctrl = GetLogController();
 	HRESULT hr;
 	ctrl->Init(L".");
-	TPUT_EXPECT(ctrl->RemoveOutputDevice(L"aaa") == BDLOG_E_NOT_INITED);
+	TPUT_EXPECT(ctrl->RemoveOutputDevice(L"aaa") == TPLOG_E_NOT_INITED);
 }
 
 TPUT_DEFINE_BLOCK(L"#初始化日志系统", L"")

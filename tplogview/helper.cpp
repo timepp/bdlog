@@ -775,7 +775,7 @@ CStringW helper::GetConfigDir()
 	SHGetFolderPathW(NULL, CSIDL_APPDATA, NULL, SHGFP_TYPE_CURRENT, szPath);
 	strPath = szPath;
 
-	strPath += L"\\Baidu\\bdlogview";
+	strPath += L"\\Baidu\\tplogview";
 	::SHCreateDirectory(NULL, strPath);
 
 	return strPath;

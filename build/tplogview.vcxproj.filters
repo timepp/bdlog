@@ -1,0 +1,323 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Helper">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="#Resource">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="Filter">
+      <UniqueIdentifier>{0fccf1f9-ce7b-47f2-a0c4-df4af5731ef8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{fbe6e39c-7724-4670-b7e5-66eb75e33ee5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Config">
+      <UniqueIdentifier>{6871dab9-a20c-4f50-9769-878787235f1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripting">
+      <UniqueIdentifier>{803a8078-d202-4b1a-b651-405b4712a6bf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\tplogview\helper.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tplogview\advancedfiltereditdlg.cpp">
+      <Filter>Filter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tplogview\concretefiltereditdlg.CPP">
+      <Filter>Filter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tplogview\filter.cpp">
+      <Filter>Filter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tplogview\filtercreator.cpp">
+      <Filter>Filter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tplogview\filtereditdlg.cpp">
+      <Filter>Filter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tplogview\filtersetdlg.cpp">
+      <Filter>Filter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tplogview\graphicfiltereditdlg.cpp">
+      <Filter>Filter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tplogview\hilightereditdlg.cpp">
+      <Filter>Filter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tplogview\hilightermanagedlg.cpp">
+      <Filter>Filter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tplogview\simplefiltereditdlg.cpp">
+      <Filter>Filter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tplogview\loginfodlg.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tplogview\logsourceinfodlg.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tplogview\mainframe.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tplogview\quickfilterdlg.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tplogview\specialpathdlg.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tplogview\tagselector.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tplogview\config.cpp">
+      <Filter>Config</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tplogview\logicvis.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tplogview\vislogicdlg.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tplogview\tplogview.cpp" />
+    <ClCompile Include="..\tplogview\stdafx.cpp" />
+    <ClCompile Include="..\tplogview\logcenter.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tplogview\scripthost.cpp">
+      <Filter>Scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tplogview\updater.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tplogview\aboutdlg.CPP">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tplogview\optiondlg.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tplogview\optpage.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tplogview\runscriptdlg.cpp">
+      <Filter>Scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tplogview\tplogview_i.c">
+      <Filter>Scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tplogview\tplogview_p.c">
+      <Filter>Scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tplogview\dlldata.c">
+      <Filter>Scripting</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\tplogview\helper.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tplogview\taglist.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tplogview\concretefilter.h">
+      <Filter>Filter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tplogview\concretefiltereditdlg.h">
+      <Filter>Filter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tplogview\filter.h">
+      <Filter>Filter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tplogview\filtercreator.h">
+      <Filter>Filter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tplogview\filtereditdlg.h">
+      <Filter>Filter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tplogview\filtersetdlg.h">
+      <Filter>Filter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tplogview\hilightereditdlg.h">
+      <Filter>Filter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tplogview\hilightermanagedlg.h">
+      <Filter>Filter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tplogview\serializer.h">
+      <Filter>Filter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tplogview\aboutdlg.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tplogview\colorselector.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tplogview\droptarget.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tplogview\firsttimedlg.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tplogview\historycombo.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tplogview\loginfodlg.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tplogview\logsourceinfodlg.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tplogview\mainframe.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tplogview\modelesskeyprocessor.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tplogview\quickfilterdlg.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tplogview\searchdlg.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tplogview\specialpathdlg.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tplogview\tagselector.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tplogview\whitebkdlg.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tplogview\config.h">
+      <Filter>Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tplogview\common.h" />
+    <ClInclude Include="..\tplogview\logpropdb.h" />
+    <ClInclude Include="..\tplogview\msgfilter.h" />
+    <ClInclude Include="..\tplogview\Resource.h" />
+    <ClInclude Include="..\tplogview\stdafx.h" />
+    <ClInclude Include="..\tplogview\targetver.h" />
+    <ClInclude Include="..\tplogview\uipublic.h" />
+    <ClInclude Include="..\tplogview\logcenter.h" />
+    <ClInclude Include="..\tplogview\vislogicdlg.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tplogview\serviceid.h" />
+    <ClInclude Include="..\tplogview\scripthost.h">
+      <Filter>Scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tplogview\runscriptdlg.h">
+      <Filter>Scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tplogview\jsparser.h" />
+    <ClInclude Include="..\tplogview\tplogview_h.h">
+      <Filter>Scripting</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\tplogview\res\advanced.ico">
+      <Filter>#Resource</Filter>
+    </Image>
+    <Image Include="..\tplogview\res\application.ico">
+      <Filter>#Resource</Filter>
+    </Image>
+    <Image Include="..\tplogview\res\clear.ico">
+      <Filter>#Resource</Filter>
+    </Image>
+    <Image Include="..\tplogview\res\content.ico">
+      <Filter>#Resource</Filter>
+    </Image>
+    <Image Include="..\tplogview\res\Down.ico">
+      <Filter>#Resource</Filter>
+    </Image>
+    <Image Include="..\tplogview\res\Edit.ico">
+      <Filter>#Resource</Filter>
+    </Image>
+    <Image Include="..\tplogview\res\icon3.ico">
+      <Filter>#Resource</Filter>
+    </Image>
+    <Image Include="..\tplogview\res\level.ico">
+      <Filter>#Resource</Filter>
+    </Image>
+    <Image Include="..\tplogview\res\logical_and.ico">
+      <Filter>#Resource</Filter>
+    </Image>
+    <Image Include="..\tplogview\res\logical_not.ico">
+      <Filter>#Resource</Filter>
+    </Image>
+    <Image Include="..\tplogview\res\logical_or.ico">
+      <Filter>#Resource</Filter>
+    </Image>
+    <Image Include="..\tplogview\res\open.ico">
+      <Filter>#Resource</Filter>
+    </Image>
+    <Image Include="..\tplogview\res\pid.ico">
+      <Filter>#Resource</Filter>
+    </Image>
+    <Image Include="..\tplogview\res\save.ico">
+      <Filter>#Resource</Filter>
+    </Image>
+    <Image Include="..\tplogview\res\simple.ico">
+      <Filter>#Resource</Filter>
+    </Image>
+    <Image Include="..\tplogview\res\simplify.ico">
+      <Filter>#Resource</Filter>
+    </Image>
+    <Image Include="..\tplogview\res\star.ico">
+      <Filter>#Resource</Filter>
+    </Image>
+    <Image Include="..\tplogview\res\star_next.ico">
+      <Filter>#Resource</Filter>
+    </Image>
+    <Image Include="..\tplogview\res\star_prev.ico">
+      <Filter>#Resource</Filter>
+    </Image>
+    <Image Include="..\tplogview\res\start.ico">
+      <Filter>#Resource</Filter>
+    </Image>
+    <Image Include="..\tplogview\res\stop.ico">
+      <Filter>#Resource</Filter>
+    </Image>
+    <Image Include="..\tplogview\res\tag.ico">
+      <Filter>#Resource</Filter>
+    </Image>
+    <Image Include="..\tplogview\res\tid.ico">
+      <Filter>#Resource</Filter>
+    </Image>
+    <Image Include="..\tplogview\res\tree.ico">
+      <Filter>#Resource</Filter>
+    </Image>
+    <Image Include="..\tplogview\res\filter.ico">
+      <Filter>#Resource</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\tplogview\res\bdxlog.ini">
+      <Filter>#Resource</Filter>
+    </None>
+    <None Include="..\tplogview\res\debugset.ini">
+      <Filter>#Resource</Filter>
+    </None>
+    <None Include="..\tplogview\tplogview.tlb">
+      <Filter>Scripting</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\tplogview\res\help.txt">
+      <Filter>#Resource</Filter>
+    </Text>
+    <Text Include="..\tplogview\ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="..\tplogview\tplogview.idl">
+      <Filter>Scripting</Filter>
+    </Midl>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\tplogview\tplogview.rc" />
+  </ItemGroup>
+</Project>

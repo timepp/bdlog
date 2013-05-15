@@ -14,9 +14,9 @@
     <VCTargetsPath Condition="'$(VCTargetsPath11)' != '' and '$(VSVersion)' == '' and '$(VisualStudioVersion)' == ''">$(VCTargetsPath11)</VCTargetsPath>
   </PropertyGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>bdlogview</ProjectName>
+    <ProjectName>tplogview</ProjectName>
     <ProjectGuid>{BD966C3A-5865-4EAC-A013-C59FAAB2D23D}</ProjectGuid>
-    <RootNamespace>bdlogview</RootNamespace>
+    <RootNamespace>tplogview</RootNamespace>
     <Keyword>Win32Proj</Keyword>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -67,11 +67,11 @@
     </Link>
     <Manifest />
     <Midl>
-      <OutputDirectory>$(bdlogroot)\bdlogview</OutputDirectory>
-      <TypeLibraryName>$(bdlogroot)\bdlogview\bdlogview.tlb</TypeLibraryName>
+      <OutputDirectory>$(tplogroot)\tplogview</OutputDirectory>
+      <TypeLibraryName>$(tplogroot)\tplogview\tplogview.tlb</TypeLibraryName>
     </Midl>
     <Manifest>
-      <AdditionalManifestFiles>$(bdlogroot)\thirdparty\xpstyle.manifest</AdditionalManifestFiles>
+      <AdditionalManifestFiles>$(tplogroot)\thirdparty\xpstyle.manifest</AdditionalManifestFiles>
     </Manifest>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -91,12 +91,12 @@
       <Profile>true</Profile>
     </Link>
     <Manifest>
-      <AdditionalManifestFiles>$(bdlogroot)\thirdparty\xpstyle.manifest</AdditionalManifestFiles>
+      <AdditionalManifestFiles>$(tplogroot)\thirdparty\xpstyle.manifest</AdditionalManifestFiles>
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\bdlogview\aboutdlg.CPP" />
-    <ClCompile Include="..\bdlogview\bdlogview_i.c">
+    <ClCompile Include="..\tplogview\aboutdlg.CPP" />
+    <ClCompile Include="..\tplogview\tplogview_i.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4820;4255;4668</DisableSpecificWarnings>
@@ -104,7 +104,7 @@
       <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">TurnOffAllWarnings</WarningLevel>
       <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">TurnOffAllWarnings</WarningLevel>
     </ClCompile>
-    <ClCompile Include="..\bdlogview\bdlogview_p.c">
+    <ClCompile Include="..\tplogview\tplogview_p.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">TurnOffAllWarnings</WarningLevel>
@@ -112,7 +112,7 @@
       <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4820;4255;4668</DisableSpecificWarnings>
       <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">TurnOffAllWarnings</WarningLevel>
     </ClCompile>
-    <ClCompile Include="..\bdlogview\dlldata.c">
+    <ClCompile Include="..\tplogview\dlldata.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">TurnOffAllWarnings</WarningLevel>
@@ -120,123 +120,123 @@
       <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4820;4255;4668</DisableSpecificWarnings>
       <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">TurnOffAllWarnings</WarningLevel>
     </ClCompile>
-    <ClCompile Include="..\bdlogview\helper.cpp" />
-    <ClCompile Include="..\bdlogview\advancedfiltereditdlg.cpp" />
-    <ClCompile Include="..\bdlogview\concretefiltereditdlg.CPP" />
-    <ClCompile Include="..\bdlogview\filter.cpp" />
-    <ClCompile Include="..\bdlogview\filtercreator.cpp" />
-    <ClCompile Include="..\bdlogview\filtereditdlg.cpp" />
-    <ClCompile Include="..\bdlogview\filtersetdlg.cpp" />
-    <ClCompile Include="..\bdlogview\graphicfiltereditdlg.cpp" />
-    <ClCompile Include="..\bdlogview\hilightereditdlg.cpp" />
-    <ClCompile Include="..\bdlogview\hilightermanagedlg.cpp" />
-    <ClCompile Include="..\bdlogview\logcenter.cpp" />
-    <ClCompile Include="..\bdlogview\logicvis.cpp" />
-    <ClCompile Include="..\bdlogview\optiondlg.cpp" />
-    <ClCompile Include="..\bdlogview\optpage.cpp" />
-    <ClCompile Include="..\bdlogview\runscriptdlg.cpp" />
-    <ClCompile Include="..\bdlogview\scripthost.cpp" />
-    <ClCompile Include="..\bdlogview\simplefiltereditdlg.cpp" />
-    <ClCompile Include="..\bdlogview\loginfodlg.cpp" />
-    <ClCompile Include="..\bdlogview\logsourceinfodlg.cpp" />
-    <ClCompile Include="..\bdlogview\mainframe.cpp" />
-    <ClCompile Include="..\bdlogview\quickfilterdlg.cpp" />
-    <ClCompile Include="..\bdlogview\specialpathdlg.cpp" />
-    <ClCompile Include="..\bdlogview\tagselector.cpp" />
-    <ClCompile Include="..\bdlogview\config.cpp" />
-    <ClCompile Include="..\bdlogview\bdlogview.cpp" />
-    <ClCompile Include="..\bdlogview\stdafx.cpp">
+    <ClCompile Include="..\tplogview\helper.cpp" />
+    <ClCompile Include="..\tplogview\advancedfiltereditdlg.cpp" />
+    <ClCompile Include="..\tplogview\concretefiltereditdlg.CPP" />
+    <ClCompile Include="..\tplogview\filter.cpp" />
+    <ClCompile Include="..\tplogview\filtercreator.cpp" />
+    <ClCompile Include="..\tplogview\filtereditdlg.cpp" />
+    <ClCompile Include="..\tplogview\filtersetdlg.cpp" />
+    <ClCompile Include="..\tplogview\graphicfiltereditdlg.cpp" />
+    <ClCompile Include="..\tplogview\hilightereditdlg.cpp" />
+    <ClCompile Include="..\tplogview\hilightermanagedlg.cpp" />
+    <ClCompile Include="..\tplogview\logcenter.cpp" />
+    <ClCompile Include="..\tplogview\logicvis.cpp" />
+    <ClCompile Include="..\tplogview\optiondlg.cpp" />
+    <ClCompile Include="..\tplogview\optpage.cpp" />
+    <ClCompile Include="..\tplogview\runscriptdlg.cpp" />
+    <ClCompile Include="..\tplogview\scripthost.cpp" />
+    <ClCompile Include="..\tplogview\simplefiltereditdlg.cpp" />
+    <ClCompile Include="..\tplogview\loginfodlg.cpp" />
+    <ClCompile Include="..\tplogview\logsourceinfodlg.cpp" />
+    <ClCompile Include="..\tplogview\mainframe.cpp" />
+    <ClCompile Include="..\tplogview\quickfilterdlg.cpp" />
+    <ClCompile Include="..\tplogview\specialpathdlg.cpp" />
+    <ClCompile Include="..\tplogview\tagselector.cpp" />
+    <ClCompile Include="..\tplogview\config.cpp" />
+    <ClCompile Include="..\tplogview\tplogview.cpp" />
+    <ClCompile Include="..\tplogview\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\bdlogview\updater.cpp" />
-    <ClCompile Include="..\bdlogview\vislogicdlg.cpp" />
+    <ClCompile Include="..\tplogview\updater.cpp" />
+    <ClCompile Include="..\tplogview\vislogicdlg.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\bdlogview\bdlogview_h.h" />
-    <ClInclude Include="..\bdlogview\helper.h" />
-    <ClInclude Include="..\bdlogview\jsparser.h" />
-    <ClInclude Include="..\bdlogview\logcenter.h" />
-    <ClInclude Include="..\bdlogview\runscriptdlg.h" />
-    <ClInclude Include="..\bdlogview\scripthost.h" />
-    <ClInclude Include="..\bdlogview\serviceid.h" />
-    <ClInclude Include="..\bdlogview\taglist.h" />
-    <ClInclude Include="..\bdlogview\concretefilter.h" />
-    <ClInclude Include="..\bdlogview\concretefiltereditdlg.h" />
-    <ClInclude Include="..\bdlogview\filter.h" />
-    <ClInclude Include="..\bdlogview\filtercreator.h" />
-    <ClInclude Include="..\bdlogview\filtereditdlg.h" />
-    <ClInclude Include="..\bdlogview\filtersetdlg.h" />
-    <ClInclude Include="..\bdlogview\hilightereditdlg.h" />
-    <ClInclude Include="..\bdlogview\hilightermanagedlg.h" />
-    <ClInclude Include="..\bdlogview\serializer.h" />
-    <ClInclude Include="..\bdlogview\aboutdlg.h" />
-    <ClInclude Include="..\bdlogview\colorselector.h" />
-    <ClInclude Include="..\bdlogview\droptarget.h" />
-    <ClInclude Include="..\bdlogview\firsttimedlg.h" />
-    <ClInclude Include="..\bdlogview\historycombo.h" />
-    <ClInclude Include="..\bdlogview\loginfodlg.h" />
-    <ClInclude Include="..\bdlogview\logsourceinfodlg.h" />
-    <ClInclude Include="..\bdlogview\mainframe.h" />
-    <ClInclude Include="..\bdlogview\modelesskeyprocessor.h" />
-    <ClInclude Include="..\bdlogview\quickfilterdlg.h" />
-    <ClInclude Include="..\bdlogview\searchdlg.h" />
-    <ClInclude Include="..\bdlogview\specialpathdlg.h" />
-    <ClInclude Include="..\bdlogview\tagselector.h" />
-    <ClInclude Include="..\bdlogview\vislogicdlg.h" />
-    <ClInclude Include="..\bdlogview\whitebkdlg.h" />
-    <ClInclude Include="..\bdlogview\config.h" />
-    <ClInclude Include="..\bdlogview\common.h" />
-    <ClInclude Include="..\bdlogview\logpropdb.h" />
-    <ClInclude Include="..\bdlogview\msgfilter.h" />
-    <ClInclude Include="..\bdlogview\Resource.h" />
-    <ClInclude Include="..\bdlogview\stdafx.h" />
-    <ClInclude Include="..\bdlogview\targetver.h" />
-    <ClInclude Include="..\bdlogview\uipublic.h" />
+    <ClInclude Include="..\tplogview\tplogview_h.h" />
+    <ClInclude Include="..\tplogview\helper.h" />
+    <ClInclude Include="..\tplogview\jsparser.h" />
+    <ClInclude Include="..\tplogview\logcenter.h" />
+    <ClInclude Include="..\tplogview\runscriptdlg.h" />
+    <ClInclude Include="..\tplogview\scripthost.h" />
+    <ClInclude Include="..\tplogview\serviceid.h" />
+    <ClInclude Include="..\tplogview\taglist.h" />
+    <ClInclude Include="..\tplogview\concretefilter.h" />
+    <ClInclude Include="..\tplogview\concretefiltereditdlg.h" />
+    <ClInclude Include="..\tplogview\filter.h" />
+    <ClInclude Include="..\tplogview\filtercreator.h" />
+    <ClInclude Include="..\tplogview\filtereditdlg.h" />
+    <ClInclude Include="..\tplogview\filtersetdlg.h" />
+    <ClInclude Include="..\tplogview\hilightereditdlg.h" />
+    <ClInclude Include="..\tplogview\hilightermanagedlg.h" />
+    <ClInclude Include="..\tplogview\serializer.h" />
+    <ClInclude Include="..\tplogview\aboutdlg.h" />
+    <ClInclude Include="..\tplogview\colorselector.h" />
+    <ClInclude Include="..\tplogview\droptarget.h" />
+    <ClInclude Include="..\tplogview\firsttimedlg.h" />
+    <ClInclude Include="..\tplogview\historycombo.h" />
+    <ClInclude Include="..\tplogview\loginfodlg.h" />
+    <ClInclude Include="..\tplogview\logsourceinfodlg.h" />
+    <ClInclude Include="..\tplogview\mainframe.h" />
+    <ClInclude Include="..\tplogview\modelesskeyprocessor.h" />
+    <ClInclude Include="..\tplogview\quickfilterdlg.h" />
+    <ClInclude Include="..\tplogview\searchdlg.h" />
+    <ClInclude Include="..\tplogview\specialpathdlg.h" />
+    <ClInclude Include="..\tplogview\tagselector.h" />
+    <ClInclude Include="..\tplogview\vislogicdlg.h" />
+    <ClInclude Include="..\tplogview\whitebkdlg.h" />
+    <ClInclude Include="..\tplogview\config.h" />
+    <ClInclude Include="..\tplogview\common.h" />
+    <ClInclude Include="..\tplogview\logpropdb.h" />
+    <ClInclude Include="..\tplogview\msgfilter.h" />
+    <ClInclude Include="..\tplogview\Resource.h" />
+    <ClInclude Include="..\tplogview\stdafx.h" />
+    <ClInclude Include="..\tplogview\targetver.h" />
+    <ClInclude Include="..\tplogview\uipublic.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\bdlogview\res\advanced.ico" />
-    <Image Include="..\bdlogview\res\application.ico" />
-    <Image Include="..\bdlogview\res\clear.ico" />
-    <Image Include="..\bdlogview\res\content.ico" />
-    <Image Include="..\bdlogview\res\Down.ico" />
-    <Image Include="..\bdlogview\res\Edit.ico" />
-    <Image Include="..\bdlogview\res\filter.ico" />
-    <Image Include="..\bdlogview\res\icon3.ico" />
-    <Image Include="..\bdlogview\res\level.ico" />
-    <Image Include="..\bdlogview\res\logical_and.ico" />
-    <Image Include="..\bdlogview\res\logical_not.ico" />
-    <Image Include="..\bdlogview\res\logical_or.ico" />
-    <Image Include="..\bdlogview\res\open.ico" />
-    <Image Include="..\bdlogview\res\pid.ico" />
-    <Image Include="..\bdlogview\res\save.ico" />
-    <Image Include="..\bdlogview\res\simple.ico" />
-    <Image Include="..\bdlogview\res\simplify.ico" />
-    <Image Include="..\bdlogview\res\star.ico" />
-    <Image Include="..\bdlogview\res\star_next.ico" />
-    <Image Include="..\bdlogview\res\star_prev.ico" />
-    <Image Include="..\bdlogview\res\start.ico" />
-    <Image Include="..\bdlogview\res\stop.ico" />
-    <Image Include="..\bdlogview\res\tag.ico" />
-    <Image Include="..\bdlogview\res\tid.ico" />
-    <Image Include="..\bdlogview\res\tree.ico" />
+    <Image Include="..\tplogview\res\advanced.ico" />
+    <Image Include="..\tplogview\res\application.ico" />
+    <Image Include="..\tplogview\res\clear.ico" />
+    <Image Include="..\tplogview\res\content.ico" />
+    <Image Include="..\tplogview\res\Down.ico" />
+    <Image Include="..\tplogview\res\Edit.ico" />
+    <Image Include="..\tplogview\res\filter.ico" />
+    <Image Include="..\tplogview\res\icon3.ico" />
+    <Image Include="..\tplogview\res\level.ico" />
+    <Image Include="..\tplogview\res\logical_and.ico" />
+    <Image Include="..\tplogview\res\logical_not.ico" />
+    <Image Include="..\tplogview\res\logical_or.ico" />
+    <Image Include="..\tplogview\res\open.ico" />
+    <Image Include="..\tplogview\res\pid.ico" />
+    <Image Include="..\tplogview\res\save.ico" />
+    <Image Include="..\tplogview\res\simple.ico" />
+    <Image Include="..\tplogview\res\simplify.ico" />
+    <Image Include="..\tplogview\res\star.ico" />
+    <Image Include="..\tplogview\res\star_next.ico" />
+    <Image Include="..\tplogview\res\star_prev.ico" />
+    <Image Include="..\tplogview\res\start.ico" />
+    <Image Include="..\tplogview\res\stop.ico" />
+    <Image Include="..\tplogview\res\tag.ico" />
+    <Image Include="..\tplogview\res\tid.ico" />
+    <Image Include="..\tplogview\res\tree.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\bdlogview\bdlogview.rc" />
+    <ResourceCompile Include="..\tplogview\tplogview.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\bdlogview\bdlogview.tlb" />
-    <None Include="..\bdlogview\res\bdxlog.ini" />
-    <None Include="..\bdlogview\res\debugset.ini" />
+    <None Include="..\tplogview\tplogview.tlb" />
+    <None Include="..\tplogview\res\bdxlog.ini" />
+    <None Include="..\tplogview\res\debugset.ini" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\bdlogview\res\help.txt" />
-    <Text Include="..\bdlogview\ReadMe.txt" />
+    <Text Include="..\tplogview\res\help.txt" />
+    <Text Include="..\tplogview\ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Midl Include="..\bdlogview\bdlogview.idl">
-      <OutputDirectory Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(bdlogroot)\bdlogview</OutputDirectory>
-      <TypeLibraryName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(bdlogroot)\bdlogview\bdlogview.tlb</TypeLibraryName>
+    <Midl Include="..\tplogview\tplogview.idl">
+      <OutputDirectory Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(tplogroot)\tplogview</OutputDirectory>
+      <TypeLibraryName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(tplogroot)\tplogview\tplogview.tlb</TypeLibraryName>
     </Midl>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <bdlogprovider.h>
+#include <tplog_reader.h>
 #include <vector>
 #include <deque>
 #include <atlsync.h>
@@ -22,7 +22,7 @@ public:
 	virtual ~CLogCenterListener(){}
 };
 
-class CLogCenter : public tp::service_impl<SID_LogCenter>, public bdlog::log_listener, public bdlog::log_source_support
+class CLogCenter : public tp::service_impl<SID_LogCenter>, public tplog::log_listener, public tplog::log_source_support
 {
 	TP_SET_DEPENDENCIES(create, );
 	TP_SET_DEPENDENCIES(destroy, );
@@ -52,11 +52,11 @@ public:
 	void AddListener(CLogCenterListener* pListener);
 	void RemoveListener(CLogCenterListener* pListener);
 
-	virtual void on_new_log(bdlog::logitem* li);
+	virtual void on_new_log(tplog::logitem* li);
 	virtual void on_notify(int notifyid, HRESULT hr);
 
 	virtual size_t source_count() const;
-	virtual bdlog::lsi_vec_t get_sources() const;
+	virtual tplog::lsi_vec_t get_sources() const;
 
 private:
 	static VOID CALLBACK TimerProc(
@@ -85,7 +85,7 @@ private:
 	CCriticalSection m_csListener;
 
 	// buffer
-	typedef std::vector<bdlog::logitem*> LogBuffer;
+	typedef std::vector<tplog::logitem*> LogBuffer;
 	LogBuffer m_buffer;
 	CCriticalSection m_csLogBuffer;
 
@@ -95,12 +95,12 @@ private:
 	CCriticalSection m_csLogDB;
 
 	// provider
-	bdlog::pipe_reader m_logPipeReader;
-	bdlog::file_reader m_logFileReader;
-	bdlog::sharememory_reader m_logShareMemoryReader;
+	tplog::pipe_reader m_logPipeReader;
+	tplog::file_reader m_logFileReader;
+	tplog::sharememory_reader m_logShareMemoryReader;
 
 	// occupytime
-	std::map<bdlog::uint32_t, UINT64> m_lastLogInSameThread;
+	std::map<tplog::uint32_t, UINT64> m_lastLogInSameThread;
 
 	UINT64 m_logID;
 

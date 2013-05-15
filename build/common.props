@@ -3,19 +3,19 @@
   <ImportGroup Label="PropertySheets">
   </ImportGroup>
   <PropertyGroup Label="UserMacros">
-    <bdlogroot>$(SolutionDir)..</bdlogroot>
-    <bdlogoutput>$(bdlogroot)\output</bdlogoutput>
+    <tplogroot>$(SolutionDir)..</tplogroot>
+    <tplogoutput>$(tplogroot)\output</tplogoutput>
   </PropertyGroup>
   <PropertyGroup>
     <_ProjectFileVersion>11.0.50214.1</_ProjectFileVersion>
-    <_PropertySheetDisplayName>bdlog common</_PropertySheetDisplayName>
-    <OutDir>$(bdlogroot)\output\$(PlatformName)\$(Configuration)\</OutDir>
+    <_PropertySheetDisplayName>tplog common</_PropertySheetDisplayName>
+    <OutDir>$(tplogroot)\output\$(PlatformName)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)intermediate\$(ProjectName)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <AdditionalOptions>/Wall %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>$(bdlogroot)\include;$(bdlogroot)\thirdparty;$(bdlogroot)\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(tplogroot)\include;$(tplogroot)\thirdparty;$(tplogroot)\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
@@ -25,12 +25,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <BuildMacro Include="bdlogroot">
-      <Value>$(bdlogroot)</Value>
+    <BuildMacro Include="tplogroot">
+      <Value>$(tplogroot)</Value>
       <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
-    <BuildMacro Include="bdlogoutput">
-      <Value>$(bdlogoutput)</Value>
+    <BuildMacro Include="tplogoutput">
+      <Value>$(tplogoutput)</Value>
       <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
   </ItemGroup>

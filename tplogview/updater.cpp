@@ -5,7 +5,7 @@
 unsigned int Updater::CheckAndUpdateWorker(void* param)
 {
 	helper::DownloadUrlToFile(
-		L"http://db-win-dump00.db01.baidu.com:8180/help/bdlogview_ver.txt",
+		L"http://db-win-dump00.db01.baidu.com:8180/help/tplogview_ver.txt",
 		Updater::GetVersionInfoFilePath()
 		);
 
@@ -17,7 +17,7 @@ unsigned int Updater::CheckAndUpdateWorker(void* param)
 		CStringW strOldPath = Updater::GetOldExePath();
 
 		helper::DownloadUrlToFile(
-			L"http://db-win-dump00.db01.baidu.com:8180/help/bdlogview.exe",
+			L"http://db-win-dump00.db01.baidu.com:8180/help/tplogview.exe",
 			strTmpPath
 			);
 		
@@ -74,7 +74,7 @@ CStringW Updater::GetOldExePath()
 }
 CString Updater::GetVersionInfoFilePath()
 {
-	return helper::GetConfigDir() + L"\\bdlogview_version.txt";
+	return helper::GetConfigDir() + L"\\tplogview_version.txt";
 }
 
 // bBackend为TRUE时，静默，无论有无更新，都不提示用户
@@ -109,7 +109,7 @@ void Updater::NotifyNewVersion()
 		UINT64 oldver = helper::GetFileVersion(strPath);
 		::DeleteFileW(strPath);
 
-		CStringW info = L"bdlogview已升级，细节如下：\n\n";
+		CStringW info = L"tplogview已升级，细节如下：\n\n";
 		Versions v = Updater::ParseVersionInfoFile();
 		for (Versions::const_iterator it = v.begin(); it != v.end(); ++it)
 		{
@@ -120,7 +120,7 @@ void Updater::NotifyNewVersion()
 			info += L"\n";
 		}
 
-		::MessageBoxW(NULL, info, L"bdlogview升级提示", MB_OK|MB_ICONINFORMATION);
+		::MessageBoxW(NULL, info, L"tplogview升级提示", MB_OK|MB_ICONINFORMATION);
 	}
 }
 

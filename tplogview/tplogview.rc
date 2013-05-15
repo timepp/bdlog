@@ -24,7 +24,7 @@ LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
 // TYPELIB
 //
 
-1                       TYPELIB                 "bdlogview.tlb"
+1                       TYPELIB                 "tplogview.tlb"
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -127,7 +127,7 @@ BEGIN
     LTEXT           "版本：",IDC_STATIC,53,49,56,12,SS_CENTERIMAGE
     LTEXT           "产品名称：",IDC_STATIC,53,64,56,12,SS_CENTERIMAGE
     LTEXT           "配置文件路径：",IDC_STATIC,53,79,56,12,SS_CENTERIMAGE
-    LTEXT           "日志查看器是配合BDLOG使用的工具。可以实时查看应用程序的管道日志(LODT_PIPE)的输出；可以查看应用应用程序的共享内存日志(LODT_SHAREMEMORY)的内容；也可以以离线模式打开计算机中的BDLOG日志文件。",IDC_STATIC,53,7,244,35
+    LTEXT           "日志查看器是配合TPLOG使用的工具。可以实时查看应用程序的管道日志(LODT_PIPE)的输出；可以查看应用应用程序的共享内存日志(LODT_SHAREMEMORY)的内容；也可以以离线模式打开计算机中的BDLOG日志文件。",IDC_STATIC,53,7,244,35
     ICON            IDR_MAINFRAME,IDC_STATIC,7,9,20,20,SS_REALSIZEIMAGE
     LTEXT           "Static",IDC_STATIC_VERSION,111,49,60,12,SS_CENTERIMAGE
     LTEXT           "Static",IDC_STATIC_PRODUCT_NAME,111,64,194,12,SS_CENTERIMAGE
@@ -675,9 +675,9 @@ BEGIN
             VALUE "CompanyName", "Baidu"
             VALUE "FileDescription", "百度客户端日志查看器"
             VALUE "FileVersion", "9.0.0.1"
-            VALUE "InternalName", "bdlogview"
+            VALUE "InternalName", "tplogview"
             VALUE "LegalCopyright", "Baidu.  All rights reserved."
-            VALUE "OriginalFilename", "bdlogview.exe"
+            VALUE "OriginalFilename", "tplogview.exe"
             VALUE "ProductName", "百度客户端日志查看器"
             VALUE "ProductVersion", "9.0.0.1"
         END

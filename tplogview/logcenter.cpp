@@ -43,8 +43,8 @@ void CLogCenter::ConnectPipe()
 {
 	Disconnect();
 
-	m_cfgPathFile = helper::ExpandPath(BSP_BDXLOG_INI);
-	m_cfgPathReg = CStringW(L"Software\\Baidu\\BDLOG\\") + helper::GetProductName();
+//	m_cfgPathFile = helper::ExpandPath(BSP_BDXLOG_INI);
+	m_cfgPathReg = CStringW(L"Software\\Baidu\\TPLOG\\") + helper::GetProductName();
 	m_autoEnablePipeDeviceFile = EnablePipeDeviceFile(true);
 	m_autoEnablePipeDeviceReg = EnablePipeDeviceReg(true);
 
@@ -154,7 +154,7 @@ void CLogCenter::RemoveListener(CLogCenterListener* pListener)
 	}
 }
 
-void CLogCenter::on_new_log(bdlog::logitem* li)
+void CLogCenter::on_new_log(tplog::logitem* li)
 {
 	CAutoCriticalSection cs(m_csLogBuffer);
 
@@ -195,7 +195,7 @@ void CLogCenter::MergeBuffer()
 		for (UINT64 i = newrange.idmin; i < newrange.idmax; i++)
 		{
 			LogInfo* li = GetLog(i);
-			std::map<bdlog::uint32_t, UINT64>::iterator it = m_lastLogInSameThread.find(li->item->log_tid);
+			std::map<tplog::uint32_t, UINT64>::iterator it = m_lastLogInSameThread.find(li->item->log_tid);
 			if (it == m_lastLogInSameThread.end())
 			{
 				m_lastLogInSameThread[li->item->log_tid] = i;
@@ -277,8 +277,6 @@ void CLogCenter::UnlockLog()
 
 bool CLogCenter::EnablePipeDeviceFile(bool bEnable)
 {
-//	helper::WriteFileIfNotExist(m_cfgPathFile, MAKEINTRESOURCEW(IDR_BDXLOG_INI), L"PDATA");
-
 	CStringW desiredEnableString = bEnable? L"enable:true" : L"enable:false";
 	WCHAR buffer[4096];
 	::GetPrivateProfileStringW(L"LOG_CONFIG", L"ld_pipe", L"", buffer, _countof(buffer), m_cfgPathFile);
@@ -366,7 +364,7 @@ size_t CLogCenter::source_count() const
 	}
 }
 
-bdlog::lsi_vec_t CLogCenter::get_sources() const
+tplog::lsi_vec_t CLogCenter::get_sources() const
 {
 	if (m_logPipeReader.working())
 	{

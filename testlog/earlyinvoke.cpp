@@ -1,6 +1,6 @@
 #include "stdafx.h"
 
-// 测试在全局对象构造和析构过程中调用bdlog是否正常
+// 测试在全局对象构造和析构过程中调用tplog是否正常
 
 struct GlobalObj
 {

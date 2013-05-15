@@ -4,7 +4,7 @@
 #include "config.h"
 #include "helper.h"
 
-#define DLL_DOWNLOAD_URL L"ftp://tmp:tmp@win.baidu.com/incoming/timepp/bdlogview.exe"
+#define DLL_DOWNLOAD_URL L"ftp://tmp:tmp@win.baidu.com/incoming/timepp/tplogview.exe"
 
 const LPCWSTR g_tips[] =
 {

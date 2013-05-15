@@ -53,7 +53,7 @@ config& CConfig::GetConfig()
 
 CStringW CConfig::GetDefaultConfigFilePath()
 {
-	return helper::GetConfigDir() + L"\\bdlogview.xml";
+	return helper::GetConfigDir() + L"\\tplogview.xml";
 }
 
 bool CConfig::Load(LPCWSTR pszFileName)

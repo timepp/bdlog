@@ -4,7 +4,7 @@
 #include <vector>
 #include <list>
 #include <deque>
-#include <bdlogprovider.h>
+#include <tplog_reader.h>
 
 typedef std::set<CStringW> StrSet;
 typedef std::list<std::wstring> strlist_t;
@@ -13,7 +13,7 @@ typedef std::list<std::wstring> strlist_t;
 struct LogInfo
 {
 	UINT64 logid;                      // 全局唯一的日志ID
-	bdlog::logitem* item;              // 通过管道接收到的日志信息
+	tplog::logitem* item;              // 通过管道接收到的日志信息
 	INT64 occupytime;                  // 日志占用时间（本条日志到同一线程的下一条日志的时间间隔）
 };
 
@@ -115,9 +115,6 @@ struct time_range
 	accutime t2;
 };
 
-
-#define BSP_BDXLOG_INI           L"<CSIDL:COMMON_APPDATA>\\Baidu\\<VAR:PRODUCT>\\bdlog.ini"
-#define BSP_DEBUGSET_INI         L"<CSIDL:APPDATA>\\Baidu\\<VAR:PRODUCT>\\debugset.ini"
 
 #define WM_FILTER_CHANGE     WM_USER + 21
 

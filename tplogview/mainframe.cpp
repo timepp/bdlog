@@ -380,7 +380,7 @@ LRESULT CMainFrame::OnOpenXLog(WORD, WORD, HWND, BOOL&)
 {
 	COpenFileDialog dlg(
 		m_cfg.ui.savedpath.logfile.c_str(), 
-		L"日志(*.log,*.txt,*.xlog,*.bdlog)\0*.log;*.txt;*.xlog;*.bdlog\0所有文件(*.*)\0*.*\0\0");
+		L"日志(*.log,*.txt,*.xlog,*.tplog)\0*.log;*.txt;*.xlog;*.tplog\0所有文件(*.*)\0*.*\0\0");
 	if (dlg.DoModal() == IDOK)
 	{
 		GD.strXLogFile = dlg.m_szFileName;
@@ -400,12 +400,9 @@ LRESULT CMainFrame::OnEditXlogIni(WORD, WORD, HWND, BOOL&)
 	CStringW strMessage;
 	strMessage.Format(
 		L"日志配置已经从文件移至注册表，请编辑注册表的如下位置:\n"
-		L"HKCU\\Software\\Baidu\\BDLOG\\%s", 
+		L"HKCU\\Software\\Baidu\\TPLOG\\%s", 
 		m_cfg.product_name.c_str());
 	MessageBox(strMessage, L"提示", MB_OK|MB_ICONINFORMATION);
-//	CStringW strXlogPath = helper::ExpandPath(BSP_BDXLOG_INI);
-//	helper::WriteFileIfNotExist(strXlogPath, MAKEINTRESOURCEW(IDR_BDXLOG_INI), L"PDATA");
-//	::ShellExecuteW(m_hWnd, L"open", strXlogPath, NULL, NULL, SW_SHOW);
 	return 0;
 }
 
@@ -896,7 +893,7 @@ LRESULT CMainFrame::OnAbout(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/
 
 LRESULT CMainFrame::OnHelp(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 {
-	ShellExecute(NULL, L"open", L"http://db-win-dump00.db01.baidu.com:8180/bdlog/help", NULL, NULL, SW_SHOW);
+	ShellExecute(NULL, L"open", L"http://db-win-dump00.db01.baidu.com:8180/tplog/help", NULL, NULL, SW_SHOW);
 	return 0;
 }
 
@@ -925,7 +922,7 @@ LRESULT CMainFrame::OnFilterChange(UINT /*uMsg*/, WPARAM /*wp*/, LPARAM /*lp*/, 
 LRESULT CMainFrame::OnViewLogSourceInfo(WORD, WORD, HWND, BOOL&)
 {
 	lsds_t lsds;
-	bdlog::lsi_vec_t src = ServiceHelper::GetLogCenter()->get_sources();
+	tplog::lsi_vec_t src = ServiceHelper::GetLogCenter()->get_sources();
 	CStringW strInfo;
 	for (size_t i = 0; i < src.size(); i++)
 	{
@@ -1645,7 +1642,7 @@ LRESULT CMainFrame::OnSearch(WORD, WORD, HWND, BOOL&)
 	return 0;
 }
 
-bool CMainFrame::IsFunctionLog(const bdlog::logitem& item)
+bool CMainFrame::IsFunctionLog(const tplog::logitem& item)
 {
 	return helper::TagMatch(item.log_tags.c_str(), L"function");
 }
@@ -1656,7 +1653,7 @@ void CMainFrame::UpdateFunctionPos(int index, int lookuplimit)
 
 	m_functionBegin = m_functionEnd = -1;
 
-	const bdlog::logitem* item = GetLogInfo(index)->item;
+	const tplog::logitem* item = GetLogInfo(index)->item;
 	if (!IsFunctionLog(*item))
 	{
 		m_functionBegin = m_functionEnd = -1;
@@ -1667,7 +1664,7 @@ void CMainFrame::UpdateFunctionPos(int index, int lookuplimit)
 	{
 		for (int i = index - 1; i >= 0 && lookuplimit > 0; i--, lookuplimit--)
 		{
-			const bdlog::logitem* item2 = GetLogInfo(i)->item;
+			const tplog::logitem* item2 = GetLogInfo(i)->item;
 			if (item2->log_pid == item->log_pid &&
 				item2->log_tid == item->log_tid &&
 				item2->log_depth == item->log_depth &&
@@ -1684,7 +1681,7 @@ void CMainFrame::UpdateFunctionPos(int index, int lookuplimit)
 	{
 		for (int i = index + 1; i < static_cast<int>(m_lvs.size()) && lookuplimit > 0; i++, lookuplimit--)
 		{
-			const bdlog::logitem* item2 = GetLogInfo(i)->item;
+			const tplog::logitem* item2 = GetLogInfo(i)->item;
 			if (item2->log_pid == item->log_pid &&
 				item2->log_tid == item->log_tid &&
 				item2->log_depth == item->log_depth &&

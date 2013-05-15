@@ -9,8 +9,8 @@
 #include "searchdlg.h"
 #include "droptarget.h"
 #include "filtersetdlg.h"
-#include <accutime.h>
-#include <bdlogprovider.h>
+#include <tplog_synctime.h>
+#include <tplog_reader.h>
 #include "quickfilterdlg.h"
 #include "logcenter.h"
 #include "logicvis.h"
@@ -174,7 +174,7 @@ private:
 	void UpdateFunctionPos(int index, int lookuplimit);
 
 	// 判断是否是一条函数日志
-	bool IsFunctionLog(const bdlog::logitem& item);
+	bool IsFunctionLog(const tplog::logitem& item);
 	// 取某一条日志在当前视图的索引
 	int GetLogIndex(UINT64 logid);
 

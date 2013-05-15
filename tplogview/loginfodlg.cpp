@@ -43,7 +43,7 @@ LRESULT CLogInfoDlg::OnGetMinMaxInfo(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM lP
 void CLogInfoDlg::ShowLogInfo(const LogInfo& li)
 {
 	CString strInfo;
-	bdlog::logitem* item = li.item;
+	tplog::logitem* item = li.item;
 
 	strInfo.Format(L"%I64u", item->log_index);
 	SetDlgItemTextW(IDC_EDIT_ID, strInfo);

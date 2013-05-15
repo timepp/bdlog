@@ -78,7 +78,7 @@ void CVisLogicDlg::Refresh()
 	bool use_current_time_as_end_time = false;
 	if (ServiceHelper::GetLogCenter()->MonitoringPipe())
 	{
-		bdlog::lsi_vec_t src = ServiceHelper::GetLogCenter()->get_sources();
+		tplog::lsi_vec_t src = ServiceHelper::GetLogCenter()->get_sources();
 		for (size_t i = 0; i < src.size(); i++)
 		{
 			if (src[i].pid == m_process->pid)

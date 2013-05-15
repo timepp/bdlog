@@ -128,7 +128,7 @@ bool filter_creator::save(filter* f, LPCWSTR pszFileName)
 	CComPtr<IXMLDOMNode> pFilterNode;
 
 	hr = CoCreateInstance(CLSID_DOMDocument, NULL, CLSCTX_INPROC_SERVER, IID_IXMLDOMDocument, (void**)&pDoc);
-	hr = pDoc->appendChild(helper::XML_CreateNode(pDoc, NODE_ELEMENT, L"bdlogfilter"), &pRootNode);
+	hr = pDoc->appendChild(helper::XML_CreateNode(pDoc, NODE_ELEMENT, L"tplogfilter"), &pRootNode);
 
 	save(f, pDoc, pRootNode);
 	hr = pDoc->save(CComVariant(pszFileName));

@@ -207,7 +207,7 @@ void CVisualLogic::ParseThreadInfo(const LogInfo* li)
 	vllog_info vli;
 	if (!ParseVLLog(li->item->log_content.c_str(), vli)) return;
 
-	bdlog::logitem& l = *(li->item);
+	tplog::logitem& l = *(li->item);
 
 	// thread create
 	if (wcsncmp(L"thread start", vli.hdr.str, vli.hdr.len) == 0)

@@ -5,8 +5,8 @@
 intermediate/
 ipch/
 output/Win32/
-/bdlogview/bdlogview.tlb
-/bdlogview/bdlogview_i.c
-/bdlogview/bdlogview_p.c
-/bdlogview/bdlogview_h.h
-/bdlogview/dlldata.c
+/tplogview/tplogview.tlb
+/tplogview/tplogview_i.c
+/tplogview/tplogview_p.c
+/tplogview/tplogview_h.h
+/tplogview/dlldata.c

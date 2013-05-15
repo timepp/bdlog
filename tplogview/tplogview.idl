@@ -8,7 +8,7 @@ import "ocidl.idl";
 	helpstring("aaa"),
 	pointer_default(unique)
 ]
-interface IBdLogView : IDispatch
+interface ITpLogView : IDispatch
 {
 	[id(1), helpstring("bbb")]
 	HRESULT MessageBox([in] BSTR text, [in,optional] VARIANT title);
@@ -68,9 +68,9 @@ interface ILogCenter : IDispatch
 [
 	uuid(565E617D-43FF-41cc-8EC3-D41A38A887D4),
 	version(1.0),
-	helpstring("BDLogView")
+	helpstring("TPLogView")
 ]
-library BdLogviewLib
+library TpLogviewLib
 {
 	importlib("stdole32.tlb");
 	importlib("stdole2.tlb");
@@ -79,9 +79,9 @@ library BdLogviewLib
 		uuid(F5C68AE4-272E-4271-BF37-C7D122484089), 
 		helpstring("ccc")
 	]
-	coclass BdLogView
+	coclass TpLogView
 	{
-		[default] interface IBdLogView;
+		[default] interface ITpLogView;
 	};
 
 	[ 

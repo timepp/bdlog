@@ -3,7 +3,7 @@
 #include "resource.h"
 #include "modelesskeyprocessor.h"
 #include "logicvis.h"
-#include <accutime.h>
+#include <tplog_synctime.h>
 
 class CVisLogicDlg 
 	: public CDialogImpl<CVisLogicDlg>

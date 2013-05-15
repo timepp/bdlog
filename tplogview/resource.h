@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
-// Used by bdlogview.rc
+// Used by tplogview.rc
 //
 #define IDC_BTN_SAVESCRIPT              3
 #define IDC_BTN_LOADSCRIPT              4

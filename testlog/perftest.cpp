@@ -3,7 +3,7 @@
 LARGE_INTEGER CProfiler::m_freq = {};
 BOOL CProfiler::m_avaliable = ::QueryPerformanceFrequency(&CProfiler::m_freq);
 
-// 测试bdlog的性能
+// 测试tplog的性能
 
 #define BATCH_COUNT 1
 static int PerformanceTest(const wchar_t* /*description*/)

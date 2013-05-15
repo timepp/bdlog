@@ -73,7 +73,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPWSTR lps
 	}
 	else
 	{
-		cfg->Load(helper::GetConfigDir() + L"\\..\\bdlogview.xml");
+		cfg->Load(helper::GetConfigDir() + L"\\..\\tplogview.xml");
 	}
 
 	INITCOMMONCONTROLSEX iccx;
