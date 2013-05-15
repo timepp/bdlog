@@ -1,7 +1,7 @@
 #pragma once
 
 #include "outputdevice_common.h"
-#include "bdsharemem.h"
+#include "sharememory.h"
 
 #pragma pack(push, 1)
 struct MemLogQuene
@@ -58,7 +58,7 @@ public:
 	{
 		if (!m_shareMemory.IsOpen())
 		{
-			return BDLOG_E_DEVICE_NOT_READY;
+			return TPLOG_E_DEVICE_NOT_READY;
 		}
 
 		MemLogQuene& q = m_shareMemory.GetDataAs<MemLogQuene>();
@@ -103,7 +103,7 @@ public:
 private:
 	static void GetShareMemoryName(ILogOption* opt, wchar_t* name, size_t len)
 	{
-		const wchar_t* namePrefix = opt->GetOption(L"nameprefix", L"BDXLOG_SHAREMEMORY_V1.0_");
+		const wchar_t* namePrefix = opt->GetOption(L"nameprefix", L"TPLOG_SHAREMEMORY_V1.0_");
 		textstream(name, len) << namePrefix << ToStr(GetCurrentProcessId(), L"%u");
 	}
 };

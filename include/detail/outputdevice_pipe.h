@@ -15,7 +15,7 @@ public:
 	virtual HRESULT Open(ILogOption* opt)
 	{
 		Close();
-		TRUNCATED_COPY(m_pipeName, opt->GetOption(L"name", L"bdlog_data_channel"));
+		TRUNCATED_COPY(m_pipeName, opt->GetOption(L"name", L"tplog_data_channel"));
 
 		return S_OK;
 	}

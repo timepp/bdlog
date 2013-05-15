@@ -69,12 +69,12 @@ BEGIN
     BEGIN
         BLOCK "080404b0"
         BEGIN
-            VALUE "FileDescription", "bdlog Dynamic Link Library"
+            VALUE "FileDescription", "tplog Dynamic Link Library"
             VALUE "FileVersion", "9.0.0.1"
-            VALUE "InternalName", "bdlog"
+            VALUE "InternalName", "tplog"
             VALUE "LegalCopyright", "Copyright (C) 2011"
-            VALUE "OriginalFilename", "bdlog.dll"
-            VALUE "ProductName", "bdlog Dynamic Link Library"
+            VALUE "OriginalFilename", "tplog.dll"
+            VALUE "ProductName", "tplog Dynamic Link Library"
             VALUE "ProductVersion", "9.0.0.1"
         END
     END

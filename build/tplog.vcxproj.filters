@@ -9,26 +9,8 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\bdlog.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\bdlog_util.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\bdlogprovider.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="..\bdlog\resource.h" />
     <ClInclude Include="..\bdlog\stdafx.h" />
-    <ClInclude Include="..\include\accutime.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\detail\bdsecurity.h">
-      <Filter>include\detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\detail\bdsharemem.h">
-      <Filter>include\detail</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\detail\lock.h">
       <Filter>include\detail</Filter>
     </ClInclude>
@@ -62,7 +44,25 @@
     <ClInclude Include="..\include\detail\stream.h">
       <Filter>include\detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\bdlog_impl.h">
+    <ClInclude Include="..\include\detail\security.h">
+      <Filter>include\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\detail\sharememory.h">
+      <Filter>include\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\tplog.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\tplog_impl.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\tplog_reader.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\tplog_synctime.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\tplog_util.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

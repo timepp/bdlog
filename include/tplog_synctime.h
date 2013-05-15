@@ -1,9 +1,9 @@
 #pragma once
 
 #include <windows.h>
-#include "detail/bdsharemem.h"
+#include "detail/sharememory.h"
 
-// TODO 休眠后，用基准时间+计数器算出来的时间落后于当前时间
+// FIX ME: 休眠后，用基准时间+计数器算出来的时间落后于当前时间
 
 #pragma pack(push, 1)
 struct TimingInfo
@@ -25,7 +25,7 @@ public:
 
 	void Init()
 	{
-		HRESULT hr = m_sm.Open(L"bdlog_timing_info_V3", sizeof(TimingInfo), NULL);
+		HRESULT hr = m_sm.Open(L"tplog_timing_info", sizeof(TimingInfo), NULL);
 		if (FAILED(hr))
 		{
 			m_timingInfo = CreateTimingInfo();

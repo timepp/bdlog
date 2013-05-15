@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../bdlog.h"
-#include "../accutime.h"
+#include "../tplog.h"
+#include "../tplog_synctime.h"
 
 #include "logutil.h"
 #include "logfilter.h"
@@ -12,12 +12,12 @@
 #include "outputdevice_sharememory.h"
 #include "outputdevice_file.h"
 
-#define BDLOG_CONTROLLER_CHECK_STATE \
-	if (!m_constructed) return BDLOG_E_BEFORE_CONSTRUCT; \
-	if (m_destructed) return BDLOG_E_DESTRUCTED; \
-	if (!m_inited) return BDLOG_E_NOT_INITED;
+#define TPLOG_CONTROLLER_CHECK_STATE \
+	if (!m_constructed) return TPLOG_E_BEFORE_CONSTRUCT; \
+	if (m_destructed) return TPLOG_E_DESTRUCTED; \
+	if (!m_inited) return TPLOG_E_NOT_INITED;
 
-#define BDLOG_CONTROLLER_ENSURE_STATE_RETVAL(v) if (!m_constructed || m_destructed || !m_inited) return v
+#define TPLOG_CONTROLLER_ENSURE_STATE_RETVAL(v) if (!m_constructed || m_destructed || !m_inited) return v
 
 
 class CLogController : public ILogController
@@ -116,9 +116,9 @@ inline HRESULT CLogController::Init(const wchar_t* configname)
 	LOGFUNC;
 	MULTI_TRHEAD_GUARD(m_csLog);
 
-	if (!m_constructed) return BDLOG_E_BEFORE_CONSTRUCT;
-	if (m_destructed) return BDLOG_E_DESTRUCTED;
-	if (m_inited) return BDLOG_E_ALREADY_INITED;
+	if (!m_constructed) return TPLOG_E_BEFORE_CONSTRUCT;
+	if (m_destructed) return TPLOG_E_DESTRUCTED;
+	if (m_inited) return TPLOG_E_ALREADY_INITED;
 
 	m_pid = ::GetCurrentProcessId();
 	m_calldepthTlsIndex = ::TlsAlloc();
@@ -127,7 +127,8 @@ inline HRESULT CLogController::Init(const wchar_t* configname)
 	if (configname && configname[0])
 	{
 		textstream s(m_configpath, _countof(m_configpath));
-		s << LSTR(L"Software\\Baidu\\BDLOG\\") << configname;
+		// todo 注册表路径由外界传入
+		s << LSTR(L"Software\\Baidu\\TPLOG\\") << configname;
 
 		::RegCreateKeyExW(HKEY_CURRENT_USER, m_configpath, 0, NULL, 0, KEY_QUERY_VALUE|KEY_NOTIFY, NULL, &m_hConfigKey, NULL);
 		if (!m_hConfigKey)
@@ -144,7 +145,7 @@ inline HRESULT CLogController::UnInit()
 {
 	LOGFUNC;
 	MULTI_TRHEAD_GUARD(m_csLog);
-	BDLOG_CONTROLLER_CHECK_STATE;
+	TPLOG_CONTROLLER_CHECK_STATE;
 
 	m_inited = false;
 	
@@ -196,7 +197,7 @@ inline HRESULT CLogController::MonitorConfigChange()
 
 	if (!CanMonitorConfig())
 	{
-		return BDLOG_E_FUNCTION_UNAVAILBLE;
+		return TPLOG_E_FUNCTION_UNAVAILBLE;
 	}
 	
 	m_monitorThreadQuitEvent = ::CreateEvent(NULL, FALSE, FALSE, NULL);
@@ -212,7 +213,7 @@ inline HRESULT CLogController::MonitorConfigChange()
 inline HRESULT CLogController::AddOutputDevice(const wchar_t* name, LogOutputDeviceType type, const wchar_t* config)
 {
 	MULTI_TRHEAD_GUARD(m_csLog);
-	BDLOG_CONTROLLER_CHECK_STATE;
+	TPLOG_CONTROLLER_CHECK_STATE;
 
 	ILogOutputDevice* device = NULL;
 
@@ -235,18 +236,18 @@ inline HRESULT CLogController::AddCustomOutputDevice(const wchar_t* name, ILogOu
 {
 	LOGFUNC;
 	MULTI_TRHEAD_GUARD(m_csLog);
-	BDLOG_CONTROLLER_CHECK_STATE;
+	TPLOG_CONTROLLER_CHECK_STATE;
 
 	for (size_t i = 0; i < m_odsLen; i++)
 	{
 		if (wcscmp(m_ods[i]->name, name) == 0)
 		{
-			return BDLOG_E_OUTPUT_DEVICE_ALREADY_EXIST;
+			return TPLOG_E_OUTPUT_DEVICE_ALREADY_EXIST;
 		}
 	}
 	if (m_odsLen >= _countof(m_ods))
 	{
-		return BDLOG_E_OUTPUT_DEVICE_FULL;
+		return TPLOG_E_OUTPUT_DEVICE_FULL;
 	}
 
 	OutputDevice* od = new OutputDevice;
@@ -268,9 +269,9 @@ inline HRESULT CLogController::AddCustomOutputDevice(const wchar_t* name, ILogOu
 inline HRESULT CLogController::RemoveOutputDevice(const wchar_t* name)
 {
 	MULTI_TRHEAD_GUARD(m_csLog);
-	BDLOG_CONTROLLER_CHECK_STATE;
+	TPLOG_CONTROLLER_CHECK_STATE;
 
-	HRESULT ret = BDLOG_E_OUTPUT_DEVICE_NOT_FOUND;
+	HRESULT ret = TPLOG_E_OUTPUT_DEVICE_NOT_FOUND;
 
 	for (size_t i = 0; i < m_odsLen; )
 	{
@@ -295,7 +296,7 @@ inline HRESULT CLogController::RemoveOutputDevice(const wchar_t* name)
 
 inline HRESULT CLogController::IncreaseCallDepth()
 {
-	BDLOG_CONTROLLER_CHECK_STATE;
+	TPLOG_CONTROLLER_CHECK_STATE;
 
 	LPVOID data = TlsGetValue(m_calldepthTlsIndex);
 	++reinterpret_cast<INT_PTR&>(data);
@@ -306,7 +307,7 @@ inline HRESULT CLogController::IncreaseCallDepth()
 
 inline HRESULT CLogController::DecreaseCallDepth()
 {
-	BDLOG_CONTROLLER_CHECK_STATE;
+	TPLOG_CONTROLLER_CHECK_STATE;
 
 	LPVOID data = TlsGetValue(m_calldepthTlsIndex);
 	--reinterpret_cast<INT_PTR&>(data);
@@ -317,9 +318,9 @@ inline HRESULT CLogController::DecreaseCallDepth()
 
 inline BOOL CLogController::NeedLog(LogLevel level, const wchar_t* tag)
 {
-	BDLOG_CONTROLLER_ENSURE_STATE_RETVAL(FALSE);
+	TPLOG_CONTROLLER_ENSURE_STATE_RETVAL(FALSE);
 	MULTI_TRHEAD_GUARD(m_csLog);
-	BDLOG_CONTROLLER_ENSURE_STATE_RETVAL(FALSE);
+	TPLOG_CONTROLLER_ENSURE_STATE_RETVAL(FALSE);
 
 	LogItem item = {};
 	item.level = level;
@@ -339,7 +340,7 @@ inline BOOL CLogController::NeedLog(LogLevel level, const wchar_t* tag)
 inline HRESULT CLogController::Log(LogLevel level, const wchar_t* tag, const wchar_t* content)
 {
 	MULTI_TRHEAD_GUARD(m_csLog);
-	BDLOG_CONTROLLER_CHECK_STATE;
+	TPLOG_CONTROLLER_CHECK_STATE;
 
 	LogItem item;
 	FILETIME t = m_accurateTime.GetTime();
@@ -370,7 +371,7 @@ inline HRESULT CLogController::Log(LogLevel level, const wchar_t* tag, const wch
 inline HRESULT CLogController::ChangeOutputDeviceConfig(const wchar_t* name, const wchar_t* config)
 {
 	MULTI_TRHEAD_GUARD(m_csLog);
-	BDLOG_CONTROLLER_CHECK_STATE;
+	TPLOG_CONTROLLER_CHECK_STATE;
 
 	for (size_t i = 0; i < m_odsLen; i++)
 	{
@@ -380,7 +381,7 @@ inline HRESULT CLogController::ChangeOutputDeviceConfig(const wchar_t* name, con
 		}
 	}
 
-	return BDLOG_E_OUTPUT_DEVICE_NOT_FOUND;
+	return TPLOG_E_OUTPUT_DEVICE_NOT_FOUND;
 }
 
 inline HRESULT CLogController::GetLogOutputDeviceOverlayConfig(const wchar_t* name, wchar_t* buffer, size_t len)
@@ -467,7 +468,7 @@ inline HRESULT CLogController::OnConfigFileChange()
 {
 	LOGFUNC;
 	MULTI_TRHEAD_GUARD(m_csLog);
-	BDLOG_CONTROLLER_CHECK_STATE;
+	TPLOG_CONTROLLER_CHECK_STATE;
 
 	wchar_t overlayConfig[1024];
 	for (size_t i = 0; i < m_odsLen; i++)
@@ -525,7 +526,7 @@ inline BOOL CLogController::CanMonitorConfig()
 {
 	LOGFUNC;
 	MULTI_TRHEAD_GUARD(m_csLog);
-	BDLOG_CONTROLLER_ENSURE_STATE_RETVAL(FALSE);
+	TPLOG_CONTROLLER_ENSURE_STATE_RETVAL(FALSE);
 
 	if (!m_hConfigKey)
 	{

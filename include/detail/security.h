@@ -1,5 +1,4 @@
-#ifndef BD_SECURITY_H
-#define BD_SECURITY_H
+#pragma once
 
 #include <windows.h>
 #pragma warning(push)
@@ -74,4 +73,3 @@ private:
 
 typedef CLowestRightsSecurityAttribute3 CLowestRightsSecurityAttribute;
 
-#endif

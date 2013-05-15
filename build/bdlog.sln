@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bdlog", "bdlog.vcxproj", "{6235A976-3901-4B3B-AACF-5F3E9BFA11CC}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tplog", "tplog.vcxproj", "{6235A976-3901-4B3B-AACF-5F3E9BFA11CC}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "testlog", "testlog.vcxproj", "{8A5ABA52-4791-4F9E-BE94-78213C3A2181}"
 EndProject

@@ -1,25 +1,17 @@
 #include "stdafx.h"
 
-#include <detail/logcontroller.h>
+#include <tplog_impl.h>
 
 void * operator new (unsigned int /*size*/, void * p)
 { 
 	return p ; 
 }
 
-static char Room_For_LogControler[sizeof(CLogController)];
-
-extern "C" __declspec(dllexport)
-ILogController* GetLogController()
-{
-	return (CLogController*)Room_For_LogControler;
-}
-
 BOOL APIENTRY DllMain( HMODULE /*hModule*/, DWORD ul_reason_for_call, LPVOID /*lpReserved*/)
 {
 	if (ul_reason_for_call == DLL_PROCESS_ATTACH)
 	{
-		new(Room_For_LogControler) CLogController;
+		GetLogController();
 	}
 	if (ul_reason_for_call == DLL_PROCESS_DETACH)
 	{
@@ -37,7 +29,7 @@ BOOL APIENTRY DllMain( HMODULE /*hModule*/, DWORD ul_reason_for_call, LPVOID /*l
 #define SHOULD_NOT_LINK(reason)  LOG(L"不该被链接(" reason L"): " WIDE_STR(__FUNCTION__))
 
 /// 缺省实现的new/delete比较复杂，
-/// bdlog中没有几处new/delete，用不到这么复杂的功能，直接使用HeapAlloc/HeapFree代替
+/// tplog中没有几处new/delete，用不到这么复杂的功能，直接使用HeapAlloc/HeapFree代替
 void * operator new(unsigned int size)
 {
 	return ::HeapAlloc(::GetProcessHeap(), 0, size);
@@ -53,7 +45,7 @@ int _purecall()
 }
 
 /// 缺省的wcschr比较复杂(占用170多个字节，见wcschr.c)
-/// bdlog中的场景都是在一个比较短的字符串中进行查找，自己写一个wcschr就够了
+/// tplog中的场景都是在一个比较短的字符串中进行查找，自己写一个wcschr就够了
 const wchar_t* wcschr(const wchar_t* src, wchar_t ch)
 {
 	while (*src)

@@ -1,18 +1,17 @@
-#ifndef BDCLIENT_LOG_UTIL_H
-#define BDCLIENT_LOG_UTIL_H
+#pragma once
 
-#include "bdlog.h"
+#include "tplog.h"
 
-#ifndef BDLOG_STR_W
-#define BDLOG_STR_W_2(str) L##str
-#define BDLOG_STR_W(str) BDLOG_STR_W_2(str)
+#ifndef TPLOG_STR_W
+#define TPLOG_STR_W_2(str) L##str
+#define TPLOG_STR_W(str) TPLOG_STR_W_2(str)
 #endif
 
-#define BDLOG_CONCAT_INNER(a,b) a##b
-#define BDLOG_CONCAT(a,b) BDLOG_CONCAT_INNER(a,b)
-#define BDLOG_NAME(prefix) BDLOG_CONCAT(prefix,__LINE__)
+#define TPLOG_CONCAT_INNER(a,b) a##b
+#define TPLOG_CONCAT(a,b) TPLOG_CONCAT_INNER(a,b)
+#define TPLOG_NAME(prefix) TPLOG_CONCAT(prefix,__LINE__)
 
-namespace bdlog
+namespace tplog
 {
 	struct FunctionLogger
 	{
@@ -221,69 +220,69 @@ namespace bdlog
 	};
 }
 
-#if defined(BDLOG_DISABLE_ALL)
-#define BDLOG_DISABLE_FUNCTION
+#if defined(TPLOG_DISABLE_ALL)
+#define TPLOG_DISABLE_FUNCTION
 #endif
 
-#if defined(BDLOG_DISABLE_FUNCTION)
+#if defined(TPLOG_DISABLE_FUNCTION)
 #define LOG_FUNCTION(...)
 #else
 #define LOG_FUNCTION(...) \
-	bdlog::fmter bda_f_(1, __VA_ARGS__); \
-	bdlog::FunctionLogger BDLOG_NAME(fl_)(BDLOG_STR_W(__FUNCTION__), TAG(L"function"), bda_f_)
+	tplog::fmter bda_f_(1, __VA_ARGS__); \
+	tplog::FunctionLogger TPLOG_NAME(fl_)(TPLOG_STR_W(__FUNCTION__), TAG(L"function"), bda_f_)
 #endif
 
-#define BDLOG_SAFESTR(str) (str?str:L"<NULL>")
+#define TPLOG_SAFESTR(str) (str?str:L"<NULL>")
 
 /************************************************************************/
 /*                                                                      */
 /************************************************************************/
 
-#define BDLOG_RECORD_ERROR(hr)                bdlog::helper::RecordError(BDLOG_STR_W(__FUNCTION__), __LINE__, hr)
-#define BDLOG_RECORD_ERROR_WITH_MSG(hr, msg)  bdlog::helper::RecordError(BDLOG_STR_W(__FUNCTION__), __LINE__, hr, msg)
+#define TPLOG_RECORD_ERROR(hr)                tplog::helper::RecordError(TPLOG_STR_W(__FUNCTION__), __LINE__, hr)
+#define TPLOG_RECORD_ERROR_WITH_MSG(hr, msg)  tplog::helper::RecordError(TPLOG_STR_W(__FUNCTION__), __LINE__, hr, msg)
 
 /** 
- *   BD_CHECK(ret == 0, IGNORE_FAIL)
- *   BD_CHECK(!m_inited, RETURN_ON_FAIL)
- *   BD_CHECK(hFile != INVALID_HANDLE_VALUE, RETURN_LASTERROR_ON_FAIL)
+ *   TP_CHECK(ret == 0, IGNORE_FAIL)
+ *   TP_CHECK(!m_inited, RETURN_ON_FAIL)
+ *   TP_CHECK(hFile != INVALID_HANDLE_VALUE, RETURN_LASTERROR_ON_FAIL)
  */
-#define BD_CHECK(expr, operation)                                             \
+#define TP_CHECK(expr, operation)                                             \
 	do {                                                                      \
 		if (!!(expr) == false) {                                              \
-			HRESULT bda_hr_ = BDLOG_RECORD_ERROR(S_OK);                       \
-			(bda_hr_);                                                        \
+			HRESULT tpa_hr_ = TPLOG_RECORD_ERROR(S_OK);                       \
+			(tpa_hr_);                                                        \
 			operation;                                                        \
 		}                                                                     \
 	} while (0)
 
-#define BD_CHECK_WITH_MSG(expr, operation, msg)                               \
+#define TP_CHECK_WITH_MSG(expr, operation, msg)                               \
 	do {                                                                      \
 		if (!!(expr) == false) {                                              \
-			HRESULT bda_hr_ = BDLOG_RECORD_ERROR_WITH_MSG(S_OK, msg);         \
-			(bda_hr_);                                                        \
+			HRESULT tpa_hr_ = TPLOG_RECORD_ERROR_WITH_MSG(S_OK, msg);         \
+			(tpa_hr_);                                                        \
 			operation;                                                        \
 		}                                                                     \
 	} while (0)
 
 /** 
- *   BD_CHECK_HR(hr, RETURN_HR_ON_FAIL)
- *   BD_CHECK_HR(hr, IGNORE_FAIL)
- *   BD_CHECK_HR(hr, RETURN_ON_FAIL)
+ *   TP_CHECK_HR(hr, RETURN_HR_ON_FAIL)
+ *   TP_CHECK_HR(hr, IGNORE_FAIL)
+ *   TP_CHECK_HR(hr, RETURN_ON_FAIL)
  */
-#define BD_CHECK_HR(expr, operation)                                          \
+#define TP_CHECK_HR(expr, operation)                                          \
 	do {                                                                      \
-		HRESULT bda_hr_ = (expr);                                             \
-		if (FAILED(bda_hr_)) {                                                \
-			BDLOG_RECORD_ERROR(bda_hr_);                                      \
+		HRESULT tpa_hr_ = (expr);                                             \
+		if (FAILED(tpa_hr_)) {                                                \
+			TPLOG_RECORD_ERROR(tpa_hr_);                                      \
 			operation;                                                        \
 		}                                                                     \
 	} while (0)
 
-#define BD_CHECK_HR_WITH_MSG(expr, operation, msg)                            \
+#define TP_CHECK_HR_WITH_MSG(expr, operation, msg)                            \
 	do {                                                                      \
-		HRESULT bda_hr_ = (expr);                                             \
-		if (FAILED(bda_hr_)) {                                                \
-			BDLOG_RECORD_ERROR_WITH_MSG(bda_hr_, msg);                        \
+		HRESULT tpa_hr_ = (expr);                                             \
+		if (FAILED(tpa_hr_)) {                                                \
+			TPLOG_RECORD_ERROR_WITH_MSG(tpa_hr_, msg);                        \
 			operation;                                                        \
 		}                                                                     \
 	} while (0)
@@ -298,14 +297,13 @@ namespace bdlog
 #define RETURN_VAL_ON_FAIL(val) return val;
 
 /// 失败时打印日志（DEBUG下弹ASSERT窗口），函数返回，把出错的HRESULT值传递给上层调用
-#define RETURN_HR_ON_FAIL return bda_hr_;
+#define RETURN_HR_ON_FAIL return tpa_hr_;
 
 
-#define BD_ASSERT(expr) BD_CHECK(expr, IGNORE_FAIL)
-#define BD_CHECK_RETURN_HR_ON_FAIL(expr) BD_CHECK(expr, RETURN_HR_ON_FAIL)
-#define BD_CHECK_HR_PASS_HR_ON_FAIL(expr) BD_CHECK_HR(expr, RETURN_HR_ON_FAIL)
-#define BD_CHECK_RETURN_VAL_ON_FAIL(expr, val) BD_CHECK(expr, RETURN_VAL_ON_FAIL(val))
-#define BD_CHECK_HR_RETURN_VAL_ON_FAIL(expr, val) BD_CHECK_HR(expr, RETURN_VAL_ON_FAIL(val))
-#define BD_CHECK_PARAM(expr) BD_CHECK(expr, RETURN_VAL_ON_FAIL(E_INVALIDARG))
+#define TP_ASSERT(expr) TP_CHECK(expr, IGNORE_FAIL)
+#define TP_CHECK_RETURN_HR_ON_FAIL(expr) TP_CHECK(expr, RETURN_HR_ON_FAIL)
+#define TP_CHECK_HR_PASS_HR_ON_FAIL(expr) TP_CHECK_HR(expr, RETURN_HR_ON_FAIL)
+#define TP_CHECK_RETURN_VAL_ON_FAIL(expr, val) TP_CHECK(expr, RETURN_VAL_ON_FAIL(val))
+#define TP_CHECK_HR_RETURN_VAL_ON_FAIL(expr, val) TP_CHECK_HR(expr, RETURN_VAL_ON_FAIL(val))
+#define TP_CHECK_PARAM(expr) TP_CHECK(expr, RETURN_VAL_ON_FAIL(E_INVALIDARG))
 
-#endif

@@ -2,10 +2,11 @@
 
 #include "stream.h"
 #include "lock.h"
+#include <windows.h>
 
-#ifndef BDLOG_STR_W
-#define BDLOG_STR_W_2(str) L##str
-#define BDLOG_STR_W(str) BDLOG_STR_W_2(str)
+#ifndef TPLOG_STR_W
+#define TPLOG_STR_W_2(str) L##str
+#define TPLOG_STR_W(str) TPLOG_STR_W_2(str)
 #endif
 
 struct ToStr
@@ -75,7 +76,7 @@ private:
 
 #define LOG(...) helper::InternalLog(__VA_ARGS__)
 #define LOGWINERR(str) helper::InternalLogWinError(str)
-#define LOGFUNC LOG(BDLOG_STR_W(__FUNCTION__))
+#define LOGFUNC LOG(TPLOG_STR_W(__FUNCTION__))
 #define CHECK_HR(s)	if (FAILED(s)) {ATLASSERT(FALSE);}
 #define ENSURE_SUCCEED(s) {HRESULT hr_ = s; if (FAILED(hr_)) { return hr_; } }
 
@@ -85,7 +86,7 @@ inline bool helper::SelfLogEnabled()
 	if (confval == -1)
 	{
 		wchar_t buf[32];
-		if (!::GetEnvironmentVariableW(L"BDLOGENV", buf, _countof(buf)))
+		if (!::GetEnvironmentVariableW(L"TPLOGENV", buf, _countof(buf)))
 		{
 			return 0;
 		}
@@ -100,7 +101,7 @@ inline void helper::InternalLog(const wchar_t* buffer1, const wchar_t* buffer2)
 	
 	wchar_t buffer[1024];
 	textstream s(buffer, _countof(buffer));
-	s << L"BDLOG:" << buffer1 << buffer2 << L"\n";
+	s << L"TPLOG:" << buffer1 << buffer2 << L"\n";
 
 	OutputDebugStringW(buffer);
 }

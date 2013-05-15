@@ -1,32 +1,44 @@
 #pragma once
 
 /** @file
- *  日志接口
- *  - printf风格语法
- *  - 日志级别和日志标签(每条日志可关联多个标签，方便后期查看和分析)
- *  - 可随意配置的日志输出设备(控制台、文件、管道、共享内存等)，第三方日志输出设备支持
- *  - 运行时动态改变日志输出设备的配置
+ *  tplog interface
+ *  - printf style
+ *  - support log level and tag
+ *  - configurable output devices: console, file, pipe, memory, or devices wrote by user
+ *  - change settings at runtime
+ *  - machine-wide synchronized time, accurate to 10^-6 s
  *
- *  控制bdlog使用方式的宏（在使用bdlog的工程里定义）
- *  - BDLOG_USE_AS_DLL  作为DLL使用，需要在使用bdlog.dll的工程中定义
+ *  - TPLOG_EXPORT                      defined by tplog provider( which exports 'GetLogController' )
+ *  - TPLOG_USE_AS_DLL                  DLL static load
+ *  - TPLOG_USE_AS_DLL_DYNAMIC_LOAD     DLL dynamic load
  */
 
 #include <windows.h>
 #include <stdio.h>
 
-#ifdef BDLOG_SELF_BUILD
-#	define BDLOGAPI extern "C" __declspec(dllexport)
+#ifdef TPLOG_EXPORT
+	#define TPLOGAPI extern "C" __declspec(dllexport)
 #else
-#	if defined(BDLOG_USE_AS_DLL)
-#		define BDLOGAPI extern "C" __declspec(dllimport)
-#		pragma comment(lib, "bdlog.lib")
-#	else
-#		define BDLOGAPI extern "C"
-#	endif
+	#if defined(TPLOG_USE_AS_DLL)
+		#define TPLOGAPI extern "C" __declspec(dllimport)
+		#pragma comment(lib, "tplog.lib")
+	#else
+		#define TPLOGAPI extern "C"
+	#endif
 #endif
 
+#define FACILITY_TPLOG 0x10D
+#define TPLOG_E_DEVICE_NOT_READY                  MAKE_HRESULT(1, FACILITY_TPLOG, 1)
+#define TPLOG_E_NO_REPORTER                       MAKE_HRESULT(1, FACILITY_TPLOG, 2)
+#define TPLOG_E_NOT_INITED                        MAKE_HRESULT(1, FACILITY_TPLOG, 3)
+#define TPLOG_E_DESTRUCTED                        MAKE_HRESULT(1, FACILITY_TPLOG, 4)
+#define TPLOG_E_ALREADY_INITED                    MAKE_HRESULT(1, FACILITY_TPLOG, 5)
+#define TPLOG_E_OUTPUT_DEVICE_ALREADY_EXIST       MAKE_HRESULT(1, FACILITY_TPLOG, 6)
+#define TPLOG_E_OUTPUT_DEVICE_NOT_FOUND           MAKE_HRESULT(1, FACILITY_TPLOG, 7)
+#define TPLOG_E_OUTPUT_DEVICE_FULL                MAKE_HRESULT(1, FACILITY_TPLOG, 8)
+#define TPLOG_E_BEFORE_CONSTRUCT                  MAKE_HRESULT(1, FACILITY_TPLOG, 9)
+#define TPLOG_E_FUNCTION_UNAVAILBLE               MAKE_HRESULT(1, FACILITY_TPLOG, 10)
 
-/// 日志级别
 enum LogLevel
 {
 	LL_DIAGNOSE = 0x05,
@@ -34,18 +46,6 @@ enum LogLevel
 	LL_EVENT    = 0x25,
 	LL_ERROR    = 0x40,
 };
-
-#define FACILITY_BDLOG 0x10D
-#define BDLOG_E_DEVICE_NOT_READY                  MAKE_HRESULT(1, FACILITY_BDLOG, 1)
-#define BDLOG_E_NO_REPORTER                       MAKE_HRESULT(1, FACILITY_BDLOG, 2)
-#define BDLOG_E_NOT_INITED                        MAKE_HRESULT(1, FACILITY_BDLOG, 3)
-#define BDLOG_E_DESTRUCTED                        MAKE_HRESULT(1, FACILITY_BDLOG, 4)
-#define BDLOG_E_ALREADY_INITED                    MAKE_HRESULT(1, FACILITY_BDLOG, 5)
-#define BDLOG_E_OUTPUT_DEVICE_ALREADY_EXIST       MAKE_HRESULT(1, FACILITY_BDLOG, 6)
-#define BDLOG_E_OUTPUT_DEVICE_NOT_FOUND           MAKE_HRESULT(1, FACILITY_BDLOG, 7)
-#define BDLOG_E_OUTPUT_DEVICE_FULL                MAKE_HRESULT(1, FACILITY_BDLOG, 8)
-#define BDLOG_E_BEFORE_CONSTRUCT                  MAKE_HRESULT(1, FACILITY_BDLOG, 9)
-#define BDLOG_E_FUNCTION_UNAVAILBLE               MAKE_HRESULT(1, FACILITY_BDLOG, 10)
 
 struct LogItem
 {
@@ -71,9 +71,9 @@ struct ILogOption
 
 struct ILogOutputDevice
 {
-	/** 打开一个日志设备
+	/** open log device
 	 * 
-	 *  @param config 一个字符串形式传入的配置信息。
+	 *  @param config configuration in string
 	 *                配置信息包含空格分开的多个配置项，配置项格式是 KEY:VAL
 	 *                KEY=enable及KEY=filter的配置项由日志系统解析，其它配置项由具体的日志输出设备定义和解释
 	 */
@@ -99,6 +99,7 @@ struct ILogOutputDevice
 	virtual ~ILogOutputDevice(){}
 };
 
+// pre-defined output device type
 enum LogOutputDeviceType
 {
 	LODT_NULL,
@@ -113,7 +114,7 @@ struct ILogController
 {
 	/** 初始化日志管理器
 	 *  
-	 *  @param configname [opt] logcontroller会在HKCU\Software\Baidu\BDLOG\configname下查找配置信息
+	 *  @param configname [opt] logcontroller会在HKCU\Software\Baidu\TPLOG\configname下查找配置信息
 	 *         configname不能超过32个字符
 	 *         configname为NULL表示日志管理器不会从注册表读取config信息
 	 */
@@ -151,10 +152,10 @@ struct ILogController
 };
 
 // 日志输出接口
-BDLOGAPI ILogController* GetLogController();
+TPLOGAPI ILogController* GetLogController();
 
-#ifdef BDLOG_USE_AS_DLL_DYNAMIC_LOAD
-namespace bdlog
+#ifdef TPLOG_USE_AS_DLL_DYNAMIC_LOAD
+namespace tplog
 {
 	class DLLLoader
 	{
@@ -171,7 +172,7 @@ namespace bdlog
 
 		DLLLoader() : m_hDll(NULL)
 		{
-			m_hDll = ::LoadLibraryW(L"bdlog.dll");
+			m_hDll = ::LoadLibraryW(L"tplog.dll");
 			if (m_hDll)
 			{
 				PFUNC_GetLogController pFunc;
@@ -205,9 +206,9 @@ namespace bdlog
 
 	DLLLoader DLLLoader::GlobalData<int>::s_loader;
 };
-BDLOGAPI inline ILogController* GetLogController()
+TPLOGAPI inline ILogController* GetLogController()
 {
-	return bdlog::DLLLoader::Instance().GetLogController();
+	return tplog::DLLLoader::Instance().GetLogController();
 }
 #endif
 
@@ -253,16 +254,16 @@ inline void LogV(LogLevel level, const wchar_t* tag, const wchar_t* fmt, va_list
 	ctrl->Log(level, tag, buf);
 }
 
-#ifdef BDLOG_DISABLE_ALL
-#define BDLOG_ARGV(l, t, f)
+#ifdef TPLOG_DISABLE_ALL
+#define TPLOG_ARGV(l, t, f)
 #else
-#define BDLOG_ARGV(l, t, f) va_list args;va_start(args, f); LogV(l, t.tag, f, args); va_end(args);
+#define TPLOG_ARGV(l, t, f) va_list args;va_start(args, f); LogV(l, t.tag, f, args); va_end(args);
 #endif
 
 #if (_MSC_VER >= 1500)
 inline void Log(LogLevel level, LogTag tag, __in_z _Printf_format_string_ const wchar_t* fmt, ...)
 {
-	BDLOG_ARGV(level, tag, fmt);
+	TPLOG_ARGV(level, tag, fmt);
 }
 #else
 #ifdef STATIC_CODE_ANALYSIS
@@ -270,13 +271,13 @@ inline void Log(LogLevel level, LogTag tag, __in_z _Printf_format_string_ const 
 // 所以在静态代码检查的时候使用宏的形式借助wprintf让CodeAnalysis检测错误
 inline void LogF(LogLevel level, LogTag tag, __in_z const wchar_t* fmt, ...)
 {
-	BDLOG_ARGV(level, tag, fmt);
+	TPLOG_ARGV(level, tag, fmt);
 }
 #define Log(level, tag, ...) LogF(level, tag, __VA_ARGS__); wprintf(__VA_ARGS__);
 #else
 inline void Log(LogLevel level, LogTag tag, __in_z const wchar_t* fmt, ...)
 {
-	BDLOG_ARGV(level, tag, fmt);
+	TPLOG_ARGV(level, tag, fmt);
 }
 #endif // STATIC_CODE_ANALYSIS
 #endif // _MSC_VER

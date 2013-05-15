@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include "bdlog.h"
+#include "../tplog.h"
 #include "logutil.h"
 
 class CLogFilter

@@ -2,10 +2,12 @@
 
 #include <windows.h>
 #include <psapi.h>
+#include <string>
+#include <map>
 #include <TlHelp32.h>
-#include "detail/bdsecurity.h"                // for "lowest rights security attribute"
+#include "detail/security.h"                // for "lowest rights security attribute"
 
-namespace bdlog
+namespace tplog
 {
 
 typedef __int8  int8_t;
@@ -417,7 +419,7 @@ private:
 
 	void work_thread_internal()
 	{
-		pipe_connection conn(L"\\\\.\\pipe\\bdlog_data_channel");
+		pipe_connection conn(L"\\\\.\\pipe\\tplog_data_channel");
 		conn.start_new_connection();
 
 		for (;;)
@@ -555,7 +557,7 @@ private:
 	HANDLE m_worker_thread;
 	bool m_stop_flag;
 	std::wstring m_path;
-	bdlog::log_listener* m_listener;
+	tplog::log_listener* m_listener;
 
 	typedef std::map<DWORD, log_source_info> lsi_map_t;
 	lsi_map_t m_lsi_map;
@@ -794,7 +796,7 @@ private:
 	HANDLE m_worker_thread;
 	bool m_stop_flag;
 	std::wstring m_smname;
-	bdlog::log_listener* m_listener;
+	tplog::log_listener* m_listener;
 
 public:
 	sharememory_reader() : m_stop_flag(true), m_worker_thread(NULL)
@@ -919,4 +921,4 @@ thread_exit:
 };
 
 
-} // namespace bdlog
+} // namespace tplog
